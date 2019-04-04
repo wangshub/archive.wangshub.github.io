@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>使用Emacs进行日程管理（GTD） | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Emacs,Lisp">
+    <meta name="description" content="使用 Emacs 进行日程管理 (GTD) 什么是 GTD ?  Your mind is for having ideas, not holding them. --- David Allen  GTD (Getting Things Done) 是一个组织和跟进任务或待办事项的系统架构，但是它的目标要高于仅仅是将事情做完，而是要将待办事项以一个更好的方式完成。GTD 的目标是让人 100% 地">
+<meta name="keywords" content="Emacs,Lisp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Emacs进行日程管理（GTD）">
+<meta property="og:url" content="http://wangshub.github.io/2018/05/13/使用Emacs进行日程管理（GTD）/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="使用 Emacs 进行日程管理 (GTD) 什么是 GTD ?  Your mind is for having ideas, not holding them. --- David Allen  GTD (Getting Things Done) 是一个组织和跟进任务或待办事项的系统架构，但是它的目标要高于仅仅是将事情做完，而是要将待办事项以一个更好的方式完成。GTD 的目标是让人 100% 地">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1frhv25t2b7j20b505a0sq.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1frhv5kx5hwj20ea02jt8v.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1frhvn7ahrqj20eb02iaac.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1frhva450zgj20ud0dz427.jpg">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.770Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Emacs进行日程管理（GTD）">
+<meta name="twitter:description" content="使用 Emacs 进行日程管理 (GTD) 什么是 GTD ?  Your mind is for having ideas, not holding them. --- David Allen  GTD (Getting Things Done) 是一个组织和跟进任务或待办事项的系统架构，但是它的目标要高于仅仅是将事情做完，而是要将待办事项以一个更好的方式完成。GTD 的目标是让人 100% 地">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1frhv25t2b7j20b505a0sq.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用Emacs进行日程管理（GTD）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用Emacs进行日程管理（GTD）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-13T06:19:22.000Z" itemprop="datePublished" class="page-time">
+  2018-05-13
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#使用-emacs-进行日程管理-gtd"><span class="post-toc-text">使用 Emacs 进行日程管理 (GTD)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是-gtd"><span class="post-toc-text">什么是 GTD ?</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#emacs-插件安装步骤"><span class="post-toc-text">Emacs 插件安装步骤</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在-emacs-中进行日程管理"><span class="post-toc-text">在 Emacs 中进行日程管理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#todo-录入"><span class="post-toc-text">Todo 录入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#todo-显示"><span class="post-toc-text">Todo 显示</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结语"><span class="post-toc-text">结语</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-使用Emacs进行日程管理（GTD）" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用Emacs进行日程管理（GTD）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-13 14:19:22" datetime="2018-05-13T06:19:22.000Z" itemprop="datePublished">2018-05-13</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="使用-emacs-进行日程管理-gtd">使用 Emacs 进行日程管理 (GTD)</h1>
+<h2 id="什么是-gtd">什么是 GTD ?</h2>
+<blockquote>
+<p>Your mind is for having ideas, not holding them. --- David Allen</p>
+</blockquote>
+<p><strong>GTD</strong> (Getting Things Done) 是一个组织和跟进任务或待办事项的系统架构，但是它的目标要高于仅仅是将事情做完，而是要将待办事项以一个更好的方式完成。GTD 的目标是让人 100% 地相信 GTD 的系统来收集任务、想法。这样才能卸下记忆这些想法的思想包袱，专注的完成当下的任务。GTD 将所有的事情罗列下来，然后再进行分类，你就能从一个比较宏观的角度来看待这一堆问题，并且确定下一步的处理方法，将所有悬而未决的事情尽量地处于我们个人的掌握之中。</p>
+<p>更多关于 GTD 方法的介绍可以参考 <a href="https://gettingthingsdone.com/" target="_blank" rel="noopener">David Allen</a> 的博客和相关书籍。</p>
+<p>理论就介绍到这里了，目前市面上有许许多多在各种平台上收费 GTD 任务管理软件、也有许多开源免费的软件，如</p>
+<ul>
+<li><a href="Taskwarrior%20-%20What&#39;s%20next?">Taskwarrior</a></li>
+<li><a href="Todo.txt:%20Future-proof%20task%20tracking%20in%20a%20file%20you%20control" target="_blank" rel="noopener">Todo.txt</a></li>
+<li><a href="https://orgmode.org/" target="_blank" rel="noopener">Emacs Org-mode</a></li>
+<li>...</li>
+</ul>
+<p>今天主要 Show 一下在 Emacs 中使用 Org-mode 来记录、分类、保存、跟进我的想法和任务</p>
+<p><strong>主要特点</strong></p>
+<ul>
+<li>基于 Spacemacs 功能强大；</li>
+<li>操作难度较大，可定制性强；</li>
+<li>利用 Git 工具定期自动备份笔记；</li>
+</ul>
+<h2 id="emacs-插件安装步骤">Emacs 插件安装步骤</h2>
+<p>项目地址：<a href="https://github.com/carlos-wong/org-agenda-carlos" target="_blank" rel="noopener">https://github.com/carlos-wong/org-agenda-carlos</a></p>
+<h2 id="在-emacs-中进行日程管理">在 Emacs 中进行日程管理</h2>
+<p>安装并配置好插件后，使用时主要分三步：<strong>录入、显示、保存</strong>。</p>
+<h3 id="todo-录入">Todo 录入</h3>
+<p>绑定输入快捷键：<code>F7</code> 绑定显示快捷键：<code>F6</code></p>
+<ul>
+<li>选择 Todo 类型</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1frhv25t2b7j20b505a0sq.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li>输入事项</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1frhv5kx5hwj20ea02jt8v.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li>安排节点</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1frhvn7ahrqj20eb02iaac.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="todo-显示">Todo 显示</h3>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1frhva450zgj20ud0dz427.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="结语">结语</h2>
+<p>现在，每天打开 Emacs 的第一件事就是看今天的 Org ,又有做不完的事情了 ~</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.770Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Emacs/">Emacs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lisp/">Lisp</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/05/13/使用Emacs进行日程管理（GTD）/&title=《使用Emacs进行日程管理（GTD）》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/05/13/使用Emacs进行日程管理（GTD）/&title=《使用Emacs进行日程管理（GTD）》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/05/13/使用Emacs进行日程管理（GTD）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用Emacs进行日程管理（GTD）》 — 神奇的战士&url=http://wangshub.github.io/2018/05/13/使用Emacs进行日程管理（GTD）/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/05/13/使用Emacs进行日程管理（GTD）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/20/给博客加个球-访客统计/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">给博客网站加个球(访客统计)</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/30/跨平台效率软件Cerebro/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">开源跨平台效率软件Cerebro</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/05/13/使用Emacs进行日程管理（GTD）/&title=《使用Emacs进行日程管理（GTD）》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/05/13/使用Emacs进行日程管理（GTD）/&title=《使用Emacs进行日程管理（GTD）》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/05/13/使用Emacs进行日程管理（GTD）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用Emacs进行日程管理（GTD）》 — 神奇的战士&url=http://wangshub.github.io/2018/05/13/使用Emacs进行日程管理（GTD）/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/05/13/使用Emacs进行日程管理（GTD）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuklEQVR42u3awW7cMAwE0Pz/T7dATgXadWZIKVkUz6eFsfHq+SAxQ358xNevz+vvO3/ef3Xno7yS3zp84eHh4Y0e9+p69Z3npeSfn1fy/OTnNePh4eHd5j1v0O3W3H6zXXqyZjw8PLx34OVbfHKctK8PDw8P73/iJdt3WygnhwceHh7ez/LahbY/PzsY8nDkQNaCh4eHF/PacOEdPl/s7+Hh4eEtuupJO6oNGk4dHtFq8fDw8C7w2p/Pm2SziCFpj9XfxMPDw7vAy2PWvB21H9LKK+Q6zMXDw8Nb8NptdzYi0JbIxwJiPDw8vMu8/ADYNJzy8CI/El6C8fDw8C7w2uGndgBrw5s9rU5N8PDw8EbZ5n5oID9CNqFt3ZDDw8PD+yFeO9fUDhDMXmX0gvDw8PAu8JIqNN/Q83Za3mbLi3g8PDy87+HNHtrGGcX8QlCOD/MVPDw8vEO8tlDexBb7way8TP9izXh4eHhrXtv6ykes9k2vzXADHh4e3g1e3lKaVaqz0KHITp5bcXh4eHiXeXksOzseNofEsPGGh4eHd4G3GQiYBal5IrKPJPDw8PDu8TYjTUkA0YYU+6bdy6wFDw8Pb82bbbWbEnzTbMsPJDw8PLzbvHYLbttUeYSxab+9PBjw8PDwjvJyRjGJUP5t+yrbF4eHh4d3lrff3PPCehbvzgaz8PDw8L6HlzDywrftQOWMfEABDw8P7wZv1tpPHr25f3ZAAQ8PD+8sry5SF22w2atZjSPg4eHhXeDtT5I8Ak4WNwsp2tExPDw8vFP/obcxRBsxzILdWan9j/4eHh4e3gXeLHQ4VVK3IwXFiYeHh4f3o7x8U25b/rMoITqu8PDw8N6Alzf721I7aZW1rwwPDw/vHm8zbnWqkTY7ML6IhvHw8PAu8NoGWLLE9mmnXsSB/h4eHh7eE+83MLOcceAPVRAAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

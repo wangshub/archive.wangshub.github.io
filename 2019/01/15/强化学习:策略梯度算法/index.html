@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>强化学习:策略梯度算法 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Algorithm">
+    <meta name="description" content="强化学习:策略梯度算法 策略梯度的公式推导                                                                                                            ​ 学习参数化表示的策略 (Parameterized policy), 输入环境状态 $ S $ 来选择动作 \(a\) ，这里使用 \(\">
+<meta name="keywords" content="Python,Algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习:策略梯度算法">
+<meta property="og:url" content="http://wangshub.github.io/2019/01/15/强化学习:策略梯度算法/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="强化学习:策略梯度算法 策略梯度的公式推导                                                                                                            ​ 学习参数化表示的策略 (Parameterized policy), 输入环境状态 $ S $ 来选择动作 \(a\) ，这里使用 \(\">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190115200214.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117080942.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117084618.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117203920.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117091205.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117091717.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117204712.png">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.772Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="强化学习:策略梯度算法">
+<meta name="twitter:description" content="强化学习:策略梯度算法 策略梯度的公式推导                                                                                                            ​ 学习参数化表示的策略 (Parameterized policy), 输入环境状态 $ S $ 来选择动作 \(a\) ，这里使用 \(\">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190115200214.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">强化学习:策略梯度算法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">强化学习:策略梯度算法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-15T11:46:17.000Z" itemprop="datePublished" class="page-time">
+  2019-01-15
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#强化学习策略梯度算法"><span class="post-toc-text">强化学习:策略梯度算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#策略梯度的公式推导"><span class="post-toc-text">策略梯度的公式推导</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#策略梯度蒙特卡罗-reinforce-算法"><span class="post-toc-text">策略梯度蒙特卡罗 REINFORCE 算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#example-高斯策略梯度算法"><span class="post-toc-text">Example: 高斯策略梯度算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-text">参考链接</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-强化学习:策略梯度算法" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">强化学习:策略梯度算法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-15 19:46:17" datetime="2019-01-15T11:46:17.000Z" itemprop="datePublished">2019-01-15</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="强化学习策略梯度算法">强化学习:策略梯度算法</h1>
+<h2 id="策略梯度的公式推导">策略梯度的公式推导</h2>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190115200214.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>​ 学习<strong>参数化表示的策略</strong> (Parameterized policy), 输入环境状态 $ S $ 来选择动作 <span class="math inline">\(a\)</span> ，这里使用 <span class="math inline">\(\theta \in \mathbb { R } ^ { d }\)</span> 来表示策略的参数向量，因此策略函数表示为</p>
+<p><span class="math display">\[\pi ( a | s , \boldsymbol { \theta } ) = \operatorname { P_r } \left\{ A _ { t } = a | S _ { t } = s , \boldsymbol { \theta } _ { t } = \boldsymbol { \theta } \right\} \tag{1} \]</span></p>
+<p>其中时刻 <span class="math inline">\(t\)</span> ，环境状态为 <span class="math inline">\(s\)</span> ，参数为 <span class="math inline">\(\theta\)</span> ，输出动作 <span class="math inline">\(a\)</span> 的概率为 <span class="math inline">\(P_r\)</span></p>
+<p>因此生成马尔可夫决策过程的一个<em>轨迹</em>（trajectory）<span class="math inline">\(\tau = (\mathbf { s } _ { 1 } , \mathbf { a } _ { 1 } , \dots , \mathbf { s } _ { T } , \mathbf { a } _ { T })\)</span> 的概率为</p>
+<p><span class="math display">\[\underbrace { p _ { \theta } \left( \mathbf { s } _ { 1 } , \mathbf { a } _ { 1 } , \ldots , \mathbf { s } _ { T } , \mathbf { a } _ { T } \right) } _ { \pi _ { \theta } ( \tau ) } = p \left( \mathbf { s } _ { 1 } \right) \prod _ { t = 1 } ^ { T } \pi _ { \theta } \left( \mathbf { a } _ { t } | \mathbf { s } _ { t } \right) p \left( \mathbf { s } _ { t + 1 } | \mathbf { s } _ { t } , \mathbf { a } _ { t } \right) \tag{2} \]</span></p>
+<p>更一般地，将策略 <span class="math inline">\(\pi\)</span> 下生成轨迹 <span class="math inline">\(\tau\)</span> 的概率表示为</p>
+<p><span class="math display">\[P ( \tau | \pi ) = \rho _ { 1 } \left( s _ { 1 } \right) \prod _ { t = 0 } ^ { T  } P \left( s _ { t + 1 } | s _ { t } , a _ { t } \right) \pi \left( a _ { t } | s _ { t } \right) \tag{3}\]</span></p>
+<p>​ 策略梯度方法的目标就是找到一组最佳的参数 <span class="math inline">\(\theta ^ { \star }\)</span> 来表示策略函数使得累计奖励的期望最大，即</p>
+<p><span class="math display">\[\theta ^ { \star } = \arg \max _ { \theta } E _ { \tau \sim p _ { \theta } ( \tau ) } \left[ \sum _ { t } r \left( \mathbf { s } _ { t } , \mathbf { a } _ { t } \right) \right] \tag{4}\]</span></p>
+<p>​ 令累积奖励为 <span class="math inline">\(R ( \tau ) = \sum _ { t = 1 } ^ { T } r \left( s _ { t } , a _ { t } \right)\)</span> ，设定优化目标 <span class="math inline">\(J\left( \pi _ { \theta } \right)\)</span> 优化策略参数使得奖励的期望值最大</p>
+<p><span class="math display">\[J\left( \pi _ { \theta } \right) = \underset { \tau \sim \pi _ { \theta } } { \mathrm { E } } [ R ( \tau ) ]\tag{5} \]</span></p>
+<p>对 <span class="math inline">\(J\left( \pi _ { \theta } \right)\)</span> 求梯度可得策略梯度 $_ { } J ( ) $ ，公式 (6) 的推导过程请参见<a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro3.html#deriving-the-simplest-policy-gradient" target="_blank" rel="noopener">链接</a></p>
+<p><span class="math display">\[\begin{aligned} \nabla _ { \theta } J ( \theta ) &amp;= \int \nabla _ { \theta } \pi _ { \theta } ( \tau ) r ( \tau ) d \tau \\&amp;= \int \pi _ { \theta } ( \tau ) \nabla _ { \theta } \log \pi _ { \theta } ( \tau ) r ( \tau ) d \tau \\ &amp;= E _ { \tau \sim \pi _ { \theta } ( \tau ) } \left[ \nabla _ { \theta } \log \pi _ { \theta } ( \tau ) r ( \tau ) \right]\end{aligned} \tag{6}\]</span></p>
+<p>将策略 (1) 两边取 log 对数，然后带入梯度表达式 (6) ，推导策略梯度的公式请参考下图</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117080942.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>根据策略 <span class="math inline">\(\pi _ { \theta }\)</span> 生成 <span class="math inline">\(N\)</span> 条轨迹如图所示</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117084618.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>利用上图 <span class="math inline">\(N\)</span> 条轨迹的经验平均对策略梯度进行逼近，有公式 (7) (8)</p>
+<p><span class="math display">\[J ( \theta ) = E _ { \tau \sim p _ { \theta } ( \tau ) } \left[ \sum _ { t } r \left( \mathbf { s } _ { t } , \mathbf { a } _ { t } \right) \right] \approx \frac { 1 } { N } \sum _ { i } \sum _ { t } r \left( \mathbf { s } _ { i , t } , \mathbf { a } _ { i , t } \right) \tag{7}\]</span></p>
+<p><span class="math display">\[\nabla _ { \theta } J ( \theta ) \approx \frac { 1 } { N } \sum _ { i = 1 } ^ { N } \left( \sum _ { t = 1 } ^ { T } \nabla _ { \theta } \log \pi _ { \theta } \left( \mathbf { a } _ { i , t } | \mathbf { s } _ { i , t } \right) \right) \left( \sum _ { t = 1 } ^ { T } r \left( \mathbf { s } _ { i , t } , \mathbf { a } _ { i , t } \right) \right) \tag{8}\]</span></p>
+<p>其中 <span class="math inline">\(N\)</span> 为轨迹的数量，<span class="math inline">\(T\)</span> 为一条轨迹的长度，假设已知策略 <span class="math inline">\(\pi _ { \theta }\)</span> ，那么就可以计算出策略的梯度 <span class="math inline">\(\nabla _ { \theta } \log \pi _ { \theta } ( a | s )\)</span>。另一方面，根据策略 <span class="math inline">\(\pi _ { \theta }\)</span> ，在仿真环境 <span class="math inline">\(E\)</span> 中生成 <span class="math inline">\(N\)</span> 条轨迹的数据，即可计算出 (8)，根据梯度上升 对参数 <span class="math inline">\(\theta\)</span> 进行一步更新，如公式 (9)</p>
+<p><span class="math display">\[
+\theta \leftarrow \theta + \alpha \nabla _ { \theta } J ( \theta ) \tag{9}
+\]</span></p>
+<p>总结下来就是：</p>
+<ul>
+<li>增加带来正激励的概率</li>
+<li>减少带来负激励的概率</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117203920.png" width="60%/"></p>
+<h2 id="策略梯度蒙特卡罗-reinforce-算法">策略梯度蒙特卡罗 REINFORCE 算法</h2>
+<p>根据公式 (7) (8) (9) 可得<strong>蒙特卡罗 REINFORCE 算法</strong>流程</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117091205.png" alt="公式" title>
+                </div>
+                <div class="image-caption">公式</div>
+            </figure>
+<p>写成伪代码形式</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117091717.png" alt="伪代码" title>
+                </div>
+                <div class="image-caption">伪代码</div>
+            </figure>
+<h2 id="example-高斯策略梯度算法">Example: 高斯策略梯度算法</h2>
+<p>策略属于概率分布，可以用神经网络来表示这种概率分布，输入状态 <span class="math inline">\(s\)</span> ，神经网络将 <span class="math inline">\(s\)</span> 映射成向量 <span class="math inline">\(μ\)</span>，然后网络输出概率 <span class="math inline">\(p ( a | \mu )\)</span> 和动作采样值 <span class="math inline">\(a \sim p ( a | \mu )\)</span>，令 <span class="math inline">\(r\)</span> 为 log 标准差。</p>
+<p><span class="math display">\[
+\mathcal { N } \left( \text { mean } = \text { NeuralNet } \left( s ; \left\{ W _ { i } , b _ { i } \right\} _ { i = 1 } ^ { L } \right) , stdev = exp(r) \right)
+\]</span></p>
+<p>其中 <span class="math inline">\(\mu = [ \text { mean, stdev } ]\)</span></p>
+<p><img src="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190117204712.png"></p>
+<p>在连续的运动空间中，通常使用<strong>高斯策略</strong>，假设方差为 <span class="math inline">\(\sigma ^ { 2 }\)</span> ，策略是高斯的，输入状态 <span class="math inline">\(s\)</span> 输出动作 <span class="math inline">\(a\)</span> 服从 <span class="math inline">\(a \sim \mathcal { N } \left( \mu ( s ) , \sigma ^ { 2 } \right)\)</span>，那么 log 策略梯度为</p>
+<p><span class="math display">\[
+\nabla _ { \theta } \log \pi _ { \theta } ( s , a ) = \frac { ( a - \mu ( s ) ) \phi ( s ) } { \sigma ^ { 2 } }
+\tag{10}\]</span></p>
+<p>在实际使用高斯策略时，用神经网络来表示，即令 <span class="math inline">\(f _ { neural\ network } \left( \mathbf { s } _ { t } \right) = \mu ( s _ t )\)</span>，那么策略 <span class="math inline">\(\pi _ \theta\)</span></p>
+<p><span class="math display">\[\log \pi _ { \theta } \left( \mathbf { a } _ { t } | \mathbf { s } _ { t } \right) = - \frac { 1 } { 2 } \left\| f \left( \mathbf { s } _ { t } \right) - \mathbf { a } _ { t } \right\| _ { \Sigma } ^ { 2 } + const \tag{11}\]</span></p>
+<p>策略的梯度</p>
+<p><span class="math display">\[\nabla _ { \theta } \log \pi _ { \theta } \left( \mathbf { a } _ { t } | \mathbf { s } _ { t } \right) = - \frac { 1 } { 2 } \Sigma ^ { - 1 } \left( f \left( \mathbf { s } _ { t } \right) - \mathbf { a } _ { t } \right) \frac { d f } { d \theta } \tag{12}\]</span></p>
+<p>然后反向传播，更新网络参数</p>
+<p><span class="math display">\[- \frac { 1 } { 2 } \Sigma ^ { - 1 } \left( f \left( \mathbf { s } _ { t } \right) - \mathbf { a } _ { t } \right) \left( \sum _ { t } r \left( \mathbf { s } _ { t } , \mathbf { a } _ { t } \right) \right) \tag{13}\]</span></p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://hadovanhasselt.files.wordpress.com/2016/01/pg1.pdf" target="_blank" rel="noopener">Lecture 8: Policy Gradient</a></li>
+<li><a href="https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html" target="_blank" rel="noopener">Policy Gradient Algorithms</a></li>
+<li><a href="http://incompleteideas.net/book/the-book-2nd.html" target="_blank" rel="noopener">Reinforcement Learning: An Introduction</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.772Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/">Algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/01/15/强化学习:策略梯度算法/&title=《强化学习:策略梯度算法》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/01/15/强化学习:策略梯度算法/&title=《强化学习:策略梯度算法》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/01/15/强化学习:策略梯度算法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《强化学习:策略梯度算法》 — 神奇的战士&url=http://wangshub.github.io/2019/01/15/强化学习:策略梯度算法/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/01/15/强化学习:策略梯度算法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/01/22/用Python获取B站播放历史记录/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">用Python获取B站播放历史记录</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/14/MLPGaussianPolicy/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">MLPGaussianPolicy</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/01/15/强化学习:策略梯度算法/&title=《强化学习:策略梯度算法》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/01/15/强化学习:策略梯度算法/&title=《强化学习:策略梯度算法》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/01/15/强化学习:策略梯度算法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《强化学习:策略梯度算法》 — 神奇的战士&url=http://wangshub.github.io/2019/01/15/强化学习:策略梯度算法/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/01/15/强化学习:策略梯度算法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtElEQVR42u3aQU4lMQwFQO5/aUaa3Sy6ec9OAI2qV1+o+XEFKTZ2Pj7i5/Pvk7zz9Ly/+bTW0+fDDx4eHt4o9PewkmWSQN9DfF/96Sfvm4WHh4d3j/cebh5WsnH56vstxsPDw/tZXvGl65IdDw8P7//g5QHNEkD+nXh4eHi/gZc0I/Jm7qw90bZ0D/da8PDw8GJeW/L+hs8X53t4eHh4i6n6LFW0FwjyhFHHiYeHh3eB15bLe0bbum0HY8V0Dg8PD2/BS5oFbQLYNAvyhm9dfOPh4eGtefke5MOnUwOtZFPqYhoPDw/vEC9vAczGVLNEkpTa0WQPDw8P71t4yXG8aRbkx33SvHj8LTw8PLwLvE1bNinHi+XLjRsmCTw8PLxDvLzRkLzf4lt2nVTw8PDwLvDyo7xtWLRFcD5+qx88PDy8Q7y8ID51uLeNiXbdKOPh4eHhrXktsj2TN2d1G8k/b+Lh4eFd450KsW0i5Klo1jjGw8PDu83Ly+h8C9orVrNWyGM8eHh4eJd5bdBtksgHae11q8e2Lx4eHt438trBWPvmrHCvh2p4eHh4F3izIX1+uBeXSsstLrYADw8P7zJvA0iGWHl6SEhFSwIPDw/vEK9t2m4avrMxWHLd6ouUgIeHh3eUV7REF63ezSptPMXfEA8PD2/Bm5W8+XGfj8fyzaq/Ew8PD+8oLy9h8zK3LZfzBkc9ZsPDw8P7Rl77Tjuayi8EzE5+PDw8vBu8z/LJx2NtGyJft9gmPDw8vAu8tinQhpsX07MCfZO68PDw8Da8NhnMGg2zsjsZcUWjLzw8PLwLvE0DYlY0H8taSWLAw8PD+1He5hpBQt1v3yox4OHh4R3ltU2HfJUkbVwvqfHw8PAuNCNmR3kbdHuZILp0hYeHh3eUt/lXf1Ze5+BTaQkPDw/vEO8P06dUucALsY0AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

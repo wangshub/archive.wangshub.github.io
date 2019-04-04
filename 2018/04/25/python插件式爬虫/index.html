@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>python插件式爬虫 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="Python 插件式的信息爬虫  🐝 一群不辞劳苦采花小蜜蜂   项目代码地址  本项目运行在可以运行在本地或者服务器端，将不同插件程序获取的信息如：每日天气、新闻等，通过 Github Api 上传到仓库进行保存。当然，你还可以你日常机械重复性的劳动在插件中帮你完成，比如煮咖啡、发邮件等等，真是棒极了。  额外收获 ：定期稳定运行在服务器上，还可以每日贡献一次 Github 贡献度 ... 点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python插件式爬虫">
+<meta property="og:url" content="http://wangshub.github.io/2018/04/25/python插件式爬虫/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="Python 插件式的信息爬虫  🐝 一群不辞劳苦采花小蜜蜂   项目代码地址  本项目运行在可以运行在本地或者服务器端，将不同插件程序获取的信息如：每日天气、新闻等，通过 Github Api 上传到仓库进行保存。当然，你还可以你日常机械重复性的劳动在插件中帮你完成，比如煮咖啡、发邮件等等，真是棒极了。  额外收获 ：定期稳定运行在服务器上，还可以每日贡献一次 Github 贡献度 ... 点">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.768Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python插件式爬虫">
+<meta name="twitter:description" content="Python 插件式的信息爬虫  🐝 一群不辞劳苦采花小蜜蜂   项目代码地址  本项目运行在可以运行在本地或者服务器端，将不同插件程序获取的信息如：每日天气、新闻等，通过 Github Api 上传到仓库进行保存。当然，你还可以你日常机械重复性的劳动在插件中帮你完成，比如煮咖啡、发邮件等等，真是棒极了。  额外收获 ：定期稳定运行在服务器上，还可以每日贡献一次 Github 贡献度 ... 点">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">python插件式爬虫</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">python插件式爬虫</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-25T07:51:05.000Z" itemprop="datePublished" class="page-time">
+  2018-04-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#python-插件式的信息爬虫"><span class="post-toc-text">Python 插件式的信息爬虫</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#工程说明"><span class="post-toc-text">工程说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用步骤"><span class="post-toc-text">使用步骤</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#插件接口-json-格式"><span class="post-toc-text">插件接口 Json 格式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#todo"><span class="post-toc-text">Todo</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-python插件式爬虫" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">python插件式爬虫</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-25 15:51:05" datetime="2018-04-25T07:51:05.000Z" itemprop="datePublished">2018-04-25</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="python-插件式的信息爬虫">Python 插件式的信息爬虫</h1>
+<blockquote>
+<p>🐝 一群不辞劳苦采花小蜜蜂</p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/wangshub/beehive" target="_blank" rel="noopener">项目代码地址</a></li>
+</ul>
+<p>本项目运行在可以运行在本地或者服务器端，将不同插件程序获取的信息如：每日天气、新闻等，通过 Github Api 上传到仓库进行保存。当然，你还可以你日常机械重复性的劳动在插件中帮你完成，比如煮咖啡、发邮件等等，真是棒极了。</p>
+<blockquote>
+<p><strong>额外收获</strong> ：定期稳定运行在服务器上，还可以每日贡献一次 Github 贡献度 ... 点亮你的人生！</p>
+</blockquote>
+<h2 id="工程说明">工程说明</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">├── app</span><br><span class="line">│   └── plugins</span><br><span class="line">│       └── weather.py</span><br><span class="line">├── builtin_plugins</span><br><span class="line">├── config</span><br><span class="line">│   └── config.json</span><br><span class="line">├── main.py</span><br><span class="line">└── upload_github.py</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>main.py</code> : 加载 <code>builtin_plugins/</code> 和 <code>app/</code> 下的插件；</li>
+<li><code>app/plugins/</code> : 插件程序存放路径；</li>
+<li><code>builtin_plugins</code> ： 内置插件路径；</li>
+<li><code>upload_github.py</code> : 通过 Github Api 提交一次 Commit；</li>
+</ul>
+<h2 id="使用步骤">使用步骤</h2>
+<ul>
+<li><p>生成 Github Token</p></li>
+<li><p>运行代码 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h2 id="插件接口-json-格式">插件接口 Json 格式</h2>
+<p>可以自己补充插件，各个插件的返回值为字典类型，必须满足如下格式</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"code"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"type"</span>: <span class="string">"weather"</span>,</span><br><span class="line">  <span class="attr">"date"</span>: <span class="string">"2018-04-23 20:18:03"</span>,</span><br><span class="line">  <span class="attr">"content"</span>: &#123;</span><br><span class="line">    <span class="attr">"city"</span>: <span class="string">"\u6df1\u5733"</span>, <span class="attr">"weather"</span>: <span class="string">"\u591a\u4e91"</span>, <span class="attr">"temperature"</span>: <span class="string">"21 ~ 26\u2103"</span>, <span class="attr">"humidity"</span>: <span class="string">"\u6e7f\u5ea6\uff1a63%"</span>, <span class="attr">"wind"</span>: <span class="string">"\u98ce\u5411\uff1a\u5317\u98ce 2\u7ea7"</span>, <span class="attr">"radiation"</span>: <span class="string">"\u7d2b\u5916\u7ebf\uff1a\u5f31"</span>, <span class="attr">"air"</span>: <span class="string">"PM: 43"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>参数说明</strong></p>
+<ul>
+<li><code>code</code>: <code>0</code> 成功、<code>-1</code> 失败；</li>
+<li><code>type</code>: 例如 [<code>weather</code>, <code>stock</code>, <code>news</code>] 等；</li>
+<li><code>date</code>: 当天日期，如 <code>2018-05-01</code>；</li>
+<li><code>content</code>: 获取的 Json 格式信息，这部分提交到仓库保存；</li>
+</ul>
+<h2 id="todo">Todo</h2>
+<ul>
+<li><p><input type="checkbox" disabled checked>
+Python 插件化信息管理，可拓展；</p></li>
+<li><p><input type="checkbox" disabled checked>
+信息保存到 Github 仓库；</p></li>
+<li><p><input type="checkbox" disabled>
+更多插件补充；</p></li>
+<li><p><input type="checkbox" disabled>
+Docker一键部署到本地或服务器；</p></li>
+<li><p><input type="checkbox" disabled>
+信息可视化</p><ul>
+<li><input type="checkbox" disabled>
+Pyeacharts 网页显示</li>
+<li><input type="checkbox" disabled>
+Gitpage 静态页面每日渲染</li>
+</ul></li>
+<li><p><input type="checkbox" disabled>
+Itchat 微信推送</p><ul>
+<li><input type="checkbox" disabled>
+自动登录</li>
+<li><input type="checkbox" disabled>
+自动推送</li>
+<li><input type="checkbox" disabled>
+信息查询</li>
+</ul></li>
+<li><p><input type="checkbox" disabled>
+补充插件内容</p><ul>
+<li><input type="checkbox" disabled>
+插件思路收集</li>
+<li><input type="checkbox" disabled>
+<strong>大新闻</strong>日常备份</li>
+<li><input type="checkbox" disabled>
+商品价格记录插件</li>
+</ul></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.768Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/04/25/python插件式爬虫/&title=《python插件式爬虫》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/04/25/python插件式爬虫/&title=《python插件式爬虫》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/04/25/python插件式爬虫/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python插件式爬虫》 — 神奇的战士&url=http://wangshub.github.io/2018/04/25/python插件式爬虫/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/04/25/python插件式爬虫/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">cerebro-codelf给变量起名的事情上，为你生命省3s</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/23/Python插件式程序结构设计/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python插件式程序结构设计</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/04/25/python插件式爬虫/&title=《python插件式爬虫》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/04/25/python插件式爬虫/&title=《python插件式爬虫》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/04/25/python插件式爬虫/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python插件式爬虫》 — 神奇的战士&url=http://wangshub.github.io/2018/04/25/python插件式爬虫/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/04/25/python插件式爬虫/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aS27DMAwFwN7/0i7QVYA29iPlFDA1WgVOYmu8IPjR11e8jp+VXH+9crysd1d+//fdtzcsDAyMxzKO05X/pspLvi08FwMDYwPG+VbewXr3ycNx/powMDAwetTzsJ58i4GBgfE5Rp7qJUEZAwMDIy9i8zbcefqYF8AfqcUxMDAeyKgOBv7z8wfnGxgYGA9hHMXVC45JyM6D7B/3x8DAGM1YaXXlg4G7/nvR1MPAwBjNqB536B2hyIPybeMBDAyMQYzeAGAlUPbSzYvXioGBMZSRJ3Mrw8588NArZTEwMGYz7kraeqlk9WUVilgMDIyhjPNtVZtlycN6RWx05AIDA2MQY6WwrLbqckC1eYeBgTGbkT+s14ZLSOttOwwMjNmM3nhypUxNnlIO7hgYGBsw7u1ZrR+2yF8WBgbGDozq5qpBtvpqksS0cGYEAwNjBCNpt+UtufV2f/WYBQYGxg6MvJgsNOjjtLIagqPgjoGBMZpRHU/e9fv1USgGBsZsRjXt67XM8qBcTUYxMDB2ZlTbYcmmq9cL+8HAwBjNyCvB6hGxPO2rrvJ9MDAwHs7oteCrA8t8bFAdJGBgYOzA6IW53kGKXrmbp4wYGBizGXmQrQbKlYDenGlgYGCMZqyUnb2WXC/Juwi4GBgY2zPy7SYNu2rhevFEDAwMjDgRzNO7la1jYGDsybiriF0ZSSZXMDAw9mT0jjisJHbrz23eGQMD43mMbyOQjnTzG9VCAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

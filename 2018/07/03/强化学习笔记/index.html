@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>机器人强化学习笔记（0） | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Reinforment Learning">
+    <meta name="description" content="机器人强化学习笔记（0） 机器学习分类                                                                                              Machine Learning              强化学习问题">
+<meta name="keywords" content="Python,Reinforment Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器人强化学习笔记（0）">
+<meta property="og:url" content="http://wangshub.github.io/2018/07/03/强化学习笔记/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="机器人强化学习笔记（0） 机器学习分类                                                                                              Machine Learning              强化学习问题">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fsx1t71czwj20lc0dkdjg.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fsx1s6yxgsj20c204vjrh.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fsx1xqsh7ij20c204v0t0.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1ft298te49zj203001c0si.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fsx3dp18t2j20md0bq74c.jpg">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.772Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器人强化学习笔记（0）">
+<meta name="twitter:description" content="机器人强化学习笔记（0） 机器学习分类                                                                                              Machine Learning              强化学习问题">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fsx1t71czwj20lc0dkdjg.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">机器人强化学习笔记（0）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">机器人强化学习笔记（0）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-07-03T14:34:36.000Z" itemprop="datePublished" class="page-time">
+  2018-07-03
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#机器人强化学习笔记0"><span class="post-toc-text">机器人强化学习笔记（0）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#机器学习分类"><span class="post-toc-text">机器学习分类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#强化学习问题"><span class="post-toc-text">强化学习问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#解决强化学习问题的框架和算法"><span class="post-toc-text">解决强化学习问题的框架和算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#马尔可夫决策过程markov-decision-process"><span class="post-toc-text">马尔可夫决策过程(Markov Decision Process)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#最短路径问题shortest-path-problem"><span class="post-toc-text">最短路径问题(Shortest Path Problem)</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-强化学习笔记" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">机器人强化学习笔记（0）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-07-03 22:34:36" datetime="2018-07-03T14:34:36.000Z" itemprop="datePublished">2018-07-03</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="机器人强化学习笔记0">机器人强化学习笔记（0）</h1>
+<h2 id="机器学习分类">机器学习分类</h2>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fsx1t71czwj20lc0dkdjg.jpg" alt="Machine Learning" title>
+                </div>
+                <div class="image-caption">Machine Learning</div>
+            </figure>
+<h2 id="强化学习问题">强化学习问题</h2>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fsx1s6yxgsj20c204vjrh.jpg" alt="RL problem" title>
+                </div>
+                <div class="image-caption">RL problem</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fsx1xqsh7ij20c204v0t0.jpg" alt="Child walk" title>
+                </div>
+                <div class="image-caption">Child walk</div>
+            </figure>
+<ul>
+<li><strong>监督学习</strong>：监督学习由任务驱动，需要创造外部的“导师”，“导师”拥有外部环境的所有先验信息，并教导 Agent 完成特定的任务。但是 Agent 可以用很多种子任务相结合的方式去完成相同的任务。所以创造一个全能的“导师”来训练 Agent 在实际中几乎是不可能的。</li>
+<li><strong>非监督学习</strong>：非监督学习是由数据驱动，主要目的是找到底层的模式而不是映射关系。例如给用户推荐新闻时，非监督学习主要是根据用户先前阅读过的新闻来推荐相似的新闻。</li>
+<li><strong>强化学习</strong>：和上面两种方法相比较，强化学习主要是从自身的经验来获取知识，在输入和输出之间存在着映射关系。强化学习将奖励函数作为行为的反馈。</li>
+</ul>
+<h2 id="解决强化学习问题的框架和算法">解决强化学习问题的框架和算法</h2>
+<p>强化学习需要平衡 <strong>exploration vs exploitation</strong> 困境。</p>
+<h3 id="马尔可夫决策过程markov-decision-process">马尔可夫决策过程(Markov Decision Process)</h3>
+<p>在强化学习场景下，数学模型为马尔可夫决策过程，表示为</p>
+<ul>
+<li>状态集合：S</li>
+<li>动作集合：A</li>
+<li>奖励函数：R</li>
+<li>策略：Pi</li>
+<li>值：V</li>
+</ul>
+<p>从起始状态到结束状态<span class="math inline">\(S\)</span>需要经过动作集合 A。执行每个动作后，都会获得奖励 R，每个动作可能会导致好的或者坏的奖励函数值。策略(Policy)就是采取某个系列动作的方法，并且会相应的得到奖励函数的值。因此，求解强化学习的目标就是要选取最佳策略(Policy)，在所有可能的状态和时间范围内使得评估函数最大，即</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1ft298te49zj203001c0si.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="最短路径问题shortest-path-problem">最短路径问题(Shortest Path Problem)</h3>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fsx3dp18t2j20md0bq74c.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>求解以最小代价，从地点 A 到地点 F 的最短路径问题，转化为</p>
+<ul>
+<li>节点集合 {A, B, C, D, E, F}</li>
+<li>从点到点移动成为动作，{A-&gt;B, C-&gt;D}</li>
+<li>奖励函数为每条边的花费</li>
+<li>完成 A 点到 F 行走路线成为策略，如 {A-&gt;B-&gt;D-&gt;F}</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.772Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Reinforment-Learning/">Reinforment Learning</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/07/03/强化学习笔记/&title=《机器人强化学习笔记（0）》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/07/03/强化学习笔记/&title=《机器人强化学习笔记（0）》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/07/03/强化学习笔记/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《机器人强化学习笔记（0）》 — 神奇的战士&url=http://wangshub.github.io/2018/07/03/强化学习笔记/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/07/03/强化学习笔记/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/07/27/机器人强化学习之使用 OpenAI Gym 教程与笔记/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">机器人强化学习之使用 OpenAI Gym 教程与笔记</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/09/工具网站推荐/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">效率工具网站推荐</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/07/03/强化学习笔记/&title=《机器人强化学习笔记（0）》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/07/03/强化学习笔记/&title=《机器人强化学习笔记（0）》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/07/03/强化学习笔记/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《机器人强化学习笔记（0）》 — 神奇的战士&url=http://wangshub.github.io/2018/07/03/强化学习笔记/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/07/03/强化学习笔记/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aSW7DMBAEwPz/0845gMV0k7IBkaWTkcjylA6DWfjzE1+v4Lq6f/zM9ltLFwYGxmMZSXA5YBzu1f1X9xS/i4GBcQCjffRVihwHnT8zjw0DAwNjfE9b0uVlJQYGBsY3E+5cK4uBgYEx18TmyTRva8dP+EgvjoGB8UBGPnX//ueP7DcwMDAexXiVV8LLC8eVSP48GQMDY2vGXNnXNqUribsoQzEwMA5gtCOz7xzFSH4dAwMDI19A5q8j+W67kMDAwNiVkYeSB5esJ5NvFQsADAyMYxh5g9ouIO9taN/8FwMDY2vG+o+1QSfpe+6gBgYGxt6MduyVF3xzBeUSGwMDYztGW+rNtaaTpV6AwcDAOIGRF15z7e7KyrN9uRgYGLsyxolsZdE4By6OVuT7DQwMjI0Yc8ez8pIxCTQvKy8rXAwMjO0Yc6O0dp3ZrhZuKBAxMDA2ZeSDtnZ5ma8Q8hUmBgbGaYy2vPtEulz5jIGBcQIjSXx5csyHZStl5Zu/YGBgHMOod57xoH8u6MlxGwYGxtaMvIpcGcC1rW/0cjEwMDZlvMorT8f5yjM58PEPGwMDY2vGDdk6aEqTAnRcXEalIQYGxtaMJMmuH5hoB3Z1wsXAwDiAkQzO8vx915qhSOsYGBgY8aGHuUVCvbDEwMDACMJt15Ztmq7XohgYGAcwkia2PQyRF4JzYzgMDIxzGG3ruB5u+1JuO66BgYHxPMYvnRLbGYm+CeIAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

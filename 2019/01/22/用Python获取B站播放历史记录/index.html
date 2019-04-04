@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>用Python获取B站播放历史记录 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="用 Python 获取 B 站播放历史记录 最近 B 站出了一个年度报告，统计用户一年当中在 B 站上观看视频的总时长和总个数。过去一年我居然在 B 站上看了 2600+ 个视频，总计 251 个小时，居然花了这么多时间，吓得我差点把 Bilibili App 卸载了...">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Python获取B站播放历史记录">
+<meta property="og:url" content="http://wangshub.github.io/2019/01/22/用Python获取B站播放历史记录/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="用 Python 获取 B 站播放历史记录 最近 B 站出了一个年度报告，统计用户一年当中在 B 站上观看视频的总时长和总个数。过去一年我居然在 B 站上看了 2600+ 个视频，总计 251 个小时，居然花了这么多时间，吓得我差点把 Bilibili App 卸载了...">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fzfksqinlgj208i07475z.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fzfkf5qyuqj20c009g765.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fzfkc5s8scj21ga0nok4i.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fzfkkj1adsj20ta07ita2.jpg">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.775Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用Python获取B站播放历史记录">
+<meta name="twitter:description" content="用 Python 获取 B 站播放历史记录 最近 B 站出了一个年度报告，统计用户一年当中在 B 站上观看视频的总时长和总个数。过去一年我居然在 B 站上看了 2600+ 个视频，总计 251 个小时，居然花了这么多时间，吓得我差点把 Bilibili App 卸载了...">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fzfksqinlgj208i07475z.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">用Python获取B站播放历史记录</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">用Python获取B站播放历史记录</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-22T10:40:22.000Z" itemprop="datePublished" class="page-time">
+  2019-01-22
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#用-python-获取-b-站播放历史记录"><span class="post-toc-text">用 Python 获取 B 站播放历史记录</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#获取请求-api-接口与-cookie"><span class="post-toc-text">获取请求 Api 接口与 Cookie</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#python-代码实现"><span class="post-toc-text">Python 代码实现</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#存在的问题"><span class="post-toc-text">存在的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安全问题"><span class="post-toc-text">安全问题</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-用Python获取B站播放历史记录" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">用Python获取B站播放历史记录</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-22 18:40:22" datetime="2019-01-22T10:40:22.000Z" itemprop="datePublished">2019-01-22</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="用-python-获取-b-站播放历史记录">用 Python 获取 B 站播放历史记录</h1>
+<p>最近 B 站出了一个年度报告，统计用户一年当中在 B 站上观看视频的总时长和总个数。过去一年我居然在 B 站上看了 <code>2600+</code> 个视频，总计 <code>251</code> 个小时，居然花了这么多时间，吓得我差点把 Bilibili App 卸载了...</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fzfksqinlgj208i07475z.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>然而我又很好奇，到底我在 B 站上都看了些什么类型 <del>小姐姐</del> 的视频，用几行 Python 代码实现了一下。</p>
+<h2 id="获取请求-api-接口与-cookie">获取请求 Api 接口与 Cookie</h2>
+<p>实现起来非常容易，获取 cookie 模拟请求即可</p>
+<ol type="1">
+<li><p>使用 chrome 浏览器</p></li>
+<li><p>登陆 <a href="https://www.bilibili.com" target="_blank" rel="noopener">B 站</a>，进入历史记录 <a href="https://www.bilibili.com/account/history" target="_blank" rel="noopener">https://www.bilibili.com/account/history</a></p></li>
+<li><p>在网页任意位置，鼠标右键 <code>检查</code></p></li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fzfkf5qyuqj20c009g765.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ol start="4" type="1">
+<li>按照下图所示，进入 <code>Network</code> 页面，筛选框输入 <code>history</code>，对结果进行筛选，页面滚轮往下即可看到浏览过程中的历史记录请求的 <code>Header</code></li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fzfkc5s8scj21ga0nok4i.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ol start="5" type="1">
+<li>将 Header 下， cookie 一行的字符串复制出来到一个 <code>cookie.txt</code> 文本里</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fzfkkj1adsj20ta07ita2.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="python-代码实现">Python 代码实现</h2>
+<ul>
+<li>伪造浏览器请求</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_cookies_file</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="string">"""read cookie txt file</span></span><br><span class="line"><span class="string">    :param filename: (str) cookies file path</span></span><br><span class="line"><span class="string">    :return: (dict) cookies</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">with</span> open(filename, <span class="string">'r'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">        cookies = fp.read()</span><br><span class="line">        <span class="keyword">return</span> cookies</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_header</span><span class="params">(filename)</span>:</span></span><br><span class="line">    cookie = read_cookies_file(filename)</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'Accept'</span>: <span class="string">'*/*'</span>,</span><br><span class="line">        <span class="string">'Accept-Encoding'</span>: <span class="string">'gzip, deflate, br'</span>,</span><br><span class="line">        <span class="string">'Accept-Language'</span>: <span class="string">'zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7'</span>,</span><br><span class="line">        <span class="string">'Connection'</span>: <span class="string">'keep-alive'</span>,</span><br><span class="line">        <span class="string">'Cookie'</span>: cookie,</span><br><span class="line">        <span class="string">'Host'</span>: <span class="string">'api.bilibili.com'</span>,</span><br><span class="line">        <span class="string">'Referer'</span>: <span class="string">'https://www.bilibili.com/account/history'</span>,</span><br><span class="line">        <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 '</span></span><br><span class="line">                      <span class="string">'(KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> headers</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">req_get</span><span class="params">(headers, url)</span>:</span></span><br><span class="line">    resp = requests.get(url, headers=headers)</span><br><span class="line">    <span class="keyword">return</span> json.loads(resp.text)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 cookie 模拟请求</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_all_bili_history</span><span class="params">(cookie_file)</span>:</span></span><br><span class="line">    headers = bilibili.get_header(cookie_file)</span><br><span class="line">    history = &#123;<span class="string">'all'</span>: []&#125;</span><br><span class="line">    <span class="keyword">for</span> page_num <span class="keyword">in</span> range(MAX_PAGE):</span><br><span class="line">        time.sleep(<span class="number">0.6</span>)</span><br><span class="line">        url = <span class="string">'https://api.bilibili.com/x/v2/history?pn=&#123;pn&#125;&amp;ps=&#123;ps&#125;&amp;jsonp=jsonp'</span>.format(pn=page_num, ps=PAGE_PER_NUM)</span><br><span class="line">        result = bilibili.req_get(headers, url)</span><br><span class="line">        print(<span class="string">'page = &#123;&#125; code = &#123;&#125; datalen = &#123;&#125;'</span>.format(page_num, result[<span class="string">'code'</span>], len(result[<span class="string">'data'</span>])))</span><br><span class="line">        <span class="keyword">if</span> len(result[<span class="string">'data'</span>]) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        history[<span class="string">'all'</span>].append(result)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> history</span><br></pre></td></tr></table></figure>
+<ul>
+<li>代码非常简单，完整代码在 <a href="https://github.com/wangshub/bilibili-history" target="_blank" rel="noopener">https://github.com/wangshub/bilibili-history</a></li>
+</ul>
+<h2 id="存在的问题">存在的问题</h2>
+<ul>
+<li><p>本来想拿到所有的播放记录，做一些统计和预测，但是经过实测，B 站只能获取到最近 <code>1000</code> 条或者最近 <code>3</code> 个月的播放记录</p></li>
+<li><p>如果想获得更多，只能做一个监测程序，不停地从接口获取数据</p></li>
+</ul>
+<h2 id="安全问题">安全问题</h2>
+<p>尽量不要使用不安全的 wifi 网络，有可能会被别有用心之人获取网络请求的 Package，易泄露个人隐私。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.775Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/01/22/用Python获取B站播放历史记录/&title=《用Python获取B站播放历史记录》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/01/22/用Python获取B站播放历史记录/&title=《用Python获取B站播放历史记录》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/01/22/用Python获取B站播放历史记录/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用Python获取B站播放历史记录》 — 神奇的战士&url=http://wangshub.github.io/2019/01/22/用Python获取B站播放历史记录/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/01/22/用Python获取B站播放历史记录/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/01/29/Vanilla-Policy-Gradient/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Vanilla_Policy_Gradient</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/15/强化学习:策略梯度算法/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">强化学习:策略梯度算法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/01/22/用Python获取B站播放历史记录/&title=《用Python获取B站播放历史记录》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/01/22/用Python获取B站播放历史记录/&title=《用Python获取B站播放历史记录》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/01/22/用Python获取B站播放历史记录/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用Python获取B站播放历史记录》 — 神奇的战士&url=http://wangshub.github.io/2019/01/22/用Python获取B站播放历史记录/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/01/22/用Python获取B站播放历史记录/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvUlEQVR42u3a0WojMQwF0P7/T2dh2ZeljHslWWkLZ55COol9XBgpkj4+4uv19/r8Ornz8/2vh+u81nnd0YWHh4fX2nq+5BPm/P4T9byTp88me8bDw8Pb5uXB4BVf503nq+RBAg8PD++n8c535vdXM2E8PDy838urBoZ8Q3nZAg8PD+/n8KppcX5/cpTVYLBSa8HDw8OLeZMG2He9flN/Dw8PD6/YVZ88+vNH9rzd9bgWHh4e3gLvVsk1DyrVlli1MRbl6Xh4eHhjXrX1lS9fDQ/VRlcz+cbDw8Mb8yYJdJ4E5+8nwaMQJPDw8PDWeHmqnY8I9Npd5xUvZPR4eHh4l3jzwJAPS1Uf970iBR4eHt4er/qBWwNVeYjKi79frIKHh4d3iZcXW3sNrSTVzv9abnrh4eHhXeVtlG6TAsfk4ArfgIeHh7fGK0eSPEMfNMkmR/nvHTw8PLw38vIi7Hbrq5pk//c9eHh4eMu8vHwwb/lHw1Jxc+5xLTw8PLwF3qTIOxk2zUNLzuv9MMDDw8Or8uYbmg8TVIPQ6BcDHh4e3phXXazaGJsPIuSH+8Xe8PDw8C7xJoXXSWtqMpRQ+L/h4eHhLfCSW/OSwa30updMRzUVPDw8vDGv+riPRp2KDa35QT9+Jx4eHt4Cr1pcqDbJ8gd6knz3WnF4eHh4G7xqMaL30O8NRfUS9Chnx8PDwxvwJqlzbwhgcgTVUjIeHh7eHq86cVAd0ro1yJU///Hw8PA2eJMf/JP0t1dWKBdz8fDw8BZ4vVJFtWjbO6BkZGFe7MDDw8Pr8ebBIB8d6DXP8sBQWAAPDw9vzLu19cnIVLN3dy5t4OHh4f0S3iSoTJpehXErPDw8vLfwqmMECbjXKkv2jIeHh7fNq7aj8rR40uKqFilGtRY8PDy8S62vXll2MmTQY1/r7+Hh4eGdeH8AJua7YFsLq14AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

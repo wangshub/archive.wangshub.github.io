@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>强化学习之 Deep Q­-Learning | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,RL">
+    <meta name="description" content="Deep Q­-Learning Q-Learning 在 Q-Learning 中定义函数 \(Q(s, a)\) 表示在当前状态 \(s\) 下采取动作 \(a\) 获得的最大有损奖励 \[Q\left(s_{t}, a_{t}\right)=\max R_{t+1}\] 可以将 \(Q(s, a)\) 理解为在一局游戏中，如果在状态 \(s\) 下采取动作 \(a\) 后，在游戏结束所能获得">
+<meta name="keywords" content="Python,RL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习之 Deep Q­-Learning">
+<meta property="og:url" content="http://wangshub.github.io/2019/03/11/RLDeepQlearning/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="Deep Q­-Learning Q-Learning 在 Q-Learning 中定义函数 \(Q(s, a)\) 表示在当前状态 \(s\) 下采取动作 \(a\) 获得的最大有损奖励 \[Q\left(s_{t}, a_{t}\right)=\max R_{t+1}\] 可以将 \(Q(s, a)\) 理解为在一局游戏中，如果在状态 \(s\) 下采取动作 \(a\) 后，在游戏结束所能获得">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312210159.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312092656.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312210239.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313082800.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313084707.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190311204446.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190311204645.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313091430.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313195452.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312083834.png">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.686Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="强化学习之 Deep Q­-Learning">
+<meta name="twitter:description" content="Deep Q­-Learning Q-Learning 在 Q-Learning 中定义函数 \(Q(s, a)\) 表示在当前状态 \(s\) 下采取动作 \(a\) 获得的最大有损奖励 \[Q\left(s_{t}, a_{t}\right)=\max R_{t+1}\] 可以将 \(Q(s, a)\) 理解为在一局游戏中，如果在状态 \(s\) 下采取动作 \(a\) 后，在游戏结束所能获得">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312210159.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">强化学习之 Deep Q­-Learning</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">强化学习之 Deep Q­-Learning</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-11T12:27:30.000Z" itemprop="datePublished" class="page-time">
+  2019-03-11
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#deep-q-learning"><span class="post-toc-text">Deep Q­-Learning</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#q-learning"><span class="post-toc-text">Q-Learning</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深度-q-网络deep-q-network"><span class="post-toc-text">深度 Q 网络(Deep Q Network)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#经验回放exploration-exploitation"><span class="post-toc-text">经验回放(Exploration-Exploitation)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文献"><span class="post-toc-text">参考文献</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-RLDeepQlearning" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">强化学习之 Deep Q­-Learning</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-11 20:27:30" datetime="2019-03-11T12:27:30.000Z" itemprop="datePublished">2019-03-11</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="deep-q-learning">Deep Q­-Learning</h1>
+<h2 id="q-learning">Q-Learning</h2>
+<p>在 Q-Learning 中定义函数 <span class="math inline">\(Q(s, a)\)</span> 表示在当前状态 <span class="math inline">\(s\)</span> 下采取动作 <span class="math inline">\(a\)</span> 获得的最大有损奖励</p>
+<p><span class="math display">\[Q\left(s_{t}, a_{t}\right)=\max R_{t+1}\]</span></p>
+<p>可以将 <span class="math inline">\(Q(s, a)\)</span> 理解为在一局游戏中，如果在状态 <span class="math inline">\(s\)</span> 下采取动作 <span class="math inline">\(a\)</span> 后，在游戏结束所能获得的最高分。即 <strong>Q-函数</strong> 表示在某一个状态下采取相应动作的<strong>质量</strong>。</p>
+<p>那么策略 <span class="math inline">\(\pi(s)\)</span> 就可以表示成在每个状态 <span class="math inline">\(s\)</span> 下选择动作 <span class="math inline">\(a\)</span> 的函数</p>
+<p><span class="math display">\[\pi(s)=\operatorname{argmax}_{a} Q(s, a)\]</span></p>
+<p>许多强化学习算法的基本思想都是通过迭代更新 Bellman 方程来对<strong>动作-值</strong>进行估计，最佳的得分奖励是由当前环境的即使奖励 <span class="math inline">\(r\)</span> 和下一个状态 <span class="math inline">\(s^{\prime}\)</span> 的最大奖励的加和。</p>
+<p><span class="math display">\[
+Q_{i+1}(s, a)=r+\gamma \max _{a^{\prime}} Q_{i}\left(s^{\prime}, a^{\prime}\right)
+\]</span></p>
+<p>Q-Learning 的核心思想：<strong>用 Bellman 方程迭代近似估计 Q-函数</strong>。一种最简单的方式实现 Q-函数 的方式就是建立一个行为状态，列为动作的表格。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312210159.png" width="50%">
+</div>
+<p>Q-learning 伪代码表示如下</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312092656.png" width="70%">
+</div>
+<p>其中 <span class="math inline">\(\alpha\)</span> 成为学习率，用于控制上一时刻的 Q-值 与下一时刻 Q-值 的差值对更新过程的影响，当 <span class="math inline">\(\alpha=1\)</span> 时，上式即为 Bellman 方程。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312210239.png" width="80%">
+</div>
+<p>假设在上图中令机器人从起始位置往右移动 1 步，然后计算并更新 Q-值。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313082800.png" width="70%">
+</div>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313084707.png" width="70%">
+</div>
+<p>当 <span class="math inline">\(i \rightarrow \infty\)</span> 时，即可找到<strong>最佳动作值函数</strong> <span class="math inline">\(Q_{i+t} \rightarrow Q^{*}\)</span>。但是在实际当中，每个轨迹序列当中，动作值函数都是被单独估计，不具有任何的泛化的能力。比较常见的方式就是使用(如神经网络)线性或者非线性的估计函数来对动作值函数进行近似估计。</p>
+<h2 id="深度-q-网络deep-q-network">深度 Q 网络(Deep Q Network)</h2>
+<p>假设状态是一张 64*64 分辨率的图像，那么每个像素点用 8bit 的灰度值表示，那么状态 <span class="math inline">\(s\)</span> 就可能有 <span class="math inline">\(256^{64 \times 64}\)</span> 种可能，如果构造这么一张巨大无比的 Q-Table，那将是不现实的。</p>
+<p>对于高度结构化的数据，正好适合用深度神经网络来对 Q 函数进行近似估计。输入状态 <span class="math inline">\(s\)</span> 和动作，通过网络，输出对应的 Q-值。另一种方式是在 DeepMind 文章中，只是输入当前的状态 <span class="math inline">\(s\)</span>, 输出各个 Action 对应的 Q-值。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190311204446.png" width="80%">
+</div>
+<p>在 Google DeepMind 的 Paper 中使用了如下的网络结构来对 <span class="math inline">\(\max _{a} \cdot Q\left(s^{\prime}, a^{\prime}\right)\)</span> 进行近似估计</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190311204645.png" width="90%">
+</div>
+<p>DeepMind 在文章中使用的网络模型如下。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313091430.png" width="80%">
+</div>
+<p>Q 值可能是任意的实数，把对 Q 值的估计看作是机器学习中的<strong>回归问题</strong>，所以使用 <strong>平方误差损失(squared error loss)</strong> 作为优化的目标函数。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313195452.png" width="40%">
+</div>
+<p><span class="math display">\[
+L_{i}\left(\theta_{i}\right)=\mathbb{E}_{\left(s, a, r, s^{\prime}\right) \sim \mathrm{U}(D)}\left[\left(r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime} ; \theta_{i}^{-}\right)-Q\left(s, a ; \theta_{i}\right)\right)^{2}\right]
+\]</span></p>
+<p>给定轨迹 <span class="math inline">\(&lt;s, a, r, s^{\prime}&gt;\)</span> ，使用神经网络替换 Q-Table 过程如下</p>
+<ol type="1">
+<li>输入当前状态 <span class="math inline">\(s\)</span>，预测所有动作 <span class="math inline">\(a\)</span> 的 Q-值；</li>
+<li>输入下一状态 <span class="math inline">\(s\)</span>，计算最大 <span class="math inline">\(\max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)\)</span></li>
+<li>设置 Q 值优化目标为 <span class="math inline">\(r+ \gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)\)</span></li>
+<li>反向传播更新网络 weights；</li>
+</ol>
+<p>目标 <span class="math inline">\(\max _{a^{\prime}} Q\)</span> 取决于神经网络中神经元的权重。监督学习在学习之前，待估计的目标是确定的。 在优化 <span class="math inline">\(L_{i}\left(\theta_{i}\right)\)</span> 时保持上一次迭代参数 <span class="math inline">\(\theta_{i}^{-}\)</span> 固定不变。</p>
+<p>利用随机梯度下降优化损失函数</p>
+<p><span class="math display">\[\nabla_{\theta_{i}} L\left(\theta_{i}\right)=\mathbb{E}_{s, a, r, s^{\prime}}\left[\left(r+\gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime} ; \theta_{i}^{-}\right)-Q\left(s, a ; \theta_{i}\right)\right) \nabla_{\theta_{i}} Q\left(s, a ; \theta_{i}\right)\right]\]</span></p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312083834.png" width="80%">
+</div>
+<h2 id="经验回放exploration-exploitation">经验回放(Exploration-Exploitation)</h2>
+<p><strong>为什么要经验回放？</strong></p>
+<ul>
+<li>网络是健忘的</li>
+</ul>
+<h2 id="参考文献">参考文献</h2>
+<ul>
+<li><p>https://medium.freecodecamp.org/an-introduction-to-q-learning-reinforcement-learning-14ac0b4493cc</p></li>
+<li></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.686Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RL/">RL</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/03/11/RLDeepQlearning/&title=《强化学习之 Deep Q­-Learning》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/03/11/RLDeepQlearning/&title=《强化学习之 Deep Q­-Learning》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/03/11/RLDeepQlearning/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《强化学习之 Deep Q­-Learning》 — 神奇的战士&url=http://wangshub.github.io/2019/03/11/RLDeepQlearning/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/03/11/RLDeepQlearning/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">『Hamerspoon』蓝牙自动开关</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/02/26/树莓派FM小电台背后的原理解析/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">树莓派FM小电台背后的原理解析</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/03/11/RLDeepQlearning/&title=《强化学习之 Deep Q­-Learning》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/03/11/RLDeepQlearning/&title=《强化学习之 Deep Q­-Learning》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/03/11/RLDeepQlearning/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《强化学习之 Deep Q­-Learning》 — 神奇的战士&url=http://wangshub.github.io/2019/03/11/RLDeepQlearning/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/03/11/RLDeepQlearning/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3a0Y7DIAxE0fz/T6fPVQs7M05Xwr48RWkXOF3JsjHXJY/7Y6w+Xb1Zzbmf5+EBAwaMYxn3duy/oyCVLX7Opu8NBgwYcxju1G4AdYO1uxYMGDBgZOlgJTTDgAEDRp1RL1b3iSAMGDBgZEXsfit6Iqgf5/2kFocBA8aBDP3U/f+ff9LfgAEDxlGM2xxKqM22pQfZLyvCgAGjNcNdRi93K82GcD8wYMBoyqiUnXrbMks69z/Kl/8DDBgwWjPcA7V6IM62u9wPDBgwWjPceKU0GrMAWgnZMGDA6M3Qi88MvGfr1yz+CNwwYMAYz9Ajt36pK+s/LueEAQPGAIabS2ZUoxkphO+3ZxgwYLRmuEte5nBLVjeUw4ABYwKjcjHCTQT1i19uSQwDBozeDH2B7DJEdoQXFtIwYMBoysiO5vUk0n3j7kdqDMCAAaMdo5L8ZcdqWfEMAwaMaYxKAWmExSi8Su9hwIDRmuHWgJWrFUpp6mLCUhYGDBgtGPq23LCoJ6PuUR0MGDDmMPRi0m0nZGClLQEDBoxpDLfdWE8EjV7r/q9gwIDRlHGbQ7+kpSR2DxSuei8CBgwYxzL0kaVu7gx6Ua3/TDBgwOjBUIJsFnCzdkIYcGHAgDGA4ZasSsr4VLBWdgsDBgwY7rO+OT28PhxwYcCA0ZpRL2LdQzrpmzBgwBjA0K9E7AOlEkwrxS0MGDBmMrIrDpXS1L6cWi59YcCAcSzjBbGBS6ktOEdjAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

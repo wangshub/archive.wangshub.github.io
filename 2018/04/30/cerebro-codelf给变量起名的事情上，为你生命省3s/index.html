@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>cerebro-codelf给变量起名的事情上，为你生命省3s | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="JacaScript,Cerebro">
+    <meta name="description" content="cerebro-codelf  There are only two hard things in Computer Science: cache invalidation and naming things. -- Phil Karlton   给变量起名的事情上，为你生命省 3s。  Cerebro 变量名搜索插件，项目灵感来源 codelf。通过 Cerebro 的搜索窗口快速查找变量名。">
+<meta name="keywords" content="JacaScript,Cerebro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cerebro-codelf给变量起名的事情上，为你生命省3s">
+<meta property="og:url" content="http://wangshub.github.io/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="cerebro-codelf  There are only two hard things in Computer Science: cache invalidation and naming things. -- Phil Karlton   给变量起名的事情上，为你生命省 3s。  Cerebro 变量名搜索插件，项目灵感来源 codelf。通过 Cerebro 的搜索窗口快速查找变量名。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/carlos-wong/cerebro-codelf/raw/master/res/screenshot.png">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.691Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cerebro-codelf给变量起名的事情上，为你生命省3s">
+<meta name="twitter:description" content="cerebro-codelf  There are only two hard things in Computer Science: cache invalidation and naming things. -- Phil Karlton   给变量起名的事情上，为你生命省 3s。  Cerebro 变量名搜索插件，项目灵感来源 codelf。通过 Cerebro 的搜索窗口快速查找变量名。">
+<meta name="twitter:image" content="https://github.com/carlos-wong/cerebro-codelf/raw/master/res/screenshot.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">cerebro-codelf给变量起名的事情上，为你生命省3s</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">cerebro-codelf给变量起名的事情上，为你生命省3s</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-30T12:11:27.000Z" itemprop="datePublished" class="page-time">
+  2018-04-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#cerebro-codelf"><span class="post-toc-text">cerebro-codelf</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#特性"><span class="post-toc-text">特性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装"><span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用"><span class="post-toc-text">使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#license"><span class="post-toc-text">LICENSE</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-cerebro-codelf给变量起名的事情上，为你生命省3s" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">cerebro-codelf给变量起名的事情上，为你生命省3s</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-30 20:11:27" datetime="2018-04-30T12:11:27.000Z" itemprop="datePublished">2018-04-30</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="cerebro-codelf">cerebro-codelf</h1>
+<blockquote>
+<p>There are only two hard things in Computer Science: cache invalidation and naming things. -- Phil Karlton</p>
+</blockquote>
+<blockquote>
+<p>给变量起名的事情上，为你生命省 <strong>3s</strong>。</p>
+</blockquote>
+<p><strong><a href="https://github.com/KELiON/cerebro.git" target="_blank" rel="noopener">Cerebro</a> 变量名搜索插件</strong>，项目灵感来源 <a href="https://unbug.github.io/codelf/" target="_blank" rel="noopener">codelf</a>。通过 Cerebro 的搜索窗口快速查找变量名。</p>
+<h2 id="特性">特性</h2>
+<ul>
+<li>快速启动、搜索</li>
+<li>中英文搜索</li>
+<li>自由定制</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://github.com/carlos-wong/cerebro-codelf/raw/master/res/screenshot.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="安装">安装</h2>
+<ul>
+<li>插件依赖于 <a href="https://github.com/KELiON/cerebro.git" target="_blank" rel="noopener">Cerebro</a></li>
+<li><code>Ctrl-Space</code> 打开 Cerebro</li>
+<li>输入 <code>plugins codelf</code>，点击安装</li>
+</ul>
+<h2 id="使用">使用</h2>
+<ul>
+<li>Cerebro 中，输入 <code>codelf</code> + <code>[待搜索的变量名]</code>；</li>
+<li>上下选择变量名，敲回车 <code>Enter</code> 复制到剪切板；</li>
+</ul>
+<h2 id="license">LICENSE</h2>
+<p>MIT</p>
+<p>项目地址 <a href="https://github.com/carlos-wong/cerebro-codelf" target="_blank" rel="noopener">https://github.com/carlos-wong/cerebro-codelf</a></p>
+<p>欢迎 fork :fork_and_knife: 和 star :star:</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.691Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Cerebro/">Cerebro</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JacaScript/">JacaScript</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/&title=《cerebro-codelf给变量起名的事情上，为你生命省3s》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/&title=《cerebro-codelf给变量起名的事情上，为你生命省3s》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《cerebro-codelf给变量起名的事情上，为你生命省3s》 — 神奇的战士&url=http://wangshub.github.io/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/30/跨平台效率软件Cerebro/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">开源跨平台效率软件Cerebro</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/25/python插件式爬虫/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">python插件式爬虫</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/&title=《cerebro-codelf给变量起名的事情上，为你生命省3s》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/&title=《cerebro-codelf给变量起名的事情上，为你生命省3s》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《cerebro-codelf给变量起名的事情上，为你生命省3s》 — 神奇的战士&url=http://wangshub.github.io/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/04/30/cerebro-codelf给变量起名的事情上，为你生命省3s/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADKklEQVR42u3aQY7bMBAEwP3/px0gpwCOvN1DGrDo0mmR2BKLOoxnmj8/8fX4e139+7//e/XJ589ffff5Du3nt13Y2NjYN2E/Xl5XmHwpybKu7p+vPLdgY2Njn8p+vZTXpaLduFkBSzYosWBjY2N/M3tWbJItyMtSuzZsbGxs7HZ8ky9616gIGxsbGztvJJJCtTL6mW3922dp2NjY2B/PXikSn/b3G/NtbGxs7I9kP8oriWZXjuzMouJagY2NjX0Qux33J2FtuzV5a7EywFo6JYSNjY19c3ZbwGYlLY8NVkojNjY29nns/Id722bkQezrzUqiBWxsbOxvZufFoG1adsW9OXjWLGFjY2OfwZ793F85fJNvWd4I1c/CxsbGPo6dlIH2wW1TsbIRdVSMjY2NfRB7Fhi0C9ob1rZhcITHxsbGvjl777HLBLmyTe1Q7JfREjY2NvbN2e1oPvnWrP1I7jl7SVEHho2NjX1Ddh6X5olxuxH5diTg6D7Y2NjYB7HzEcx6CZmNn/LxVl6GsbGxsb+BvXIoZ/3QT45cXzM2Njb23dltA9AGtC21ffpsndjY2NjnsdtIIPluO2x6PWBqD2L+0n5gY2NjH8TOr5WB0Upv1LYf+UvFxsbGPoO9UsCSktNGwvkByjZywMbGxj6Vvd4ktI3ErtLVFlpsbGzsb2OvtB/1wccYtjmExsbGxj6IPZsz5Q9LkEvnjOJ2CBsbG/s8djvcz8c9bUjc3jlvkP7zNzY2Nvah7PZnfVKK2kFS+wJmR4WwsbGxv4edFJ5tsetC81MPs7CxsbEPYrdLzG+dHwZqG4n2UBE2Njb22ewWnMe0s03J25g8MNjwnrGxsbE/np0jVwZGs/AgGVrVLwMbGxv7OPY7Its23E2CgeFZpOenYGNjYx/Ebkfz+fGatsFIDuXMNncWM2NjY2Pfi70+pk/2dfYe8mNDdbSMjY2NfRx7duu9jUQeOcwO+mzbUWxsbOzbsmdtyeYTRmXkgI2NjY29vgX5cneVtyjAwMbGxj6O3RaDZKzfBsPr5bAoitjY2NgHsWdBbztImkW2eRHNgw1sbGzsg9h/ALUfTwJHAR6sAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

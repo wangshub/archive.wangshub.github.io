@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>python数字图像处理-图像的基本结构和基础知识 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="python,algorithm,image">
+    <meta name="description" content="数字图像处理-图像的基本结构和基础知识                                                                                              LenaRGB.bmp              一、python实现BMP图像的读取和显示 BMP文件格式，又称为Bitmap（位图）或是DIB(Device-Indepe">
+<meta name="keywords" content="python,algorithm,image">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python数字图像处理-图像的基本结构和基础知识">
+<meta property="og:url" content="http://wangshub.github.io/2017/12/16/python数字图像处理-图像的基本结构和基础知识/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="数字图像处理-图像的基本结构和基础知识                                                                                              LenaRGB.bmp              一、python实现BMP图像的读取和显示 BMP文件格式，又称为Bitmap（位图）或是DIB(Device-Indepe">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2017/12/16/5a34e2a04b0bc.bmp">
+<meta property="og:image" content="https://i.loli.net/2017/12/16/5a34e49c0fd38.png">
+<meta property="og:image" content="https://i.loli.net/2017/12/16/5a34e49c3a072.png">
+<meta property="og:image" content="https://i.loli.net/2017/12/16/5a34e15929e62.jpg">
+<meta property="og:image" content="https://i.loli.net/2017/12/16/5a34e49c37be5.png">
+<meta property="og:image" content="https://i.loli.net/2017/12/16/5a34e26b25e70.jpg">
+<meta property="og:image" content="https://i.loli.net/2017/12/16/5a34e49c3b8d4.png">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.768Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python数字图像处理-图像的基本结构和基础知识">
+<meta name="twitter:description" content="数字图像处理-图像的基本结构和基础知识                                                                                              LenaRGB.bmp              一、python实现BMP图像的读取和显示 BMP文件格式，又称为Bitmap（位图）或是DIB(Device-Indepe">
+<meta name="twitter:image" content="https://i.loli.net/2017/12/16/5a34e2a04b0bc.bmp">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">python数字图像处理-图像的基本结构和基础知识</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">python数字图像处理-图像的基本结构和基础知识</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-16T09:10:39.000Z" itemprop="datePublished" class="page-time">
+  2017-12-16
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#数字图像处理-图像的基本结构和基础知识"><span class="post-toc-text">数字图像处理-图像的基本结构和基础知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一python实现bmp图像的读取和显示"><span class="post-toc-text">一、python实现BMP图像的读取和显示</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二python统计图像的直方图"><span class="post-toc-text">二、python统计图像的直方图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三rgbyiqhsixyz颜色空间"><span class="post-toc-text">三、RGB、YIQ、HSI、XYZ颜色空间</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#yiq"><span class="post-toc-text">YIQ</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#hsi"><span class="post-toc-text">HSI</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#xyz"><span class="post-toc-text">XYZ</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四python代码实现"><span class="post-toc-text">四、python代码实现</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-python数字图像处理-图像的基本结构和基础知识" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">python数字图像处理-图像的基本结构和基础知识</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-12-16 17:10:39" datetime="2017-12-16T09:10:39.000Z" itemprop="datePublished">2017-12-16</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="数字图像处理-图像的基本结构和基础知识">数字图像处理-图像的基本结构和基础知识</h1>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2017/12/16/5a34e2a04b0bc.bmp" alt="LenaRGB.bmp" title>
+                </div>
+                <div class="image-caption">LenaRGB.bmp</div>
+            </figure>
+<h2 id="一python实现bmp图像的读取和显示">一、python实现BMP图像的读取和显示</h2>
+<p>BMP文件格式，又称为Bitmap（位图）或是DIB(Device-Independent Device，设备无关位图)，是Windows系统中广泛使用的图像文件格式。由于它可以不作任何变换地保存图像像素域的数据，因此成为我们取得RAW数据的重要来源。Windows的图形用户界面（graphical user interfaces）也在它的内建图像子系统GDI中对BMP格式提供了支持。</p>
+<p>BMP文件的数据按照从文件头开始的先后顺序分为四个部分：</p>
+<ol type="1">
+<li><p><strong>bmp文件头(bmp file header)</strong> ：提供文件的格式、大小等信息</p></li>
+<li><p><strong>位图信息头(bitmap information)</strong>：提供图像数据的尺寸、位平面数、压缩方式、颜色索引等信息</p></li>
+<li><p><strong>调色板(color palette)</strong>：可选，如使用索引来表示图像，调色板就是索引与其对应的颜色的映射表</p></li>
+<li><p><strong>位图数据(bitmap data)</strong>：就是图像数据</p></li>
+</ol>
+<blockquote>
+<p>参考链接 <a href="https://zh.wikipedia.org/wiki/BMP" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/BMP</a></p>
+</blockquote>
+<h2 id="二python统计图像的直方图">二、python统计图像的直方图</h2>
+<p><strong>图像直方图</strong>（英语：Image Histogram）是用以表示数字图像中亮度分布的直方图，标绘了图像中每个亮度值的像素数。可以借助观察该直方图了解需要如何调整亮度分布。这种直方图中，横坐标的左侧为纯黑、较暗的区域，而右侧为较亮、纯白的区域。因此，一张较暗图片的图像直方图中的数据多集中于左侧和中间部分；而整体明亮、只有少量阴影的图像则相反。 很多数码相机提供图像直方图功能，拍摄者可以通过观察图像直方图了解到当前图像是否过分曝光或者曝光不足。 计算机视觉领域常借助图像直方图来实现图像的二值化</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2017/12/16/5a34e49c0fd38.png" alt="2 统计直方图.png" title>
+                </div>
+                <div class="image-caption">2 统计直方图.png</div>
+            </figure>
+<blockquote>
+<p>参考链接 <a href="https://zh.wikipedia.org/wiki/%E7%9B%B4%E6%96%B9%E5%9B%BE#%E5%9B%BE%E5%83%8F%E7%9B%B4%E6%96%B9%E5%9B%BE" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/%E7%9B%B4%E6%96%B9%E5%9B%BE#%E5%9B%BE%E5%83%8F%E7%9B%B4%E6%96%B9%E5%9B%BE</a></p>
+</blockquote>
+<h2 id="三rgbyiqhsixyz颜色空间">三、RGB、YIQ、HSI、XYZ颜色空间</h2>
+<h3 id="yiq">YIQ</h3>
+<p>YIQ色彩空间通常被北美的电视系统所采用，属于NTSC（National Television Standards Committee）系统。这里Y不是指黄色，而是指颜色的明视度（Luminance），即亮度（Brightness）。其实Y就是图像的灰度值（Gray value），而I和Q则是指色调（Chrominance），即描述图像色彩及饱和度的属性。在YIQ系统中，Y分量代表图像的亮度信息，I、Q两个分量则携带颜色信息，I分量代表从橙色到青色的颜色变化，而Q分量则代表从紫色到黄绿色的颜色变化。</p>
+<p>NTSC制为了进一步压缩色度带宽，用色差信号I,Q来代替U,V。若采用U,V色差信号，则色度、亮度信号的共频带部分极大，低端不共频带的亮度信号带宽很小，亮、色干扰大。将彩色图像从RGB转换到YIQ色彩空间，可以把彩色图像中的亮度信息与色度信息分开，分别独立进行处理。</p>
+<p>RGB和YIQ的对应关系用下面的方程式表示： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Y=0.299R+0.587G+0.114B</span><br><span class="line">I=0.596R-0.274G-0.322B</span><br><span class="line">Q=0.211R-0.523G+0.312B</span><br></pre></td></tr></table></figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2017/12/16/5a34e49c3a072.png" alt="3 YIQ分量.png" title>
+                </div>
+                <div class="image-caption">3 YIQ分量.png</div>
+            </figure>
+<h3 id="hsi">HSI</h3>
+<ul>
+<li><p>色调H（Hue）：与光波的波长有关，它表示人的感官对不同颜色的感受，如红色、绿色、蓝色等，它也可表示一定范围的颜色，如暖色、冷色等。</p></li>
+<li><p>饱和度S（Saturation）：表示颜色的纯度，纯光谱色是完全饱和的，加入白光会稀释饱和度。饱和度越大，颜色看起来就会越鲜艳，反之亦然。</p></li>
+<li><p>亮度I（Intensity）：对应成像亮度和图像灰度，是颜色的明亮程度。 若将RGB单位立方体沿主对角线进行投影，可得到六边形，这样，原来沿主对角线的灰色都投影到中心白色点，而红色点（1，0，0）则位于右边的角上，绿色点（0，1，0）位于左上角，蓝色点（0，0，1）则位于左下角。</p></li>
+</ul>
+<p>HSI颜色模型的双六棱锥表示，I是强度轴，色调H的角度范围为[0，2π]，其中，纯红色的角度为0，纯绿色的角度为2π/3，纯蓝色的角度为4π/3。饱和度S是颜色空间任一点距I轴的距离。当然，若用圆表示RGB模型的投影，则HSI色度空间为双圆锥3D表示。</p>
+<p>注意： 当强度I=0时，色调H、饱和度S无定义；当S=0时，色调H无定义。 HSI模型也可用圆柱来表示，如图9-5所示。若将其展开，并按图9-6进行定义，可得到HSI调色板。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2017/12/16/5a34e15929e62.jpg" alt="HSI_Formula.jpg" title>
+                </div>
+                <div class="image-caption">HSI_Formula.jpg</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2017/12/16/5a34e49c37be5.png" alt="5 HSI分量.png" title>
+                </div>
+                <div class="image-caption">5 HSI分量.png</div>
+            </figure>
+<h3 id="xyz">XYZ</h3>
+<p>国际照明委员会(CIE)在进行了大量正常人视觉测量和统计,1931年建立了"标准色度观察者"， 从而奠定了现代CIE标准色度学的定量基础。由于"标准色度观察者"用来标定光谱色时出现负 刺激值，计算不便，也不易理解，因此1931年CIE在RGB系统基础上，改用三个假想的原色X、Y、 Z建立了一个新的色度系统。将它匹配等能光谱的三刺激值，定名为"CIE1931 标准色度观察者 光谱三刺激值"，简称为"CIE1931标准色度观察者"。这一系统叫做"CIE1931标准色度系统"或称为" 2° 视场XYZ色度系统"。CIEXYZ颜色空间稍加变换就可得到Yxy色彩空间，其中Y取三刺激值中Y的值， 表示亮度，x、y反映颜色的色度特性。定义如下：在色彩管理中，选择与设备无关的颜色空间是 十分重要的，与设备无关的颜色空间由国际照明委员会(CIE)制定，包括CIEXYZ和CIELAB两个标准。 它们包含了人眼所能辨别的全部颜色。而且，CIEYxy测色制的建立给定量的确定颜色创造了条件。 但是，在这一空间中，两种不同颜色之间的距离值并不能正确地反映人们色彩感觉差别的大小， 也就是说在CIEYxy色厦图中，在 不同的位置不同方向上颜色的宽容量是不同的，这就是Yxy颜色空间 的不均匀性。这一缺陷的存在，使得在Yxy及XYZ空间不能直观地评价颜色。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2017/12/16/5a34e26b25e70.jpg" alt="xyz.jpg" title>
+                </div>
+                <div class="image-caption">xyz.jpg</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://i.loli.net/2017/12/16/5a34e49c3b8d4.png" alt="6 XYZ分量.png" title>
+                </div>
+                <div class="image-caption">6 XYZ分量.png</div>
+            </figure>
+<h2 id="四python代码实现">四、python代码实现</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding: utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_bmp</span><span class="params">(img)</span>:</span></span><br><span class="line">    <span class="comment"># BMP 的读取与显示</span></span><br><span class="line">    plt.figure(<span class="string">"LenaRGB.bmp"</span>)</span><br><span class="line">    plt.title(<span class="string">"LenaRGB.bmp"</span>)</span><br><span class="line">    plt.imshow(img)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_hist</span><span class="params">(img)</span>:</span></span><br><span class="line">    <span class="comment"># 直方图</span></span><br><span class="line">    plt.figure(<span class="string">"Lena hist"</span>)</span><br><span class="line">    plt.title(<span class="string">'Lena hist figure'</span>)</span><br><span class="line">    arr = img.flatten()</span><br><span class="line">    n, bins, patches = plt.hist(arr, bins=<span class="number">256</span>, normed=<span class="number">1</span>, facecolor=<span class="string">'green'</span>, alpha=<span class="number">0.75</span>)  </span><br><span class="line">    plt.show()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_rgb</span><span class="params">(img)</span>:</span></span><br><span class="line">    <span class="comment"># 显示RGB图像    </span></span><br><span class="line">    plt.subplot(<span class="number">221</span>)</span><br><span class="line">    plt.title(<span class="string">'orignal'</span>)</span><br><span class="line">    plt.imshow(img)</span><br><span class="line">    plt.subplot(<span class="number">222</span>)</span><br><span class="line">    plt.title(<span class="string">'R'</span>)</span><br><span class="line">    plt.imshow(img[:, :, <span class="number">0</span>], cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.subplot(<span class="number">223</span>)</span><br><span class="line">    plt.title(<span class="string">'G'</span>)</span><br><span class="line">    plt.imshow(img[:, :, <span class="number">1</span>], cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.subplot(<span class="number">224</span>)</span><br><span class="line">    plt.title(<span class="string">'B'</span>)</span><br><span class="line">    plt.imshow(img[:, :, <span class="number">2</span>], cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">shou_yiq</span><span class="params">(img)</span>:</span></span><br><span class="line">    <span class="comment"># 显示YIQ分量</span></span><br><span class="line">    R = np.mat(img[:, :, <span class="number">0</span>])</span><br><span class="line">    G = np.mat(img[:, :, <span class="number">1</span>])</span><br><span class="line">    B = np.mat(img[:, :, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># aH = np.array([(0.299, 0.587, 0.114), </span></span><br><span class="line">    <span class="comment">#               (0.596, -0.274, -0.322), </span></span><br><span class="line">    <span class="comment">#               (0.211, -0.523, 0.312)])</span></span><br><span class="line">    Y = <span class="number">0.299</span> * R + <span class="number">0.587</span> * G + <span class="number">0.114</span> * B</span><br><span class="line">    I = <span class="number">0.596</span> * R - <span class="number">0.274</span> * G - <span class="number">0.322</span> * B</span><br><span class="line">    Q = <span class="number">0.211</span> * R - <span class="number">0.523</span> * G - <span class="number">0.312</span> * B</span><br><span class="line">    </span><br><span class="line">    plt.subplot(<span class="number">221</span>)</span><br><span class="line">    plt.title(<span class="string">'orignal'</span>)</span><br><span class="line">    plt.imshow(img)</span><br><span class="line">    plt.subplot(<span class="number">222</span>)</span><br><span class="line">    plt.title(<span class="string">'Y'</span>)</span><br><span class="line">    plt.imshow(Y, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.subplot(<span class="number">223</span>)</span><br><span class="line">    plt.title(<span class="string">'I'</span>)</span><br><span class="line">    plt.imshow(I, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.subplot(<span class="number">224</span>)</span><br><span class="line">    plt.title(<span class="string">'Q'</span>)</span><br><span class="line">    plt.imshow(Q, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line">    <span class="comment"># YIQ = </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_xyz</span><span class="params">(img)</span>:</span></span><br><span class="line">    <span class="comment"># 显示YIQ分量</span></span><br><span class="line">    R = np.mat(img[:, :, <span class="number">0</span>])</span><br><span class="line">    G = np.mat(img[:, :, <span class="number">1</span>])</span><br><span class="line">    B = np.mat(img[:, :, <span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># aH = np.array([(0.299, 0.587, 0.114), </span></span><br><span class="line">    <span class="comment">#               (0.596, -0.274, -0.322), </span></span><br><span class="line">    <span class="comment">#               (0.211, -0.523, 0.312)])</span></span><br><span class="line">    X = <span class="number">0.490</span> * R + <span class="number">0.310</span> * G + <span class="number">0.200</span> * B</span><br><span class="line">    Y = <span class="number">0.177</span> * R + <span class="number">0.813</span> * G + <span class="number">0.011</span> * B</span><br><span class="line">    Z = <span class="number">0.000</span> * R + <span class="number">0.010</span> * G + <span class="number">0.990</span> * B</span><br><span class="line">    </span><br><span class="line">    plt.subplot(<span class="number">221</span>)</span><br><span class="line">    plt.title(<span class="string">'orignal'</span>)</span><br><span class="line">    plt.imshow(img)</span><br><span class="line">    plt.subplot(<span class="number">222</span>)</span><br><span class="line">    plt.title(<span class="string">'X'</span>)</span><br><span class="line">    plt.imshow(X, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.subplot(<span class="number">223</span>)</span><br><span class="line">    plt.title(<span class="string">'Y'</span>)</span><br><span class="line">    plt.imshow(Y, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.subplot(<span class="number">224</span>)</span><br><span class="line">    plt.title(<span class="string">'Z'</span>)</span><br><span class="line">    plt.imshow(Z, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_hsi</span><span class="params">(img)</span>:</span></span><br><span class="line">    rows, cols, dims = img.shape </span><br><span class="line">    R = np.mat(img[:, :, <span class="number">0</span>])</span><br><span class="line">    G = np.mat(img[:, :, <span class="number">1</span>])</span><br><span class="line">    B = np.mat(img[:, :, <span class="number">2</span>])</span><br><span class="line">    </span><br><span class="line">    I = (R + G + B) / <span class="number">3</span></span><br><span class="line"></span><br><span class="line">    E = np.mat(np.ones([rows, cols]))</span><br><span class="line">    minRGB = np.mat(img.min(<span class="number">2</span>))</span><br><span class="line">    lv = <span class="number">3</span> * E / (R + G + B)</span><br><span class="line">    S = E - np.multiply(lv, minRGB)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># S = np.mat(np.zeros([rows, cols]))</span></span><br><span class="line">    <span class="comment"># for i in range(rows):</span></span><br><span class="line">    <span class="comment">#     for j in range(cols):</span></span><br><span class="line">    <span class="comment">#         S[i, j] = 1 - 3/(R[i, j] + G[i, j] + B[i, j]) * min([R[i, j], G[i, j], B[i, j]])</span></span><br><span class="line"></span><br><span class="line">    H = np.mat(np.zeros([rows, cols]))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(rows):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(cols):</span><br><span class="line">            up = (R[i, j] - G[i, j] + R[i, j] - B[i, j]) / <span class="number">2</span></span><br><span class="line">            down = (R[i, j] - G[i, j])**<span class="number">2</span> + (R[i, j] - B[i, j]) * (G[i, j] - B[i, j])**<span class="number">0.5</span></span><br><span class="line">            H[i, j] = math.acos(up / down)</span><br><span class="line">            </span><br><span class="line">    plt.subplot(<span class="number">221</span>)</span><br><span class="line">    plt.title(<span class="string">'orignal'</span>)</span><br><span class="line">    plt.imshow(img)</span><br><span class="line">    plt.subplot(<span class="number">222</span>)</span><br><span class="line">    plt.title(<span class="string">'I'</span>)</span><br><span class="line">    plt.imshow(I, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.subplot(<span class="number">223</span>)</span><br><span class="line">    plt.title(<span class="string">'S'</span>)</span><br><span class="line">    plt.imshow(S, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.subplot(<span class="number">224</span>)</span><br><span class="line">    plt.title(<span class="string">'H'</span>)</span><br><span class="line">    plt.imshow(H, cmap=<span class="string">'gray'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    img = np.array(Image.open(<span class="string">'/home/sun/Desktop/PycharmProjects/Digital_image_process_lxk/lab1/LenaRGB.bmp'</span>))</span><br><span class="line">    rows, cols, dims = img.shape</span><br><span class="line">    <span class="keyword">print</span> img.shape  </span><br><span class="line">    <span class="keyword">print</span> img.dtype </span><br><span class="line">    <span class="keyword">print</span> img.size </span><br><span class="line">    <span class="keyword">print</span> type(img)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># show_bmp(img)</span></span><br><span class="line">    <span class="comment"># show_hist(img)</span></span><br><span class="line">    <span class="comment"># show_rgb(img)</span></span><br><span class="line">    <span class="comment"># shou_yiq(img)</span></span><br><span class="line">    <span class="comment"># show_hsi(img)</span></span><br><span class="line">    <span class="comment"># show_xyz(img)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.768Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/image/">image</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/12/16/python数字图像处理-图像的基本结构和基础知识/&title=《python数字图像处理-图像的基本结构和基础知识》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/12/16/python数字图像处理-图像的基本结构和基础知识/&title=《python数字图像处理-图像的基本结构和基础知识》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/12/16/python数字图像处理-图像的基本结构和基础知识/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python数字图像处理-图像的基本结构和基础知识》 — 神奇的战士&url=http://wangshub.github.io/2017/12/16/python数字图像处理-图像的基本结构和基础知识/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/12/16/python数字图像处理-图像的基本结构和基础知识/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/12/16/python数字图像处理-图像噪声与去噪算法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">python数字图像处理-图像噪声与去噪算法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/12/14/image-to-excel/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">python：将图片转换成excel文档</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/12/16/python数字图像处理-图像的基本结构和基础知识/&title=《python数字图像处理-图像的基本结构和基础知识》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/12/16/python数字图像处理-图像的基本结构和基础知识/&title=《python数字图像处理-图像的基本结构和基础知识》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/12/16/python数字图像处理-图像的基本结构和基础知识/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python数字图像处理-图像的基本结构和基础知识》 — 神奇的战士&url=http://wangshub.github.io/2017/12/16/python数字图像处理-图像的基本结构和基础知识/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/12/16/python数字图像处理-图像的基本结构和基础知识/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJElEQVR42u3a0Y7aQAwFUP7/p+nrVl3CtT1IxD15QiFNcgZpXfvO4xEfzx9Hcubn+et7/vs5+fbVlYcPbGxs7Juwn5fH9TXVO7xasgSfL9/1m2BjY2NvZecFJi9mebG5Xoi8vBWei42Njf3fs6ufE3D1ztjY2NjY8wJWHfckpS5ZiAOFExsbG3sduzcSSlqIfHyfNyTVd8PGxsbezc5f6Ps/fyTfxsbGxv5i9rN49IpEtdTl9+kd2NjY2JvY1W0xyWtVq0YSIfSW6U2Tg42Njb2UPSlXyZn5xqDecAobGxt7N7s6pklC36SdmIcTTSo2Njb2OnYv0O2dz7fm9BqVQoOEjY2NvYJd/Y9+eQTf+x2Ca/IS+8vCYWNjY69mT1qF6r/Nw4ZkjJUXQmxsbOx97Hm82ota8yHUPAx+l/piY2Nj35VdbTMmm3hORcWHt/VgY2Nj35xdDWir0UJ1cfPiN3k6NjY29lZ2dWCUx7d5cHsqPH7zs2FjY2MvYlcH8YURfB67xkWx+ibRb46NjY19c/b8AZNhfW+7T2+8dXhdsbGxsb+efarx6N3nERyjaAEbGxt7ETsvM3lwm4915gWy15BgY2Njb2L3woBJqetFyPN3+OsabGxs7EXs6wfMh/u9MKBalnoxAzY2NvYOdtJy5E3L5NvJlXnRimZp2NjY2Ldin9pA84n2YxIkR8uEjY2NvYJd3TRTDQ96hS1HVgMMbGxs7H3sXgCcx735iD9PYOdxAjY2NvYmdvVP/CQA7i1Qrx16szTY2NjYi9i90pW89KlYt9fSRPEANjY29iL2pIT0+pte3FvdVDRKRbCxsbFvyE4KTK/lyEm9ADgZJ70cLWFjY2OvY5/aFlPFVJdjUjKxsbGxN7F7Y6Pqt/n5Tw+hRtMybGxs7K9kj+pesUlIPldboF4MjI2Njb2PXX3MKD0+tNDVMdYv74aNjY29jp0nob2RUG9zz2RZsbGxsbHnBaw64qk2Nr3mBBsbGxs7L1SnGpW8HObhNDY2NvY+9iTcnYQB1y9afXpyf2xsbOx97MmAplfAJttoqgVs9ERsbGzsb2f/AQ40fLhDQnw1AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

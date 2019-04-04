@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>linux驱动器和分区的备份，使用dd命令示例 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="linux">
+    <meta name="description" content="dd命令是Linux发行版非常简单的备份工具。 “dd”工具简单的拷贝标准输入到标准输出，在512字节块读取。 dd 命令是Linux发行版非常简单的备份工具。该“dd”工具简单的拷贝标准输入到标准输出，在512字节块读取。 用dd命令，我们可以创建整盘，磁盘驱动器等备份，下面这篇文章将帮助你学习一些有用的“dd”命令。 ## 1：创建现有分区备份 以下命令将整个分区/dev/sdb1备份到/op">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux驱动器和分区的备份，使用dd命令示例">
+<meta property="og:url" content="http://wangshub.github.io/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="dd命令是Linux发行版非常简单的备份工具。 “dd”工具简单的拷贝标准输入到标准输出，在512字节块读取。 dd 命令是Linux发行版非常简单的备份工具。该“dd”工具简单的拷贝标准输入到标准输出，在512字节块读取。 用dd命令，我们可以创建整盘，磁盘驱动器等备份，下面这篇文章将帮助你学习一些有用的“dd”命令。 ## 1：创建现有分区备份 以下命令将整个分区/dev/sdb1备份到/op">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.692Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux驱动器和分区的备份，使用dd命令示例">
+<meta name="twitter:description" content="dd命令是Linux发行版非常简单的备份工具。 “dd”工具简单的拷贝标准输入到标准输出，在512字节块读取。 dd 命令是Linux发行版非常简单的备份工具。该“dd”工具简单的拷贝标准输入到标准输出，在512字节块读取。 用dd命令，我们可以创建整盘，磁盘驱动器等备份，下面这篇文章将帮助你学习一些有用的“dd”命令。 ## 1：创建现有分区备份 以下命令将整个分区/dev/sdb1备份到/op">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">linux驱动器和分区的备份，使用dd命令示例</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">linux驱动器和分区的备份，使用dd命令示例</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-18T12:04:51.000Z" itemprop="datePublished" class="page-time">
+  2017-12-18
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#恢复备份到其他分区"><span class="post-toc-text">2：恢复备份到其他分区</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建现有的硬盘克隆"><span class="post-toc-text">4：创建现有的硬盘克隆</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#备份和恢复的mbr镜像文件"><span class="post-toc-text">5：备份和恢复的MBR镜像文件</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-linux驱动器和分区的备份，使用dd命令示例" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">linux驱动器和分区的备份，使用dd命令示例</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-12-18 20:04:51" datetime="2017-12-18T12:04:51.000Z" itemprop="datePublished">2017-12-18</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>dd命令是Linux发行版非常简单的备份工具。 “dd”工具简单的拷贝标准输入到标准输出，在512字节块读取。 dd 命令是Linux发行版非常简单的备份工具。该“dd”工具简单的拷贝标准输入到标准输出，在512字节块读取。 用dd命令，我们可以创建整盘，磁盘驱动器等备份，下面这篇文章将帮助你学习一些有用的“dd”命令。 ## 1：创建现有分区备份</p>
+<p>以下命令将整个分区/dev/sdb1备份到/opt/sdb1.img文件。</p>
+<p><code># dd if=/dev/sdb1 of=/opt/sdb1.img</code></p>
+<p>样本输出 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">16064937+0 records in</span><br><span class="line">16064937+0 records out</span><br><span class="line">8225247744 bytes (8.2 GB) copied, 123.319 s, 66.7 MB/s</span><br></pre></td></tr></table></figure></p>
+<h2 id="恢复备份到其他分区">2：恢复备份到其他分区</h2>
+<p>上面 /opt/sdb1.img备份文件可以恢复到其他分区（/dev/sdb2），我们可以用以下命令恢复。</p>
+<p><code># dd if=/opt/sdb1.img of=/dev/sdb2</code></p>
+<p>样本输出 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">16064937+0 records in</span><br><span class="line">16064937+0 records out</span><br><span class="line">8225247744 bytes (8.2 GB) copied, 197.688 s, 41.6 MB/s</span><br></pre></td></tr></table></figure></p>
+<p>现在，你可以看到的/dev/sdb2 是/dev/sdb1 的翻版。 ## 3：创建与现有分区副本</p>
+<p>我们可以直接从现有的分区副本来分区。以下命令将创建的/dev/sdb1 到 /dev/sdb2 的副本。</p>
+<p><code># dd if=/dev/sdb1 of=/dev/sdb2</code></p>
+<p>样本输出 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">16064937+0 records in</span><br><span class="line">16064937+0 records out</span><br><span class="line">8225247744 bytes (8.2 GB) copied, 221.431 s, 37.1 MB/s</span><br></pre></td></tr></table></figure></p>
+<h2 id="创建现有的硬盘克隆">4：创建现有的硬盘克隆</h2>
+<p>以下命令将复制前446个字节这是MBR从第一个磁盘到第二个磁盘。这将创建第二个磁盘引导。 。</p>
+<p><code># dd if=/dev/sda of=/dev/sdb bs=446 count=1</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1+0 records in</span><br><span class="line">1+0 records out</span><br><span class="line">446 bytes (446 B) copied, 0.00174812 s, 255 kB/s</span><br></pre></td></tr></table></figure>
+<p>现在确保在/dev/sdb的匹配为/dev/sda的分区。一旦做到这一点，您可以使用复制每个分区：</p>
+<p><code># dd if=/dev/sda1 of=/dev/sdb1</code></p>
+<p><code># dd if=/dev/sda2 of=/dev/sdb2</code></p>
+<h2 id="备份和恢复的mbr镜像文件">5：备份和恢复的MBR镜像文件</h2>
+<p>创建使用以下命令MBR的镜像文件的备份。</p>
+<p><code># dd if=/dev/sda of=/opt/backup-mbr-sda.img bs=512 count=1</code></p>
+<p>示例输出 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1+0 records in</span><br><span class="line">1+0 records out</span><br><span class="line">512 bytes (512 B) copied, 0.0115243 s, 44.4 kB/s</span><br></pre></td></tr></table></figure></p>
+<p>接下来的步骤是MBR恢复到不同的磁盘，使用下面的命令来做到这一点。</p>
+<p><code># dd if=/opt/backup-mbr-sda.img of=/dev/sdb bs=446 count=1</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.692Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/&title=《linux驱动器和分区的备份，使用dd命令示例》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/&title=《linux驱动器和分区的备份，使用dd命令示例》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux驱动器和分区的备份，使用dd命令示例》 — 神奇的战士&url=http://wangshub.github.io/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Python蔡英文facebook主页分析_by神奇的战士</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/12/16/python数字图像处理-图像噪声与去噪算法/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">python数字图像处理-图像噪声与去噪算法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/&title=《linux驱动器和分区的备份，使用dd命令示例》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/&title=《linux驱动器和分区的备份，使用dd命令示例》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux驱动器和分区的备份，使用dd命令示例》 — 神奇的战士&url=http://wangshub.github.io/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADJUlEQVR42u3ay24iQQwFUP7/pzPraAS5124kuji1igJp6piF48fjEZ+fJ+f/V5/95tkzn/0m/9vX71wdbGxs7Juwf16e11d89v48HHlA83smd8PGxsY+j50kiVlQ8hDnz2mTGTY2NjZ28vGbi2542NjY2Ng5O3pc3OjJW1Gvg4KNjY2N3TZrkqu3KXBTbLy9l4aNjY398ex8Kvr5P79lvo2NjY39weyf0clHAm3x8Do5XXZ/bGxs7IPYbZJor5W3nzYlTV4+YWNjY5/Hni07vsbkiz6zdtXsC3iat7GxsbFvzs4BbSLJC49Z8dN+JdjY2NinsvN/6JMUkjd92hZSXlcVvTRsbGzsg9ht6z9fu5mt72wGA9EYGBsbG/tQ9qwNlBcwm+Fum0SxsbGxv4c9S1F52ps1g/JP3LS3sLGxsU9lt4knJ23euSlgohyOjY2NfVv27KFXjWYfozMb8WJjY2N/DztaWBy9OisV6jychAYbGxv7IPY71mLaAUA7YMjvGY2NsbGxsW/Ozkeqefzypk/bJNrjsbGxsU9lv3tNpx0MzIqNvBDCxsbGPok9W6lpBwBJUK76rAtqL2xsbOwbsmcpqm3Kb8YDs4JkODfGxsbGvhW7LRja5JSHu/15Viz9WtnBxsbGPoLdrsu05cFsKacN02bkjI2NjX0S+6oG/WYwsHnybJCMjY2NfXd2UlTMgpKntNk6zmogjY2NjX0QOxmLzgqM/NJtqtsMj7GxsbHPY7cJJg/TprBph8HtwhA2Njb2eey22GhD0zaw2vRWD4+xsbGxD2K304M8eeTlxOwUvGdGbGxs7CPYeSFRtNrj0iJPn5vhblGKYGNjY9+QPdvuaQe9mzC1qTR5MjY2NvZJ7FkBsC9L2uWezZrOH+0kbGxs7Juz96382VAhCeVmtNymT2xsbOy7s2fj1XcksCQo+9EvNjY29qns2eJL3oTaFDOblaA/6jBsbGzsL2Pn4KuaSrNgRV8PNjY29leyrxriDi86CmiR37CxsbFvzp6NWvNGf9v63xQeUfLDxsbGPoj9jiTXFi3tk9tU95gdbGxs7E9n/wOiAUUoedpbuAAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

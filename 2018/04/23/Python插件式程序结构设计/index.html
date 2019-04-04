@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>Python插件式程序结构设计 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python">
+    <meta name="description" content="Python 插件式程序结构设计  小姐姐，你的插件掉了  本文源码在 github/wangshub 最近有个问题一直困扰着我，我经常会遇到对以前的程序或者代码进行功能的扩充，但是由于前期没有太多程序架构上的设计，导致功能扩充时冗余代码太多，而且不方便维护( YC 创始人 Paul Graham 其实推荐这种做法，产品快速上线，获取用户反馈进行修改)。 知名的插件式设计的项目有  Emacs">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python插件式程序结构设计">
+<meta property="og:url" content="http://wangshub.github.io/2018/04/23/Python插件式程序结构设计/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="Python 插件式程序结构设计  小姐姐，你的插件掉了  本文源码在 github/wangshub 最近有个问题一直困扰着我，我经常会遇到对以前的程序或者代码进行功能的扩充，但是由于前期没有太多程序架构上的设计，导致功能扩充时冗余代码太多，而且不方便维护( YC 创始人 Paul Graham 其实推荐这种做法，产品快速上线，获取用户反馈进行修改)。 知名的插件式设计的项目有  Emacs">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.686Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python插件式程序结构设计">
+<meta name="twitter:description" content="Python 插件式程序结构设计  小姐姐，你的插件掉了  本文源码在 github/wangshub 最近有个问题一直困扰着我，我经常会遇到对以前的程序或者代码进行功能的扩充，但是由于前期没有太多程序架构上的设计，导致功能扩充时冗余代码太多，而且不方便维护( YC 创始人 Paul Graham 其实推荐这种做法，产品快速上线，获取用户反馈进行修改)。 知名的插件式设计的项目有  Emacs">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python插件式程序结构设计</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python插件式程序结构设计</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-23T06:27:19.000Z" itemprop="datePublished" class="page-time">
+  2018-04-23
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#python-插件式程序结构设计"><span class="post-toc-text">Python 插件式程序结构设计</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目文件结构"><span class="post-toc-text">项目文件结构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#插件管理器"><span class="post-toc-text">插件管理器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现插件"><span class="post-toc-text">实现插件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#插件-1-app1"><span class="post-toc-text">插件 1 ： App1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#插件-2-app2"><span class="post-toc-text">插件 2 ： App2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内置插件"><span class="post-toc-text">内置插件</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调用你的插件"><span class="post-toc-text">调用你的插件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关参考链接"><span class="post-toc-text">相关参考链接</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Python插件式程序结构设计" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python插件式程序结构设计</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-23 14:27:19" datetime="2018-04-23T06:27:19.000Z" itemprop="datePublished">2018-04-23</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="python-插件式程序结构设计">Python 插件式程序结构设计</h1>
+<blockquote>
+<p>小姐姐，你的插件掉了</p>
+</blockquote>
+<p>本文源码在 <a href="github/wangshub">github/wangshub</a></p>
+<p>最近有个问题一直困扰着我，我经常会遇到对以前的程序或者代码进行功能的扩充，但是由于前期没有太多程序架构上的设计，导致功能扩充时冗余代码太多，而且不方便维护( YC 创始人 Paul Graham 其实推荐这种做法，产品快速上线，获取用户反馈进行修改)。</p>
+<p>知名的插件式设计的项目有</p>
+<ul>
+<li>Emacs</li>
+<li>Vs-code</li>
+<li>Atom</li>
+</ul>
+<p>为了拓展软件的功能，经常会将软件设计成插件式结构，所以就从我熟悉的 Python 开始了解这部分知识。 通过 Google， 发现了 <a href="http://pluginbase.pocoo.org/" target="_blank" rel="noopener">Pluginbase</a> Python 插件框架，可以快速实现一个 Python 插件式结构，这篇博客作为阅读笔记。</p>
+<h2 id="项目文件结构">项目文件结构</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">├── app1</span><br><span class="line">│   └── plugins</span><br><span class="line">│       └── secret.py</span><br><span class="line">├── app2</span><br><span class="line">│   └── plugins</span><br><span class="line">│       └── randomstr.py</span><br><span class="line">├── builtin_plugins</span><br><span class="line">│   ├── lowercase.py</span><br><span class="line">│   └── uppercase.py</span><br><span class="line">└── example.py</span><br></pre></td></tr></table></figure>
+<h2 id="插件管理器">插件管理器</h2>
+<ul>
+<li>获取当前项目的路径</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> partial</span><br><span class="line"><span class="keyword">from</span> pluginbase <span class="keyword">import</span> PluginBase</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># For easier usage calculate the path relative to here.</span></span><br><span class="line">here = os.path.abspath(os.path.dirname(__file__))</span><br><span class="line"><span class="comment"># 函数包装，重新定义函数签名，减少调用参数</span></span><br><span class="line">get_path = partial(os.path.join, here)</span><br><span class="line">print(<span class="string">'here:'</span>, here)</span><br><span class="line">print(<span class="string">'get_path:'</span>, get_path)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Setup a plugin base for "example.modules" and make sure to load</span></span><br><span class="line"><span class="comment"># all the default built-in plugins from the builtin_plugins folder.</span></span><br><span class="line">plugin_base = PluginBase(package=<span class="string">'example.plugins'</span>,</span><br><span class="line">                         searchpath=[get_path(<span class="string">'./builtin_plugins'</span>)])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Application</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""Represents a simple example application."""</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="comment"># Each application has a name</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">        <span class="comment"># And a dictionary where it stores "formatters".  These will be</span></span><br><span class="line">        <span class="comment"># functions provided by plugins which format strings.</span></span><br><span class="line">        self.formatters = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># and a source which loads the plugins from the "&#123;app_name&#125;/plugins"</span></span><br><span class="line">        <span class="comment"># folder.  We also pass the application name as identifier.  This</span></span><br><span class="line">        <span class="comment"># is optional but by doing this out plugins have consistent</span></span><br><span class="line">        <span class="comment"># internal module names which allows pickle to work.</span></span><br><span class="line">        self.source = plugin_base.make_plugin_source(</span><br><span class="line">            searchpath=[get_path(<span class="string">'./%s/plugins'</span> % name)],</span><br><span class="line">            identifier=self.name)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Here we list all the plugins the source knows about, load them</span></span><br><span class="line">        <span class="comment"># and the use the "setup" function provided by the plugin to</span></span><br><span class="line">        <span class="comment"># initialize the plugin.</span></span><br><span class="line">        <span class="keyword">for</span> plugin_name <span class="keyword">in</span> self.source.list_plugins():</span><br><span class="line">            plugin = self.source.load_plugin(plugin_name)</span><br><span class="line">            plugin.setup(self)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">register_formatter</span><span class="params">(self, name, formatter)</span>:</span></span><br><span class="line">        <span class="string">"""A function a plugin can use to register a formatter."""</span></span><br><span class="line">        self.formatters[name] = formatter</span><br></pre></td></tr></table></figure>
+<h2 id="实现插件">实现插件</h2>
+<h3 id="插件-1-app1">插件 1 ： App1</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_secret</span><span class="params">(s)</span>:</span></span><br><span class="line">    chars = list(s)</span><br><span class="line">    <span class="keyword">for</span> idx, char <span class="keyword">in</span> enumerate(chars):</span><br><span class="line">        <span class="keyword">if</span> char <span class="keyword">not</span> <span class="keyword">in</span> string.punctuation <span class="keyword">and</span> <span class="keyword">not</span> char.isspace():</span><br><span class="line">            chars[idx] = <span class="string">'x'</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join(chars)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setup</span><span class="params">(app)</span>:</span></span><br><span class="line">    app.register_formatter(<span class="string">'secret'</span>, make_secret)</span><br></pre></td></tr></table></figure>
+<h3 id="插件-2-app2">插件 2 ： App2</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_random</span><span class="params">(s)</span>:</span></span><br><span class="line">    chars = list(s)</span><br><span class="line">    <span class="keyword">for</span> idx, char <span class="keyword">in</span> enumerate(chars):</span><br><span class="line">        <span class="keyword">if</span> char <span class="keyword">not</span> <span class="keyword">in</span> string.punctuation <span class="keyword">and</span> <span class="keyword">not</span> char.isspace():</span><br><span class="line">            chars[idx] = random.choice(string.ascii_letters)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join(chars)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setup</span><span class="params">(app)</span>:</span></span><br><span class="line">    app.register_formatter(<span class="string">'random'</span>, make_random)</span><br></pre></td></tr></table></figure>
+<h3 id="内置插件">内置插件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_lowercase</span><span class="params">(s)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> s.lower()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setup</span><span class="params">(app)</span>:</span></span><br><span class="line">    app.register_formatter(<span class="string">'lowercase'</span>, make_lowercase)</span><br></pre></td></tr></table></figure>
+<h2 id="调用你的插件">调用你的插件</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_demo</span><span class="params">(app, source)</span>:</span></span><br><span class="line">    <span class="string">"""Shows all formatters in demo mode of an application."""</span></span><br><span class="line">    print(<span class="string">'Formatters for %s:'</span> % app.name)</span><br><span class="line">    print(<span class="string">'       input: %s'</span> % source)</span><br><span class="line">    <span class="keyword">for</span> name, fmt <span class="keyword">in</span> sorted(app.formatters.items()):</span><br><span class="line">        print(<span class="string">'  %10s: %s'</span> % (name, fmt(source)))</span><br><span class="line">    print(<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="相关参考链接">相关参考链接</h2>
+<ul>
+<li><a href="http://hgoldfish.com/blogs/article/81/" target="_blank" rel="noopener">如何设计插件式结构的程序，兼谈Python语言的动态性</a></li>
+<li><a href="https://github.com/wangshub/pluginbase" target="_blank" rel="noopener">A simple but flexible plugin system for Python.</a></li>
+<li><a href="https://docs.python.org/3/tutorial/classes.html" target="_blank" rel="noopener">Python Classes</a></li>
+<li><a href="http://www.wklken.me/posts/2013/08/18/python-extra-functools.html" target="_blank" rel="noopener">PYTHON-进阶-FUNCTOOLS模块小结</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.686Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/04/23/Python插件式程序结构设计/&title=《Python插件式程序结构设计》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/04/23/Python插件式程序结构设计/&title=《Python插件式程序结构设计》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/04/23/Python插件式程序结构设计/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python插件式程序结构设计》 — 神奇的战士&url=http://wangshub.github.io/2018/04/23/Python插件式程序结构设计/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/04/23/Python插件式程序结构设计/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/25/python插件式爬虫/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">python插件式爬虫</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/31/Cerebro插件之电影磁力搜索神器/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Cerebro插件之电影磁力搜索神器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/04/23/Python插件式程序结构设计/&title=《Python插件式程序结构设计》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/04/23/Python插件式程序结构设计/&title=《Python插件式程序结构设计》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/04/23/Python插件式程序结构设计/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python插件式程序结构设计》 — 神奇的战士&url=http://wangshub.github.io/2018/04/23/Python插件式程序结构设计/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/04/23/Python插件式程序结构设计/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACs0lEQVR42u3aQW7DMAwEwP7/0y3Qa2t7SYpJDuNTgCaRRgUkZsWvr/j5/n3+vr7/6993Ju9PPnX4wcPDw2tN/eq5GrjHSKZ49c6rb7uaMx4eHt42rzq55mABJl/u6PDAw8PDeyuvVwTnx8zZYh0PDw/vc3jJtn6/xZ8dBQ8PD+9dvLyEPVVYf7eexawFDw8Pr58PFC7A3vX6Rfd7eHh4eOOteXJhVm1BqB48/8wEDw8Pb4GXhK29K6tJOHu24QAPDw9vgzepSOdTrEYV1QAaDw8P7ywvH3iyQVdL86TILv9iwMPDwzvEy3/2V4PdSdmdHzmFFgQ8PDy8Q7x8mDxsnbdz9WZS+I/h4eHhjXm9ELZacM/fkxTfD1dfeHh4eId4vUarSbGbx8HNyy08PDy8NV51yEkBXR0lOTAiNh4eHt5LeNVgd14o50dXEjHj4eHhbfOqV/7VC7DqFCfNB1Gki4eHhzfg5RtrPtFJu0C1lephLDw8PLxlXnWKG0+1ZC8cDHh4eHiHePml1/2G3iumJ3FDtd0BDw8P7xQv2YLzZqleC8I8wL1cVjw8PLwFXm8qvcK6ukwbC42Hh4c3502K40mI0GsFKC8rHh4e3gKvF9SezUJ612NJvIuHh4e3x8sv4+cBbjXSvV+y8kUdHh4e3pjXK5rzBqw8yKhGtMn34OHh4W3zku1+Hrn2lvJ+lMtvxsPDw1vg5bFsrzUqGbjcFzZ/8PDw8A4xkmdyHdW74qqGuQ+/GPDw8PDGvHmTQR4ET5oSqkU8Hh4e3jYvOQx6h0f1Ii0vtQtNA3h4eHhrvOphkIcIk16G5AR7KPfx8PDw3srrNQEk4F6gEM0KDw8P72N41SWoRgnVSPchjMDDw8Nb4FU36+pWvt06cLl8eHh4eAu83ofz6fYu/ldaBPDw8PCmvB9Z+nOol5vf6AAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

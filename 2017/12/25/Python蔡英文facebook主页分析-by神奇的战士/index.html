@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>Python蔡英文facebook主页分析_by神奇的战士 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="python">
+    <meta name="description" content="Python蔡英文facebook主页分析(by神奇的战士)  博客地址：https://wangshub.github.io/ 公众号：神奇的战士 拒绝转载  用Facebook Graph API和情绪分析API对蔡英文Facebook主页进行统计分析。 1. 说明 蔡英文2016年5月20日，蔡英文正式就任台湾地区领导人，成为台湾地区首位女性领导人。 最近台湾省地区新闻主要有： &amp;gt; 新">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python蔡英文facebook主页分析_by神奇的战士">
+<meta property="og:url" content="http://wangshub.github.io/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="Python蔡英文facebook主页分析(by神奇的战士)  博客地址：https://wangshub.github.io/ 公众号：神奇的战士 拒绝转载  用Facebook Graph API和情绪分析API对蔡英文Facebook主页进行统计分析。 1. 说明 蔡英文2016年5月20日，蔡英文正式就任台湾地区领导人，成为台湾地区首位女性领导人。 最近台湾省地区新闻主要有： &amp;gt; 新">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fmsa0xjo5fj21py0ht0ul.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fmsadx87t0j20m80goacm.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fmsaval30qj21041taaom.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fmt0ape4h1j20b405kt9b.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fmt0p0kbpbj218g0m8drx.jpg">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.686Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python蔡英文facebook主页分析_by神奇的战士">
+<meta name="twitter:description" content="Python蔡英文facebook主页分析(by神奇的战士)  博客地址：https://wangshub.github.io/ 公众号：神奇的战士 拒绝转载  用Facebook Graph API和情绪分析API对蔡英文Facebook主页进行统计分析。 1. 说明 蔡英文2016年5月20日，蔡英文正式就任台湾地区领导人，成为台湾地区首位女性领导人。 最近台湾省地区新闻主要有： &amp;gt; 新">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fmsa0xjo5fj21py0ht0ul.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python蔡英文facebook主页分析_by神奇的战士</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python蔡英文facebook主页分析_by神奇的战士</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-12-25T07:14:39.000Z" itemprop="datePublished" class="page-time">
+  2017-12-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#python蔡英文facebook主页分析by神奇的战士"><span class="post-toc-text">Python蔡英文facebook主页分析(by神奇的战士)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#说明"><span class="post-toc-text">1. 说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实现工具"><span class="post-toc-text">2. 实现工具</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据处理"><span class="post-toc-text">3. 数据处理</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#posts"><span class="post-toc-text">3.1 posts</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#comments"><span class="post-toc-text">3.2 comments</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据分析"><span class="post-toc-text">4. 数据分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#蔡英文主页分析"><span class="post-toc-text">4.1. 蔡英文主页分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#蔡英文评论分析"><span class="post-toc-text">4.2. 蔡英文评论分析</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#todo"><span class="post-toc-text">5. TODO</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Python蔡英文facebook主页分析-by神奇的战士" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python蔡英文facebook主页分析_by神奇的战士</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-12-25 15:14:39" datetime="2017-12-25T07:14:39.000Z" itemprop="datePublished">2017-12-25</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="python蔡英文facebook主页分析by神奇的战士"><strong>Python</strong>蔡英文facebook主页分析(by神奇的战士)</h1>
+<ul>
+<li>博客地址：<a href="https://wangshub.github.io/">https://wangshub.github.io/</a></li>
+<li>公众号：神奇的战士</li>
+<li>拒绝转载</li>
+</ul>
+<p>用<a href="https://developers.facebook.com/tools/explorer/?method=GET&amp;path=tsaiingwen%2Fposts&amp;version=v2.11" target="_blank" rel="noopener">Facebook Graph API</a>和情绪分析API对蔡英文Facebook主页进行统计分析。</p>
+<h2 id="说明">1. 说明</h2>
+<p><a href="https://baike.baidu.com/item/%E8%94%A1%E8%8B%B1%E6%96%87/353?fr=aladdin" target="_blank" rel="noopener">蔡英文</a>2016年5月20日，蔡英文正式就任台湾地区领导人，成为台湾地区首位女性领导人。</p>
+<p>最近台湾省地区新闻主要有： &gt; 新闻来源： 人民网 &gt; <a href="http://tw.people.com.cn/n1/2017/1222/c14657-29722289.html" target="_blank" rel="noopener">坚决惩治电信诈骗犯罪 切实维护两岸同胞利益</a> &gt; <a href="http://tw.people.com.cn/n1/2017/1221/c14657-29720989.html" target="_blank" rel="noopener">两岸学者评新党人士被调查事件：民进党当局逆流而动终将自掘坟墓</a> &gt; <a href="http://tw.people.com.cn/n1/2017/1126/c14657-29668078.html" target="_blank" rel="noopener">台民众高呼“醒来”，蔡英文不能继续装睡</a> &gt; ...</p>
+<p><strong>但是真实的台湾同胞们是如何看待她的执政表现呢？</strong></p>
+<h2 id="实现工具">2. 实现工具</h2>
+<p>如果是直接爬取脸书的主页，需要进行模拟登陆，反爬虫，代理，验证等等一系列的操作。幸好脸书开放出了图API，可以在一定的请求限制下对脸书上的数据进行访问。注意在多线程请求API的时候，不应该请求的太快，否则会被系统封禁一段时间(不要问我为什么-_-)。</p>
+<p><strong>目前为止使用了如下这些工具：</strong></p>
+<ul>
+<li>python 2.7</li>
+<li><a href="https://developers.facebook.com/tools/explorer/?method=GET&amp;path=tsaiingwen%2Fposts&amp;version=v2.11" target="_blank" rel="noopener">Facebook Graph API</a></li>
+<li>情感分析API</li>
+<li>python 词云</li>
+<li><a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">python 中文jieba分词</a></li>
+<li>python Pandas</li>
+<li>python 多线程</li>
+</ul>
+<h2 id="数据处理">3. 数据处理</h2>
+<h3 id="posts">3.1 posts</h3>
+<p>首先测试脸书<a href="https://developers.facebook.com/tools/explorer/?method=GET&amp;path=tsaiingwen%2Fposts&amp;version=v2.11" target="_blank" rel="noopener">Facebook Graph API</a>，对蔡小姐的post进行访问，</p>
+<p><strong>curl测试脚本</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -i -X GET \</span><br><span class="line"> "https://graph.facebook.com/v2.11/tsaiingwen/posts?access_token=xxxxxxxxxxxxxxxxx"</span><br></pre></td></tr></table></figure>
+<p><strong>返回示例</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">"data": [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"created_time"</span>: <span class="string">"2017-12-24T11:50:06+0000"</span>,</span><br><span class="line">      <span class="attr">"message"</span>: <span class="string">"蔡想想🐱祝福大家聖誕快樂🎅</span></span><br><span class="line"><span class="string">        #MerryChristmas"</span>,</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"46251501064_10154820163381065"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">    ...</span><br><span class="line">],</span><br><span class="line">"paging": &#123;</span><br><span class="line">    "cursors": &#123;</span><br><span class="line">      "before": "xxxxxx",</span><br><span class="line">      "after": "xxxxx"</span><br><span class="line">    &#125;,</span><br><span class="line">    "next": "xxxxxxxxxxxxxxxxxxxxxx"</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>可以观察到，脸书的每一个post都对应了一个唯一的<strong>id</strong>，由于post的数量是在太多，所以一次请求无法完整获取。根据<strong>next</strong>可以得到下一页的post，直到<strong>next</strong>为空时，表示所有的post获取完毕。</p>
+<p>根据以上原理，我获取了蔡小姐从开通脸书第一天起到今天，发的每一条post。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fmsa0xjo5fj21py0ht0ul.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li>横坐标：时间</li>
+<li>纵坐标：每天发文数量</li>
+</ul>
+<p>自 <em>2008-10-22T13:55:20+0000</em>蔡小姐发了第一条post以来，一共发了<strong>4120</strong>篇状态，基本上在脸书上还是非常活跃的，在2012年最多一天发送了24条状态，成功刷屏。</p>
+<h3 id="comments">3.2 comments</h3>
+<p>与 <strong>3.1</strong>节类似，每一个post下都会有网友进行评论，那么如何获取所有评论?参考图谱API文档，利用测试脚本</p>
+<p><strong>curl测试脚本</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -i -X GET \</span><br><span class="line"> "https://graph.facebook.com/v2.11/46251501064_10154729068451065/comments?access_token=xxxxxxxxxxxx"</span><br></pre></td></tr></table></figure>
+<p><strong>返回示例</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"created_time"</span>: <span class="string">"2017-11-13T07:15:25+0000"</span>,</span><br><span class="line">      <span class="attr">"message"</span>: <span class="string">"XXXXXXXX"</span>,</span><br><span class="line">      <span class="attr">"id"</span>: <span class="string">"10154729068451065_10154729097936065"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">    ...</span><br><span class="line">  <span class="string">"paging"</span>: &#123;</span><br><span class="line">  <span class="attr">"cursors"</span>: &#123;</span><br><span class="line">      <span class="attr">"before"</span>: <span class="string">"MTQyNQZDZD"</span>,</span><br><span class="line">      <span class="attr">"after"</span>: <span class="string">"MTM5MQZDZD"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"next"</span>: <span class="string">"https://graph.facebook.com/v2.11/46251501064_10154729068451065/comments?access_token=xxxxxxxx&amp;pretty=0&amp;limit=25&amp;after=MTM5MQZDZD"</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>每一条评论都对应着唯一的<strong>id</strong>，<strong>next</strong>字段是下一页的评论内容。可以通过设置，选择一夜最多显示100条评论。以此逐级获取所有的评论。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fmsadx87t0j20m80goacm.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li>横坐标：时间</li>
+<li>纵坐标：每条状态对应的评论数量</li>
+</ul>
+<p>一共爬取了<strong>1830322</strong>条网友评论，最多评论数是<strong>23630</strong>条。其中几次出现了较大值，原因应该是前几次大陆网友自发组织的Facebook远征军去进行<strong>友好访问</strong>了。具体内容可以接下来对这几次的峰值进行详细分析。</p>
+<blockquote>
+<p><strong>相关新闻</strong>： <a href="http://news.163.com/16/0122/19/BDV5H0O200014SEH.html" target="_blank" rel="noopener">帝吧“远征”facebook｜一场表情包大战的爱国交流</a> <a href="https://www.zhihu.com/question/39663757" target="_blank" rel="noopener">如何评价李毅吧 2016 年 1 月 20 日「出征」Facebook？</a></p>
+</blockquote>
+<h2 id="数据分析">4. 数据分析</h2>
+<h3 id="蔡英文主页分析">4.1. 蔡英文主页分析</h3>
+<p>一共获取了蔡小姐的<strong>4120</strong>状态，对json的message字段进行提取，将所有的状态的文字保存进行词云分析，看哪些词汇出现的频率最高。</p>
+<ol type="1">
+<li>首先利用Pandas对状态的结构数据进行保存；</li>
+<li>读取Pandas表格，获取所有的状态文字；</li>
+<li>利用jieba中文分词库，对所有的文字进行分割；</li>
+<li>显示，保存图片；</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fmsaval30qj21041taaom.jpg" alt="蔡小姐词云" title>
+                </div>
+                <div class="image-caption">蔡小姐词云</div>
+            </figure>
+<h3 id="蔡英文评论分析">4.2. 蔡英文评论分析</h3>
+<p>从蔡小姐的post的所有评论当中，我找出了一条评论最多的状态，共有<strong>23630</strong>条评论，对应id为<code>46251501064_10154244975341065</code>，读取对应数据文件，利用词云分析可得</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fmt0ape4h1j20b405kt9b.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>看来台湾网友也十分注意<strong>安全开车</strong>，其实这条post的评论区被台湾网友刷屏了，看来怨气挺重呢，哈哈哈哈，霸屏具体内容是 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.政府請正視目前台灣改裝汽機車問題！</span><br><span class="line">排氣管及改裝品可以合法製造 合法販賣 合法進口但裝載車上就不合法 這是什麼邏輯 政府要課稅又要開罰單又是什麼想法？</span><br><span class="line">排氣管或車上零件是原廠被惡意檢舉驗車那是否能跟監理單位或環保署拿今日上班請假損失？</span><br><span class="line">2.環保局 監理站 警察執法單位 專業度嚴重不足 原廠排氣管也開單 叫民眾到監理單位驗車 當做民眾都很有時間？</span><br><span class="line">3.請提供可比照國外變更車體，如重機行李箱、遮陽板、避震、制動煞車系統在不影響行車安全的部份合乎法規</span><br><span class="line">4.如民眾遭受到檢舉達人惡意檢舉，因此需要請假驗車，若屬於惡意檢舉，政府需要支付民眾請假之當天工資</span><br><span class="line">蔡??...您不是希望台灣能跟世界接軌，那請您重視汽機車改裝合法性與可變更性，在不影響行車安全與噪音的&gt; 情況下，請把檢舉改裝還於司法單位執行，才不構成擾民。</span><br></pre></td></tr></table></figure></p>
+<p>既然这条被刷屏了，那就换成最新的一篇post，看看网友又关心啥问题。。。 截止爬取脸书时，最新一条博客是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">你有吃過越南生春捲、香蘭娘惹糕或是薑黃飯嗎？它們是來自東南亞各國的美食，現在也是台灣的美食。</span><br><span class="line">今天是國際移民日，前幾天，我邀請了幾位新移民的好朋友來到總統府，一起準備午餐。在這場午餐的約會中，他們和我分享來到台灣生活的點點滴滴，也給我很多建議。</span><br><span class="line">謝謝你們來到台灣，讓我們的社會更多元、更茁壯。祝大家國際移民日快樂！</span><br><span class="line">#留言告訴我你最喜歡的新南向美食</span><br><span class="line">#晚餐文&quot;,</span><br></pre></td></tr></table></figure>
+<p>蔡小姐问网友喜欢吃啥美食，我们来看看网友是如何回复的</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fmt0p0kbpbj218g0m8drx.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>结合最近的新党王炳忠事件，评论中出现了较多<strong>绿色恐怖、王炳忠、白色恐怖</strong>等高频词汇</p>
+<h2 id="todo">5. TODO</h2>
+<p>可以分析的数据还有很多，就先分析这么多了，接下来，可以对评论进行情感分析，看下网友对蔡小姐的评论是积极还是消极的多一些。不过经过这一年的时间来看，应该是消极多一点。哈哈哈</p>
+<p>总结下来，我认为：</p>
+<ol type="1">
+<li>台湾社会的认知是处于一个分裂的状态；</li>
+<li>不少年轻人还是无脑反对大陆；</li>
+<li>真正理性思考人太少；</li>
+<li>不少人处于岛内的小确幸当中；</li>
+<li>结合最近的新闻来看，猜测台湾的士兵在开战时会不会遇到<strong>为了什么而战斗</strong>的信仰问题。哈哈，一百分将军太逗啦</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.686Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/&title=《Python蔡英文facebook主页分析_by神奇的战士》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/&title=《Python蔡英文facebook主页分析_by神奇的战士》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python蔡英文facebook主页分析_by神奇的战士》 — 神奇的战士&url=http://wangshub.github.io/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/12/29/教你用Python来玩微信跳一跳/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">教你用Python来玩微信跳一跳</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/12/18/linux驱动器和分区的备份，使用dd命令示例/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">linux驱动器和分区的备份，使用dd命令示例</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/&title=《Python蔡英文facebook主页分析_by神奇的战士》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/&title=《Python蔡英文facebook主页分析_by神奇的战士》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python蔡英文facebook主页分析_by神奇的战士》 — 神奇的战士&url=http://wangshub.github.io/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/12/25/Python蔡英文facebook主页分析-by神奇的战士/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADG0lEQVR42u3aQXLjMAwEQP//09nL3lxRZgC7yqZap5QjS2zmgGDAxyO+fp6uR3k9fzd5zvP9z9+arQcbGxv7JPbP5ZW8/no7rqnJk9t1Xt+DjY2NfSo7Lx7J55uqkZS96625tmBjY2Njt99qm418s7CxsbGxZ4Ak1plt5fXTNhuNjY2NfQd2HtZsMMlv2z/A27M0bGxs7I9n51PRz//5LfNtbGxs7A9m/4yutuTMmpZ3rPz/u7CxsbEPYrdFIvm3Ph/ZzkbI+zuxsbGxT2LnjDY2moVNr4qf/iiK2NjY2IeyZ0dhkhLSbkp+z6xYYmNjY5/Nbl+Qx0Z/9EPrQ0JF+4SNjY19EHs2QG2bhJyX39OWxuHsGhsbG/vj2W0wNPtkHxvlg2dsbGzsu7GThmFzT37IJt+ydkhcn/3BxsbG/lp2W9Ly5c7ipBkjj7SwsbGxT2XvW5Th8HX0ln0JxMbGxj6DvTmO0zYYbTC0ObKDjY2NfQd23iokpW4TG7Xjh/Zp2NjY2Key2wBoxsi36TG62kEyNjY29kns2cGX2dh1NgbIG5uiiGJjY2Mfx85LS1tmZrHRptWpUzRsbGzsL2e3haRd+nBBozYjaZOwsbGx78NuQ59Z07L5eRN7YWNjY5/N3gxok81qh7ivGutGU25sbGzsL2S/rBgsIqE20rouqNFbsLGxsQ9iz47O7BfdDn3zIUEROWFjY2MfxG5Dn6R4JK1CW5D2xRIbGxv7VPas/WhbhU0Ba8cY0TEjbGxs7CPY+3/9Z7H+bEi8PzaEjY2NfR57EwnNGoNZUJWMhCMqNjY29nHsHJwvJS8tm2Fw28BgY2Njn8qeHYXJG4N2bFy3E4sWCBsbG/sM9ub4SwJoo6jZE/I4DBsbG/s8dlsG2uHB7OjPq8YGeSCFjY2N/e3sfNGz+H4TLc2iqKiAYWNjYx/Hbken7wvxX3tI6Ne1YWNjY9+SvbkzCYbyO/PPf/0tNjY29i3ZmyakDe7z7ZttBDY2NvZ57DZUyo/I5OWtDf1XQwJsbGzsg9h5QNMuaLOUdlCRl1VsbGzsg9j/AHtiJjnf89HbAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

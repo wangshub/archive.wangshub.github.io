@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>python的webrtc库实现语音端点检测 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Code">
+    <meta name="description" content="刚刚搭了博客thinkhard.tech,欢迎踩踩~ ## 引言 语音端点检测最早应用于电话传输和检测系统当中,用于通信信道的时间分配,提高传输线路的利用效率.端点检测属于语音处理系统的前端操作,在语音检测领域意义重大. 但是目前的语音端点检测,尤其是检测 人声 开始和结束的端点始终是属于技术难点,各家公司始终处于 能判断,但是不敢保证 判别准确性 的阶段.  现在基于云端语义库的聊天机器人层出不">
+<meta name="keywords" content="Code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python的webrtc库实现语音端点检测">
+<meta property="og:url" content="http://wangshub.github.io/2017/05/25/python-vad/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="刚刚搭了博客thinkhard.tech,欢迎踩踩~ ## 引言 语音端点检测最早应用于电话传输和检测系统当中,用于通信信道的时间分配,提高传输线路的利用效率.端点检测属于语音处理系统的前端操作,在语音检测领域意义重大. 但是目前的语音端点检测,尤其是检测 人声 开始和结束的端点始终是属于技术难点,各家公司始终处于 能判断,但是不敢保证 判别准确性 的阶段.  现在基于云端语义库的聊天机器人层出不">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/25/5926ed7fcc2b3.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/25/5926ee0cbc85b.jpg">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/05/25/5926f2220cae2.jpg">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.767Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python的webrtc库实现语音端点检测">
+<meta name="twitter:description" content="刚刚搭了博客thinkhard.tech,欢迎踩踩~ ## 引言 语音端点检测最早应用于电话传输和检测系统当中,用于通信信道的时间分配,提高传输线路的利用效率.端点检测属于语音处理系统的前端操作,在语音检测领域意义重大. 但是目前的语音端点检测,尤其是检测 人声 开始和结束的端点始终是属于技术难点,各家公司始终处于 能判断,但是不敢保证 判别准确性 的阶段.  现在基于云端语义库的聊天机器人层出不">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2017/05/25/5926ed7fcc2b3.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">python的webrtc库实现语音端点检测</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">python的webrtc库实现语音端点检测</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-25T13:47:56.000Z" itemprop="datePublished" class="page-time">
+  2017-05-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/Code/">Code</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#语音转文字asrstt"><span class="post-toc-text">语音转文字(ASR/STT)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#python-端点检测"><span class="post-toc-text">python 端点检测</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-python-vad" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">python的webrtc库实现语音端点检测</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-05-25 21:47:56" datetime="2017-05-25T13:47:56.000Z" itemprop="datePublished">2017-05-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/Code/">Code</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>刚刚搭了博客<a href="thinkhard.tech">thinkhard.tech</a>,欢迎踩踩~ ## 引言 语音端点检测最早应用于电话传输和检测系统当中,用于通信信道的时间分配,提高传输线路的利用效率.端点检测属于语音处理系统的前端操作,在语音检测领域意义重大.<br>
+但是目前的语音端点检测,尤其是检测 <em>人声</em> 开始和结束的端点始终是属于技术难点,各家公司始终处于 <strong>能判断</strong>,但是不敢保证 <strong>判别准确性</strong> 的阶段.<br>
+<img src="https://ooo.0o0.ooo/2017/05/25/5926ed7fcc2b3.png" alt="Screenshot from 2017-05-25 22-42-50.png"><br>
+现在基于云端语义库的聊天机器人层出不穷,其中最著名的当属amazon的 <strong>Alexa/Echo</strong> 智能音箱.<br>
+<img src="https://ooo.0o0.ooo/2017/05/25/5926ee0cbc85b.jpg" alt="timg.jpg"></p>
+<p>国内如雨后春笋般出现了各种搭载语音聊天的智能音箱(如前几天在知乎上广告的若琪机器人)和各类智能机器人产品.国内语音服务提供商主要面对中文语音服务,由于语音不像图像有分辨率等等较为客观的指标,很多时候凭主观判断,所以较难判断各家语音识别和合成技术的好坏.但是我个人认为,国内的中文语音服务和国外的英文语音服务,在某些方面已经有超越的趋势.<br>
+<img src="https://ooo.0o0.ooo/2017/05/25/5926f2220cae2.jpg" alt="timg (1).jpg"></p>
+<p>通常搭建机器人聊天系统主要包括以下三个方面:<br>
+* 语音转文字(ASR/STT)<br>
+* 语义内容(NLU/NLP)<br>
+* 文字转语音(TTS)</p>
+<h2 id="语音转文字asrstt">语音转文字(ASR/STT)</h2>
+<p>在将语音传给云端API之前,是本地前端的语音采集,这部分主要包括如下几个方面: * 麦克风降噪 * 声源定位 * 回声消除 * 唤醒词 * 语音端点检测 * 音频格式压缩</p>
+<a id="more"></a>
+<h2 id="python-端点检测">python 端点检测</h2>
+<p>由于实际应用中,单纯依靠能量检测特征检测等方法很难判断人声说话的起始点,所以市面上大多数的语音产品都是使用唤醒词判断语音起始.另外加上声音回路,还可以做语音打断.这样的交互方式可能有些傻,每次必须喊一下 <em>唤醒词</em> 才能继续聊天.这种方式聊多了,个人感觉会嘴巴疼:-O .现在github上有snowboy唤醒词的开源库,大家可以登录snowboy官网训练自己的唤醒词模型. * Kitt-AI : <a href="https://github.com/Kitt-AI/snowboy" target="_blank" rel="noopener">Snowboy</a> * Sensory : <a href="http://www.sensory.com/" target="_blank" rel="noopener">Sensory</a></p>
+<p>考虑到用唤醒词嘴巴会累,所以大致调研了一下,python拥有丰富的库,直接import就能食用.这种方式容易受强噪声干扰,适合一个人在家玩玩. * pyaudio: <code>pip install pyaudio</code> 可以从设备节点读取原始音频流数据,音频编码是PCM格式; * webrtcvad: <code>pip install webrtcvad</code> 检测判断一组语音数据是否为空语音; 当检测到持续时间长度 <em>T1</em> vad检测都有语音活动,可以判定为语音起始; 当检测到持续时间长度 <em>T2</em> vad检测都没有有语音活动,可以判定为语音结束;</p>
+<p>完整程序代码可以从我的<a href="https://github.com/wangshub/python-vad" target="_blank" rel="noopener">github</a>下载<br>
+程序很简单,相信看一会儿就明白了</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="co">&#39;&#39;&#39;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co">Requirements:</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co">+ pyaudio - `pip install pyaudio`</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">+ py-webrtcvad - `pip install webrtcvad`</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co">&#39;&#39;&#39;</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="im">import</span> webrtcvad</a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="im">import</span> collections</a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="im">import</span> sys</a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="im">import</span> signal</a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="im">import</span> pyaudio</a>
+<a class="sourceLine" id="cb1-11" title="11"></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="im">from</span> array <span class="im">import</span> array</a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="im">from</span> struct <span class="im">import</span> pack</a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="im">import</span> wave</a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="im">import</span> time</a>
+<a class="sourceLine" id="cb1-16" title="16"></a>
+<a class="sourceLine" id="cb1-17" title="17">FORMAT <span class="op">=</span> pyaudio.paInt16</a>
+<a class="sourceLine" id="cb1-18" title="18">CHANNELS <span class="op">=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-19" title="19">RATE <span class="op">=</span> <span class="dv">16000</span></a>
+<a class="sourceLine" id="cb1-20" title="20">CHUNK_DURATION_MS <span class="op">=</span> <span class="dv">30</span>       <span class="co"># supports 10, 20 and 30 (ms)</span></a>
+<a class="sourceLine" id="cb1-21" title="21">PADDING_DURATION_MS <span class="op">=</span> <span class="dv">1500</span>   <span class="co"># 1 sec jugement</span></a>
+<a class="sourceLine" id="cb1-22" title="22">CHUNK_SIZE <span class="op">=</span> <span class="bu">int</span>(RATE <span class="op">*</span> CHUNK_DURATION_MS <span class="op">/</span> <span class="dv">1000</span>)  <span class="co"># chunk to read</span></a>
+<a class="sourceLine" id="cb1-23" title="23">CHUNK_BYTES <span class="op">=</span> CHUNK_SIZE <span class="op">*</span> <span class="dv">2</span>  <span class="co"># 16bit = 2 bytes, PCM</span></a>
+<a class="sourceLine" id="cb1-24" title="24">NUM_PADDING_CHUNKS <span class="op">=</span> <span class="bu">int</span>(PADDING_DURATION_MS <span class="op">/</span> CHUNK_DURATION_MS)</a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="co"># NUM_WINDOW_CHUNKS = int(240 / CHUNK_DURATION_MS)</span></a>
+<a class="sourceLine" id="cb1-26" title="26">NUM_WINDOW_CHUNKS <span class="op">=</span> <span class="bu">int</span>(<span class="dv">400</span> <span class="op">/</span> CHUNK_DURATION_MS)  <span class="co"># 400 ms/ 30ms  ge</span></a>
+<a class="sourceLine" id="cb1-27" title="27">NUM_WINDOW_CHUNKS_END <span class="op">=</span> NUM_WINDOW_CHUNKS <span class="op">*</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb1-28" title="28"></a>
+<a class="sourceLine" id="cb1-29" title="29">START_OFFSET <span class="op">=</span> <span class="bu">int</span>(NUM_WINDOW_CHUNKS <span class="op">*</span> CHUNK_DURATION_MS <span class="op">*</span> <span class="fl">0.5</span> <span class="op">*</span> RATE)</a>
+<a class="sourceLine" id="cb1-30" title="30"></a>
+<a class="sourceLine" id="cb1-31" title="31">vad <span class="op">=</span> webrtcvad.Vad(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1-32" title="32"></a>
+<a class="sourceLine" id="cb1-33" title="33">pa <span class="op">=</span> pyaudio.PyAudio()</a>
+<a class="sourceLine" id="cb1-34" title="34">stream <span class="op">=</span> pa.<span class="bu">open</span>(<span class="bu">format</span><span class="op">=</span>FORMAT,</a>
+<a class="sourceLine" id="cb1-35" title="35">                 channels<span class="op">=</span>CHANNELS,</a>
+<a class="sourceLine" id="cb1-36" title="36">                 rate<span class="op">=</span>RATE,</a>
+<a class="sourceLine" id="cb1-37" title="37">                 <span class="bu">input</span><span class="op">=</span><span class="va">True</span>,</a>
+<a class="sourceLine" id="cb1-38" title="38">                 start<span class="op">=</span><span class="va">False</span>,</a>
+<a class="sourceLine" id="cb1-39" title="39">                 <span class="co"># input_device_index=2,</span></a>
+<a class="sourceLine" id="cb1-40" title="40">                 frames_per_buffer<span class="op">=</span>CHUNK_SIZE)</a>
+<a class="sourceLine" id="cb1-41" title="41"></a>
+<a class="sourceLine" id="cb1-42" title="42"></a>
+<a class="sourceLine" id="cb1-43" title="43">got_a_sentence <span class="op">=</span> <span class="va">False</span></a>
+<a class="sourceLine" id="cb1-44" title="44">leave <span class="op">=</span> <span class="va">False</span></a>
+<a class="sourceLine" id="cb1-45" title="45"></a>
+<a class="sourceLine" id="cb1-46" title="46"></a>
+<a class="sourceLine" id="cb1-47" title="47"><span class="kw">def</span> handle_int(sig, chunk):</a>
+<a class="sourceLine" id="cb1-48" title="48">    <span class="kw">global</span> leave, got_a_sentence</a>
+<a class="sourceLine" id="cb1-49" title="49">    leave <span class="op">=</span> <span class="va">True</span></a>
+<a class="sourceLine" id="cb1-50" title="50">    got_a_sentence <span class="op">=</span> <span class="va">True</span></a>
+<a class="sourceLine" id="cb1-51" title="51"></a>
+<a class="sourceLine" id="cb1-52" title="52"></a>
+<a class="sourceLine" id="cb1-53" title="53"><span class="kw">def</span> record_to_file(path, data, sample_width):</a>
+<a class="sourceLine" id="cb1-54" title="54">    <span class="co">&quot;Records from the microphone and outputs the resulting data to &#39;path&#39;&quot;</span></a>
+<a class="sourceLine" id="cb1-55" title="55">    <span class="co"># sample_width, data = record()</span></a>
+<a class="sourceLine" id="cb1-56" title="56">    data <span class="op">=</span> pack(<span class="st">&#39;&lt;&#39;</span> <span class="op">+</span> (<span class="st">&#39;h&#39;</span> <span class="op">*</span> <span class="bu">len</span>(data)), <span class="op">*</span>data)</a>
+<a class="sourceLine" id="cb1-57" title="57">    wf <span class="op">=</span> wave.<span class="bu">open</span>(path, <span class="st">&#39;wb&#39;</span>)</a>
+<a class="sourceLine" id="cb1-58" title="58">    wf.setnchannels(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1-59" title="59">    wf.setsampwidth(sample_width)</a>
+<a class="sourceLine" id="cb1-60" title="60">    wf.setframerate(RATE)</a>
+<a class="sourceLine" id="cb1-61" title="61">    wf.writeframes(data)</a>
+<a class="sourceLine" id="cb1-62" title="62">    wf.close()</a>
+<a class="sourceLine" id="cb1-63" title="63"></a>
+<a class="sourceLine" id="cb1-64" title="64"></a>
+<a class="sourceLine" id="cb1-65" title="65"><span class="kw">def</span> normalize(snd_data):</a>
+<a class="sourceLine" id="cb1-66" title="66">    <span class="co">&quot;Average the volume out&quot;</span></a>
+<a class="sourceLine" id="cb1-67" title="67">    MAXIMUM <span class="op">=</span> <span class="dv">32767</span>  <span class="co"># 16384</span></a>
+<a class="sourceLine" id="cb1-68" title="68">    times <span class="op">=</span> <span class="bu">float</span>(MAXIMUM) <span class="op">/</span> <span class="bu">max</span>(<span class="bu">abs</span>(i) <span class="cf">for</span> i <span class="kw">in</span> snd_data)</a>
+<a class="sourceLine" id="cb1-69" title="69">    r <span class="op">=</span> array(<span class="st">&#39;h&#39;</span>)</a>
+<a class="sourceLine" id="cb1-70" title="70">    <span class="cf">for</span> i <span class="kw">in</span> snd_data:</a>
+<a class="sourceLine" id="cb1-71" title="71">        r.append(<span class="bu">int</span>(i <span class="op">*</span> times))</a>
+<a class="sourceLine" id="cb1-72" title="72">    <span class="cf">return</span> r</a>
+<a class="sourceLine" id="cb1-73" title="73"></a>
+<a class="sourceLine" id="cb1-74" title="74">signal.signal(signal.SIGINT, handle_int)</a>
+<a class="sourceLine" id="cb1-75" title="75"></a>
+<a class="sourceLine" id="cb1-76" title="76"><span class="cf">while</span> <span class="kw">not</span> leave:</a>
+<a class="sourceLine" id="cb1-77" title="77">    ring_buffer <span class="op">=</span> collections.deque(maxlen<span class="op">=</span>NUM_PADDING_CHUNKS)</a>
+<a class="sourceLine" id="cb1-78" title="78">    triggered <span class="op">=</span> <span class="va">False</span></a>
+<a class="sourceLine" id="cb1-79" title="79">    voiced_frames <span class="op">=</span> []</a>
+<a class="sourceLine" id="cb1-80" title="80">    ring_buffer_flags <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> NUM_WINDOW_CHUNKS</a>
+<a class="sourceLine" id="cb1-81" title="81">    ring_buffer_index <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-82" title="82"></a>
+<a class="sourceLine" id="cb1-83" title="83">    ring_buffer_flags_end <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> NUM_WINDOW_CHUNKS_END</a>
+<a class="sourceLine" id="cb1-84" title="84">    ring_buffer_index_end <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-85" title="85">    buffer_in <span class="op">=</span> <span class="st">&#39;&#39;</span></a>
+<a class="sourceLine" id="cb1-86" title="86">    <span class="co"># WangS</span></a>
+<a class="sourceLine" id="cb1-87" title="87">    raw_data <span class="op">=</span> array(<span class="st">&#39;h&#39;</span>)</a>
+<a class="sourceLine" id="cb1-88" title="88">    index <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-89" title="89">    start_point <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-90" title="90">    StartTime <span class="op">=</span> time.time()</a>
+<a class="sourceLine" id="cb1-91" title="91">    <span class="bu">print</span>(<span class="st">&quot;* recording: &quot;</span>)</a>
+<a class="sourceLine" id="cb1-92" title="92">    stream.start_stream()</a>
+<a class="sourceLine" id="cb1-93" title="93"></a>
+<a class="sourceLine" id="cb1-94" title="94">    <span class="cf">while</span> <span class="kw">not</span> got_a_sentence <span class="kw">and</span> <span class="kw">not</span> leave:</a>
+<a class="sourceLine" id="cb1-95" title="95">        chunk <span class="op">=</span> stream.read(CHUNK_SIZE)</a>
+<a class="sourceLine" id="cb1-96" title="96">        <span class="co"># add WangS</span></a>
+<a class="sourceLine" id="cb1-97" title="97">        raw_data.extend(array(<span class="st">&#39;h&#39;</span>, chunk))</a>
+<a class="sourceLine" id="cb1-98" title="98">        index <span class="op">+=</span> CHUNK_SIZE</a>
+<a class="sourceLine" id="cb1-99" title="99">        TimeUse <span class="op">=</span> time.time() <span class="op">-</span> StartTime</a>
+<a class="sourceLine" id="cb1-100" title="100"></a>
+<a class="sourceLine" id="cb1-101" title="101">        active <span class="op">=</span> vad.is_speech(chunk, RATE)</a>
+<a class="sourceLine" id="cb1-102" title="102"></a>
+<a class="sourceLine" id="cb1-103" title="103">        sys.stdout.write(<span class="st">&#39;1&#39;</span> <span class="cf">if</span> active <span class="cf">else</span> <span class="st">&#39;_&#39;</span>)</a>
+<a class="sourceLine" id="cb1-104" title="104">        ring_buffer_flags[ring_buffer_index] <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> active <span class="cf">else</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-105" title="105">        ring_buffer_index <span class="op">+=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-106" title="106">        ring_buffer_index <span class="op">%=</span> NUM_WINDOW_CHUNKS</a>
+<a class="sourceLine" id="cb1-107" title="107"></a>
+<a class="sourceLine" id="cb1-108" title="108">        ring_buffer_flags_end[ring_buffer_index_end] <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> active <span class="cf">else</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb1-109" title="109">        ring_buffer_index_end <span class="op">+=</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb1-110" title="110">        ring_buffer_index_end <span class="op">%=</span> NUM_WINDOW_CHUNKS_END</a>
+<a class="sourceLine" id="cb1-111" title="111"></a>
+<a class="sourceLine" id="cb1-112" title="112">        <span class="co"># start point detection</span></a>
+<a class="sourceLine" id="cb1-113" title="113">        <span class="cf">if</span> <span class="kw">not</span> triggered:</a>
+<a class="sourceLine" id="cb1-114" title="114">            ring_buffer.append(chunk)</a>
+<a class="sourceLine" id="cb1-115" title="115">            num_voiced <span class="op">=</span> <span class="bu">sum</span>(ring_buffer_flags)</a>
+<a class="sourceLine" id="cb1-116" title="116">            <span class="cf">if</span> num_voiced <span class="op">&gt;</span> <span class="fl">0.8</span> <span class="op">*</span> NUM_WINDOW_CHUNKS:</a>
+<a class="sourceLine" id="cb1-117" title="117">                sys.stdout.write(<span class="st">&#39; Open &#39;</span>)</a>
+<a class="sourceLine" id="cb1-118" title="118">                triggered <span class="op">=</span> <span class="va">True</span></a>
+<a class="sourceLine" id="cb1-119" title="119">                start_point <span class="op">=</span> index <span class="op">-</span> CHUNK_SIZE <span class="op">*</span> <span class="dv">20</span>  <span class="co"># start point</span></a>
+<a class="sourceLine" id="cb1-120" title="120">                <span class="co"># voiced_frames.extend(ring_buffer)</span></a>
+<a class="sourceLine" id="cb1-121" title="121">                ring_buffer.clear()</a>
+<a class="sourceLine" id="cb1-122" title="122">        <span class="co"># end point detection</span></a>
+<a class="sourceLine" id="cb1-123" title="123">        <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb1-124" title="124">            <span class="co"># voiced_frames.append(chunk)</span></a>
+<a class="sourceLine" id="cb1-125" title="125">            ring_buffer.append(chunk)</a>
+<a class="sourceLine" id="cb1-126" title="126">            num_unvoiced <span class="op">=</span> NUM_WINDOW_CHUNKS_END <span class="op">-</span> <span class="bu">sum</span>(ring_buffer_flags_end)</a>
+<a class="sourceLine" id="cb1-127" title="127">            <span class="cf">if</span> num_unvoiced <span class="op">&gt;</span> <span class="fl">0.90</span> <span class="op">*</span> NUM_WINDOW_CHUNKS_END <span class="kw">or</span> TimeUse <span class="op">&gt;</span> <span class="dv">10</span>:</a>
+<a class="sourceLine" id="cb1-128" title="128">                sys.stdout.write(<span class="st">&#39; Close &#39;</span>)</a>
+<a class="sourceLine" id="cb1-129" title="129">                triggered <span class="op">=</span> <span class="va">False</span></a>
+<a class="sourceLine" id="cb1-130" title="130">                got_a_sentence <span class="op">=</span> <span class="va">True</span></a>
+<a class="sourceLine" id="cb1-131" title="131"></a>
+<a class="sourceLine" id="cb1-132" title="132">        sys.stdout.flush()</a>
+<a class="sourceLine" id="cb1-133" title="133"></a>
+<a class="sourceLine" id="cb1-134" title="134">    sys.stdout.write(<span class="st">&#39;</span><span class="ch">\n</span><span class="st">&#39;</span>)</a>
+<a class="sourceLine" id="cb1-135" title="135">    <span class="co"># data = b&#39;&#39;.join(voiced_frames)</span></a>
+<a class="sourceLine" id="cb1-136" title="136"></a>
+<a class="sourceLine" id="cb1-137" title="137">    stream.stop_stream()</a>
+<a class="sourceLine" id="cb1-138" title="138">    <span class="bu">print</span>(<span class="st">&quot;* done recording&quot;</span>)</a>
+<a class="sourceLine" id="cb1-139" title="139">    got_a_sentence <span class="op">=</span> <span class="va">False</span></a>
+<a class="sourceLine" id="cb1-140" title="140"></a>
+<a class="sourceLine" id="cb1-141" title="141">    <span class="co"># write to file</span></a>
+<a class="sourceLine" id="cb1-142" title="142">    raw_data.reverse()</a>
+<a class="sourceLine" id="cb1-143" title="143">    <span class="cf">for</span> index <span class="kw">in</span> <span class="bu">range</span>(start_point):</a>
+<a class="sourceLine" id="cb1-144" title="144">        raw_data.pop()</a>
+<a class="sourceLine" id="cb1-145" title="145">    raw_data.reverse()</a>
+<a class="sourceLine" id="cb1-146" title="146">    raw_data <span class="op">=</span> normalize(raw_data)</a>
+<a class="sourceLine" id="cb1-147" title="147">    record_to_file(<span class="st">&quot;recording.wav&quot;</span>, raw_data, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-148" title="148">    leave <span class="op">=</span> <span class="va">True</span></a>
+<a class="sourceLine" id="cb1-149" title="149"></a>
+<a class="sourceLine" id="cb1-150" title="150">stream.close()</a></code></pre></div>
+<p>程序运行方式<code>sudo python vad.py</code><br>
+qrcode_for_gh_3586401957c4_258.jpg Remove</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.767Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Code/">Code</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/05/25/python-vad/&title=《python的webrtc库实现语音端点检测》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/05/25/python-vad/&title=《python的webrtc库实现语音端点检测》 — 神奇的战士&source=刚刚搭了博客thinkhard.tech,欢迎踩踩~ ## 引言 语音端点检测最早应用于电话传输和检测系统当中,用于通信信道的时间分配,提高传输线路的利用..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/05/25/python-vad/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python的webrtc库实现语音端点检测》 — 神奇的战士&url=http://wangshub.github.io/2017/05/25/python-vad/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/05/25/python-vad/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/05/29/python-data-structure-BST/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">python 数据结构之二叉搜索树</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/05/25/Atom-editor/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Atom editor</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/05/25/python-vad/&title=《python的webrtc库实现语音端点检测》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/05/25/python-vad/&title=《python的webrtc库实现语音端点检测》 — 神奇的战士&source=刚刚搭了博客thinkhard.tech,欢迎踩踩~ ## 引言 语音端点检测最早应用于电话传输和检测系统当中,用于通信信道的时间分配,提高传输线路的利用..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/05/25/python-vad/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python的webrtc库实现语音端点检测》 — 神奇的战士&url=http://wangshub.github.io/2017/05/25/python-vad/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/05/25/python-vad/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJUlEQVR42u3awY5bIQwF0Pz/T6fbVlWYe3FSNXBYRS/Mg5ORLBv8eMTj+df4/fl6/t4qj08MDAyMr2U8lyOZkyy8/gnWn6MVMTAwLmC8WjhfZj1z/SR/w8vnGBgYGOM5SVrZpp4YGBgYe0EwCcd74RsDAwMjKWLbUBstHwTlN9fiGBgYX8hol/+Xnz9yv4GBgfFVjGc5kr9tk8W9nfzxHgwMjKMZeYDLX7d+22aBmrRlYGBgHM3Iy8g5soWtA3S0FQwMjC9n5KFz0jaRP2lbx37IcDEwMA5itKVpEqbnx/pFsMbAwLiA0R6HTZ7kTRVJUoiBgXEDI0/O5sdkdVVdro6BgXE2I1+sLT6TErQNrPV/BgMD4zjGDwdbW/PfdanZ7goDA+MMRr7ddbjMj96SN7QkDAyMsxl5uJykfUm9OSl0MTAwzmbshcj8oK0Nx3s/FgYGxg2MebtDe3mZU6MEEQMD42hGnrRNTu8mRW/SaoaBgXEzIwmR+fHZ5OJzs+UCAwPjIEYrbtO1vG1i1KCGgYFxDWOveWK+uXbdl/exGBgY1zCSZLEtaN+Qpa6LWAwMjEMZz3K0pWwOG9XfGBgYRzMmYS4P00kiOCl6MTAwbmC0pWZ76NbiNwMuBgbGBYx3Bb42rdwroTEwMDDa4/75BedHukIwMDAwBhefCSk/2sPAwLiHkbdktRcJk8K1SCgxMDCOZuzlXZOt7337kfQRAwPjf2f8Atd4GQYjpL9xAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

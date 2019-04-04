@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>python 数据结构之二叉搜索树 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="python,code,algorithm">
+    <meta name="description" content="二叉搜索树定义 一颗二叉搜索树是以二叉树来组织的,每个节点除了 Key 还包括 左孩子, 右孩子, 父节点 等信息. BST满足限制条件: 对于任意节点的X,他的 左子树中关键字最大值&amp;lt;=X.key , 右子树关键字最小值&amp;gt;=X.key 这个关系表示如下">
+<meta name="keywords" content="python,code,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 数据结构之二叉搜索树">
+<meta property="og:url" content="http://wangshub.github.io/2017/05/29/python-data-structure-BST/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="二叉搜索树定义 一颗二叉搜索树是以二叉树来组织的,每个节点除了 Key 还包括 左孩子, 右孩子, 父节点 等信息. BST满足限制条件: 对于任意节点的X,他的 左子树中关键字最大值&amp;lt;=X.key , 右子树关键字最小值&amp;gt;=X.key 这个关系表示如下">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://algs4.cs.princeton.edu/32bst/images/bst-anatomy.png">
+<meta property="og:image" content="http://algs4.cs.princeton.edu/32bst/images/bst-subtree-count.png">
+<meta property="og:image" content="http://algs4.cs.princeton.edu/32bst/images/bst-search.png">
+<meta property="og:image" content="http://algs4.cs.princeton.edu/32bst/images/bst-insert.png">
+<meta property="og:image" content="http://algs4.cs.princeton.edu/32bst/images/bst-typical.png">
+<meta property="og:image" content="http://algs4.cs.princeton.edu/32bst/images/bst-delete.png">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.767Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python 数据结构之二叉搜索树">
+<meta name="twitter:description" content="二叉搜索树定义 一颗二叉搜索树是以二叉树来组织的,每个节点除了 Key 还包括 左孩子, 右孩子, 父节点 等信息. BST满足限制条件: 对于任意节点的X,他的 左子树中关键字最大值&amp;lt;=X.key , 右子树关键字最小值&amp;gt;=X.key 这个关系表示如下">
+<meta name="twitter:image" content="http://algs4.cs.princeton.edu/32bst/images/bst-anatomy.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">python 数据结构之二叉搜索树</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">python 数据结构之二叉搜索树</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-05-29T15:06:12.000Z" itemprop="datePublished" class="page-time">
+  2017-05-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/code/">code</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/code/algorithm/">algorithm</a></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉搜索树定义"><span class="post-toc-text">二叉搜索树定义</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二叉树操作"><span class="post-toc-text">二叉树操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#查询搜索"><span class="post-toc-text">查询(搜索)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#插入"><span class="post-toc-text">插入</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#删除"><span class="post-toc-text">删除</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考文献"><span class="post-toc-text">参考文献</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-python-data-structure-BST" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">python 数据结构之二叉搜索树</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-05-29 23:06:12" datetime="2017-05-29T15:06:12.000Z" itemprop="datePublished">2017-05-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/code/">code</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/code/algorithm/">algorithm</a></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="二叉搜索树定义">二叉搜索树定义</h1>
+<p>一颗二叉搜索树是以二叉树来组织的,每个节点除了 <em>Key</em> 还包括 <em>左孩子</em>, <em>右孩子</em>, <em>父节点</em> 等信息. BST满足限制条件: <em>对于任意节点的X,他的 <strong>左子树中关键字最大值&lt;=X.key</strong> , <strong>右子树关键字最小值&gt;=X.key</strong></em> 这个关系表示如下<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://algs4.cs.princeton.edu/32bst/images/bst-anatomy.png" alt="二叉" title>
+                </div>
+                <div class="image-caption">二叉</div>
+            </figure><br> 根据上图定义,一个二叉搜索树的例子是<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://algs4.cs.princeton.edu/32bst/images/bst-subtree-count.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="二叉树操作">二叉树操作</h1>
+<ul>
+<li>查询</li>
+<li>插入</li>
+<li>删除</li>
+</ul>
+<h2 id="查询搜索">查询(搜索)</h2>
+<p>二叉树搜索采用递归的方式来进行查询,根据二叉搜索树的定义: 左子树存储小值, 右子树存储大值,一个完整的二叉搜索示意图如下<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://algs4.cs.princeton.edu/32bst/images/bst-search.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure><br> 可以写成 <em>伪代码</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TREE-SEARCH(x, k)</span><br><span class="line">  <span class="keyword">if</span> x == NULL  <span class="keyword">or</span> k == x.key</span><br><span class="line">    <span class="keyword">return</span> x  </span><br><span class="line">  <span class="keyword">if</span> k &lt; x.key</span><br><span class="line">    <span class="keyword">return</span> TREE-SEARCH(x.left)</span><br><span class="line">  <span class="keyword">if</span> k &gt; x.key</span><br><span class="line">    <span class="keyword">return</span> TREE-SEARCH(x.right)</span><br></pre></td></tr></table></figure>
+<p>转换成python代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_get</span><span class="params">(self, key, node)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> node <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> key &lt; node.key:</span><br><span class="line">            <span class="keyword">return</span> self._get(key, node.left)</span><br><span class="line">        <span class="keyword">elif</span> key &gt; node.key:</span><br><span class="line">            <span class="keyword">return</span> self._get(key, node.right)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> node.val</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, key)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        Return the value paired with 'key'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Worst Case Complexity: O(N)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Balanced Tree Complexity: O(lg N)</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">return</span> self._get(key, self.root)</span><br></pre></td></tr></table></figure>
+<h2 id="插入">插入</h2>
+<p>插入和删除比查询呢稍微复杂一些,因为该操作会引起二叉搜索树的大小变化,会改变动态集合的结构.插入呢又比删除稍微容易实现.插入分为两部</p>
+<ul>
+<li>查询插入节点</li>
+<li>改变目标节点附近的数据结构</li>
+</ul>
+<p>插入过程示意图如下<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://algs4.cs.princeton.edu/32bst/images/bst-insert.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>相应的伪代码如下, 输入节点 <em>z</em> , <em>z.key = v</em>, <em>z.left = NULL</em>, <em>z.right = NULL</em>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">TREE-INSERT(T, x)</span><br><span class="line">  y = NULL</span><br><span class="line">  x = T.root   <span class="comment"># 从根节点开始</span></span><br><span class="line">  <span class="keyword">while</span> x != NULL</span><br><span class="line">    y = x      <span class="comment"># 保存上一节点</span></span><br><span class="line">    <span class="keyword">if</span> z.key &lt; x.key <span class="comment"># 往左</span></span><br><span class="line">      x = x.left</span><br><span class="line">    <span class="keyword">else</span>             <span class="comment"># 往右</span></span><br><span class="line">      x = x.right</span><br><span class="line"></span><br><span class="line">  z.p = y        <span class="comment"># 父节点</span></span><br><span class="line">  <span class="keyword">if</span> y == NULL   <span class="comment"># tree T 为空</span></span><br><span class="line">    T.root = z</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> z.key &lt; y.key</span><br><span class="line">    y.left = z</span><br><span class="line">  <span class="keyword">else</span> y.right = z</span><br></pre></td></tr></table></figure>
+<p>程序的运行复杂度取决于二叉树的形状<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://algs4.cs.princeton.edu/32bst/images/bst-typical.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure><br> 插入的运行时间取决于二叉搜索树的_高度h_,程序的运行时间_O(h)_ ,所以二叉树形状的好坏直接影响算法的运行时间.</p>
+<p>python代码实现为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_put</span><span class="params">(self, key, val, node)</span>:</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># If we hit the end of a branch, create a new node</span></span><br><span class="line">        <span class="keyword">if</span> node <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> Node(key, val)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Follow left branch</span></span><br><span class="line">        <span class="keyword">if</span> key &lt; node.key:</span><br><span class="line">            node.left = self._put(key, val, node.left)</span><br><span class="line">        <span class="comment"># Follow right branch</span></span><br><span class="line">        <span class="keyword">elif</span> key &gt; node.key:</span><br><span class="line">            node.right = self._put(key, val, node.right)</span><br><span class="line">        <span class="comment"># Overwrite value</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            node.val = val</span><br><span class="line"></span><br><span class="line">        node.size_of_subtree = self._size(node.left) + self._size(node.right)+<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> node</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">put</span><span class="params">(self, key, val)</span>:</span></span><br><span class="line">          <span class="string">"""</span></span><br><span class="line"><span class="string">        Add a new key-value pair.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Worst Case Complexity: O(N)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Balanced Tree Complexity: O(lg N)</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        self.root = self._put(key, val, self.root)</span><br></pre></td></tr></table></figure>
+<h2 id="删除">删除</h2>
+<p>删除总共分为三种情况:</p>
+<ul>
+<li><p>如果删除节点x没有孩子,直接删除即可;</p></li>
+<li><p>如果删除节点x有1个孩子,用孩子替换该节点位置;</p></li>
+<li><p>如果删除节点x有2个孩子, 这个情况有些复杂.关键是要找到节点 <em>x的继承者</em> . 节点z的继承者在节点z的右子树中有最小的关键值.这种情况下的操作分为下面步骤:</p>
+<ol type="1">
+<li>输入待删除的节点x 和 二叉搜索树T.</li>
+<li>在节点x的右子树开始搜索:往右再往左找到最小值节点H;</li>
+<li>H右孩子为H的父节点, H的左孩子为X的左孩子;</li>
+</ol></li>
+</ul>
+<p>示意图如下,应该一目了然:<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://algs4.cs.princeton.edu/32bst/images/bst-delete.png" alt="](http://algs4.cs.princeton.edu/32bst/images/bst-deletemin.png) ![" title>
+                </div>
+                <div class="image-caption">](http://algs4.cs.princeton.edu/32bst/images/bst-deletemin.png) ![</div>
+            </figure></p>
+<p>根据上面的描述,删除的伪代码可以分为两部分:</p>
+<ol type="1">
+<li>为了移动子树, 用一棵子树替换一棵子树,并成为双亲的孩子节点.</li>
+</ol>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">TRANSPLANT(T, u, v)</span><br><span class="line"><span class="keyword">if</span> u.p == NULL</span><br><span class="line">T.root = v</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> u = u.p.left</span><br><span class="line">u.p.left = v</span><br><span class="line"><span class="keyword">else</span> u.p.right = v</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> v!= NULL</span><br><span class="line">v.p = u.p</span><br></pre></td></tr></table></figure></p>
+<ol start="2" type="1">
+<li>根据第一步完成二叉搜索树的删除过程:</li>
+</ol>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">TREE-DELETE(T, z)</span><br><span class="line"><span class="keyword">if</span> z.left = NULL</span><br><span class="line">TRANSPLANT(T, z, z.right)</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (z.right == NULL)</span><br><span class="line">TRANSPLANT(T, z, z.left)</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">y = TREE-MINIMUM(z.right)</span><br><span class="line"><span class="keyword">if</span> y.p != z</span><br><span class="line">TRANSPLANT(T, y, y.right)</span><br><span class="line">y.right = z.right</span><br><span class="line">y.right.p = y</span><br><span class="line">TRANSPLANT(T, z, y)</span><br><span class="line">y.left = z.left</span><br><span class="line">y.left.p = y</span><br></pre></td></tr></table></figure></p>
+<p>用python 实现如下:</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_delete</span><span class="params">(self, key, node)</span>:</span></span><br><span class="line"> <span class="keyword">if</span> node <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">     <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"> <span class="keyword">if</span> key &lt; node.key:</span><br><span class="line">     node.left = self._delete(key, node.left)</span><br><span class="line"> <span class="keyword">elif</span> key &gt; node.key:</span><br><span class="line">     node.right = self._delete(key, node.right)</span><br><span class="line"></span><br><span class="line"> <span class="keyword">else</span>:</span><br><span class="line">     <span class="keyword">if</span> node.right <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">         <span class="keyword">return</span> node.left</span><br><span class="line">     <span class="keyword">elif</span> node.left <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">         <span class="keyword">return</span> node.right</span><br><span class="line">     <span class="keyword">else</span>:</span><br><span class="line">         old_node = node</span><br><span class="line">         node = self._ceiling_node(key, node.right)</span><br><span class="line">         node.right = self._delete_min(old_node.right)</span><br><span class="line">         node.left = old_node.left</span><br><span class="line"> node.size_of_subtree = self._size(node.left) + self._size(node.right)+<span class="number">1</span></span><br><span class="line"> <span class="keyword">return</span> node</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_delete_min</span><span class="params">(self, node)</span>:</span></span><br><span class="line"> <span class="keyword">if</span> node.left <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">     <span class="keyword">return</span> node.right</span><br><span class="line"></span><br><span class="line"> node.left = self._delete_min(node.left)</span><br><span class="line"> node.size_of_subtree = self._size(node.left) + self._size(node.right)+<span class="number">1</span></span><br><span class="line"> <span class="keyword">return</span> node</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_ceiling_node</span><span class="params">(self, key, node)</span>:</span></span><br><span class="line"> <span class="string">"""</span></span><br><span class="line"><span class="string"> Returns the node with the smallest key that is greater than or equal to</span></span><br><span class="line"><span class="string"> the given value 'key'</span></span><br><span class="line"><span class="string"> """</span></span><br><span class="line"> <span class="keyword">if</span> node <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">     <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">if</span> key &lt; node.key:</span><br><span class="line">     <span class="comment"># Ceiling is either in left subtree or is this node</span></span><br><span class="line">     attempt_in_left = self._ceiling_node(key, node.left)</span><br><span class="line">     <span class="keyword">if</span> attempt_in_left <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">         <span class="keyword">return</span> node</span><br><span class="line">     <span class="keyword">else</span>:</span><br><span class="line">         <span class="keyword">return</span> attempt_in_left</span><br><span class="line"> <span class="keyword">elif</span> key &gt; node.key:</span><br><span class="line">     <span class="comment"># Ceiling must be in right subtree</span></span><br><span class="line">     <span class="keyword">return</span> self._ceiling_node(key, node.right)</span><br><span class="line"> <span class="keyword">else</span>:</span><br><span class="line">     <span class="comment"># Keys are equal so ceiling is node with this key</span></span><br><span class="line">     <span class="keyword">return</span> node</span><br></pre></td></tr></table></figure></p>
+<h2 id="参考文献">参考文献</h2>
+<ol type="1">
+<li>&lt;<算法导论第三版>&gt;</算法导论第三版></li>
+<li><a href="http://algs4.cs.princeton.edu/32bst/" class="uri" target="_blank" rel="noopener">http://algs4.cs.princeton.edu/32bst/</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.767Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code/">code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/05/29/python-data-structure-BST/&title=《python 数据结构之二叉搜索树》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/05/29/python-data-structure-BST/&title=《python 数据结构之二叉搜索树》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/05/29/python-data-structure-BST/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python 数据结构之二叉搜索树》 — 神奇的战士&url=http://wangshub.github.io/2017/05/29/python-data-structure-BST/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/05/29/python-data-structure-BST/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/05/31/sshfs-mount-net-disk/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">从机sshfs访问主机文件系统</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/05/25/python-vad/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">python的webrtc库实现语音端点检测</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/05/29/python-data-structure-BST/&title=《python 数据结构之二叉搜索树》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/05/29/python-data-structure-BST/&title=《python 数据结构之二叉搜索树》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/05/29/python-data-structure-BST/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python 数据结构之二叉搜索树》 — 神奇的战士&url=http://wangshub.github.io/2017/05/29/python-data-structure-BST/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/05/29/python-data-structure-BST/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3aQW7CQAwFUO5/aSp11Q3Jtz0GKr2sKkrJvFQam+95POLr+Xslr/995dRfPf9cj40LDw8Pr7X0V1f+nvwukzWU14OHh4e3xrvevvPFJZ+c3OX67nnJwcPDw/ssr8q+Xlz1ceDh4eH9X15+s+vtPn9Yby0MeHh4eDFvEgRUI+AccCAcwcPDw1vgVQdg3/Dz4nwPDw8PbzBVr27KvQY6b53Lq8XDw8Nb4CVjp0khycOF6icUjibg4eHhLfDyEVdvlFU9btVj3Pxj8PDw8BZ4+SZbbaZ7rfleycHDw8Ob8PJhfLW97iHzEhUVCTw8PLw1Xr5B92LZ3nGufD03AQQeHh7eUV6+lc8H/ElMPAl2CyfL8PDw8Ma8HmBSBqoFI49o8fDw8N7DO1Ueei1y9Y7V1eLh4eGd5SWbbC8+yIf91fJTKDB4eHh4C7zqsCpvl6uLm8BuCgkeHh7eAi9vfJPCkJeWU98Donfi4eHhHeUlyxrN1gZHtSZNPB4eHt42L0fmv80DiGpDXwg+8PDw8BZ4k8FVdZvOy0ZeDKIQBA8PD2+Zl2zHCXvjUELygPDw8PD2ePlWm79+8xTjyKN6XOCR/Dfw8PDwxrzqR/da2/xvq4+mfOgKDw8P7y28ZNF5lNALO3rrxMPDw9vgTUb+1SNW1ZgjjzNevgcPDw9vmZdHuqe27+oxhbzdL98MDw8PL+b1Fj0JYSdHBCbtOx4eHt4p3rN4JfHEvCHuxcfRNwY8PDy8Ma8XPVQb7qjlHYcak2AFDw8Pr8o7NfLvHZbKF9ps3PHw8PDWeM14NI5oq4xeIXmZVePh4eF9iJfHuNUxWJWUPyA8PDy8b+P1hvrXgOrxgsXCgIeHh3fJ6w29ekFwUiSiTT+5Fx4eHt4C79Ti8ja6enjr7IPGw8PDG/B+ABlQnHFHcfMKAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

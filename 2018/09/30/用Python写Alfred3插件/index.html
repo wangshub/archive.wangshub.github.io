@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>用Python写Alfred3插件 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="用 Python 写 Alfred3 workflow 插件，一个最小示例 以前一直在使用 Cerebro 作为效率工具(开源免费)，但是 Cerebro 原作者似乎很久没有更新，今天抱着试一试的心态用了一把 Alfred 才发现，哎哟握草">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Python写Alfred3插件">
+<meta property="og:url" content="http://wangshub.github.io/2018/09/30/用Python写Alfred3插件/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="用 Python 写 Alfred3 workflow 插件，一个最小示例 以前一直在使用 Cerebro 作为效率工具(开源免费)，但是 Cerebro 原作者似乎很久没有更新，今天抱着试一试的心态用了一把 Alfred 才发现，哎哟握草">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fvrqrg2gbpj209q08h40i.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/Alfred-HackerNews/master/pic/hn_screen.gif">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fvrr8c47v5j20uk0ia794.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fvrrlzz4n1j20lq0hs400.jpg">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.775Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用Python写Alfred3插件">
+<meta name="twitter:description" content="用 Python 写 Alfred3 workflow 插件，一个最小示例 以前一直在使用 Cerebro 作为效率工具(开源免费)，但是 Cerebro 原作者似乎很久没有更新，今天抱着试一试的心态用了一把 Alfred 才发现，哎哟握草">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fvrqrg2gbpj209q08h40i.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">用Python写Alfred3插件</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">用Python写Alfred3插件</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-30T10:18:16.000Z" itemprop="datePublished" class="page-time">
+  2018-09-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#用-python-写-alfred3-workflow-插件一个最小示例"><span class="post-toc-text">用 Python 写 Alfred3 workflow 插件，一个最小示例</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#背景"><span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用截图"><span class="post-toc-text">使用截图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#步骤"><span class="post-toc-text">步骤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建一个新-workflow"><span class="post-toc-text">创建一个新 Workflow</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用-alfred-workflow-库"><span class="post-toc-text">使用 Alfred-Workflow 库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#导出-.workflow"><span class="post-toc-text">导出 *.workflow</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#示例代码和-workflow-下载地址"><span class="post-toc-text">示例代码和 Workflow 下载地址</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-用Python写Alfred3插件" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">用Python写Alfred3插件</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-30 18:18:16" datetime="2018-09-30T10:18:16.000Z" itemprop="datePublished">2018-09-30</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="用-python-写-alfred3-workflow-插件一个最小示例">用 Python 写 Alfred3 workflow 插件，一个最小示例</h1>
+<p>以前一直在使用 Cerebro 作为效率工具(开源免费)，但是 Cerebro 原作者似乎很久没有更新，今天抱着试一试的心态用了一把 Alfred 才发现，<strong>哎哟握草</strong></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fvrqrg2gbpj209q08h40i.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>Alfred 优化了快速启动与搜索的功能，比 Cerebro 更加丝滑流畅，还引入了 Workflows 这个强大的扩展功能，用户可以用自己熟悉的语言比如 python、JavaScript 和 Php 等来写 Wokflow。因此赋予了 Alfred 无限的可能性。</p>
+<p>我查阅了一下 <a href="https://www.alfredapp.com/help/workflows/" target="_blank" rel="noopener">Alfred 的文档</a>，发现添加一个 Workflow 插件竟是如此便捷。</p>
+<h2 id="背景">背景</h2>
+<p>自己平时喜欢浏览 HackerNews，所以希望在 Alfred 里面快速浏览今天的热门新闻，搜了一下现成的 Alfred 的 HackerNews 插件，都十分老旧，好像都不能正常工作。照着 Alfred 官方文档，用 Python 简单写了个 <a href="https://github.com/wangshub/Alfred-HackerNews" target="_blank" rel="noopener">Alfred-HackerNews</a>，通过请求 API 获取 HackerNews 新闻。</p>
+<h2 id="使用截图">使用截图</h2>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://raw.githubusercontent.com/wangshub/Alfred-HackerNews/master/pic/hn_screen.gif" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h2 id="步骤">步骤</h2>
+<h3 id="创建一个新-workflow">创建一个新 Workflow</h3>
+<ul>
+<li>新建步骤推荐阅读: <a href="http://www.deanishe.net/alfred-workflow/tutorial_1.html#creating-a-new-workflow" target="_blank" rel="noopener">creating-a-new-workflow</a></li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fvrr8c47v5j20uk0ia794.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ul>
+<li>设置关键词触发 Python 脚本，如图所示，当输入 <code>hn</code> 时，就可以执行 <code>/usr/bin/python hn.py</code> 这条 shell 指令，<code>hn.py</code> 就是需要编辑的 Python 文件。在这个 Workflow 中由于没有输入参数，所以我设置了 <code>No Argument</code>。</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fvrrlzz4n1j20lq0hs400.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="使用-alfred-workflow-库">使用 Alfred-Workflow 库</h3>
+<p>流程创建完毕后，就需要对代码进行编辑</p>
+<ul>
+<li><p>找到 Workflow 源码路径: 鼠标右键 <code>Hacker-news</code>，选择 <strong>Show in Finder</strong>，找到源码</p></li>
+<li><p>请求 <a href="https://api.hnpwa.com/v0" target="_blank" rel="noopener">api.hnpwa.com/v0</a> 获取 HackerNews 数据</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_top_news</span><span class="params">()</span>:</span></span><br><span class="line">    base_url = <span class="string">'https://api.hnpwa.com/v0/&#123;name&#125;/&#123;page&#125;.json'</span></span><br><span class="line">    max_pages = <span class="number">15</span></span><br><span class="line">    name = <span class="string">'news'</span></span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> page <span class="keyword">in</span> range(<span class="number">1</span>, max_pages):</span><br><span class="line">        url = base_url.format(name=name, page=page)</span><br><span class="line">        req = web.get(url)</span><br><span class="line">        req.raise_for_status()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> len(req.json()) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        result = result + req.json()</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure></p></li>
+<li><p>将数据封装成 <code>xml</code> 格式返回给 Alfred <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(wf)</span>:</span></span><br><span class="line">    posts = wf.cached_data(<span class="string">'posts'</span>, get_top_news, max_age=<span class="number">60</span>*<span class="number">60</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Loop through the returned posts and add an item for each to</span></span><br><span class="line">    <span class="comment"># the list of results for Alfred</span></span><br><span class="line">    <span class="keyword">for</span> post <span class="keyword">in</span> posts:</span><br><span class="line">        subtitle = <span class="string">"points: &#123;points&#125; | user: &#123;user&#125; | &#123;time_ago&#125; | comments:&#123;comments_count&#125; | &#123;url&#125;"</span>.format(</span><br><span class="line">            points=post[<span class="string">'points'</span>],</span><br><span class="line">            user=post[<span class="string">'user'</span>],</span><br><span class="line">            time_ago=post[<span class="string">'time_ago'</span>],</span><br><span class="line">            comments_count=post[<span class="string">'comments_count'</span>],</span><br><span class="line">            url=post[<span class="string">'url'</span>]</span><br><span class="line">        )</span><br><span class="line">        wf.add_item(title=post[<span class="string">'title'</span>],</span><br><span class="line">                    subtitle=subtitle,</span><br><span class="line">                    arg=post[<span class="string">'url'</span>],</span><br><span class="line">                    valid=<span class="literal">True</span>,</span><br><span class="line">                    icon=<span class="string">'./icon.png'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Send the results to Alfred as XML</span></span><br><span class="line">    wf.send_feedback()</span><br></pre></td></tr></table></figure></p></li>
+<li><p>为了防止大量请求 API 造成服务器压力，也为了更快地显示结果，将数据进行缓存 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">posts = wf.cached_data(<span class="string">'posts'</span>, get_top_news, max_age=<span class="number">60</span>*<span class="number">60</span>)</span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h3 id="导出-.workflow">导出 *.workflow</h3>
+<p>右键 <code>Hacker-news</code> 将 workflow 导出为 <code>hacker-news.alfredworkflow</code> 格式，就可以发布出去啦</p>
+<h2 id="总结">总结</h2>
+<ul>
+<li>如果使用 Python 第三方库，需要 pip 安装到本地路径</li>
+<li>出于兼容性的考虑，Alfred-Workflow 暂时只支持 Python 2，有些小小遗憾；</li>
+</ul>
+<h2 id="示例代码和-workflow-下载地址">示例代码和 Workflow 下载地址</h2>
+<ul>
+<li><a href="https://github.com/wangshub/Alfred-HackerNews" target="_blank" rel="noopener">https://github.com/wangshub/Alfred-HackerNews</a></li>
+<li>MIT@<a href="https://github.com/wangshub/Alfred-HackerNews" target="_blank" rel="noopener">神奇的战士</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.775Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/09/30/用Python写Alfred3插件/&title=《用Python写Alfred3插件》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/09/30/用Python写Alfred3插件/&title=《用Python写Alfred3插件》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/09/30/用Python写Alfred3插件/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用Python写Alfred3插件》 — 神奇的战士&url=http://wangshub.github.io/2018/09/30/用Python写Alfred3插件/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/09/30/用Python写Alfred3插件/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/10/12/Alfred-Gitlab-Workflow/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Alfred-Gitlab-Workflow</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/09/20/在roboschool中控制Atlas/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">在roboschool中控制Atlas</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/09/30/用Python写Alfred3插件/&title=《用Python写Alfred3插件》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/09/30/用Python写Alfred3插件/&title=《用Python写Alfred3插件》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/09/30/用Python写Alfred3插件/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用Python写Alfred3插件》 — 神奇的战士&url=http://wangshub.github.io/2018/09/30/用Python写Alfred3插件/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/09/30/用Python写Alfred3插件/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACu0lEQVR42u3aQU7DQAwFUO5/aZBYIaGm/9uZUqSXVVWaZN4sxsb2x0d8fX5fPz9ff/P7rkfPefTL33dd/2Z14eHh4Y2W/ui6fn1y12xZydZcvx0PDw/vNG8TDJK/5kvM355sCh4eHt7f8trctc1y82fi4eHh/RdeGyraWsF1Mo2Hh4f3brx9ipwkzTlvlo7j4eHhvYY3a4D97efj/T08PDy8UVf9+sA98U3bZnuyWjw8PLwDvHwRm3GrfLAgSaPb8gQeHh7eCd5s6Xkh9XNxtRsUFXPx8PDwFry2GNqWA9oEfRYSHj4HDw8P7zAvf9AmBZ8NGeDh4eG9G+/edHkzyJXwihCFh4eHd4zXhofrR7dh464JiGiaDA8PD2/Nm12bJHtfMk62e0XFw8PDu3x72/LfD1HlKXtLrcet8PDw8Ba8TVF1VmbNi7nFWGp+Mx4eHt6CNztwkyDRpsuz8BOVMPDw8PAO89pjOh8UaI/7dhNviH54eHh4AW+Wzs6oyb35IELUhMPDw8M7xmtbX23xd3ZKtw2wqEqNh4eHt+bNChOz9n+e6+YF4hqJh4eHdxNvU0TYp8ubcm1UwsDDw8M7wEvaV8lSNk/LMbNmGx4eHt5dvPxx7aFfFAhGaffq/wM8PDy8m3h3tbjaw71No/MNwsPDwzvHa0uo7aHfBoNZQaQeHcDDw8Mb8WYtrvZY35eA2+YZHh4e3jlekjRvyg1Jcjwb0opCBR4eHt5LeAkgHzVICh/t1hQbgYeHh3eANysc5E2p/TDWbAQBDw8P7zQvDwab7cif2Y4LPAk2eHh4eMd4+RLbxHcWHm4oRuDh4eG9AW82CjALBvlwwJO34OHh4b0BLx8CyFPkTTr+pKCMh4eHd4zXpsL5wd2m6bNRsBtqLXh4eHgxry3LtklwOxyQJ9ZHRgfw8PDwrn7zBZVxAydxatNBAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

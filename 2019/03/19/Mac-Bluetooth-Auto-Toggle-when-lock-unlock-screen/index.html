@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>『Hamerspoon』蓝牙自动开关 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Mac,Lua,Hammerspoon">
+    <meta name="description" content="『Hamerspoon』Mac 蓝牙自动开关 前言 如果你也像我一样使用 Mac 连接蓝牙耳机，下班后总是忘记关耳机，第二天耳机没电的话，那么这篇文章也许有用。    当我尝试解决上面这个问题时，写了一个 Python 脚本，但是这并不优雅，直到我找到了 Hammerspoon，从此打开了新世界大门。 首先 Hammerspoon 是什么？ Hammerspoon 是 MacOS 平台上的自动化工">
+<meta name="keywords" content="Mac,Lua,Hammerspoon">
+<meta property="og:type" content="article">
+<meta property="og:title" content="『Hamerspoon』蓝牙自动开关">
+<meta property="og:url" content="http://wangshub.github.io/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="『Hamerspoon』Mac 蓝牙自动开关 前言 如果你也像我一样使用 Mac 连接蓝牙耳机，下班后总是忘记关耳机，第二天耳机没电的话，那么这篇文章也许有用。    当我尝试解决上面这个问题时，写了一个 Python 脚本，但是这并不优雅，直到我找到了 Hammerspoon，从此打开了新世界大门。 首先 Hammerspoon 是什么？ Hammerspoon 是 MacOS 平台上的自动化工">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190319165809.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190319170342.png">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="『Hamerspoon』蓝牙自动开关">
+<meta name="twitter:description" content="『Hamerspoon』Mac 蓝牙自动开关 前言 如果你也像我一样使用 Mac 连接蓝牙耳机，下班后总是忘记关耳机，第二天耳机没电的话，那么这篇文章也许有用。    当我尝试解决上面这个问题时，写了一个 Python 脚本，但是这并不优雅，直到我找到了 Hammerspoon，从此打开了新世界大门。 首先 Hammerspoon 是什么？ Hammerspoon 是 MacOS 平台上的自动化工">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190319165809.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">『Hamerspoon』蓝牙自动开关</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">『Hamerspoon』蓝牙自动开关</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-03-19T06:08:10.000Z" itemprop="datePublished" class="page-time">
+  2019-03-19
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#hamerspoonmac-蓝牙自动开关"><span class="post-toc-text">『Hamerspoon』Mac 蓝牙自动开关</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#首先-hammerspoon-是什么"><span class="post-toc-text">首先 Hammerspoon 是什么？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在-mac-上用脚本控制蓝牙开关"><span class="post-toc-text">在 Mac 上用脚本控制蓝牙开关？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#put-them-together"><span class="post-toc-text">Put Them Together！</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装-hammerspoon-配置"><span class="post-toc-text">安装 Hammerspoon 配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-text">参考链接</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">『Hamerspoon』蓝牙自动开关</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-03-19 14:08:10" datetime="2019-03-19T06:08:10.000Z" itemprop="datePublished">2019-03-19</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="hamerspoonmac-蓝牙自动开关">『Hamerspoon』Mac 蓝牙自动开关</h1>
+<h2 id="前言">前言</h2>
+<p><strong>如果你也像我一样使用 Mac 连接蓝牙耳机，下班后总是忘记关耳机，第二天耳机没电的话，那么这篇文章也许有用。</strong></p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190319165809.png" width="70%">
+</div>
+<p>当我尝试解决上面这个问题时，写了一个 Python 脚本，但是这并不优雅，直到我找到了 <a href="https://www.hammerspoon.org/" target="_blank" rel="noopener">Hammerspoon</a>，从此打开了新世界大门。</p>
+<h2 id="首先-hammerspoon-是什么">首先 Hammerspoon 是什么？</h2>
+<p>Hammerspoon 是 MacOS 平台上的自动化工具，它<strong>不仅仅是应用窗口管理工具</strong>，配置 <code>~/.hammerspoon/init.lua</code> 脚本可以与系统进行交互，这就让这把小锤子的可玩性极高。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190319170342.png" width="80%">
+</div>
+<p>在 <code>init.lua</code> 中，注册一系列的回调函数，当监测到事件发生，就能触发对应的回调，例如</p>
+<ul>
+<li>按下快捷键事件，快速切换应用；</li>
+<li>Wi-Fi 连接事件，判断是否到家了；</li>
+<li>USB 设备连接事件，对插上的设备进行扫描；</li>
+<li>电脑休眠和解锁事件;</li>
+<li>...</li>
+</ul>
+<p><strong>如果使用小锤子，检测到锁屏事件，那么在脚本里就可以自动地对蓝牙进行开关。</strong></p>
+<h2 id="在-mac-上用脚本控制蓝牙开关">在 Mac 上用脚本控制蓝牙开关？</h2>
+<p>在 OSX 上，使用 <a href="https://github.com/toy/blueutil" target="_blank" rel="noopener">blueutil</a> 可以对蓝牙进行操作</p>
+<ul>
+<li>安装方式: <code>brew install blueutil</code></li>
+<li>开启蓝牙: <code>blueutil --power 1</code></li>
+<li>关闭蓝牙: <code>blueutil --power 0</code></li>
+</ul>
+<h2 id="put-them-together">Put Them Together！</h2>
+<ul>
+<li>蓝牙切换函数，这里使用 Hammerspoon 运行 Applescript 脚本，然后再在 Applescript 里运行 shell 指令</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bluetoothSwitch</span><span class="params">(state)</span></span></span><br><span class="line">  <span class="comment">-- state: 0(off), 1(on)</span></span><br><span class="line">  cmd = <span class="string">"/usr/local/bin/blueutil --power "</span>..(state)</span><br><span class="line">  result = hs.osascript.applescript(<span class="built_in">string</span>.<span class="built_in">format</span>(<span class="string">'do shell script "%s"'</span>, cmd))</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>回调函数</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">caffeinateCallback</span><span class="params">(eventType)</span></span></span><br><span class="line">    <span class="keyword">if</span> (eventType == hs.caffeinate.watcher.screensDidSleep) <span class="keyword">then</span></span><br><span class="line">      <span class="built_in">print</span>(<span class="string">"screensDidSleep"</span>)</span><br><span class="line">    <span class="keyword">elseif</span> (eventType == hs.caffeinate.watcher.screensDidWake) <span class="keyword">then</span></span><br><span class="line">      <span class="built_in">print</span>(<span class="string">"screensDidWake"</span>)</span><br><span class="line">    <span class="keyword">elseif</span> (eventType == hs.caffeinate.watcher.screensDidLock) <span class="keyword">then</span></span><br><span class="line">      <span class="built_in">print</span>(<span class="string">"screensDidLock"</span>)</span><br><span class="line">      bluetoothSwitch(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elseif</span> (eventType == hs.caffeinate.watcher.screensDidUnlock) <span class="keyword">then</span></span><br><span class="line">      <span class="built_in">print</span>(<span class="string">"screensDidUnlock"</span>)</span><br><span class="line">      bluetoothSwitch(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>监测 Mac 系统<code>睡眠</code>、<code>锁屏</code>等事件</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">caffeinateWatcher = hs.caffeinate.watcher.new(caffeinateCallback)</span><br><span class="line">caffeinateWatcher:start()</span><br></pre></td></tr></table></figure>
+<h2 id="安装-hammerspoon-配置">安装 Hammerspoon 配置</h2>
+<ul>
+<li>首先需要安装 <a href="https://github.com/Hammerspoon/hammerspoon/releases/" target="_blank" rel="noopener">Hammerspoon</a></li>
+<li><code>brew install blueutil</code></li>
+<li><code>git clone https://github.com/wangshub/hammerspoon-config.git ~/.hammerspoon</code></li>
+</ul>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://www.hammerspoon.org/docs/" target="_blank" rel="noopener">Hammerspoon 文档</a></li>
+<li><a href="https://www.macosxautomation.com/applescript/firsttutorial/index.html" target="_blank" rel="noopener">What is AppleScript?</a></li>
+<li><a href="https://www.lua.org/start.html" target="_blank" rel="noopener">Lua: Getting started</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.685Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hammerspoon/">Hammerspoon</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lua/">Lua</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac/">Mac</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/&title=《『Hamerspoon』蓝牙自动开关》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/&title=《『Hamerspoon』蓝牙自动开关》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《『Hamerspoon』蓝牙自动开关》 — 神奇的战士&url=http://wangshub.github.io/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/03/11/RLDeepQlearning/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">强化学习之 Deep Q­-Learning</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/&title=《『Hamerspoon』蓝牙自动开关》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/&title=《『Hamerspoon』蓝牙自动开关》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《『Hamerspoon』蓝牙自动开关》 — 神奇的战士&url=http://wangshub.github.io/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADL0lEQVR42u3ay47iQAwF0P7/n2akWY1ET3Ftp1vEnKwQCsGnWBg/vr7i6/H3yu/89/7n189PO99/jiePrXxhY2Nj34T9OF7J1yR3/g9fvZIjTj6LjY2NvY+dJ4n8aM4HdH6nis8t2NjY2J/MPlOTf/tV8FXxYGNjY2MnQU+aPmdGrxDCxsbG/jR20lSqtpzyMiNpEvXKpAt6adjY2Nhvz64Oet/59Q/Ot7GxsbHfkn3VqDVPKtVkljebCvFjY2NjL2Kfw7oqmY2CGxzuCxE2Njb2OnZvTFtoxwefrT6tl9iwsbGxN7F7yaB3HEmazBdxqokQGxsbeyu799BJY+h3VoWiGLCxsbHXsZOG/mRRstdIStZu8tWi6ISwsbGxb8jurWDmTflq+dH7AXptKWxsbOwd7N6gd9I8yg+l+pPkC0PY2NjYO9hJ2sgB1ZIj+d7q/VFiw8bGxv4Y9qRsmKSc6mi5/BNiY2Njr2PP12XyMe28mTUpfrCxsbH3sfPgems3+WCgmjirRVGzm4WNjY399uwkGUwSWL7KMz+4fK0HGxsbeys7b+ucw0qQ+XOqaSxKctjY2NiL2PPxav6Vk5Kj3DDqLe5gY2Nj35ydBBr90Y+b/tVxQnWQ/CLtYWNjY69gV8OqtnLm7ar5MOCbb8TGxsZeyu790e8NGKrtpF5SfJGxsbGxsdexk4Z+0n6atId66SovkLCxsbH3sSePOI8NegkmP9DqCtE3LmxsbOwV7Goqqi709IqWvHTptZ+wsbGx97EnKzW9pn++ZFONrbysg42NjX1zdh7cpGCYNJiaA4B8UIGNjY29jl1d1snf7yWt/J1qKwobGxt7H3ve6Lkq+eUprTADySfe2NjY2LdlJwksHwbkKXAy1u1NAbCxsbE3sR/Fq7cimRzc/KDzgTQ2Njb2JnZ+9dLSJKzqIKF6JzY2NvYmdq886I0HeofVG1qMChJsbGzsG7LzxDAJt7peU860x/ixsbGxsfP1nWqqmyS8vO2FjY2NjZ03gKqhJEfce35hWQcbGxv75uxJi7+QNlqp6OLUhY2Njb2OPR/0VkuUaqlTLX6S5hc2Njb2CvYf371aPbiIDJcAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

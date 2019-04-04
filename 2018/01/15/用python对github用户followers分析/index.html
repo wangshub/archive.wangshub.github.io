@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>用python对github用户followers分析 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="python,github">
+    <meta name="description" content="github 用户 followers 分析 如何分析一个github用户的followers？ 周末手痒，用python分析了一下自己 github 的 followers 用户，统计结果如下 问题分析 在github上，一个用户的主页显示如下，主要对如下用户信息进行提取 - 用户名称 - 所在的位置 - 用户仓库、stars、Followers、Following数量 - 去年一年的贡献度">
+<meta name="keywords" content="python,github">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用python对github用户followers分析">
+<meta property="og:url" content="http://wangshub.github.io/2018/01/15/用python对github用户followers分析/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="github 用户 followers 分析 如何分析一个github用户的followers？ 周末手痒，用python分析了一下自己 github 的 followers 用户，统计结果如下 问题分析 在github上，一个用户的主页显示如下，主要对如下用户信息进行提取 - 用户名称 - 所在的位置 - 用户仓库、stars、Followers、Following数量 - 去年一年的贡献度">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fngknl9cckj20uh0g6wfm.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fngljy93kjj20rs0nwtdv.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fngln8yfgij20m80b4t94.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fngmed2kovj20m80b474m.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fnglp9onenj20m80b4jrs.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fngm1vx9oij20m80b4dg8.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fngm814cbgj20m80b43yw.jpg">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.775Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用python对github用户followers分析">
+<meta name="twitter:description" content="github 用户 followers 分析 如何分析一个github用户的followers？ 周末手痒，用python分析了一下自己 github 的 followers 用户，统计结果如下 问题分析 在github上，一个用户的主页显示如下，主要对如下用户信息进行提取 - 用户名称 - 所在的位置 - 用户仓库、stars、Followers、Following数量 - 去年一年的贡献度">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fngknl9cckj20uh0g6wfm.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">用python对github用户followers分析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">用python对github用户followers分析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-15T01:40:16.000Z" itemprop="datePublished" class="page-time">
+  2018-01-15
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#github-用户-followers-分析"><span class="post-toc-text">github 用户 followers 分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#问题分析"><span class="post-toc-text">问题分析</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一些弯路"><span class="post-toc-text">一些弯路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#工具"><span class="post-toc-text">工具</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#操作步骤"><span class="post-toc-text">操作步骤</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#实验结果"><span class="post-toc-text">实验结果</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户地点分析"><span class="post-toc-text">用户地点分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#去年一年用户贡献度分析"><span class="post-toc-text">去年一年用户贡献度分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户followers分析"><span class="post-toc-text">用户followers分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户仓库数量分析"><span class="post-toc-text">用户仓库数量分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户stars分析"><span class="post-toc-text">用户stars分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用户-following-分析"><span class="post-toc-text">用户 following 分析</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最后"><span class="post-toc-text">最后</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-用python对github用户followers分析" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">用python对github用户followers分析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-15 09:40:16" datetime="2018-01-15T01:40:16.000Z" itemprop="datePublished">2018-01-15</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="github-用户-followers-分析">github 用户 followers 分析</h1>
+<p><strong>如何分析一个github用户的followers？</strong></p>
+<p>周末手痒，用python分析了一下自己 <a href="https://github.com/wangshub" target="_blank" rel="noopener">github</a> 的 <strong>followers</strong> 用户，统计结果如下</p>
+<h2 id="问题分析">问题分析</h2>
+<p>在github上，一个用户的主页显示如下，主要对如下用户信息进行提取 - 用户名称 - 所在的位置 - 用户仓库、stars、Followers、Following数量 - 去年一年的贡献度</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngknl9cckj20uh0g6wfm.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>我们需要对上图红框里面的数据进行提取，最直接的方法是使用<code>requests</code>，通过<code>BeautifulSoup</code>对<code>html</code>中的信息进行提取。</p>
+<h2 id="一些弯路">一些弯路</h2>
+<p>最开始没打算用爬虫的方式来获取用户信息，因为github有公开的<a href="https://developer.github.com/v3/" target="_blank" rel="noopener">REST API v3</a>可以对指定用户的信息进行访问，并且已经有打包好的<a href="https://github.com/PyGithub/PyGithub" target="_blank" rel="noopener">PyGithub</a>方便调用。但是我实验下来有如下问题所以放弃使用<a href="https://developer.github.com/v3/" target="_blank" rel="noopener">REST API v3</a> 1. API请求频率有限制，无法运用多线程快速获取批量的用户信息 2. 不知道是不是小BUG，通过API无法获得用户去年一年的贡献度<strong>contributions</strong></p>
+<h2 id="工具">工具</h2>
+<ul>
+<li><strong>python 3</strong> ： 彻底告别我的py2</li>
+<li><strong>BeaufulSoup</strong> ：从HTML或XML文件中提取数据</li>
+<li><strong>Requests</strong> ： 请求网页</li>
+<li><strong>多进程</strong> ： 为了更快</li>
+<li><strong>pyecharts</strong> ： 美的令人窒息的绘图工具</li>
+</ul>
+<h2 id="操作步骤">操作步骤</h2>
+<ol type="1">
+<li>获取目标用户如<code>https://github.com/wangshub?page=1&amp;tab=followers</code>的所有followers；</li>
+<li>改变<code>page</code>编号，遍历所有用户；</li>
+<li>提取用户关键信息，保存成<code>csv</code>文件；</li>
+<li>数据清洗，过滤；</li>
+<li>利用<a href="https://github.com/pyecharts/pyecharts" target="_blank" rel="noopener">pyecharts</a>绘图；</li>
+<li>进行地点词频统计；</li>
+</ol>
+<h2 id="实验结果">实验结果</h2>
+<p>截止<code>2018-01-15</code>,我的github账号一共有<code>1214</code>名follower，分析结果如下</p>
+<h3 id="用户地点分析">用户地点分析</h3>
+<p>排除掉没有填写地点信息的用户，将中文转化成pinyin后，词云如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngljy93kjj20rs0nwtdv.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>用户基本上都是来自<code>北京、上海、深圳</code>等地</p>
+<h3 id="去年一年用户贡献度分析">去年一年用户贡献度分析</h3>
+<p>如果看用户是否活跃，肯定是看<code>contributions</code>啦</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngln8yfgij20m80b4t94.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>可以看出超过一般多的用户，去年的贡献度都在都在 <strong>1~50</strong> 之间，新的一年要加油啦。其中一年贡献最多的用户是<span class="citation" data-cites="dragon-yuan">[@dragon-yuan]</span>(https://github.com/dragon-yuan), 在2017年有整整 <strong>4,197</strong> 个贡献度，不多说了，前去关注一波。</p>
+<h3 id="用户followers分析">用户followers分析</h3>
+<p>哇，有大牛，别拦着我，我要去点关注了</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngmed2kovj20m80b474m.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<h3 id="用户仓库数量分析">用户仓库数量分析</h3>
+<p>通过爬取用户的仓库数量，进行统计如下</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fnglp9onenj20m80b4jrs.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>可以看到一个有意思的现象，有少数的人仓库数量超过了<strong>1000</strong>，打开这几位仁兄的github主页，大部分是fork的项目，其中仓库最多的用户有<strong>13100个</strong>仓库，叫<span class="citation" data-cites="ProgrammerAndHacker">[@ProgrammerAndHacker]</span>(https://github.com/ProgrammerAndHacker)，他是这么介绍自己的 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">I follow best programmer and hacker， </span><br><span class="line">Do you want to hacked by them? ^_^ </span><br><span class="line">Best programmers and hackers are here: </span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h3 id="用户stars分析">用户stars分析</h3>
+<p>都说点击star是一个好习惯，</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngm1vx9oij20m80b4dg8.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>不得不说，github上面还是有点赞狂魔的，这位老铁<span class="citation" data-cites="chenruibin">[@chenruibin]</span>(https://github.com/chenruibin)一共点击了<code>10100</code>个赞，真是好习惯～</p>
+<h3 id="用户-following-分析">用户 following 分析</h3>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngm814cbgj20m80b43yw.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>同样是<span class="citation" data-cites="ProgrammerAndHacker">[@ProgrammerAndHacker]</span>(https://github.com/ProgrammerAndHacker)这位仁兄，一共follow了<strong>19600</strong>个用户，严重怀疑是不是机器人。</p>
+<h2 id="最后">最后</h2>
+<p>不搞了，我要去写论文了TAT，要代码的，来这里找<a href="https://github.com/wangshub/who_is_following" target="_blank" rel="noopener">https://github.com/wangshub/who_is_following</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.775Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/01/15/用python对github用户followers分析/&title=《用python对github用户followers分析》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/01/15/用python对github用户followers分析/&title=《用python对github用户followers分析》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/01/15/用python对github用户followers分析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用python对github用户followers分析》 — 神奇的战士&url=http://wangshub.github.io/2018/01/15/用python对github用户followers分析/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/01/15/用python对github用户followers分析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/02/07/python装饰器学习笔记/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">python装饰器学习笔记</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/12/29/教你用Python来玩微信跳一跳/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">教你用Python来玩微信跳一跳</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2018/01/15/用python对github用户followers分析/&title=《用python对github用户followers分析》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2018/01/15/用python对github用户followers分析/&title=《用python对github用户followers分析》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2018/01/15/用python对github用户followers分析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用python对github用户followers分析》 — 神奇的战士&url=http://wangshub.github.io/2018/01/15/用python对github用户followers分析/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2018/01/15/用python对github用户followers分析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvElEQVR42u3aQW7DMAwEwPz/0ynQU4pC7pKUnKAYn4wkrjU6SOqSj0d8Pb+v/NvXT/L71+v6880XHh4eXmvoq2syxNUv8zH8/jYfMx4eHt5p3vVyn/8mX+7z+9548PDw8D6Bl3yy+rY6LDw8PLz/wevFENdRQn6YxsPDw/s0XjUO6D2bby294AMPDw/vHl61APYJ9wfre3h4eHiDqnpv8a1uKnmAWx4hHh4e3gHe9et7W0XesJUXxvKnovnGw8PDG/B6Za3eUl6NfXuT9eMeDw8P7xhvUtbaO9Bq8eyPicbDw8M7zJscYatxw67i2YZTPx4eHl6Ll7dG5f/pT4abTFb0FB4eHt4BXnWgk1B1ssEkh+xCAQwPDw9vzMtJk9aoPCzOj+MbGrDw8PDwirxeiFD9C5NB52HuMsbFw8PDu4WXl6N6R+peLJuXx5adEXh4eHibeMnDveAgR06i2yUYDw8P7zCvsOAWS1nVLaQ3Hct8Gg8PD+8Ar9cE0GsgqA63Gkzg4eHh3cNrVsziyCCKXONjdAGPh4eHd4zXW/Sr0UO1eFYObX8/i4eHh3eM1xtWb+lPjum9Bq8oa8HDw8PbxOsFCuc2j0lLwSNJL/Dw8PA28SZbQl7cyieiF+wuNwY8PDy8Tbw8Gkhe0DtMT5oJCuUxPDw8vFt4ySF7vtxXi2F5GwEeHh7eOV4eNxQanlpH8GS4eUMYHh4e3mleNYzovb7XEFBt+VpW+fDw8PDGvGfxmoCrU5BPx/IpPDw8vAO86oKbl80mRbU88sgbxfDw8PD28qqlqep986TfahFrphd4eHh4LV7eYtV7cR49zGOIZdaCh4eH9yZe3l5Q3TyqpbVoe8DDw8N7K68XB/TCiGpzw9KCh4eHd4y3t/iU/2ZXEW5D1oKHh4e3qfSVHH+TJXvXNFVjDjw8PLytvC863fk+w5qf1wAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>

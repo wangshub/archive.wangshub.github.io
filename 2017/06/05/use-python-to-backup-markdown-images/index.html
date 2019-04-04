@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>使用python备份博客图床图片 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="python,code,markdown">
+    <meta name="description" content="# 说明 最近在写markdown文档的过程中,经常需要插入一些图片.因为托管博客的服务器空间有限,所以上传图片到图床再插入到markdown中.有时候又插入网上的图片,这些图片随时可能失效.导致我的博客网站显示图片错误. 所以花了一点时间,用python 正则匹配 markdown中图片链接,然后下载图片保存到本地文件夹img中.这样就不用担心图片失效啦,当我找到稳定的图床,可以随时把这些图片">
+<meta name="keywords" content="python,code,markdown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用python备份博客图床图片">
+<meta property="og:url" content="http://wangshub.github.io/2017/06/05/use-python-to-backup-markdown-images/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="# 说明 最近在写markdown文档的过程中,经常需要插入一些图片.因为托管博客的服务器空间有限,所以上传图片到图床再插入到markdown中.有时候又插入网上的图片,这些图片随时可能失效.导致我的博客网站显示图片错误. 所以花了一点时间,用python 正则匹配 markdown中图片链接,然后下载图片保存到本地文件夹img中.这样就不用担心图片失效啦,当我找到稳定的图床,可以随时把这些图片">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-04T10:10:23.770Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用python备份博客图床图片">
+<meta name="twitter:description" content="# 说明 最近在写markdown文档的过程中,经常需要插入一些图片.因为托管博客的服务器空间有限,所以上传图片到图床再插入到markdown中.有时候又插入网上的图片,这些图片随时可能失效.导致我的博客网站显示图片错误. 所以花了一点时间,用python 正则匹配 markdown中图片链接,然后下载图片保存到本地文件夹img中.这样就不用担心图片失效啦,当我找到稳定的图床,可以随时把这些图片">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用python备份博客图床图片</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">使用python备份博客图床图片</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-06-05T15:09:29.000Z" itemprop="datePublished" class="page-time">
+  2017-06-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/markdown/">markdown</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/markdown/code/">code</a></li></ul></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#功能"><span class="post-toc-text">功能</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#步骤"><span class="post-toc-text">步骤</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#python代码"><span class="post-toc-text">python代码</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#食用方法"><span class="post-toc-text">食用方法</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#作者"><span class="post-toc-text">作者</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-use-python-to-backup-markdown-images" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用python备份博客图床图片</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-06-05 23:09:29" datetime="2017-06-05T15:09:29.000Z" itemprop="datePublished">2017-06-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/markdown/">markdown</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/markdown/code/">code</a></li></ul></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <a id="more"></a>
+<p># 说明</p>
+<p>最近在写markdown文档的过程中,经常需要插入一些图片.因为托管博客的服务器空间有限,所以上传图片到图床再插入到markdown中.有时候又插入网上的图片,这些图片随时可能失效.导致我的博客网站显示图片错误.<br> 所以花了一点时间,用python <em>正则匹配</em> markdown中图片链接,然后下载图片保存到本地文件夹<code>img</code>中.这样就不用担心图片失效啦,当我找到稳定的图床,可以随时把这些图片再上传更新,美滋滋~~~</p>
+<h1 id="功能">功能</h1>
+<ul>
+<li><input type="checkbox" disabled checked>
+<code>.md</code>文件自动搜索</li>
+<li><input type="checkbox" disabled checked>
+正则匹配图片链接</li>
+<li><input type="checkbox" disabled checked>
+爬取图片内容</li>
+<li><input type="checkbox" disabled checked>
+保存文本到本地</li>
+</ul>
+<h1 id="步骤">步骤</h1>
+<p><strong>读取文件</strong> =&gt; <strong>正则匹配</strong> =&gt; <strong>图片下载</strong> =&gt; <strong>保存本地</strong></p>
+<h1 id="python代码">python代码</h1>
+<p>详细见我的github地址: www.github.com/wangshub</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">(path, word)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> filename <span class="keyword">in</span> os.listdir(path):</span><br><span class="line">        fp = os.path.join(path, filename)</span><br><span class="line">        <span class="keyword">if</span> os.path.isfile(fp) <span class="keyword">and</span> word <span class="keyword">in</span> filename:</span><br><span class="line">            <span class="keyword">print</span> fp</span><br><span class="line">            download(str(fp))</span><br><span class="line">        <span class="keyword">elif</span> os.path.isdir(fp):</span><br><span class="line">            search(fp, word)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">download</span><span class="params">(file_path)</span>:</span></span><br><span class="line">    <span class="comment"># filename = "test"</span></span><br><span class="line">    name = file_path.split(<span class="string">u"/"</span>)</span><br><span class="line">    filename = name[<span class="number">-1</span>]</span><br><span class="line">    f_md = open(file_path)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># all text of md file</span></span><br><span class="line">    text = f_md.read().decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="comment"># regex</span></span><br><span class="line">    img_reg = <span class="string">r'\!&#123;1&#125;\[(.*?)\]\((.*?)\)'</span></span><br><span class="line">    result = re.findall(<span class="string">'!\[(.*)\]\((.*)\)'</span>, text)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(result)):</span><br><span class="line">        img_quote = result[i][<span class="number">0</span>]</span><br><span class="line">        img_url = result[i][<span class="number">1</span>]</span><br><span class="line">        <span class="comment"># download img</span></span><br><span class="line">        request = urllib2.Request(img_url)</span><br><span class="line">        response = urllib2.urlopen(request)</span><br><span class="line">        img_contents = response.read()</span><br><span class="line">        <span class="comment"># img name spell</span></span><br><span class="line">        urlname = img_url.split(<span class="string">u"/"</span>)</span><br><span class="line">        img_name = filename + <span class="string">'_'</span> + \</span><br><span class="line">            str(i) + <span class="string">'_'</span> + img_quote + str(urlname[len(urlname) - <span class="number">1</span>])</span><br><span class="line">        <span class="keyword">print</span> img_name, <span class="string">'~~~'</span>, img_url</span><br><span class="line">        <span class="comment"># write to file</span></span><br><span class="line">        f_img = open(<span class="string">'img/'</span> + img_name, <span class="string">'wb'</span>)</span><br><span class="line">        f_img.write(img_contents)</span><br><span class="line">        f_img.close()</span><br><span class="line">    f_md.close()</span><br><span class="line"></span><br><span class="line">search(sys.argv[<span class="number">1</span>], <span class="string">'.md'</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="食用方法">食用方法</h1>
+<p><code>python md_image_bacup.py /path/to/your/file/</code></p>
+<h1 id="作者">作者</h1>
+<blockquote>
+<p>Author : <em>WangSong</em><br> E-mail : <em>easternslope@yeah.net</em></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-04T10:10:23.770Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/code/">code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/">markdown</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/06/05/use-python-to-backup-markdown-images/&title=《使用python备份博客图床图片》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/06/05/use-python-to-backup-markdown-images/&title=《使用python备份博客图床图片》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/06/05/use-python-to-backup-markdown-images/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用python备份博客图床图片》 — 神奇的战士&url=http://wangshub.github.io/2017/06/05/use-python-to-backup-markdown-images/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/06/05/use-python-to-backup-markdown-images/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/07/20/python-mail-sender/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">python mail sender</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/05/31/sshfs-mount-net-disk/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">从机sshfs访问主机文件系统</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2017/06/05/use-python-to-backup-markdown-images/&title=《使用python备份博客图床图片》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2017/06/05/use-python-to-backup-markdown-images/&title=《使用python备份博客图床图片》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2017/06/05/use-python-to-backup-markdown-images/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《使用python备份博客图床图片》 — 神奇的战士&url=http://wangshub.github.io/2017/06/05/use-python-to-backup-markdown-images/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2017/06/05/use-python-to-backup-markdown-images/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3aQW7jMBAEQP//0wmQUwAjUveQtB2gdAoMrcjiQZrtmccjvr5+rue/f/+S3/N8/bXK9TO3XXh4eHijra8v/Px78m+TXV0/53p1PDw8vHO85GMwQ+YfifyeZM94eHh4n8Cb1ast7Pp+PDw8vP/Fy2OIGWBWXuPh4eG9i5eUsLNr13aPZy14eHh43YrDBti7/n5Rfw8PDw+vjBLaIGAW+ObRQ71bPDw8vAO86wbVrMCdDRPk4wL1SBYeHh7eMV77Om6fMIuGNwwQ4OHh4R3j5Q2wWSMqiRJmK9YlNR4eHt4CbyUyyM8v/2zkxxS11vDw8PAO8GZNptlLfzZutWFFPDw8vK0rtqVqUkavUNcPCw8PD+81vLb8TcrctsiejQvcfDbw8PDwjvHaCDVn5PfMgoYin8bDw8PbxFspiPN4d33rs6PEw8PDO8dLFp6VufUZl02vKMLAw8PD28rLo9s2bN0bNwybYXh4eHgHeLPN5cNY7fOTI06O+2YneHh4eAu85D//SVG7N6LNI4mb48DDw8N7IS9/cee/5J+Q/IiHHwY8PDy8ZV5bLrcFd97ESgLcfCd4eHh4J3jtazp/la98TvIiPgp28fDw8F7Ca5tVeWjbluD5QMPN0BUeHh7eJl77ss4HDvIyPVlxeOHh4eEd4600w9qCuB3hWtoJHh4e3gFeO6I6iwnaxlUbCkcDBHh4eHibeOuk2djB3sL6zzvx8PDwDvPaKGE97JiFFHkEjIeHh3eCN0tE946frgwWPHZdeHh4eCVvVgon7bE8nG3DjqJph4eHh3eMl7zQZwXuLMjIPwA3ZToeHh7eW3ltWZzz2uGDotTGw8PD+xjeSsE9+6jMGml4eHh453jtwslLuS2mZ+MINyvi4eHhHeC1DbDkEQm1HSNIguMN/T08PDy8K943BrE3K4y68kEAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
