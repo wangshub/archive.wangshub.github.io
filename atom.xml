@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://wangshub.github.io/"/>
-  <updated>2019-04-04T10:10:23.685Z</updated>
+  <updated>2019-04-04T12:04:21.237Z</updated>
   <id>http://wangshub.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>升级 Macbook 2015 固态硬盘为  M.2 2280 PCIE NVME 接口 SSD</title>
+    <link href="http://wangshub.github.io/2019/04/04/macbook2015upgradessd/"/>
+    <id>http://wangshub.github.io/2019/04/04/macbook2015upgradessd/</id>
+    <published>2019-04-04T11:18:36.000Z</published>
+    <updated>2019-04-04T12:04:21.237Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="升级-macbook-2015-固态硬盘为-m.2-2280-pcie-nvme-接口-ssd">升级 Macbook 2015 固态硬盘为 M.2 2280 PCIE NVME 接口 SSD</h1><blockquote><p>东西没有坏掉，只有修不好的</p></blockquote><p>由于苹果原装接口 SSD 价格太高(512G ≈ 2000RMB)，采用 M2.0 接口转苹果 SSD 专用接口的转接卡，升级成本在 600RMB 左右。</p><h2 id="macbook-型号">Macbook 型号</h2><ul><li>MacBook Pro (Retina, 13-inch, Early 2015)</li><li>配置: 8G RAM, 128G SSD</li></ul><h2 id="所需材料">所需材料</h2><ul><li>NVMe PCIe M.2 转 2015 款 Macbook Pro SSD 转接卡 （￥17）</li></ul><div style="text-align:center"><img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190404192727.png" width="40%"></div><ul><li>INTEL 760p SSD M.2 2280 PCIE NVME 协议固态 （￥656）</li></ul><div style="text-align:center"><img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190404193211.png" width="30%"></div><ul><li>螺丝刀工具盒</li></ul><h2 id="更换步骤">更换步骤</h2><ul><li><p><a href="https://support.apple.com/zh-cn/HT201372" target="_blank" rel="noopener">制作 MacOS Mojave 启动 U 盘</a></p></li><li><p>自行备份旧 SSD 数据</p></li><li><p>拆解过程请参考 <a href="https://zh.ifixit.com/Guide/MacBook+Pro+%EF%BC%8813%E8%8B%B1%E5%AF%B8%EF%BC%8C%E9%85%8D%E5%A4%87Retina%E6%98%BE%E7%A4%BA%E5%B1%8F%EF%BC%8C2015%E5%88%9D%E6%9C%9F%EF%BC%89%E6%8B%86%E8%A7%A3/38300" target="_blank" rel="noopener">MacBook Pro （13英寸，配备Retina显示屏，2015初期）拆解</a></p></li><li><p>五角螺丝刀拆下 SSD，并更换转接卡</p></li></ul><div style="text-align:center"><img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190404194132.png" width="50%"></div><ul><li>安装后盖，插上启动 U 盘，开机按照提示安装 MacOS 系统。</li></ul><h2 id="硬盘测速">硬盘测速</h2><div style="text-align:center"><img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190404194648.png" width="60%"></div><p><strong>OK, 安装完毕，再战 5 年。</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;升级-macbook-2015-固态硬盘为-m.2-2280-pcie-nvme-接口-ssd&quot;&gt;升级 Macbook 2015 固态硬盘为 M.2 2280 PCIE NVME 接口 SSD&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;东西没有坏掉，只有修不好的&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="MacOS" scheme="http://wangshub.github.io/tags/MacOS/"/>
+    
+      <category term="Macbook" scheme="http://wangshub.github.io/tags/Macbook/"/>
+    
+  </entry>
   
   <entry>
     <title>『Hamerspoon』蓝牙自动开关</title>
@@ -505,32 +532,6 @@
       <category term="Python" scheme="http://wangshub.github.io/tags/Python/"/>
     
       <category term="ADB" scheme="http://wangshub.github.io/tags/ADB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>给博客网站加个球(访客统计)</title>
-    <link href="http://wangshub.github.io/2018/05/20/%E7%BB%99%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA%E7%90%83-%E8%AE%BF%E5%AE%A2%E7%BB%9F%E8%AE%A1/"/>
-    <id>http://wangshub.github.io/2018/05/20/给博客加个球-访客统计/</id>
-    <published>2018-05-20T09:09:18.000Z</published>
-    <updated>2019-04-04T10:10:23.776Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="给博客网站加个球-访客统计脚本">给博客网站加个球-访客统计脚本</h1><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1frhx77kz3yj20dg0autd0.jpg" alt title>                </div>                <div class="image-caption"></div>            </figure><p>最近无意中发现了 Revolvermaps 这个网站，可以对网站页面上的访客进行统计。</p><h2 id="demo-演示">Demo 演示</h2><p><strong><a href="http://thinkhard.tech/" target="_blank" rel="noopener">神奇的战士的博客</a></strong></p><h2 id="主要特征">主要特征</h2><ul><li>访客 IP 地点统计；</li><li>访客人数统计；</li><li>页面停留时间统计；</li><li>多样式定制；</li><li>免费、易使用；</li></ul><h2 id="使用方法">使用方法</h2><ul><li>访问 <a href="https://www.revolvermaps.com/" target="_blank" rel="noopener">https://www.revolvermaps.com</a></li><li>复制脚本代码</li></ul><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1frhxg9k3n0j20n90a3wg1.jpg" alt title>                </div>                <div class="image-caption"></div>            </figure><ul><li>插入到博客网站中的 Html；</li></ul><h2 id="效果展示">效果展示</h2><ul><li>过去 24 小时访客统计</li></ul><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1frhxjg7qa3j20kb0lomyp.jpg" alt title>                </div>                <div class="image-caption"></div>            </figure><ul><li>不同地区统计</li></ul><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1frhxkeoz6qj20kj0fd408.jpg" alt title>                </div>                <div class="image-caption"></div>            </figure><ul><li>各地区访问人数</li></ul><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1frhxlcmny8j20gp0di0z1.jpg" alt title>                </div>                <div class="image-caption"></div>            </figure><ul><li>各个地区的访问时间</li></ul><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="https://ws1.sinaimg.cn/large/c3a916a7gy1frhxmixiqbj20kl0gkn63.jpg" alt title>                </div>                <div class="image-caption"></div>            </figure><h2 id="最后">最后</h2><blockquote><p>Happy 520 Day ~</p></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;给博客网站加个球-访客统计脚本&quot;&gt;给博客网站加个球-访客统计脚本&lt;/h1&gt;
-&lt;figure class=&quot;image-bubble&quot;&gt;
-                &lt;div class=&quot;img-lightbox&quot;&gt;
-                    &lt;
-      
-    
-    </summary>
-    
-    
-      <category term="Blog" scheme="http://wangshub.github.io/tags/Blog/"/>
     
   </entry>
   
