@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案 | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Lua,Hammerspoon">
+    <meta name="description" content="推荐一个 MacOS 上用了就无法自拔的 App Hammerspoon！    Hammerspoon 是 MacOS 上的自动化工具，许多介绍 Hammerspoon 的文章都主要介绍了它是一个窗口管理工具，但是 Hammerspoon 能做到的远远不仅如此。 Hammerspoon 开源、免费和支持插件，将大多数系统层面的接口封装成了 Lua API，这就让这把小锤子在 MacOS 上近乎无">
+<meta name="keywords" content="Lua,Hammerspoon">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案">
+<meta property="og:url" content="http://wangshub.github.io/2019/04/08/hammerspoon-introduce/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="推荐一个 MacOS 上用了就无法自拔的 App Hammerspoon！    Hammerspoon 是 MacOS 上的自动化工具，许多介绍 Hammerspoon 的文章都主要介绍了它是一个窗口管理工具，但是 Hammerspoon 能做到的远远不仅如此。 Hammerspoon 开源、免费和支持插件，将大多数系统层面的接口封装成了 Lua API，这就让这把小锤子在 MacOS 上近乎无">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190409090520.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/20924010/55765634-26490700-5aa3-11e9-9d95-9cf9de6f8f17.gif">
+<meta property="og:image" content="https://user-images.githubusercontent.com/20924010/55765624-1b8e7200-5aa3-11e9-9f9a-ab271844c8d5.gif">
+<meta property="og:image" content="https://user-images.githubusercontent.com/20924010/55765751-c010b400-5aa3-11e9-8b78-e686b104c113.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/hammerspoon.2019-04-08%2023_06_30.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190408231744.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190409090021.png">
+<meta property="og:updated_time" content="2019-04-09T06:11:32.008Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案">
+<meta name="twitter:description" content="推荐一个 MacOS 上用了就无法自拔的 App Hammerspoon！    Hammerspoon 是 MacOS 上的自动化工具，许多介绍 Hammerspoon 的文章都主要介绍了它是一个窗口管理工具，但是 Hammerspoon 能做到的远远不仅如此。 Hammerspoon 开源、免费和支持插件，将大多数系统层面的接口封装成了 Lua API，这就让这把小锤子在 MacOS 上近乎无">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190409090520.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-08T14:26:58.000Z" itemprop="datePublished" class="page-time">
+  2019-04-08
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#我都用-hammerspoon-做了些什么"><span class="post-toc-text">我都用 Hammerspoon 做了些什么？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#其他插件思路"><span class="post-toc-text">其他插件思路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用入门"><span class="post-toc-text">使用入门</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#我的参考配置"><span class="post-toc-text">我的参考配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最后"><span class="post-toc-text">最后</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-hammerspoon-introduce" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-08 22:26:58" datetime="2019-04-08T14:26:58.000Z" itemprop="datePublished">2019-04-08</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>推荐一个 MacOS 上用了就无法自拔的 App</p>
+<p><strong>Hammerspoon</strong>！</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190409090520.png" width="10%">
+</div>
+<p>Hammerspoon 是 MacOS 上的自动化工具，许多介绍 Hammerspoon 的文章都主要介绍了它是一个窗口管理工具，但是 Hammerspoon 能做到的远远不仅如此。</p>
+<p>Hammerspoon 开源、免费和支持插件，将大多数系统层面的接口封装成了 Lua API，这就让<strong>这把小锤子在 MacOS 上近乎无所不能，可玩性极高</strong>。</p>
+<h2 id="我都用-hammerspoon-做了些什么">我都用 Hammerspoon 做了些什么？</h2>
+<ul>
+<li><strong>菜单栏显示最近几天天气情况</strong>
+<ul>
+<li><a href="https://github.com/wangshub/hammerspoon-config/blob/master/weather/weather.lua" target="_blank" rel="noopener">参考示例</a></li>
+<li>请求免费的天气 API，在深圳这个多雨的城市里提醒我别忘记带伞。</li>
+</ul></li>
+</ul>
+<div style="text-align:center">
+<img src="https://user-images.githubusercontent.com/20924010/55765634-26490700-5aa3-11e9-9d95-9cf9de6f8f17.gif" width="50%">
+</div>
+<ul>
+<li><strong>剪切板历史记录</strong>
+<ul>
+<li><a href="https://github.com/wangshub/hammerspoon-config/tree/master/clipboard" target="_blank" rel="noopener">参考示例</a></li>
+<li>记录剪贴板历史，点击某一项再重新复制。
+<div style="text-align:center">
+<img src="https://user-images.githubusercontent.com/20924010/55765624-1b8e7200-5aa3-11e9-9f9a-ab271844c8d5.gif" width="53%">
+</div></li>
+</ul></li>
+<li><strong>音量调节快捷键</strong>
+<ul>
+<li><p><a href="https://github.com/wangshub/hammerspoon-config/tree/master/volume" target="_blank" rel="noopener">参考示例</a></p></li>
+<li><p>当我使用外接键盘时，自定义快捷键 <code>cmd + up/down</code> 调节系统音量</p>
+<div style="text-align:center">
+<img src="https://user-images.githubusercontent.com/20924010/55765751-c010b400-5aa3-11e9-8b78-e686b104c113.gif" width="54%">
+</div></li>
+</ul></li>
+<li><strong>窗口管理</strong>
+<ul>
+<li><a href="https://github.com/wangshub/hammerspoon-config/tree/master/window" target="_blank" rel="noopener">参考示例</a></li>
+<li>快捷键实现二分屏、三分屏和全屏</li>
+</ul>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/hammerspoon.2019-04-08%2023_06_30.gif" width="80%">
+</div></li>
+<li><strong>Wi-Fi 自动脚本</strong>
+<ul>
+<li><a href="https://github.com/wangshub/hammerspoon-config/tree/master/wifi" target="_blank" rel="noopener">参考示例</a></li>
+<li>根据 Wi-Fi SSID 判断是否在公司还是在家，例如在家里自动挂载 NAS 服务器，如果在公司 sshfs 挂载服务器目录等。
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190408231744.png" width="50%">
+</div></li>
+</ul></li>
+<li><strong>蓝牙耳机自动连接</strong>
+<ul>
+<li><a href="https://github.com/wangshub/hammerspoon-config/tree/master/headphone" target="_blank" rel="noopener">参考示例</a></li>
+<li>电脑锁屏时，自动断开连接的蓝牙耳机，参考我的<a href="https://zhuanlan.zhihu.com/p/59737941" target="_blank" rel="noopener">另一篇介绍</a>。</li>
+</ul></li>
+<li><strong>输入法自动切换</strong>
+<ul>
+<li><a href="https://github.com/wangshub/hammerspoon-config/tree/master/ime" target="_blank" rel="noopener">参考示例</a></li>
+<li>在每个 App 界面自动切换成搜狗输入法，配合搜狗输入法自动中英文切换，再也不用在系统默认的英文输入法和搜狗输入法之间来回切换了。</li>
+</ul></li>
+<li><strong>定时自动提交代码</strong>
+<ul>
+<li><a href="https://github.com/wangshub/hammerspoon-config/tree/master/autoscript" target="_blank" rel="noopener">参考示例</a></li>
+<li>使用 <code>hs.timer</code> 定时器，定时自动推送我的笔记和下载的电子书到 Github 仓库。</li>
+</ul></li>
+<li><strong>USB 设备连接记录</strong>
+<ul>
+<li><a href="https://github.com/wangshub/hammerspoon-config/tree/master/usb" target="_blank" rel="noopener">参考示例</a></li>
+<li>记录插上你电脑的每一个 USB 设备信息，凡插过必留记录。</li>
+</ul></li>
+<li><strong>消息推送</strong>
+<ul>
+<li><a href="https://github.com/wangshub/hammerspoon-config/tree/master/speaker" target="_blank" rel="noopener">参考示例</a></li>
+<li>推送任意消息提醒</li>
+</ul></li>
+<li><strong>TTS 发声</strong>
+<ul>
+<li><a href="https://github.com/wangshub/hammerspoon-config/tree/master/speaker" target="_blank" rel="noopener">参考示例</a></li>
+<li>调用 <code>say hello world</code> 合成 TTS，模拟真人发音，让 Mac 会说话。</li>
+</ul></li>
+<li><strong>更多... (完全停不下来啊)</strong></li>
+</ul>
+<h2 id="其他插件思路">其他插件思路</h2>
+<ul>
+<li><strong>番茄钟</strong></li>
+<li><strong>应用搜索</strong></li>
+<li><strong>桌面小部件</strong></li>
+<li>...</li>
+</ul>
+<h2 id="使用入门">使用入门</h2>
+<p>Hammerspoon 已经将与 MacOS 之间的系统交互封装成了 <strong>Lua 的 API</strong>，配置 <code>~/.hammerspoon/init.lua</code> 脚本可以与系统进行交互，只需要了解一些基本的 Lua 语法，就可以 <strong>Happy Hacking</strong> 了</p>
+<ul>
+<li><a href="https://learnxinyminutes.com/docs/lua/" target="_blank" rel="noopener">Lua 快速入门教程</a></li>
+<li><a href="https://www.hammerspoon.org/go/" target="_blank" rel="noopener">Hammerspoon API 文档</a></li>
+</ul>
+<h2 id="我的参考配置">我的参考配置</h2>
+<p>如果你懒得配置，可以参考我的配置，根据自身需求修改</p>
+<p><a href="https://github.com/wangshub/hammerspoon-config" target="_blank" rel="noopener">wangshub/hammerspoon-config</a></p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190409090021.png" width="40%">
+</div>
+<h2 id="最后">最后</h2>
+<p>已经完全停不下来了，Hammerspoon 每天至少省下了 30 分钟的时间 😀⏱</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-09T06:11:32.008Z" itemprop="dateUpdated">2019-04-09 14:11:32</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hammerspoon/">Hammerspoon</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Lua/">Lua</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/04/08/hammerspoon-introduce/&title=《推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/04/08/hammerspoon-introduce/&title=《推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/04/08/hammerspoon-introduce/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案》 — 神奇的战士&url=http://wangshub.github.io/2019/04/08/hammerspoon-introduce/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/04/08/hammerspoon-introduce/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/04/macbook2015upgradessd/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">升级 Macbook 2015 固态硬盘为  M.2 2280 PCIE NVME 接口 SSD</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/04/08/hammerspoon-introduce/&title=《推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/04/08/hammerspoon-introduce/&title=《推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/04/08/hammerspoon-introduce/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和 我的配置方案》 — 神奇的战士&url=http://wangshub.github.io/2019/04/08/hammerspoon-introduce/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/04/08/hammerspoon-introduce/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACH0lEQVR42u3aQW7DMAwFUd//0u4BgrjzSTmAqNGqSAqLzwtGJHVdeN0fq/Y53+V6Y8mQIWNbxv24eFgkiM9vv+3FY5MhQ8Y5jOctSRJMQ+QMspcMGTJk8P8hqbPDliFDhowOgyfi2ouQIUOGDFLE8oPgt1KTfP56LS5DhowNGbzr/vu/X5lvyJAhYyvGHS4+euyEGEclQ4aM0Yzao0l5mRbGHaoMGTJmM3hr/vkTUo7WXs1z0RvPTmXIkLEho59eawPOWluNv0oZMmRMYqwqTdPQi2dYfjSUIUPGIAbZuANLv629JhkyZMxm8KBJukwPlBzzzzNlyJAxmpGS+NGtNphcMEKQIUPGOAY5FPL0R57AW3VBapYhQ8YBjFVNND50TMcAqNEmQ4aM0Qxy+ONJtl/0xlcrZMiQMZrB72KkpWZauNZKWTTfkCFDxiAGT7idVhovaIuXLWTIkDGUkbbja+OENOHWdpQhQ8ZsxtrLFiQsjgkStwwZMoYyyDCA5+zOtYnai5AhQ8Y5jKCxFV4O44fC2mFRhgwZ5zDSFhsJsZaI+Y4yZMg4gXGHq3MJgzfOivW3DBkyhjL4IpvVwq0NJ/hPggwZMmYwFrS6GmDe1AtqcRkyZAxlrLp4kbbw0l+AYAYrQ4aMgxlp0GnDjl/OkCFDhoy16bITKBlwypAh4wQGHwbUStZVlzZkyJBxJqNTOtYOiGnQ/QOoDBkytmX8AbMMslDI5DT1AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
