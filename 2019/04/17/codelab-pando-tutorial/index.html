@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>当遇到 Scratch3-Codelab，Pando 觉醒了！ | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Scratch3,Codelab">
+    <meta name="description" content="当遇到 Scratch3-Codelab，Pando 觉醒了！  Explore Amazing Moment With Pando  Pando 是由乐聚机器人研发，可以进行情感互动的益智编程机器人。主要功能包括情感交互、手势控制、自主避障、积木编程、动作编程、任务挑战、拟人步态等功能。        图片来源：lejurobot.com  Scratch3-Codelab Scratch3-C">
+<meta name="keywords" content="Python,Scratch3,Codelab">
+<meta property="og:type" content="article">
+<meta property="og:title" content="当遇到 Scratch3-Codelab，Pando 觉醒了！">
+<meta property="og:url" content="http://wangshub.github.io/2019/04/17/codelab-pando-tutorial/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="当遇到 Scratch3-Codelab，Pando 觉醒了！  Explore Amazing Moment With Pando  Pando 是由乐聚机器人研发，可以进行情感互动的益智编程机器人。主要功能包括情感交互、手势控制、自主避障、积木编程、动作编程、任务挑战、拟人步态等功能。        图片来源：lejurobot.com  Scratch3-Codelab Scratch3-C">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417164248.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417164221.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417163658.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417182113.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417172843.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417161740.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417161705.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417161932.png">
+<meta property="og:updated_time" content="2019-04-17T12:06:14.364Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="当遇到 Scratch3-Codelab，Pando 觉醒了！">
+<meta name="twitter:description" content="当遇到 Scratch3-Codelab，Pando 觉醒了！  Explore Amazing Moment With Pando  Pando 是由乐聚机器人研发，可以进行情感互动的益智编程机器人。主要功能包括情感交互、手势控制、自主避障、积木编程、动作编程、任务挑战、拟人步态等功能。        图片来源：lejurobot.com  Scratch3-Codelab Scratch3-C">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417164248.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">当遇到 Scratch3-Codelab，Pando 觉醒了！</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">当遇到 Scratch3-Codelab，Pando 觉醒了！</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-17T07:17:02.000Z" itemprop="datePublished" class="page-time">
+  2019-04-17
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#当遇到-scratch3-codelabpando-觉醒了"><span class="post-toc-text">当遇到 Scratch3-Codelab，Pando 觉醒了！</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#scratch3-codelab"><span class="post-toc-text">Scratch3-Codelab</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统框图"><span class="post-toc-text">系统框图</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#视频演示"><span class="post-toc-text">视频演示</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#软件使用"><span class="post-toc-text">软件使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#macoslinux"><span class="post-toc-text">MacOS/Linux</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#按键控制-pando"><span class="post-toc-text">按键控制 Pando</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#微信遥控-pando"><span class="post-toc-text">微信遥控 Pando</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#语音控制-pando"><span class="post-toc-text">语音控制 Pando</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更多玩法"><span class="post-toc-text">更多玩法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-text">参考链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#关于作者"><span class="post-toc-text">关于作者</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-codelab-pando-tutorial" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">当遇到 Scratch3-Codelab，Pando 觉醒了！</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-17 15:17:02" datetime="2019-04-17T07:17:02.000Z" itemprop="datePublished">2019-04-17</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="当遇到-scratch3-codelabpando-觉醒了">当遇到 Scratch3-Codelab，Pando 觉醒了！</h1>
+<blockquote>
+<p>Explore Amazing Moment With Pando</p>
+</blockquote>
+<p><a href="http://www.lejurobot.com/pandocn/" target="_blank" rel="noopener">Pando</a> 是由<a href="http://www.lejurobot.com/" target="_blank" rel="noopener">乐聚机器人</a>研发，可以进行情感互动的益智编程机器人。<strong>主要功能包括</strong>情感交互、手势控制、自主避障、积木编程、动作编程、任务挑战、拟人步态等功能。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417164248.png" width="80%">
+</div>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417164221.png" width="80%">
+</div>
+<blockquote>
+<p>图片来源：<a href="http://www.lejurobot.com/" target="_blank" rel="noopener">lejurobot.com</a></p>
+</blockquote>
+<h2 id="scratch3-codelab"><a href="https://codelab-adapter-docs.codelab.club/" target="_blank" rel="noopener">Scratch3-Codelab</a></h2>
+<p>Scratch3-Codelab 是 <a href="https://github.com/wwj718" target="_blank" rel="noopener">wwj718</a> 在 Scratch3 的基础上，集成 EIM (Everything is Message)插件，配合 <a href="https://github.com/Scratch3Lab/codelab_adapter_extensions" target="_blank" rel="noopener">codelab_adapter</a>，就可以让 Scratch3 可以执行 Python 代码，这就赋予了 Scratch3 几乎无限的可能性。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417163658.png" width="80%">
+</div>
+<h2 id="系统框图">系统框图</h2>
+<p>如果可以运行 Python 代码，那么理论上就能把任何智能硬件都接入 Scratch3 当中，而且模块和插件越多，Scratch3 的玩法就越千变万化！</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417182113.png" width="60%">
+</div>
+<blockquote>
+<p>图片来源: <a href="https://techziffy.com/self-reconfiguring-modular-robot-market-set-explosive-growth-2026/2234/" target="_blank" rel="noopener">techziffy.com</a></p>
+</blockquote>
+<p>作为一个少儿编程产品，孩子们的想象力其实是远远超过成年的工程师的，如果做到尽可能的开放，让他们去创造和探索机器人的功能，这将是一件非常有意思的事情。</p>
+<p>非常有幸邀请文杰来公司一起交流畅谈，被 CodeLab <strong>万物积木化</strong> 的想法深深吸引，第二天花了一些时间，参照 <a href="https://codelab-adapter-docs.codelab.club/" target="_blank" rel="noopener">Codelab-adapter</a> 文档，为 <a href="http://www.lejurobot.com/pandocn/" target="_blank" rel="noopener">Pando</a> 写了 Codelab 插件 <a href="https://github.com/Scratch3Lab/codelab_adapter_extensions/pull/8" target="_blank" rel="noopener">Pando Robot Extension</a> ，成功接入 Pando 到 Scratch3 当中。下面是系统框图：</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417172843.png" width="80%">
+</div>
+<h2 id="视频演示">视频演示</h2>
+<ul>
+<li><strong>YouTube:</strong> <a href="https://www.youtube.com/watch?v=rwj1etkWIl0&amp;feature=youtu.be" target="_blank" rel="noopener">在 Codelab 中控制 Pando 机器人 By 神奇的战士</a></li>
+</ul>
+<iframe width="640" height="480" src="https://www.youtube.com/embed/rwj1etkWIl0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<h2 id="软件使用">软件使用</h2>
+<h3 id="macoslinux">MacOS/Linux</h3>
+<ul>
+<li><a href="https://codelab-adapter-docs.codelab.club/user_guide/install/" target="_blank" rel="noopener">安装 codelab-adapter 和使用说明</a></li>
+<li>插件安装
+<ul>
+<li>Pando 插件 <a href="https://github.com/Scratch3Lab/codelab_adapter_extensions/blob/master/extension_leju_pando.py" target="_blank" rel="noopener">extension_leju_pando.py</a></li>
+<li>蓝牙服务端 <a href="https://github.com/Scratch3Lab/codelab_adapter_extensions/blob/master/servers/pando_server.py" target="_blank" rel="noopener">pando_server.py</a></li>
+</ul></li>
+<li><code>pip3 install pyzmq --user</code></li>
+<li>安装 <a href="https://github.com/adafruit/Adafruit_Python_BluefruitLE" target="_blank" rel="noopener">Adafruit_Python_BluefruitLE</a></li>
+</ul>
+<h3 id="按键控制-pando">按键控制 Pando</h3>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417161740.png" width="80%">
+</div>
+<h3 id="微信遥控-pando">微信遥控 Pando</h3>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417161705.png" width="80%">
+</div>
+<h3 id="语音控制-pando">语音控制 Pando</h3>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190417161932.png" width="40%">
+</div>
+<h2 id="更多玩法">更多玩法</h2>
+<p>将 Pando 的运动功能封装成 Block，在 Codelab 平台上就能赋予其更多的 AI 能力，例如</p>
+<ul>
+<li>人脸识别和手势识别控制 Pando</li>
+<li>与 Pando 聊天对话</li>
+<li>Pando 与任何智能硬件交互</li>
+<li>更多有趣的玩法请参考<a href="https://codelab-adapter-docs.codelab.club/user_guide/gallery/" target="_blank" rel="noopener">演示视频</a></li>
+</ul>
+<p><strong>我们相信，孩子的想象力是天马星空的，如果把学习一门编程语言的门槛抹平，他们将能创造出更多令人惊叹的作品。</strong></p>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://codelab-adapter-docs.codelab.club/extension_guide/vector/" target="_blank" rel="noopener">Codelab Vector 插件</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank" rel="noopener">Welcome to codelab-adapter</a></li>
+<li><a href="https://github.com/adafruit/Adafruit_Python_BluefruitLE" target="_blank" rel="noopener">Adafruit_Python_BluefruitLE</a></li>
+</ul>
+<h2 id="关于作者">关于作者</h2>
+<blockquote>
+<p><a href="https://github.com/wangshub" target="_blank" rel="noopener">神奇的战士</a> 公众号【神奇的战士】<br>
+Github: <a href="https://github.com/wangshub" target="_blank" rel="noopener">wangshub</a><br>
+邮箱：<strong>rocksong.hit@gmail.com</strong></p>
+</blockquote>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-04-17T12:06:14.364Z" itemprop="dateUpdated">2019-04-17 20:06:14</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="/img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Codelab/">Codelab</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scratch3/">Scratch3</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/04/17/codelab-pando-tutorial/&title=《当遇到 Scratch3-Codelab，Pando 觉醒了！》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/04/17/codelab-pando-tutorial/&title=《当遇到 Scratch3-Codelab，Pando 觉醒了！》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/04/17/codelab-pando-tutorial/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《当遇到 Scratch3-Codelab，Pando 觉醒了！》 — 神奇的战士&url=http://wangshub.github.io/2019/04/17/codelab-pando-tutorial/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/04/17/codelab-pando-tutorial/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/08/hammerspoon-introduce/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和我的配置方案</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/04/17/codelab-pando-tutorial/&title=《当遇到 Scratch3-Codelab，Pando 觉醒了！》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/04/17/codelab-pando-tutorial/&title=《当遇到 Scratch3-Codelab，Pando 觉醒了！》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/04/17/codelab-pando-tutorial/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《当遇到 Scratch3-Codelab，Pando 觉醒了！》 — 神奇的战士&url=http://wangshub.github.io/2019/04/17/codelab-pando-tutorial/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/04/17/codelab-pando-tutorial/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aS27DMAwFwNz/0u0JrDySTYFQ41XR2pKmC0L8vF7x8xM85/ef1nz66vWJBwMD42sZyeGS3+Trn0lPu7xZBwMD4wJGdenzoc+HmO+FgYGB0Vvu6ap3DtnzfTEwMDCqBzoH3DwbxcDAwOglsefSWHLcc3nun3JxDAyML2RMguCnf/5IfwMDA+OrGD/Fpxp8e0csnwoDA2M1o7f0OUGdNwB658HAwLiB0TvoPOGshvJCuQ0DA2MpIy+cJeMU1YGzXhkOAwNjNyMJjtUjVmNgHo4fV8bAwFjNqI5EVNuTybUv+Wv0FQYGxmrG+aU8say+kw+clRucGBgYixiTI/ZGNPLLZSGtxcDAWM3IE8Veyjop/Zdr/hgYGBcwkltkfnVLMNXhszdsDAyM1Yxkm1fx+asktnoZxcDA2MroHbpaGpsMmZVnRjAwMBYx5iNcvSePmYWZEQwMjKWMPOBOimJ5GyAftsDAwLiN0ZtbmA+BVYt3hckRDAyMdYxqEpuH0TOvmu6++adjYGBcw8ivYnkInqzfrBpiYGAsZVSbi5MwXe6vJl9hYGAsZUwK+vNmQK+pWegnYGBgrGD0xrx6Bf2kJNdLdDEwMG5g5GMWebkt3z4J5YWeBgYGxmpGNThWhzOqmA/m4hgYGBcweuz5pbPpw8DAwBikwdURtDcNCQwMjAsYSSLaGwirNgmSQh4GBsZtjN69669g8x0xMDBWM34BRPuyUEb2LKYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
