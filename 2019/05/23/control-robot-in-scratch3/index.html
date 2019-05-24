@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！ | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Scratch3,Posenet">
+    <meta name="description" content="在 Scratch 中玩转机器人：Python、Deep Learning、Posenet and Robot！  所有的边界都被打破了 --《Mindstorms》第二版序言  开场视频：先打个响指  打响指控制机器人    Codelab-Scratch3 与 Python Scratch 是一门编程语言，上榜过编程语言 Top 20，实际它是一门少儿编程语言(如果你成年了请先不要急着走)。S">
+<meta name="keywords" content="Python,Scratch3,Posenet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！">
+<meta property="og:url" content="http://wangshub.github.io/2019/05/23/control-robot-in-scratch3/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="在 Scratch 中玩转机器人：Python、Deep Learning、Posenet and Robot！  所有的边界都被打破了 --《Mindstorms》第二版序言  开场视频：先打个响指  打响指控制机器人    Codelab-Scratch3 与 Python Scratch 是一门编程语言，上榜过编程语言 Top 20，实际它是一门少儿编程语言(如果你成年了请先不要急着走)。S">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524155347.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524143948.png">
+<meta property="og:image" content="https://user-images.githubusercontent.com/20924010/58311109-d0ee6c80-7e3a-11e9-8796-ace3d79395ac.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524110431.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524101506.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524101543.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524160540.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524160656.png">
+<meta property="og:updated_time" content="2019-05-24T09:31:28.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！">
+<meta name="twitter:description" content="在 Scratch 中玩转机器人：Python、Deep Learning、Posenet and Robot！  所有的边界都被打破了 --《Mindstorms》第二版序言  开场视频：先打个响指  打响指控制机器人    Codelab-Scratch3 与 Python Scratch 是一门编程语言，上榜过编程语言 Top 20，实际它是一门少儿编程语言(如果你成年了请先不要急着走)。S">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524155347.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="../../../../atom.xml">
+    
+    <link rel="shortcut icon" href="../../../../img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(../../../../img/brand.jpg)">
+      <div class="brand">
+        <a href="../../../../index.html" class="avatar waves-effect waves-circle waves-light">
+          <img src="../../../../img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../index.html">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-23T13:21:12.000Z" itemprop="datePublished" class="page-time">
+  2019-05-23
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#在-scratch-中玩转机器人pythondeep-learningposenet-and-robot"><span class="post-toc-text">在 Scratch 中玩转机器人：Python、Deep Learning、Posenet and Robot！</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开场视频先打个响指"><span class="post-toc-text">开场视频：先打个响指</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#codelab-scratch3-与-python"><span class="post-toc-text">Codelab-Scratch3 与 Python</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#人体姿态估计posenet"><span class="post-toc-text">人体姿态估计：Posenet</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何接入机器人到-scratch3"><span class="post-toc-text">如何接入机器人到 Scratch3</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#手势控制演示"><span class="post-toc-text">手势控制演示</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#姿态模仿演示"><span class="post-toc-text">姿态模仿演示</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最后"><span class="post-toc-text">最后</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#相关链接"><span class="post-toc-text">相关链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#鸣谢"><span class="post-toc-text">鸣谢</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-control-robot-in-scratch3" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-23 21:21:12" datetime="2019-05-23T13:21:12.000Z" itemprop="datePublished">2019-05-23</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="在-scratch-中玩转机器人pythondeep-learningposenet-and-robot">在 Scratch 中玩转机器人：Python、Deep Learning、Posenet and Robot！</h1>
+<blockquote>
+<p><strong>所有的边界都被打破了</strong> --《Mindstorms》第二版序言</p>
+</blockquote>
+<h2 id="开场视频先打个响指">开场视频：先打个响指</h2>
+<blockquote>
+<p><a href="https://v.qq.com/x/page/g0874rc7rwx.html" target="_blank" rel="noopener">打响指控制机器人</a></p>
+</blockquote>
+<iframe width="640" height="480" src="https://v.qq.com/x/page/g0874rc7rwx.html" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
+</iframe>
+<h2 id="codelab-scratch3-与-python">Codelab-Scratch3 与 Python</h2>
+<p>Scratch 是一门编程语言，上榜过编程语言 Top 20，实际它是一门<strong>少儿编程语言</strong>(如果你成年了请先不要急着走)。Scratch 基于图形化的编程，通过拖拉搭积木的方式进行编程，整个过程就像是在玩乐高积木，其实 Scratch 项目受到乐高的赞助，乐高与 Scratch 之间可以说是互相影响。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524155347.png" width="15%">
+</div>
+<p>一个正经的程序员，在看到 Scratch 的卡通界面和图形化编程风格时，可能会嗤之以鼻，认为它看上去<strong>不像是严肃的编程语言，低龄化或者太简单了</strong>。刚开始我对 Scratch 的认知亦是如此。</p>
+<p><span class="citation" data-cites="wwj718">[@wwj718]</span>(https://github.com/wwj718) 在 Scratch3 上做了<a href="https://codelab-adapter-docs.codelab.club/" target="_blank" rel="noopener">大量出色的工作</a>，Scratch3 原本不支持运行 Python，利用 Scratch3 原生的插件拓展机制，采用 Websocket 来传递消息，这就像一个间谍，负责 Scratch 内部与外部的通信。消息源源不断地以话题/订阅的方式在网络中传播，这就让 Scratch 不再受限于浏览器网页中。我终于意识到，Scratch 可以做任何事！</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524143948.png" width="100%">
+</div>
+<p>从上图看出，整个系统可以看做是三个部分：</p>
+<ul>
+<li>Scratch3：负责 Block 代码生成与运行，通过 websocket 传输消息；</li>
+<li><a href="https://codelab-adapter-docs.codelab.club/user_guide/install/" target="_blank" rel="noopener">Codelab-Adapter</a>：响应 Scratch 消息，Python 插件管理；</li>
+<li>Python 插件集合：负责连接万物！</li>
+</ul>
+<p>按照这样的设计，Scratch 获得了 Python 的能力，可以将 Python 丰富的生态和库统统接入 Scratch，比如 TensorFlow、ML、DL，甚至可以是树莓派、灯泡、门锁、空调、机器人、游戏 ...</p>
+<p>Bret Victor 在《Kill Math》中说道 &gt; 理解并预测量化世界的能力不应该只属于那些能够熟练运用抽象数学符号的人。</p>
+<p><strong>而现在编程的能力也不应该只掌握在程序员的手上，在 Codelab-Scratch 中，用户可以快速和轻松地使用这些能力。</strong></p>
+<p><em>为了向你证明这一切，下面是我在 Scratch3 中做的一个演示</em></p>
+<h2 id="人体姿态估计posenet">人体姿态估计：Posenet</h2>
+<p>Javascript 版 PoseNet 是 TensorFlow 与谷歌创意实验室合作一款机器学习模型，可以在浏览器中实时估计人体姿态。只要电脑或手机有摄像头，就可以直接在网页浏览器中体验这一有趣的技术。Scratch3 也是纯网页端的，所以将 PoseNet 做成插件的话，Scratch 积木块就具有视觉的能力！</p>
+<div style="text-align:center">
+<img src="https://user-images.githubusercontent.com/20924010/58311109-d0ee6c80-7e3a-11e9-8796-ace3d79395ac.gif" width="60%">
+</div>
+<p>针对 PoseNet，<span class="citation" data-cites="wwj718">@wwj718</span> 已经在 <a href="https://scratch3.codelab.club/" target="_blank" rel="noopener">Codelab-Scratch3</a> 中接入了，智能硬件接口开放的话，接入 Scratch 中，就可以让原本功能单一的产品很容易地获得视觉能力。我相信这就是为我今天的演示所准备的，做一个 Scratch 版本的机甲猎人!</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524110431.png" width="50%">
+</div>
+<div style="text-align:center">
+<p><img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524101506.png" width="30%"> <img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524101543.png" width="20%"></p>
+</div>
+<h2 id="如何接入机器人到-scratch3">如何接入机器人到 Scratch3</h2>
+<p>首先硬件设备需要有开放的接口，比如开放的蓝牙协议、串口协议或者 Wi-Fi 协议等，Python 有非常成熟的库可以对这些接口进行调用(不开放也没关系，可以 Hack)。</p>
+<p>我已提交相关机器人 Adapter 插件，感兴趣的可以参考我的 PR</p>
+<ul>
+<li><a href="https://github.com/Scratch3Lab/codelab_adapter_extensions/pull/13" target="_blank" rel="noopener">codelab_adapter_extensions/pull/13</a></li>
+<li><a href="https://github.com/Scratch3Lab/codelab_adapter_extensions/pull/14" target="_blank" rel="noopener">codelab_adapter_extensions/pull/14</a></li>
+</ul>
+<h2 id="手势控制演示">手势控制演示</h2>
+<p>手势控制机器人前后左右翻滚</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524160540.png" width="40%">
+</div>
+<blockquote>
+<p><a href="https://v.qq.com/x/page/q087453zq2i.html" target="_blank" rel="noopener">翻跟斗演示视频</a></p>
+</blockquote>
+<iframe width="640" height="480" src="https://v.qq.com/x/page/q087453zq2i.html" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
+</iframe>
+<h2 id="姿态模仿演示">姿态模仿演示</h2>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190524160656.png" width="50%">
+</div>
+<p>下面是姿态模仿演示，请大家忽略我羞耻又沙雕的动作，和不协调的肢体。</p>
+<blockquote>
+<p><a href="https://v.qq.com/x/page/k0874r1m246.html" target="_blank" rel="noopener">姿态模仿演示视频</a></p>
+</blockquote>
+<iframe width="640" height="480" src="https://v.qq.com/x/page/k0874r1m246.html" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
+</iframe>
+<h2 id="最后">最后</h2>
+<p>如果你也对这一块感兴趣，欢迎加入社区一起折腾。</p>
+<h2 id="相关链接">相关链接</h2>
+<ul>
+<li><a href="https://thinkhard.tech/2019/05/16/Kill-Math/" target="_blank" rel="noopener">Kill-Math</a></li>
+<li><a href="http://www.lejurobot.com/aelos-edu/" target="_blank" rel="noopener">Aelos Edu</a></li>
+<li><a href="https://scratch3.codelab.club/" target="_blank" rel="noopener">scratch3.codelab</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank" rel="noopener">codelab-adapter-docs</a></li>
+<li><a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet" target="_blank" rel="noopener">Pose Detection in the Browser</a></li>
+<li><a href="https://github.com/Scratch3Lab/codelab_adapter_extensions/pull/13" target="_blank" rel="noopener">codelab_adapter_extensions/pull/13</a></li>
+<li><a href="https://github.com/Scratch3Lab/codelab_adapter_extensions/pull/14" target="_blank" rel="noopener">codelab_adapter_extensions/pull/14</a></li>
+</ul>
+<h2 id="鸣谢">鸣谢</h2>
+<ul>
+<li><span class="citation" data-cites="jinbo">@jinbo</span> 的 OSMO；</li>
+<li><span class="citation" data-cites="yucong">@yucong</span> 的手抖式拍摄；</li>
+<li><span class="citation" data-cites="jianhong">@jianhong</span> 的专业动作调试；</li>
+<li><span class="citation" data-cites="dongming">@dongming</span> 的无线 Dongle；</li>
+<li><span class="citation" data-cites="carlos">@carlos</span> 的响指；</li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-05-24T09:31:28.525Z" itemprop="dateUpdated">2019-05-24 17:31:28</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="../../../../img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/Posenet/">Posenet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/Scratch3/">Scratch3</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/05/23/control-robot-in-scratch3/&title=《在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/05/23/control-robot-in-scratch3/&title=《在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/05/23/control-robot-in-scratch3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！》 — 神奇的战士&url=http://wangshub.github.io/2019/05/23/control-robot-in-scratch3/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/05/23/control-robot-in-scratch3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="../../16/Kill-Math/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">【译】Kill Math(Bret Victor)：让数学不只是符号</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="../../../../img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="../../../../img/wechat.jpg" data-alipay="../../../../img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="../../../../atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/05/23/control-robot-in-scratch3/&title=《在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/05/23/control-robot-in-scratch3/&title=《在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/05/23/control-robot-in-scratch3/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！》 — 神奇的战士&url=http://wangshub.github.io/2019/05/23/control-robot-in-scratch3/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/05/23/control-robot-in-scratch3/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuklEQVR42u3aS5LbMAwFwLn/pZ0DOJLeI8iMUtVaufyh2FoQMICfn/j6fF1X739/+r3O/evk+5svPDw8vPHWW8bVhu43ev9OvsLDrvDw8PCO8fJD+f64TzBzfPFw8fDw8F7AW8tak+8n6+Ph4eH9j7w21U4S9OQx4eHh4b2Nt1aQbX+bP6b2AW2oteDh4eF1WW7URXrP6yP9PTw8PLxxVz1JfJNibp5Ar+3q8i54eHh4B3j5gZuXZdfKr5O7P3wTDw8PbytvUqhdu+XkiK9DFB4eHt4xXv7nvx0FuF8hDxJJ4HmoT+Ph4eEd5rVbzBltap6En4cyBB4eHt4B3qRw0Kba7daTEHW5Ah4eHt4BXpvITgq+yTqTYkQ9eoWHh4e3xCuscSKbl4MngwhFZw8PDw9vK69t/Bcl1K0jCG1Cj4eHh3ea1xZM195pA0lenogadXh4eHibeMmX5tvNyxCTvv9fXuPh4eH9Eu8hnixdn/gapfJ4eHh4x3jtcmvDAe2gVdsSe6hS4+Hh4R3grYWESahYKwQXZWI8PDy8A7xduWg+TNA2uvLSxsFUGw8PD+8i89yVZLcbWmMUIQoPDw9vKy8ZFJiEh7yRthZyHkrSeHh4eAd4bXFhbwE3Hx3I74uHh4f3L3ltqz4fqMrXWRvhSoIQHh4e3l5evtH7I3iSWE+aakVNGg8PD28rLz/Q542xdsSqbaddNsDw8PDwjvHawmsbGE6MW13GAjw8PLytvE95rbWj8k/vV67DEh4eHt4BXnvUJgWF9sbzga1tkQQPDw8v5k1KAGtt/hY5Cht4eHh4x3hJcSF5HGtH/LwNdvkrPDw8vNfw2uLC2lDCfIgBDw8P7w28vcd3m9DnZRE8PDy807y26dWWbpMHkRQ16sYYHh4e3gHe4p/8ckQgSZrbxHpzfw8PDw/v+foDyh7uAw3chTUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
