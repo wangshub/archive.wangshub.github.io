@@ -20,22 +20,22 @@
     
     
     <meta name="keywords" content="Docker,Sentry">
-    <meta name="description" content="用 Docker 部署 Sentry Bug 日志收集服务    Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大肚哟书主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。    下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。 系统环境 12&amp;gt;&amp;gt; uname">
+    <meta name="description" content="用 Docker 部署 Sentry Bug 日志收集服务    Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大部分主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。    下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。 系统环境 12&amp;gt;&amp;gt; uname -">
 <meta name="keywords" content="Docker,Sentry">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用 Docker 部署 Sentry Bug 日志收集服务">
 <meta property="og:url" content="http://wangshub.github.io/2019/05/25/docker-sentry-deploy/index.html">
 <meta property="og:site_name" content="神奇的战士">
-<meta property="og:description" content="用 Docker 部署 Sentry Bug 日志收集服务    Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大肚哟书主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。    下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。 系统环境 12&amp;gt;&amp;gt; uname">
+<meta property="og:description" content="用 Docker 部署 Sentry Bug 日志收集服务    Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大部分主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。    下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。 系统环境 12&amp;gt;&amp;gt; uname -">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172611.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172257.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525170352.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525173043.png">
-<meta property="og:updated_time" content="2019-05-25T10:25:47.833Z">
+<meta property="og:updated_time" content="2019-05-25T10:26:19.851Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用 Docker 部署 Sentry Bug 日志收集服务">
-<meta name="twitter:description" content="用 Docker 部署 Sentry Bug 日志收集服务    Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大肚哟书主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。    下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。 系统环境 12&amp;gt;&amp;gt; uname">
+<meta name="twitter:description" content="用 Docker 部署 Sentry Bug 日志收集服务    Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大部分主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。    下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。 系统环境 12&amp;gt;&amp;gt; uname -">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172611.png">
     
         <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="../../../../atom.xml">
@@ -202,7 +202,7 @@
 <div style="text-align:center">
 <img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172611.png" width="30%">
 </div>
-<p>Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大肚哟书主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。</p>
+<p>Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大部分主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。</p>
 <div style="text-align:center">
 <img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172257.png" width="80%">
 </div>
@@ -262,7 +262,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-05-25T10:25:47.833Z" itemprop="dateUpdated">2019-05-25 18:25:47</time>
+    Last updated: <time datetime="2019-05-25T10:26:19.851Z" itemprop="dateUpdated">2019-05-25 18:26:19</time>
 </span><br>
 
 
