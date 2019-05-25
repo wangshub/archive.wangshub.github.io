@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+
+    
+
+    
+
+
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    
+    
+    
+    <title>docker-sentry-deploy | 神奇的战士 | Problems come up when they come up.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Docker,Sentry">
+    <meta name="description" content="部署 Docker + Sentry Bug 日志收集服务    Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大肚哟书主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。    下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。 系统环境 12&amp;gt;&amp;gt; uname">
+<meta name="keywords" content="Docker,Sentry">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker-sentry-deploy">
+<meta property="og:url" content="http://wangshub.github.io/2019/05/25/docker-sentry-deploy/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="部署 Docker + Sentry Bug 日志收集服务    Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大肚哟书主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。    下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。 系统环境 12&amp;gt;&amp;gt; uname">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172611.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172257.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525170352.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525173043.png">
+<meta property="og:updated_time" content="2019-05-25T09:31:30.849Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker-sentry-deploy">
+<meta name="twitter:description" content="部署 Docker + Sentry Bug 日志收集服务    Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大肚哟书主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。    下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。 系统环境 12&amp;gt;&amp;gt; uname">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172611.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="../../../../atom.xml">
+    
+    <link rel="shortcut icon" href="../../../../img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(../../../../img/brand.jpg)">
+      <div class="brand">
+        <a href="../../../../index.html" class="avatar waves-effect waves-circle waves-light">
+          <img src="../../../../img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../index.html">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+    
+      </ul>
+    </div>
+
+  <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
+  </div>
+  
+
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">docker-sentry-deploy</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">docker-sentry-deploy</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-25T02:44:27.000Z" itemprop="datePublished" class="page-time">
+  2019-05-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#部署-docker-sentry-bug-日志收集服务"><span class="post-toc-text">部署 Docker + Sentry Bug 日志收集服务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#系统环境"><span class="post-toc-text">系统环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装-docker"><span class="post-toc-text">安装 Docker</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#部署-docker-服务"><span class="post-toc-text">部署 Docker 服务</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#clone-代码"><span class="post-toc-text">Clone 代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#挂载本地路径"><span class="post-toc-text">挂载本地路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置邮箱与域名前缀"><span class="post-toc-text">配置邮箱与域名前缀</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#配置-config.yml"><span class="post-toc-text">配置 config.yml</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#配置-docker-compose.yml"><span class="post-toc-text">配置 docker-compose.yml</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#启动-docker-服务"><span class="post-toc-text">启动 Docker 服务</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#作者"><span class="post-toc-text">作者</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-docker-sentry-deploy" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">docker-sentry-deploy</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-25 10:44:27" datetime="2019-05-25T02:44:27.000Z" itemprop="datePublished">2019-05-25</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="部署-docker-sentry-bug-日志收集服务">部署 Docker + Sentry Bug 日志收集服务</h1>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172611.png" width="30%">
+</div>
+<p>Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大肚哟书主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172257.png" width="80%">
+</div>
+<p>下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。</p>
+<h2 id="系统环境">系统环境</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; uname -a</span><br><span class="line">Linux sentry 4.18.0-1018-azure #18~18.04.1-Ubuntu SMP Tue May 7 18:09:35 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
+<h2 id="安装-docker">安装 Docker</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt; sudo apt install docker.io</span><br><span class="line"><span class="meta">&gt;</span>&gt; sudo apt  install docker-compose</span><br><span class="line"><span class="meta">&gt;</span>&gt; docker -v</span><br><span class="line"></span><br><span class="line">Docker version 18.09.2, build 6247962</span><br></pre></td></tr></table></figure>
+<h2 id="部署-docker-服务">部署 Docker 服务</h2>
+<h3 id="clone-代码">Clone 代码</h3>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt; git clone https://github.com/getsentry/onpremise.git</span><br><span class="line"><span class="meta">&gt;</span>&gt; cd onpremise</span><br></pre></td></tr></table></figure>
+<h3 id="挂载本地路径">挂载本地路径</h3>
+<p>为了方便数据迁移，挂载本地路径到 Docker 镜像</p>
+<ul>
+<li><code>mkdir sentry-data</code>: 创建 Sentry 数据文件目录</li>
+<li><code>mkdir sentry-postgres</code>: 创建 Sentry 数据库目录</li>
+<li><code>config.yml</code>: Sentry 用户自定义配置文件</li>
+</ul>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525170352.png" width="60%">
+</div>
+<h3 id="配置邮箱与域名前缀">配置邮箱与域名前缀</h3>
+<p>这里需要同时改动两个文件，<code>config.yml</code> 和 <code>docker-compose.yml</code></p>
+<h5 id="配置-config.yml">配置 <code>config.yml</code></h5>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">mail.backend:</span> <span class="string">'smtp'</span>  <span class="comment"># Use dummy if you want to disable email entirely</span></span><br><span class="line"><span class="string">mail.host:</span> <span class="string">'smtp.exmail.qq.com'</span></span><br><span class="line"><span class="string">mail.port:</span> <span class="number">587</span></span><br><span class="line"><span class="string">mail.username:</span> <span class="string">'name@email.com'</span></span><br><span class="line"><span class="string">mail.password:</span> <span class="string">'yourpassword'</span></span><br><span class="line"><span class="string">mail.use-tls:</span> <span class="literal">true</span></span><br><span class="line"><span class="string">mail.from:</span> <span class="string">'name@email.com'</span></span><br><span class="line"><span class="string">system.url-prefix:</span> <span class="string">'http://your_domain.com'</span></span><br></pre></td></tr></table></figure>
+<h5 id="配置-docker-compose.yml">配置 <code>docker-compose.yml</code></h5>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">x-defaults:</span> <span class="meta">&amp;defaults</span></span><br><span class="line"><span class="attr">  restart:</span> <span class="string">unless-stopped</span></span><br><span class="line"><span class="attr">  build:</span> <span class="string">.</span></span><br><span class="line"><span class="attr">  depends_on:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">redis</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">postgres</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">memcached</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">smtp</span></span><br><span class="line"><span class="attr">  env_file:</span> <span class="string">.env</span></span><br><span class="line"><span class="attr">  environment:</span></span><br><span class="line"><span class="attr">    SENTRY_MEMCACHED_HOST:</span> <span class="string">memcached</span></span><br><span class="line"><span class="attr">    SENTRY_REDIS_HOST:</span> <span class="string">redis</span></span><br><span class="line"><span class="attr">    SENTRY_POSTGRES_HOST:</span> <span class="string">postgres</span></span><br><span class="line"><span class="attr">    SENTRY_SERVER_EMAIL:</span> <span class="string">'name@email.com'</span></span><br><span class="line"><span class="attr">    SENTRY_EMAIL_HOST:</span> <span class="string">'smtp.exmail.qq.com'</span></span><br><span class="line"><span class="attr">    SENTRY_EMAIL_PORT:</span> <span class="number">587</span></span><br><span class="line"><span class="attr">    SENTRY_EMAIL_USER:</span> <span class="string">'name@email.com'</span></span><br><span class="line"><span class="attr">    SENTRY_EMAIL_PASSWORD:</span> <span class="string">'yourpassword'</span></span><br><span class="line"><span class="attr">    SENTRY_EMAIL_USE_TLS:</span> <span class="string">'true'</span></span><br><span class="line"><span class="attr">    SENTRY_URL_PREFIX:</span> <span class="string">'http://your_domain.com'</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong></p>
+<ul>
+<li><p><strong>邮箱端口</strong>： 腾讯企业邮箱的设置 SMTP 的端口是 465，但 sentry 只支持 tls 而，所以使能 <code>tls</code> 并将端口改587。</p></li>
+<li><p>腾讯企业邮箱 <code>mail.from</code> 必须要和 <code>mail.username</code> 一致。</p></li>
+</ul>
+<h3 id="启动-docker-服务">启动 Docker 服务</h3>
+<blockquote>
+<p>参考<a href="https://github.com/getsentry/onpremise/blob/master/README.md" target="_blank" rel="noopener">官方文档</a></p>
+</blockquote>
+<ul>
+<li><code>cp -n .env.example .env</code> 创建环境配置文件</li>
+<li><code>docker-compose build</code> 构建 Docker 服务</li>
+<li><code>docker-compose run --rm web config generate-secret-key</code> 生成密钥，并将密钥添加至 <code>.env</code></li>
+<li><code>docker-compose run --rm web upgrade</code>，构建数据库，过程中需要输入管理员信息</li>
+<li><code>docker-compose up -d</code> 在后台启动，<code>docker-compose.yml</code> 默认端口为 9000</li>
+<li>浏览器打开 <a href="http://localhost:9000" target="_blank" rel="noopener">http://localhost:9000</a>，部署成功。</li>
+</ul>
+<h2 id="作者">作者</h2>
+<ul>
+<li><strong>神奇的战士</strong></li>
+<li><strong>微信公众号</strong></li>
+</ul>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525173043.png" width="30%">
+</div>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-05-25T09:31:30.849Z" itemprop="dateUpdated">2019-05-25 17:31:30</time>
+</span><br>
+
+
+        
+        这里可以写点留言，证明你来过
+        
+    </div>
+    <footer>
+        <a href="http://wangshub.github.io">
+            <img src="../../../../img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/Docker/">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/Sentry/">Sentry</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&title=《docker-sentry-deploy》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&title=《docker-sentry-deploy》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《docker-sentry-deploy》 — 神奇的战士&url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="../../23/control-robot-in-scratch3/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="../../../../img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="../../../../img/wechat.jpg" data-alipay="../../../../img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="../../../../atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&title=《docker-sentry-deploy》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&title=《docker-sentry-deploy》 — 神奇的战士&source=这个是描述" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《docker-sentry-deploy》 — 神奇的战士&url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&via=http://wangshub.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMklEQVR42u3aQYrDMAwF0Nz/0hmY1UBp8iW1Q2s/r0IJiV8WqmTpOOJ1/q6/14+/PN7/eGfylvz+8sLAwPhaxnm5qhu93sr1k6+fdvNpMDAwNmBMgmz1E0w+39PfMTAwMGJANXPLwzEGBgbGvHDNy9E8yGJgYGBUU7SkWM03N7kTAwNjN0avMfA/12/vb2BgYHw84yyu3vFZXsQ2d4WBgbE047o9WQ278yP+PCU9kroWAwNjCcZk0GE0GBF8mqRUxsDA2I2RtyTf/g8QJ6AYGBg7MPIgmLQEJtlaHl4L7QEMDIwlGL1Ss1e4VoNvoZDGwMBYmlGNze/4pTfqgYGBsRujGv6uc8zexEf1qO5pRY6BgbENo1q+9hLE/NAt2gkGBsaijOppXBIQexvtDc5iYGDswEgO+l+VAhZaj/ExX+EFGBgYX8uYlKOTlLE3Unbzv4GBgbEooxeh58ncJMW8CdwYGBjLMZLXVI/VkhSw1+B8+hwMDIylGZMELj++rxbG+djHMc9DMTAwPp4xbze+OD/tjWtgYGBswKhej4a34s9XSDoxMDCWZkyCZoLMhzDyIFvuxGJgYHw54yyupDTNi9tqSfwUj4GBsTRjPp7VSxnzQJ+kjBgYGDswJkE2P8LLn9zcAwYGxgaM3khENUQ2433SqMDAwMAIXjwZCKsG6JsuBwYGBkbcKkgS0Fe1KDAwMHZgVMNcr5GZR8gqFQMDY21GtYCctAF6R/+FBBEDA2M1xg+dDsdlA9tCLwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
