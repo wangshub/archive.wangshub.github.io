@@ -22,7 +22,7 @@ ga('send', 'pageview');
     
     
     
-    <title>用 Docker 部署 Sentry Bug 日志收集服务 | 神奇的战士 | 🍉 Living inside a terminal.</title>
+    <title>用 Docker 部署 Sentry Bug 日志收集服务 | 神奇的战士 | 🍉 Start with one, then make many.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -33,7 +33,7 @@ ga('send', 'pageview');
 <meta name="keywords" content="Docker,Sentry">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用 Docker 部署 Sentry Bug 日志收集服务">
-<meta property="og:url" content="http://wangshub.github.io/2019/05/25/docker-sentry-deploy/index.html">
+<meta property="og:url" content="http://thinkhard.tech/2019/05/25/docker-sentry-deploy/index.html">
 <meta property="og:site_name" content="神奇的战士">
 <meta property="og:description" content="用 Docker 部署 Sentry Bug 日志收集服务    Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大部分主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。    下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。 系统环境 12&amp;gt;&amp;gt; uname -">
 <meta property="og:locale" content="zh-Hans">
@@ -224,10 +224,10 @@ ga('send', 'pageview');
 <h2 id="系统环境">系统环境</h2>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; uname -a</span><br><span class="line">Linux sentry 4.18.0-1018-azure #18~18.04.1-Ubuntu SMP Tue May 7 18:09:35 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
 <h2 id="安装-docker">安装 Docker</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt; sudo apt install docker.io</span><br><span class="line"><span class="meta">&gt;</span>&gt; sudo apt  install docker-compose</span><br><span class="line"><span class="meta">&gt;</span>&gt; docker -v</span><br><span class="line"></span><br><span class="line">Docker version 18.09.2, build 6247962</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; sudo apt install docker.io</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; sudo apt  install docker-compose</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; docker -v</span></span><br><span class="line"></span><br><span class="line">Docker version 18.09.2, build 6247962</span><br></pre></td></tr></table></figure>
 <h2 id="部署-docker-服务">部署 Docker 服务</h2>
 <h3 id="clone-代码">Clone 代码</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span>&gt; git clone https://github.com/getsentry/onpremise.git</span><br><span class="line"><span class="meta">&gt;</span>&gt; cd onpremise</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; git <span class="built_in">clone</span> https://github.com/getsentry/onpremise.git</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; <span class="built_in">cd</span> onpremise</span></span><br></pre></td></tr></table></figure>
 <h3 id="挂载本地路径">挂载本地路径</h3>
 <p>为了方便数据迁移，挂载本地路径到 Docker 镜像</p>
 <ul>
@@ -285,7 +285,7 @@ ga('send', 'pageview');
         
     </div>
     <footer>
-        <a href="http://wangshub.github.io">
+        <a href="http://thinkhard.tech">
             <img src="../../../../img/avatar.jpg" alt="神奇的战士">
             神奇的战士
         </a>
@@ -311,7 +311,7 @@ ga('send', 'pageview');
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&title=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://thinkhard.tech/2019/05/25/docker-sentry-deploy/&title=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&pic=http://thinkhard.tech/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -321,22 +321,22 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&title=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&source=📚 书写是为了更好地思考" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://thinkhard.tech/2019/05/25/docker-sentry-deploy/&title=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&source=📚 书写是为了更好地思考" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://thinkhard.tech/2019/05/25/docker-sentry-deploy/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&via=http://wangshub.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&url=http://thinkhard.tech/2019/05/25/docker-sentry-deploy/&via=http://thinkhard.tech" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://thinkhard.tech/2019/05/25/docker-sentry-deploy/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -457,7 +457,7 @@ ga('send', 'pageview');
         <p><span>神奇的战士 &copy; 2015 - 2019</span>
             <span>
                 
-                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+                🍉 <a href="https://github.com/wangshub" target="_blank">Github@wangshub</a>
             </span>
         </p>
     </div>
@@ -472,7 +472,7 @@ ga('send', 'pageview');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&title=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&pic=http://wangshub.github.io/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://thinkhard.tech/2019/05/25/docker-sentry-deploy/&title=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&pic=http://thinkhard.tech/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -482,22 +482,22 @@ ga('send', 'pageview');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&title=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&source=📚 书写是为了更好地思考" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://thinkhard.tech/2019/05/25/docker-sentry-deploy/&title=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&source=📚 书写是为了更好地思考" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://thinkhard.tech/2019/05/25/docker-sentry-deploy/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/&via=http://wangshub.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《用 Docker 部署 Sentry Bug 日志收集服务》 — 神奇的战士&url=http://thinkhard.tech/2019/05/25/docker-sentry-deploy/&via=http://thinkhard.tech" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://wangshub.github.io/2019/05/25/docker-sentry-deploy/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://thinkhard.tech/2019/05/25/docker-sentry-deploy/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -508,7 +508,7 @@ ga('send', 'pageview');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACMklEQVR42u3aQYrDMAwF0Nz/0hmY1UBp8iW1Q2s/r0IJiV8WqmTpOOJ1/q6/14+/PN7/eGfylvz+8sLAwPhaxnm5qhu93sr1k6+fdvNpMDAwNmBMgmz1E0w+39PfMTAwMGJANXPLwzEGBgbGvHDNy9E8yGJgYGBUU7SkWM03N7kTAwNjN0avMfA/12/vb2BgYHw84yyu3vFZXsQ2d4WBgbE047o9WQ278yP+PCU9kroWAwNjCcZk0GE0GBF8mqRUxsDA2I2RtyTf/g8QJ6AYGBg7MPIgmLQEJtlaHl4L7QEMDIwlGL1Ss1e4VoNvoZDGwMBYmlGNze/4pTfqgYGBsRujGv6uc8zexEf1qO5pRY6BgbENo1q+9hLE/NAt2gkGBsaijOppXBIQexvtDc5iYGDswEgO+l+VAhZaj/ExX+EFGBgYX8uYlKOTlLE3Unbzv4GBgbEooxeh58ncJMW8CdwYGBjLMZLXVI/VkhSw1+B8+hwMDIylGZMELj++rxbG+djHMc9DMTAwPp4xbze+OD/tjWtgYGBswKhej4a34s9XSDoxMDCWZkyCZoLMhzDyIFvuxGJgYHw54yyupDTNi9tqSfwUj4GBsTRjPp7VSxnzQJ+kjBgYGDswJkE2P8LLn9zcAwYGxgaM3khENUQ2433SqMDAwMAIXjwZCKsG6JsuBwYGBkbcKkgS0Fe1KDAwMHZgVMNcr5GZR8gqFQMDY21GtYCctAF6R/+FBBEDA2M1xg+dDsdlA9tCLwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACM0lEQVR42u3ay27DMAxE0fz/T6tAVwEaSzMcp4DJq1XhtrKOF4T4eL3ktX7X1fP3tf+v9yd//+tqn9sWDBgwHstY27V/5X6H/SdIdv6wJwwYMAYw9kE24e0PrZMOZ4YBAwaMUhCs/RYGDBgwcoZ+lAQGAwYMGLUkVrnwKaU391035+IwYMB4IMNtDPznz1/sb8CAAeMhjGUuvbifNEftU8GAAaM1Qy976a+3k08zyBo3XBgwYLRg3FyaN9sJbvHu8l0wYMBozcgTy1qhrZaTHnaDAQPGAIbedFSO6xbvlFboIVWGAQNGa0bt6uYGTbflUNwZBgwY7RjKOFcSHPMxC6V5AAMGjN4M/Y/ckazaaNf+gxq5OAwYMIYx8tRUuVbqgfswbAEDBoymjGTcoZaCup9DubbCgAGjK8Mdesibl27iKoVpGDBgDGC45Xg9jCpB2S2rSY0BGDBgtGO4lzn9iR6UazvAgAFjDiNJLN0D1cp2UvMSBgwYTRnuZW4JKynu50MYMGDA6MdIimX5yIWe1h5OCAMGjDGMpMTmXhz3n6A4LQIDBoymjKSspl8Zk5aD/SFgwIDRjrHM9Y2kN0llL2+4MGDAaMTQV61Y7xbg3HfBgAFjDqMWBJXCmTtAppfYPuwDAwaMAYxakK2NWShP3A8BAwYMGHqTwG1/ukW9w4wbDBgwYJjDGXpj8obICQMGjAEMPYlVQq17xNqwBQwYMOYwktSx1lbUx8L0MhwMGDCaMn4A71+tY5MpNy8AAAAASUVORK5CYII=" alt="微信分享二维码">
 </div>
 
 
