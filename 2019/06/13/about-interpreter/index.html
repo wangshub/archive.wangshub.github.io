@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', '140849483', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?9995df728837d827def0baebc248d680"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="true">
+    
+    
+    
+    <title>about-interpreter | 神奇的战士 | 🍉 Start with one, then make many.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Code,Compiler">
+    <meta name="description" content="两种硬件编程的风格：离线下载和在线交互 少儿编程教育+智能硬件似乎是天生的一对，二者的结合很容易产生 1 + 1 &amp;gt; 2 的双赢局面。不管是在线编程教育企业，还是智能硬件企业，在接下来的发展中，都纷纷把目光聚焦在教育领域。 针对硬件编程的模式，在文杰的这篇 《两种硬件编程的风格》 中提到了 交互式与灌入式两种硬件编程风格，并且详细分析了二者之间的优劣。 离线下载运行 离线下载运行，使用一个">
+<meta name="keywords" content="Code,Compiler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="about-interpreter">
+<meta property="og:url" content="http://thinkhard.tech/2019/06/13/about-interpreter/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="两种硬件编程的风格：离线下载和在线交互 少儿编程教育+智能硬件似乎是天生的一对，二者的结合很容易产生 1 + 1 &amp;gt; 2 的双赢局面。不管是在线编程教育企业，还是智能硬件企业，在接下来的发展中，都纷纷把目光聚焦在教育领域。 针对硬件编程的模式，在文杰的这篇 《两种硬件编程的风格》 中提到了 交互式与灌入式两种硬件编程风格，并且详细分析了二者之间的优劣。 离线下载运行 离线下载运行，使用一个">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190614151809.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190614151836.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190614161017.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190614161656.png">
+<meta property="og:updated_time" content="2019-06-14T08:24:13.748Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="about-interpreter">
+<meta name="twitter:description" content="两种硬件编程的风格：离线下载和在线交互 少儿编程教育+智能硬件似乎是天生的一对，二者的结合很容易产生 1 + 1 &amp;gt; 2 的双赢局面。不管是在线编程教育企业，还是智能硬件企业，在接下来的发展中，都纷纷把目光聚焦在教育领域。 针对硬件编程的模式，在文杰的这篇 《两种硬件编程的风格》 中提到了 交互式与灌入式两种硬件编程风格，并且详细分析了二者之间的优劣。 离线下载运行 离线下载运行，使用一个">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190614151809.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="../../../../atom.xml">
+    
+    <link rel="shortcut icon" href="../../../../img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(../../../../img/brand.jpg)">
+      <div class="brand">
+        <a href="../../../../index.html" class="avatar waves-effect waves-circle waves-light">
+          <img src="../../../../img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../index.html">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+
+      </ul>
+    </div>
+
+  <!-- <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" width=10% async="async"></script>
+  </div> -->
+  <!-- <div style="text-align:center"><img src ="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525173043.png" width="40%" /></div> -->
+  <div style="text-align:center">
+      <img src="https://thinkhard.tech/img/wxpubqrcode.png" width="60%">
+      <p> </p>
+
+    </div>
+  </div>
+  
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">about-interpreter</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">about-interpreter</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-06-13T07:22:40.000Z" itemprop="datePublished" class="page-time">
+  2019-06-13
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#两种硬件编程的风格离线下载和在线交互"><span class="post-toc-text">两种硬件编程的风格：离线下载和在线交互</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#离线下载运行"><span class="post-toc-text">离线下载运行</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在线交互运行"><span class="post-toc-text">在线交互运行</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二者对比"><span class="post-toc-text">二者对比</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#兼顾"><span class="post-toc-text">兼顾？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#结语"><span class="post-toc-text">结语</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-text">参考链接</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-about-interpreter" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">about-interpreter</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-06-13 15:22:40" datetime="2019-06-13T07:22:40.000Z" itemprop="datePublished">2019-06-13</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="两种硬件编程的风格离线下载和在线交互">两种硬件编程的风格：离线下载和在线交互</h1>
+<p><code>少儿编程教育</code>+<code>智能硬件</code>似乎是天生的一对，二者的结合很容易产生 <code>1 + 1 &gt; 2</code> 的双赢局面。不管是在线编程教育企业，还是智能硬件企业，在接下来的发展中，都纷纷把目光聚焦在教育领域。</p>
+<p>针对硬件编程的模式，在文杰的这篇 <a href="https://blog.just4fun.site/Hardware-Programming-style.html" target="_blank" rel="noopener">《两种硬件编程的风格》</a> 中提到了 <code>交互式</code>与<code>灌入式</code>两种硬件编程风格，并且详细分析了二者之间的优劣。</p>
+<h2 id="离线下载运行">离线下载运行</h2>
+<p><strong>离线下载运行，使用一个 IDE 或者代码生成器生成一份代码(可能需要编译器编译)，然后烧写到硬件设备上运行这一段生成的代码。</strong></p>
+<p>生成代码的方式多种多样，这其中有文本编辑器编辑，或者少儿编程以积木块形式“拼搭”出一份代码。再通过拷贝、烧录等方式把代码下载到硬件 ROM、SD 卡或者其他存储介质中。硬件中的解释器根据下载的代码进行地址跳转，转译一行程序就立刻运行，然后再转译下一行，如此不停地进行下去。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190614151809.png" width="60%">
+</div>
+<p>目前图形化项目生成代码的项目比较多，大多数采用了 Google 的 Blockly 方案，这里列举部分</p>
+<ul>
+<li><a href="https://microbit.org/code/" target="_blank" rel="noopener">micro:bit MakeCode Editor</a></li>
+<li><a href="https://www.pibakery.org/" target="_blank" rel="noopener">PiBakery: The easiest way to setup a Raspberry Pi</a></li>
+<li><a href="https://github.com/BlocklyDuino/BlocklyDuino" target="_blank" rel="noopener">BlocklyDuino is a web-based visual programming editor for arduino.</a></li>
+<li>还有市面上大多数的带教育属性的编程硬件产品；</li>
+</ul>
+<p>如果使用过上面这些工具的话，会发现有一个共同点，那就是 UI 界面上一定会有个大大醒目的 <code>下载(上传)</code> 按钮，时刻提醒用户程序必须下载到硬件中，才能成功运行。</p>
+<p>这种离线下载再运行的硬件编程风格也许是微控制器时代的产物，出于成本和功耗的考虑，从最经典的 C51 单片机到 ARM Cortex-M 系列的芯片的智能硬件产品，如果一个嵌入式工程师看到这套可能再熟悉不过了。在如 Keil、IAR、Arudino IDE 中编辑程序，语法检查和编译没有问题之后，烧录到单片机 ROM 当中。</p>
+<p>那么基于微控制器开发出的可编程硬件产品自然而然就会遵循这样的<code>传统</code>。</p>
+<h2 id="在线交互运行">在线交互运行</h2>
+<p>在线运行式的硬件编程，代码解释器运行在单独的环境中，硬件提供 API 接口供解释器运行代码时调用。没有代码下载这个过程。<strong>代码运行在 PC、Pad 或者手机上，程序运行过程中硬件始终需要与解释器保持连接(蓝牙、Wi-Fi 等)，随时准备响应解释器的请求。</strong></p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190614151836.png" width="60%">
+</div>
+<p>在线运行图形化的项目有许多</p>
+<ul>
+<li><a href="http://www.squeakland.org/" target="_blank" rel="noopener">Etoys</a></li>
+<li><a href="https://scratch.mit.edu/" target="_blank" rel="noopener">Scratch3</a></li>
+<li><a href="https://scratch3.codelab.club/" target="_blank" rel="noopener">codelab-scratch3</a></li>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank" rel="noopener">codelab-adapter</a></li>
+</ul>
+<p>在交互式环境中，每个设备都是一个独立的插件，彼此之间互不干扰，需要设计好每个插件的消息格式。在类似 Scratch 的环境中彼此相遇组合，程序在 Scratch 里运行时动态获取或者控制每个插件设备的状态。以一种比较有趣且优雅的方式实现万物互联。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190614161017.png" width="80%">
+</div>
+<h2 id="二者对比">二者对比</h2>
+<p>关于二者的对比，在<a href="https://blog.just4fun.site/Hardware-Programming-style.html" target="_blank" rel="noopener">两种硬件编程风格的比较</a>中已经有非常详细的对比。引用如下</p>
+<blockquote>
+<ol type="1">
+<li>灌入式可以离线运行，只需要将代码烧入进去，即可脱离编程工具</li>
+<li>灌入式将带来优于交互式的实时性</li>
+<li>灌入式因为需要 Generate 代码，学生可以查看代码</li>
+</ol>
+</blockquote>
+<p>作者站在<code>编程教育是否真的需要离线运行？</code>角度来看待离线<code>离线烧录</code>，同时交互式也可以做好实时性与代码生成。</p>
+<p>离线下载编程与在线交互运行相比，代码运行在 MCU 上，这是优点也是缺点。首先这带来的好处就是<code>轻量</code>，程序运行时没有额外的依赖。但是缺点也很明显，那就是功能很单一，做不了复杂的运算。</p>
+<p>举个例子， 现在有一个 Robot，程序脱机离线运行，它可以唱、跳、RAP和<del>篮球</del>，那如果想为机器人增加视觉能力怎么办？在 ARM Cortex-M 系列芯片上做图像处理目前实在是太勉强，因为<code>它光是跑起来一个代码解释器都已经捉襟见肘</code>。为了弥补这种缺憾，那就是再外接一块类似 Raspberry Pi 的板子或者 ESP8266 Wi-Fi 板用于简单的图像处理或请求云端 API。对价格敏感的硬件产品来说，这无疑又增加了不少时间和物料成本。</p>
+<p>如果换一种思路，程序如果运行在 PC 上，所有与待编程设备之间的通信都是消息 (Message)，PC 的性能相较于 MCU，可以做任何复杂的任务和逻辑。这样其实让 MCU 的肩上的担子轻了很多，MCU 只需要做好外围控制，暴露接口即可。以 Scratch3 为例，如果 Robot 想获得视觉能力怎么办呢？非常简单，只需要提交一个视觉积木插件即可，代码检查，不同程序块之间的兼容性统统不需要考虑。在这样的交互式环境中，硬件设备可以轻松获取各种扩展能力。</p>
+<h2 id="兼顾">兼顾？</h2>
+<p>那么有没有可以同时兼顾在线交互和离线下载的解决方案呢？似乎是可以做到的。</p>
+<p>程序仍然是离线运行在 Robot 上，参考交互式的消息机制，只不过消息的发起方由 PC 转至 Robot，当 Robot 程序运行时，如果需要做图像识别，Robot 向 PC 发送请求，PC 将识别结果再返回给 Robot。这种方式看起来能够解决离线下载运行的痛点，将 PC 看做 Robot 的<code>扩展外设</code>。</p>
+<div style="text-align:center">
+<img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190614161656.png" width="80%">
+</div>
+<p>但是如果 PC 上的消息接收进程被关闭，Robot 里的程序就无法正常运行。就会对用户出现一个困扰，<code>PC 开启与否，会让同样的 Robot 程序呈现了不同的运行结果</code>。当然作为弥补，可以跟用户解释这背后的逻辑...</p>
+<h2 id="结语">结语</h2>
+<p>离线式受限于性能和成本，没有办法像在线式这么灵活和扩展，如果为了同时满足<code>程序可以脱机运行</code>又要扩展丰富，又要做不少的妥协。但是</p>
+<ul>
+<li><code>编程教育是否真的需要离线运行？</code></li>
+<li><code>就算脱机运行，真的就离得开 PC 吗？</code></li>
+</ul>
+<h2 id="参考链接">参考链接</h2>
+<ul>
+<li><a href="https://blog.just4fun.site/Hardware-Programming-style.html" target="_blank" rel="noopener">两种硬件编程风格的比较</a>.</li>
+<li><a href="https://developers.google.com/blockly/" target="_blank" rel="noopener">A JavaScript library for building visual programming editors: Try Blockly</a></li>
+<li><a href="https://www.arduino.cc/en/Main/Software" target="_blank" rel="noopener">Arduino IDE</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-06-14T08:24:13.748Z" itemprop="dateUpdated">2019-06-14 16:24:13</time>
+</span><br>
+
+
+        
+        讨论是绝佳的反思，留下点什么吧！
+        
+    </div>
+    <footer>
+        <a href="http://thinkhard.tech">
+            <img src="../../../../img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/Code/">Code</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/Compiler/">Compiler</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://thinkhard.tech/2019/06/13/about-interpreter/&title=《about-interpreter》 — 神奇的战士&pic=http://thinkhard.tech/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://thinkhard.tech/2019/06/13/about-interpreter/&title=《about-interpreter》 — 神奇的战士&source=📚 书写是为了更好地思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://thinkhard.tech/2019/06/13/about-interpreter/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《about-interpreter》 — 神奇的战士&url=http://thinkhard.tech/2019/06/13/about-interpreter/&via=http://thinkhard.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://thinkhard.tech/2019/06/13/about-interpreter/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="../on-dynamicland/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Dynamicland, 可视空间和设计工坊</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="../../../../img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="../../../../img/wechat.jpg" data-alipay="../../../../img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="../../../../atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                🍉 <a href="https://github.com/wangshub" target="_blank">Github@wangshub</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://thinkhard.tech/2019/06/13/about-interpreter/&title=《about-interpreter》 — 神奇的战士&pic=http://thinkhard.tech/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://thinkhard.tech/2019/06/13/about-interpreter/&title=《about-interpreter》 — 神奇的战士&source=📚 书写是为了更好地思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://thinkhard.tech/2019/06/13/about-interpreter/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《about-interpreter》 — 神奇的战士&url=http://thinkhard.tech/2019/06/13/about-interpreter/&via=http://thinkhard.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://thinkhard.tech/2019/06/13/about-interpreter/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aS5LCMAwFQO5/aeYAVMKTBEzZ7qyoVBzcLIx+j0d8PcfX69uuPr8+/7ELAwNjWUby9fd3eqvu7+TfgoGBcQ7j6gS7eiYB5E/er73fGwYGBkb11Umol9/HwMDAmBy4yRuSrWNgYGDkjE+FetWA7x9ycQwMjAUZedX995+/0t/AwMBYitFrQ/aO13xz5V1hYGBszZikoHmhv5qsNlNiDAyMAxjVDU2S2LxslwyWYWBgnMCYDE9UU99e2e4eiYGBcRpjXo6vNiDz0Y1mXRADA2NxxqQ1mK/Nf5QPj1lgYGBswUgSxTxBTdLgXtAZ/cQYGBhbMwop4jgCzZPY0X8IBgbGdowkRJs0JvNV1SASAwPjHEa1ZVhOL4vDFkk7cxTtYmBgLMWoJpnfaCrkSeyboBADA2NTxiT5nCB77+8NfGBgYKzOyIv71RbmJA0eNQMwMDC2Y/SOxTwFzZudvcZqNMCKgYGxBaNXlM/L9L1DvPw3gIGBcQCjl5RWf4hq4yEPQDEwME5g9JoE1TJZtZFQzsgxMDC2ZuSh2GRsa7LRN6swMDA2ZTyLVy9Y/GLiWj2zMTAwFmRUO4PVUYlCX6IVbjYbnBgYGAsy8jLZfFCj2mYovA0DA+MAxuTgqxb3ew2JaNgCAwMDY9xa6IWbyX0MDAyMXmg4P5QLT2JgYBzAmI9zTZqdkwARAwPjBEa+LNlcr+gfBX8DNgYGxrKMPwZCIuDquV9vAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1277645084&web_id=1277645084')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
