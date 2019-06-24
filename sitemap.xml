@@ -4,7 +4,7 @@
   <url>
     <loc>http://thinkhard.tech/2019/06/19/Reinforcement-Learning-for-Real-World-Robotics/</loc>
     
-    <lastmod>2019-06-24T08:08:01.096Z</lastmod>
+    <lastmod>2019-06-24T08:11:21.116Z</lastmod>
     
   </url>
   
@@ -93,13 +93,6 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/custom/index.html</loc>
-    
-    <lastmod>2019-04-04T10:10:23.777Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://thinkhard.tech/categories/index.html</loc>
     
     <lastmod>2019-04-04T10:10:23.777Z</lastmod>
@@ -107,7 +100,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/04/30/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%95%88%E7%8E%87%E8%BD%AF%E4%BB%B6Cerebro/</loc>
+    <loc>http://thinkhard.tech/custom/index.html</loc>
+    
+    <lastmod>2019-04-04T10:10:23.777Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://thinkhard.tech/about/index.html</loc>
     
     <lastmod>2019-04-04T10:10:23.776Z</lastmod>
     
@@ -121,7 +121,7 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/about/index.html</loc>
+    <loc>http://thinkhard.tech/2018/04/30/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%95%88%E7%8E%87%E8%BD%AF%E4%BB%B6Cerebro/</loc>
     
     <lastmod>2019-04-04T10:10:23.776Z</lastmod>
     
@@ -191,14 +191,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/07/03/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://thinkhard.tech/2019/01/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0:%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/</loc>
     
     <lastmod>2019-04-04T10:10:23.772Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2019/01/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0:%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://thinkhard.tech/2018/07/03/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2019-04-04T10:10:23.772Z</lastmod>
     
@@ -226,14 +226,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/06/05/use-python-to-backup-markdown-images/</loc>
+    <loc>http://thinkhard.tech/2018/05/13/%E4%BD%BF%E7%94%A8Emacs%E8%BF%9B%E8%A1%8C%E6%97%A5%E7%A8%8B%E7%AE%A1%E7%90%86%EF%BC%88GTD%EF%BC%89/</loc>
     
     <lastmod>2019-04-04T10:10:23.770Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/05/13/%E4%BD%BF%E7%94%A8Emacs%E8%BF%9B%E8%A1%8C%E6%97%A5%E7%A8%8B%E7%AE%A1%E7%90%86%EF%BC%88GTD%EF%BC%89/</loc>
+    <loc>http://thinkhard.tech/2017/06/05/use-python-to-backup-markdown-images/</loc>
     
     <lastmod>2019-04-04T10:10:23.770Z</lastmod>
     
@@ -282,14 +282,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/05/29/python-data-structure-BST/</loc>
+    <loc>http://thinkhard.tech/2017/07/20/python-mail-sender/</loc>
     
     <lastmod>2019-04-04T10:10:23.767Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/07/20/python-mail-sender/</loc>
+    <loc>http://thinkhard.tech/2017/05/29/python-data-structure-BST/</loc>
     
     <lastmod>2019-04-04T10:10:23.767Z</lastmod>
     
@@ -366,7 +366,7 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/03/31/Cerebro%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%94%B5%E5%BD%B1%E7%A3%81%E5%8A%9B%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8/</loc>
+    <loc>http://thinkhard.tech/2017/05/25/Atom-editor/</loc>
     
     <lastmod>2019-04-04T10:10:23.685Z</lastmod>
     
@@ -380,13 +380,6 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/05/25/Cmake-tutorial/</loc>
-    
-    <lastmod>2019-04-04T10:10:23.685Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://thinkhard.tech/2019/01/14/MLPGaussianPolicy/</loc>
     
     <lastmod>2019-04-04T10:10:23.685Z</lastmod>
@@ -394,7 +387,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/05/25/Atom-editor/</loc>
+    <loc>http://thinkhard.tech/2017/05/25/Cmake-tutorial/</loc>
+    
+    <lastmod>2019-04-04T10:10:23.685Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://thinkhard.tech/2018/03/31/Cerebro%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%94%B5%E5%BD%B1%E7%A3%81%E5%8A%9B%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8/</loc>
     
     <lastmod>2019-04-04T10:10:23.685Z</lastmod>
     
