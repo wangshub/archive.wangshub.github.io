@@ -1,3 +1,4 @@
+http://thinkhard.tech/2019/06/19/Reinforcement-Learning-for-Real-World-Robotics/
 http://thinkhard.tech/2019/06/13/about-interpreter/
 http://thinkhard.tech/2019/06/13/on-dynamicland/
 http://thinkhard.tech/2019/06/03/camera-pan-tlt-pid-face-tracking/
