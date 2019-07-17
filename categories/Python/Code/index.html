@@ -216,11 +216,11 @@ ga('send', 'pageview');
 
         
 
-            <a href="../../linux/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">linux</a>
+            <a href style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light active">code</a>
 
         
 
-            <a href style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light active">code</a>
+            <a href="../../linux/" style="-webkit-order:5;order:5" class="tags-list-item waves-effect waves-button waves-light">linux</a>
 
         
 
@@ -228,7 +228,7 @@ ga('send', 'pageview');
 
         
 
-            <a href="../../Python/Code/Mail/" style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">Mail</a>
+            <a href="algorithm/" style="-webkit-order:7;order:7" class="tags-list-item waves-effect waves-button waves-light">algorithm</a>
 
         
 
@@ -236,7 +236,7 @@ ga('send', 'pageview');
 
         
 
-            <a href="algorithm/" style="-webkit-order:9;order:9" class="tags-list-item waves-effect waves-button waves-light">algorithm</a>
+            <a href="../../Python/Code/Mail/" style="-webkit-order:9;order:9" class="tags-list-item waves-effect waves-button waves-light">Mail</a>
 
         
 
@@ -445,42 +445,6 @@ MathJax.Hub.Queue(function() {
 <script>
 (function() {
     var OriginTitile = document.title, titleTime;
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            document.title = '死鬼去哪里了！';
-            clearTimeout(titleTime);
-        } else {
-            document.title = '(つェ⊂)咦!又好了!';
-            titleTime = setTimeout(function() {
-                document.title = OriginTitile;
-            },2000);
-        }
-    });
-})();
-</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
-
-
-
-</body>
-</html>
-ile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
             document.title = '死鬼去哪里了！';
