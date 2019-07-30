@@ -4,7 +4,7 @@
   <url>
     <loc>http://thinkhard.tech/about/index.html</loc>
     
-    <lastmod>2019-07-30T12:06:02.829Z</lastmod>
+    <lastmod>2019-07-30T12:07:13.067Z</lastmod>
     
   </url>
   
@@ -107,14 +107,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/custom/index.html</loc>
+    <loc>http://thinkhard.tech/categories/index.html</loc>
     
     <lastmod>2019-04-04T10:10:23.777Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/categories/index.html</loc>
+    <loc>http://thinkhard.tech/custom/index.html</loc>
     
     <lastmod>2019-04-04T10:10:23.777Z</lastmod>
     
@@ -177,13 +177,6 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2019/01/12/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%9C%BA%E7%AD%96%E7%95%A5%E4%B9%8B%E9%AB%98%E6%96%AF%E4%BC%BC%E7%84%B6%E6%95%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/</loc>
-    
-    <lastmod>2019-04-04T10:10:23.773Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://thinkhard.tech/2018/07/27/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8%20OpenAI%20Gym%20%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2019-04-04T10:10:23.773Z</lastmod>
@@ -198,9 +191,9 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/07/03/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://thinkhard.tech/2019/01/12/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%9C%BA%E7%AD%96%E7%95%A5%E4%B9%8B%E9%AB%98%E6%96%AF%E4%BC%BC%E7%84%B6%E6%95%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/</loc>
     
-    <lastmod>2019-04-04T10:10:23.772Z</lastmod>
+    <lastmod>2019-04-04T10:10:23.773Z</lastmod>
     
   </url>
   
@@ -212,9 +205,9 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/06/09/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/</loc>
+    <loc>http://thinkhard.tech/2018/07/03/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     
-    <lastmod>2019-04-04T10:10:23.771Z</lastmod>
+    <lastmod>2019-04-04T10:10:23.772Z</lastmod>
     
   </url>
   
@@ -233,14 +226,21 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/06/05/use-python-to-backup-markdown-images/</loc>
+    <loc>http://thinkhard.tech/2018/06/09/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/</loc>
+    
+    <lastmod>2019-04-04T10:10:23.771Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://thinkhard.tech/2018/05/13/%E4%BD%BF%E7%94%A8Emacs%E8%BF%9B%E8%A1%8C%E6%97%A5%E7%A8%8B%E7%AE%A1%E7%90%86%EF%BC%88GTD%EF%BC%89/</loc>
     
     <lastmod>2019-04-04T10:10:23.770Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/05/13/%E4%BD%BF%E7%94%A8Emacs%E8%BF%9B%E8%A1%8C%E6%97%A5%E7%A8%8B%E7%AE%A1%E7%90%86%EF%BC%88GTD%EF%BC%89/</loc>
+    <loc>http://thinkhard.tech/2017/06/05/use-python-to-backup-markdown-images/</loc>
     
     <lastmod>2019-04-04T10:10:23.770Z</lastmod>
     
@@ -268,13 +268,6 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/12/16/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/</loc>
-    
-    <lastmod>2019-04-04T10:10:23.768Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://thinkhard.tech/2018/04/25/python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%88%AC%E8%99%AB/</loc>
     
     <lastmod>2019-04-04T10:10:23.768Z</lastmod>
@@ -289,14 +282,21 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/07/20/python-mail-sender/</loc>
+    <loc>http://thinkhard.tech/2017/12/16/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/</loc>
+    
+    <lastmod>2019-04-04T10:10:23.768Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://thinkhard.tech/2017/05/25/python-vad/</loc>
     
     <lastmod>2019-04-04T10:10:23.767Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/05/25/python-vad/</loc>
+    <loc>http://thinkhard.tech/2017/07/20/python-mail-sender/</loc>
     
     <lastmod>2019-04-04T10:10:23.767Z</lastmod>
     
@@ -317,14 +317,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/12/18/linux%E9%A9%B1%E5%8A%A8%E5%99%A8%E5%92%8C%E5%88%86%E5%8C%BA%E7%9A%84%E5%A4%87%E4%BB%BD%EF%BC%8C%E4%BD%BF%E7%94%A8dd%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B/</loc>
+    <loc>http://thinkhard.tech/2017/12/14/image-to-excel/</loc>
     
     <lastmod>2019-04-04T10:10:23.692Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/12/14/image-to-excel/</loc>
+    <loc>http://thinkhard.tech/2017/12/18/linux%E9%A9%B1%E5%8A%A8%E5%99%A8%E5%92%8C%E5%88%86%E5%8C%BA%E7%9A%84%E5%A4%87%E4%BB%BD%EF%BC%8C%E4%BD%BF%E7%94%A8dd%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B/</loc>
     
     <lastmod>2019-04-04T10:10:23.692Z</lastmod>
     
@@ -345,13 +345,6 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/05/28/Python%E6%8A%96%E9%9F%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%EF%BC%8C%E8%AE%BA%E5%A6%82%E4%BD%95%E5%9C%A8%E6%8A%96%E9%9F%B3%E4%B8%8A%E6%89%BE%E5%88%B0%E6%BC%82%E4%BA%AE%E5%B0%8F%E5%A7%90%E5%A7%90%EF%BC%9F/</loc>
-    
-    <lastmod>2019-04-04T10:10:23.686Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://thinkhard.tech/2017/12/25/Python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/</loc>
     
     <lastmod>2019-04-04T10:10:23.686Z</lastmod>
@@ -367,6 +360,13 @@
   
   <url>
     <loc>http://thinkhard.tech/2018/04/23/Python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/</loc>
+    
+    <lastmod>2019-04-04T10:10:23.686Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://thinkhard.tech/2018/05/28/Python%E6%8A%96%E9%9F%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%EF%BC%8C%E8%AE%BA%E5%A6%82%E4%BD%95%E5%9C%A8%E6%8A%96%E9%9F%B3%E4%B8%8A%E6%89%BE%E5%88%B0%E6%BC%82%E4%BA%AE%E5%B0%8F%E5%A7%90%E5%A7%90%EF%BC%9F/</loc>
     
     <lastmod>2019-04-04T10:10:23.686Z</lastmod>
     
