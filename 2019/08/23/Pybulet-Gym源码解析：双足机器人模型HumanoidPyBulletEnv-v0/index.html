@@ -44,7 +44,7 @@ ga('send', 'pageview');
 <meta property="og:site_name" content="神奇的战士">
 <meta property="og:description" content="OpenAI gym 是当前使用最为广泛的用于研究强化学习的工具箱，但 Gym 的物理仿真环境使用的是 Mujoco，不开源且收费，这一点一直被人诟病。而 Pybullet-gym 是对 Openai Gym Mujoco 环境的开源实现，用于替代 Mujoco 做为强化学习的仿真环境。封装了 Pybullet 的接口，无缝的接入了 Gym 环境。  Cheers!  关于如何创建 Gym 自定义">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-23T08:19:36.317Z">
+<meta property="og:updated_time" content="2019-08-23T08:46:20.950Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Pybulet Gym 源码解析：双足机器人模型 HumanoidPyBulletEnv-v0">
 <meta name="twitter:description" content="OpenAI gym 是当前使用最为广泛的用于研究强化学习的工具箱，但 Gym 的物理仿真环境使用的是 Mujoco，不开源且收费，这一点一直被人诟病。而 Pybullet-gym 是对 Openai Gym Mujoco 环境的开源实现，用于替代 Mujoco 做为强化学习的仿真环境。封装了 Pybullet 的接口，无缝的接入了 Gym 环境。  Cheers!  关于如何创建 Gym 自定义">
@@ -193,7 +193,7 @@ ga('send', 'pageview');
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#示例代码"><span class="post-toc-text">示例代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动作与观测"><span class="post-toc-text">动作与观测</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#奖励函数"><span class="post-toc-text">奖励函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-text">参考链接</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#示例代码"><span class="post-toc-text">示例代码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动作与观测"><span class="post-toc-text">动作与观测</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#奖励函数"><span class="post-toc-text">奖励函数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#补充"><span class="post-toc-text">补充</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考链接"><span class="post-toc-text">参考链接</span></a></li></ol>
         </nav>
     </aside>
     
@@ -253,6 +253,10 @@ ga('send', 'pageview');
 </ul>
 <p>Pybullet-Gym 代码逻辑是很清晰，但是由于是移植的 roboschool 的 <code>Humanoid</code> 环境，很多 Agent 代码细节没有文档可以参考，官方的态度是我们只需要关心采用哪些强化学习算法去训练 Agent 就可以了，不需要关注 Agent 的实现细节。</p>
 <p>但是如果要训练自定义的 Biped Robot Walk 的话就必须深入看 Gym 的底层代码实现，研究状态、运动、以及奖励函数的具体细节。</p>
+<h2 id="补充">补充</h2>
+<ul>
+<li><a href="https://github.com/openai/gym/wiki/Humanoid-V1#observation" target="_blank" rel="noopener">Humanoid V1 Wiki 介绍</a></li>
+</ul>
 <h2 id="参考链接">参考链接</h2>
 <ul>
 <li><a href="https://github.com/openai/gym" target="_blank" rel="noopener">https://github.com/openai/gym</a></li>
@@ -267,7 +271,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-08-23T08:19:36.317Z" itemprop="dateUpdated">2019-08-23 16:19:36</time>
+    最后更新时间：<time datetime="2019-08-23T08:46:20.950Z" itemprop="dateUpdated">2019-08-23 16:46:20</time>
 </span><br>
 
 
