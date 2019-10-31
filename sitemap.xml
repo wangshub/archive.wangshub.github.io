@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://thinkhard.tech/2019/01/29/Vanilla-Policy-Gradient/</loc>
+    
+    <lastmod>2019-10-31T01:42:48.280Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://thinkhard.tech/2019/08/23/Pybulet-Gym%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%EF%BC%9A%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8BHumanoidPyBulletEnv-v0/</loc>
     
     <lastmod>2019-08-23T08:46:20.950Z</lastmod>
@@ -128,14 +135,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/categories/index.html</loc>
+    <loc>http://thinkhard.tech/custom/index.html</loc>
     
     <lastmod>2019-04-04T10:10:23.777Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/custom/index.html</loc>
+    <loc>http://thinkhard.tech/categories/index.html</loc>
     
     <lastmod>2019-04-04T10:10:23.777Z</lastmod>
     
@@ -184,14 +191,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2019/01/11/%E6%AF%8F%E4%B8%AA%E4%BC%9A%E5%81%9A%E9%A5%AD%E7%9A%84%E4%BA%BA%E9%83%BD%E6%98%AF%E4%BA%BA%E7%94%9F%E8%B5%A2%E5%AE%B6/</loc>
+    <loc>http://thinkhard.tech/2019/02/26/%E6%A0%91%E8%8E%93%E6%B4%BEFM%E5%B0%8F%E7%94%B5%E5%8F%B0%E8%83%8C%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/</loc>
     
     <lastmod>2019-04-04T10:10:23.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2019/02/26/%E6%A0%91%E8%8E%93%E6%B4%BEFM%E5%B0%8F%E7%94%B5%E5%8F%B0%E8%83%8C%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/</loc>
+    <loc>http://thinkhard.tech/2019/01/11/%E6%AF%8F%E4%B8%AA%E4%BC%9A%E5%81%9A%E9%A5%AD%E7%9A%84%E4%BA%BA%E9%83%BD%E6%98%AF%E4%BA%BA%E7%94%9F%E8%B5%A2%E5%AE%B6/</loc>
     
     <lastmod>2019-04-04T10:10:23.774Z</lastmod>
     
@@ -219,14 +226,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2019/01/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0:%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://thinkhard.tech/2018/07/03/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2019-04-04T10:10:23.772Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/07/03/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://thinkhard.tech/2019/01/15/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0:%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/</loc>
     
     <lastmod>2019-04-04T10:10:23.772Z</lastmod>
     
@@ -268,7 +275,7 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/02/07/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>http://thinkhard.tech/2018/08/05/turn-kindle-to-electron-clock/</loc>
     
     <lastmod>2019-04-04T10:10:23.769Z</lastmod>
     
@@ -282,21 +289,21 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/08/05/turn-kindle-to-electron-clock/</loc>
+    <loc>http://thinkhard.tech/2018/02/07/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2019-04-04T10:10:23.769Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/04/25/python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%88%AC%E8%99%AB/</loc>
+    <loc>http://thinkhard.tech/2017/12/16/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/</loc>
     
     <lastmod>2019-04-04T10:10:23.768Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/12/16/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://thinkhard.tech/2018/04/25/python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%88%AC%E8%99%AB/</loc>
     
     <lastmod>2019-04-04T10:10:23.768Z</lastmod>
     
@@ -317,14 +324,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/05/29/python-data-structure-BST/</loc>
+    <loc>http://thinkhard.tech/2017/07/20/python-mail-sender/</loc>
     
     <lastmod>2019-04-04T10:10:23.767Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/07/20/python-mail-sender/</loc>
+    <loc>http://thinkhard.tech/2017/05/29/python-data-structure-BST/</loc>
     
     <lastmod>2019-04-04T10:10:23.767Z</lastmod>
     
@@ -355,13 +362,6 @@
     <loc>http://thinkhard.tech/2018/04/30/cerebro-codelf%E7%BB%99%E5%8F%98%E9%87%8F%E8%B5%B7%E5%90%8D%E7%9A%84%E4%BA%8B%E6%83%85%E4%B8%8A%EF%BC%8C%E4%B8%BA%E4%BD%A0%E7%94%9F%E5%91%BD%E7%9C%813s/</loc>
     
     <lastmod>2019-04-04T10:10:23.691Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://thinkhard.tech/2019/01/29/Vanilla-Policy-Gradient/</loc>
-    
-    <lastmod>2019-04-04T10:10:23.687Z</lastmod>
     
   </url>
   
@@ -401,14 +401,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2019/01/14/MLPGaussianPolicy/</loc>
+    <loc>http://thinkhard.tech/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/</loc>
     
     <lastmod>2019-04-04T10:10:23.685Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/</loc>
+    <loc>http://thinkhard.tech/2019/01/14/MLPGaussianPolicy/</loc>
     
     <lastmod>2019-04-04T10:10:23.685Z</lastmod>
     

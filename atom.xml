@@ -556,7 +556,7 @@
     <link href="http://thinkhard.tech/2019/01/29/Vanilla-Policy-Gradient/"/>
     <id>http://thinkhard.tech/2019/01/29/Vanilla-Policy-Gradient/</id>
     <published>2019-01-29T08:48:53.000Z</published>
-    <updated>2019-04-04T10:10:23.687Z</updated>
+    <updated>2019-10-31T01:42:48.280Z</updated>
     
     <content type="html"><![CDATA[<h1 id="强化学习-vanilla-policy-gradient">强化学习 Vanilla Policy Gradient</h1><p>令 <span class="math inline">\(\pi _ { \theta }\)</span> 表示参数为 <span class="math inline">\(\theta\)</span> 的策略，<span class="math inline">\(J \left( \pi _ { \theta } \right)\)</span> 表示策略 <span class="math inline">\(\pi _ { \theta }\)</span> 的返回值，则优化函数梯度为</p><p><span class="math display">\[\nabla _ { \theta } J \left( \pi _ { \theta } \right) = \underset { \tau \sim \pi _ { \theta } } { E } \left[ \sum _ { t = 0 } ^ { T } \nabla _ { \theta } \log \pi _ { \theta } \left( a _ { t } | s _ { t } \right) A ^ { \pi _ { \theta } } \left( s _ { t } , a _ { t } \right) \right]\]</span></p><p>梯度上升</p><p><span class="math display">\[\theta _ { k + 1 } = \theta _ { k } + \alpha \nabla _ { \theta } J \left( \pi _ { \theta _ { k } } \right)\]</span></p><p>算法伪代码</p><p><img src="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190129183255.png"></p>]]></content>
     
@@ -564,8 +564,8 @@
     
       
       
-        &lt;h1 id=&quot;强化学习-vanilla-policy-gradient&quot;&gt;强化学习 Vanilla Policy Gradient&lt;/h1&gt;
-&lt;p&gt;令 &lt;span class=&quot;math inline&quot;&gt;\(\pi _ { \theta }\)&lt;/span&gt; 表示参数为 &lt;s
+        &lt;h1 id=&quot;强化学习-vanilla-policy-gradient&quot;&gt;强化学习 Vanilla Policy Gradient&lt;/h1&gt;
+&lt;p&gt;令 &lt;span class=&quot;math inline&quot;&gt;\(\pi _ { \theta }\)&lt;/span&gt; 表示参数为 &lt;sp
       
     
     </summary>

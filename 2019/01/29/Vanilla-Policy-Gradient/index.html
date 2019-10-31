@@ -36,19 +36,19 @@ ga('send', 'pageview');
     
     
     <meta name="keywords" content="Reinforcement learning,Algorithm">
-    <meta name="description" content="强化学习 Vanilla Policy Gradient 令 \(\pi _ { \theta }\) 表示参数为 \(\theta\) 的策略，\(J \left( \pi _ { \theta } \right)\) 表示策略 \(\pi _ { \theta }\) 的返回值，则优化函数梯度为 \[\nabla _ { \theta } J \left( \pi _ { \theta }">
+    <meta name="description" content="强化学习 Vanilla Policy Gradient 令 \(\pi _ { \theta }\) 表示参数为 \(\theta\) 的策略，\(J \left( \pi _ { \theta } \right)\) 表示策略 \(\pi _ { \theta }\) 的返回值，则优化函数梯度为 \[\nabla _ { \theta } J \left( \pi _ { \theta } \">
 <meta name="keywords" content="Reinforcement learning,Algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vanilla_Policy_Gradient">
 <meta property="og:url" content="http://thinkhard.tech/2019/01/29/Vanilla-Policy-Gradient/index.html">
 <meta property="og:site_name" content="神奇的战士">
-<meta property="og:description" content="强化学习 Vanilla Policy Gradient 令 \(\pi _ { \theta }\) 表示参数为 \(\theta\) 的策略，\(J \left( \pi _ { \theta } \right)\) 表示策略 \(\pi _ { \theta }\) 的返回值，则优化函数梯度为 \[\nabla _ { \theta } J \left( \pi _ { \theta }">
+<meta property="og:description" content="强化学习 Vanilla Policy Gradient 令 \(\pi _ { \theta }\) 表示参数为 \(\theta\) 的策略，\(J \left( \pi _ { \theta } \right)\) 表示策略 \(\pi _ { \theta }\) 的返回值，则优化函数梯度为 \[\nabla _ { \theta } J \left( \pi _ { \theta } \">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190129183255.png">
-<meta property="og:updated_time" content="2019-04-04T10:10:23.687Z">
+<meta property="og:updated_time" content="2019-10-31T01:42:48.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vanilla_Policy_Gradient">
-<meta name="twitter:description" content="强化学习 Vanilla Policy Gradient 令 \(\pi _ { \theta }\) 表示参数为 \(\theta\) 的策略，\(J \left( \pi _ { \theta } \right)\) 表示策略 \(\pi _ { \theta }\) 的返回值，则优化函数梯度为 \[\nabla _ { \theta } J \left( \pi _ { \theta }">
+<meta name="twitter:description" content="强化学习 Vanilla Policy Gradient 令 \(\pi _ { \theta }\) 表示参数为 \(\theta\) 的策略，\(J \left( \pi _ { \theta } \right)\) 表示策略 \(\pi _ { \theta }\) 的返回值，则优化函数梯度为 \[\nabla _ { \theta } J \left( \pi _ { \theta } \">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190129183255.png">
     
         <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="../../../../atom.xml">
@@ -195,7 +195,7 @@ ga('send', 'pageview');
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#强化学习-vanilla-policy-gradient"><span class="post-toc-text">强化学习 Vanilla Policy Gradient</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#强化学习-vanilla-policy-gradient"><span class="post-toc-text">强化学习 Vanilla Policy Gradient</span></a></li></ol>
         </nav>
     </aside>
     
@@ -217,7 +217,7 @@ ga('send', 'pageview');
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="强化学习-vanilla-policy-gradient">强化学习 Vanilla Policy Gradient</h1>
+            <h1 id="强化学习-vanilla-policy-gradient">强化学习 Vanilla Policy Gradient</h1>
 <p>令 <span class="math inline">\(\pi _ { \theta }\)</span> 表示参数为 <span class="math inline">\(\theta\)</span> 的策略，<span class="math inline">\(J \left( \pi _ { \theta } \right)\)</span> 表示策略 <span class="math inline">\(\pi _ { \theta }\)</span> 的返回值，则优化函数梯度为</p>
 <p><span class="math display">\[\nabla _ { \theta } J \left( \pi _ { \theta } \right) = \underset { \tau \sim \pi _ { \theta } } { E } \left[ \sum _ { t = 0 } ^ { T } \nabla _ { \theta } \log \pi _ { \theta } \left( a _ { t } | s _ { t } \right) A ^ { \pi _ { \theta } } \left( s _ { t } , a _ { t } \right) \right]\]</span></p>
 <p>梯度上升</p>
@@ -231,7 +231,7 @@ ga('send', 'pageview');
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-04-04T10:10:23.687Z" itemprop="dateUpdated">2019-04-04 18:10:23</time>
+    最后更新时间：<time datetime="2019-10-31T01:42:48.280Z" itemprop="dateUpdated">2019-10-31 09:42:48</time>
 </span><br>
 
 
