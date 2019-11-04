@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://thinkhard.tech/2019/11/04/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E7%BD%91%E7%BB%9C%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%BD%B1%E5%93%8D/</loc>
+    
+    <lastmod>2019-11-04T10:54:30.890Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://thinkhard.tech/2018/06/09/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/</loc>
     
     <lastmod>2019-10-31T02:10:38.265Z</lastmod>
@@ -170,14 +177,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/04/30/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%95%88%E7%8E%87%E8%BD%AF%E4%BB%B6Cerebro/</loc>
+    <loc>http://thinkhard.tech/2018/05/20/%E7%BB%99%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA%E7%90%83-%E8%AE%BF%E5%AE%A2%E7%BB%9F%E8%AE%A1/</loc>
     
     <lastmod>2019-04-04T10:10:23.776Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/05/20/%E7%BB%99%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA%E7%90%83-%E8%AE%BF%E5%AE%A2%E7%BB%9F%E8%AE%A1/</loc>
+    <loc>http://thinkhard.tech/2018/04/30/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%95%88%E7%8E%87%E8%BD%AF%E4%BB%B6Cerebro/</loc>
     
     <lastmod>2019-04-04T10:10:23.776Z</lastmod>
     
@@ -282,13 +289,6 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2018/08/05/turn-kindle-to-electron-clock/</loc>
-    
-    <lastmod>2019-04-04T10:10:23.769Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://thinkhard.tech/2018/02/07/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2019-04-04T10:10:23.769Z</lastmod>
@@ -303,14 +303,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/12/16/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
+    <loc>http://thinkhard.tech/2018/08/05/turn-kindle-to-electron-clock/</loc>
     
-    <lastmod>2019-04-04T10:10:23.768Z</lastmod>
+    <lastmod>2019-04-04T10:10:23.769Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/12/16/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://thinkhard.tech/2017/12/16/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</loc>
     
     <lastmod>2019-04-04T10:10:23.768Z</lastmod>
     
@@ -324,14 +324,21 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/07/20/python-mail-sender/</loc>
+    <loc>http://thinkhard.tech/2017/12/16/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/</loc>
+    
+    <lastmod>2019-04-04T10:10:23.768Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://thinkhard.tech/2017/05/25/python-vad/</loc>
     
     <lastmod>2019-04-04T10:10:23.767Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/05/25/python-vad/</loc>
+    <loc>http://thinkhard.tech/2017/07/20/python-mail-sender/</loc>
     
     <lastmod>2019-04-04T10:10:23.767Z</lastmod>
     
@@ -352,14 +359,14 @@
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/12/18/linux%E9%A9%B1%E5%8A%A8%E5%99%A8%E5%92%8C%E5%88%86%E5%8C%BA%E7%9A%84%E5%A4%87%E4%BB%BD%EF%BC%8C%E4%BD%BF%E7%94%A8dd%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B/</loc>
+    <loc>http://thinkhard.tech/2017/12/14/image-to-excel/</loc>
     
     <lastmod>2019-04-04T10:10:23.692Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://thinkhard.tech/2017/12/14/image-to-excel/</loc>
+    <loc>http://thinkhard.tech/2017/12/18/linux%E9%A9%B1%E5%8A%A8%E5%99%A8%E5%92%8C%E5%88%86%E5%8C%BA%E7%9A%84%E5%A4%87%E4%BB%BD%EF%BC%8C%E4%BD%BF%E7%94%A8dd%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B/</loc>
     
     <lastmod>2019-04-04T10:10:23.692Z</lastmod>
     
@@ -401,6 +408,13 @@
   </url>
   
   <url>
+    <loc>http://thinkhard.tech/2017/05/25/Cmake-tutorial/</loc>
+    
+    <lastmod>2019-04-04T10:10:23.685Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://thinkhard.tech/2019/03/19/Mac-Bluetooth-Auto-Toggle-when-lock-unlock-screen/</loc>
     
     <lastmod>2019-04-04T10:10:23.685Z</lastmod>
@@ -409,13 +423,6 @@
   
   <url>
     <loc>http://thinkhard.tech/2019/01/14/MLPGaussianPolicy/</loc>
-    
-    <lastmod>2019-04-04T10:10:23.685Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://thinkhard.tech/2017/05/25/Cmake-tutorial/</loc>
     
     <lastmod>2019-04-04T10:10:23.685Z</lastmod>
     
