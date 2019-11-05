@@ -36,21 +36,21 @@ ga('send', 'pageview');
     
     
     <meta name="keywords" content="Algorithm,Gait">
-    <meta name="description" content="双足机器人如何行走？ 早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足机器人一个重大里程碑是 1996 年 Honda 推出的 P2 仿人机器人，随后 P2 成了大名鼎鼎的 Asimo。P2 能够完成行走、推车和爬楼梯等任务。P2 的核心设计就是基于零力矩点 (ZMP) 反馈的步行控制。本文接下来就探究这背后的原理。 如果您是第一次阅读这篇博客，建议先观看 NHK 纪录片: ASIM">
+    <meta name="description" content="[双足机器人如何行走？]  译文：how-do-biped-robots-walk  早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足机器人一个重大里程碑是 1996 年 Honda 推出的 P2 仿人机器人，随后 P2 成了大名鼎鼎的 Asimo。P2 能够完成行走、推车和爬楼梯等任务。P2 的核心设计就是基于零力矩点 (ZMP) 反馈的步行控制。本文接下来就探究这背后的原理。 如">
 <meta name="keywords" content="Algorithm,Gait">
 <meta property="og:type" content="article">
 <meta property="og:title" content="双足机器人如何行走？">
 <meta property="og:url" content="http://thinkhard.tech/2019/11/05/双足机器人如何行走？/index.html">
 <meta property="og:site_name" content="神奇的战士">
-<meta property="og:description" content="双足机器人如何行走？ 早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足机器人一个重大里程碑是 1996 年 Honda 推出的 P2 仿人机器人，随后 P2 成了大名鼎鼎的 Asimo。P2 能够完成行走、推车和爬楼梯等任务。P2 的核心设计就是基于零力矩点 (ZMP) 反馈的步行控制。本文接下来就探究这背后的原理。 如果您是第一次阅读这篇博客，建议先观看 NHK 纪录片: ASIM">
+<meta property="og:description" content="[双足机器人如何行走？]  译文：how-do-biped-robots-walk  早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足机器人一个重大里程碑是 1996 年 Honda 推出的 P2 仿人机器人，随后 P2 成了大名鼎鼎的 Asimo。P2 能够完成行走、推车和爬楼梯等任务。P2 的核心设计就是基于零力矩点 (ZMP) 反馈的步行控制。本文接下来就探究这背后的原理。 如">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20191105110825.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20191105150311.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20191105150249.png">
-<meta property="og:updated_time" content="2019-11-05T07:16:43.161Z">
+<meta property="og:updated_time" content="2019-11-05T08:56:46.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="双足机器人如何行走？">
-<meta name="twitter:description" content="双足机器人如何行走？ 早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足机器人一个重大里程碑是 1996 年 Honda 推出的 P2 仿人机器人，随后 P2 成了大名鼎鼎的 Asimo。P2 能够完成行走、推车和爬楼梯等任务。P2 的核心设计就是基于零力矩点 (ZMP) 反馈的步行控制。本文接下来就探究这背后的原理。 如果您是第一次阅读这篇博客，建议先观看 NHK 纪录片: ASIM">
+<meta name="twitter:description" content="[双足机器人如何行走？]  译文：how-do-biped-robots-walk  早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足机器人一个重大里程碑是 1996 年 Honda 推出的 P2 仿人机器人，随后 P2 成了大名鼎鼎的 Asimo。P2 能够完成行走、推车和爬楼梯等任务。P2 的核心设计就是基于零力矩点 (ZMP) 反馈的步行控制。本文接下来就探究这背后的原理。 如">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20191105110825.png">
     
         <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="../../../../atom.xml">
@@ -197,7 +197,7 @@ ga('send', 'pageview');
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#双足机器人如何行走"><span class="post-toc-text">双足机器人如何行走？</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线性倒立摆模型lipm"><span class="post-toc-text">线性倒立摆模型(LIPM)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#步态模式生成"><span class="post-toc-text">步态模式生成</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线性模型预测控制"><span class="post-toc-text">线性模型预测控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dcm-轨迹生成"><span class="post-toc-text">DCM 轨迹生成</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#步态稳定性"><span class="post-toc-text">步态稳定性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更进一步"><span class="post-toc-text">更进一步</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#双足机器人如何行走"><span class="post-toc-text">[双足机器人如何行走？]</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#线性倒立摆模型lipm"><span class="post-toc-text">线性倒立摆模型(LIPM)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#步态模式生成"><span class="post-toc-text">步态模式生成</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线性模型预测控制"><span class="post-toc-text">线性模型预测控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dcm-轨迹生成"><span class="post-toc-text">DCM 轨迹生成</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#步态稳定性"><span class="post-toc-text">步态稳定性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#更进一步"><span class="post-toc-text">更进一步</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -219,7 +219,10 @@ ga('send', 'pageview');
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="双足机器人如何行走"><a href="https://scaron.info/teaching/how-do-biped-robots-walk.html" target="_blank" rel="noopener">双足机器人如何行走？</a></h1>
+            <h1 id="双足机器人如何行走">[双足机器人如何行走？]</h1>
+<blockquote>
+<p>译文：<a href="https://scaron.info/teaching/how-do-biped-robots-walk.html" target="_blank" rel="noopener">how-do-biped-robots-walk</a></p>
+</blockquote>
 <p>早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足机器人一个重大里程碑是 1996 年 Honda 推出的 <a href="https://en.wikipedia.org/wiki/Honda_P_series" target="_blank" rel="noopener">P2 仿人机器人</a>，随后 P2 成了大名鼎鼎的 Asimo。P2 能够完成<a href="https://youtu.be/d2BUO4HEhvM?t=26" target="_blank" rel="noopener">行走</a>、<a href="https://youtu.be/d2BUO4HEhvM?t=119" target="_blank" rel="noopener">推车</a>和<a href="https://youtu.be/d2BUO4HEhvM?t=172" target="_blank" rel="noopener">爬楼梯</a>等任务。P2 的核心设计就是<strong>基于零力矩点 (ZMP) 反馈的步行控制</strong>。本文接下来就探究这背后的原理。</p>
 <p>如果您是第一次阅读这篇博客，建议先观看 <a href="https://www.youtube.com/watch?v=T7SEyvPtWFY" target="_blank" rel="noopener">NHK 纪录片: ASIMO, HONDA, ROBOT, JAPAN, DOCUMENTARY, INTERVIEW</a>，纪录片介绍了接下来将要解释的几个关键的概念。</p>
 <h2 id="线性倒立摆模型lipm">线性倒立摆模型(LIPM)</h2>
@@ -296,7 +299,7 @@ p_{Z}=p_{Z}^{d}+k_{z}\left(\xi-\xi^{d}\right)
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-11-05T07:16:43.161Z" itemprop="dateUpdated">2019-11-05 15:16:43</time>
+    最后更新时间：<time datetime="2019-11-05T08:56:46.336Z" itemprop="dateUpdated">2019-11-05 16:56:46</time>
 </span><br>
 
 
