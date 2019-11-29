@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', '140849483', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<!-- End Google Analytics -->
+
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?9995df728837d827def0baebc248d680"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    <meta name="google-site-verification" content="true">
+    
+    
+    
+    <title>Web端连接智能硬件的方案 | 神奇的战士 | 🍉 Start with one, then make many.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Scratch,JavaScript">
+    <meta name="description" content="Web 适合与服务器通信，但不适合与设备通信，目前可以通过 webBLE，WebSerial 和 WebSocket 等方式与外围设备进行连接。 Web Bluetooth 网页通过 Web Bluetooth API 向浏览器申请蓝牙控制的权限 参考示例： Web Bluetooth Samples 优缺点：  浏览器兼容性问题，只支持 Chrome 45+ 的版本 设备蓝牙兼容性问题 需要向浏">
+<meta name="keywords" content="Scratch,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web端连接智能硬件的方案">
+<meta property="og:url" content="http://thinkhard.tech/2019/11/29/Web端连接智能硬件的方案/index.html">
+<meta property="og:site_name" content="神奇的战士">
+<meta property="og:description" content="Web 适合与服务器通信，但不适合与设备通信，目前可以通过 webBLE，WebSerial 和 WebSocket 等方式与外围设备进行连接。 Web Bluetooth 网页通过 Web Bluetooth API 向浏览器申请蓝牙控制的权限 参考示例： Web Bluetooth Samples 优缺点：  浏览器兼容性问题，只支持 Chrome 45+ 的版本 设备蓝牙兼容性问题 需要向浏">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-29T09:24:58.712Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web端连接智能硬件的方案">
+<meta name="twitter:description" content="Web 适合与服务器通信，但不适合与设备通信，目前可以通过 webBLE，WebSerial 和 WebSocket 等方式与外围设备进行连接。 Web Bluetooth 网页通过 Web Bluetooth API 向浏览器申请蓝牙控制的权限 参考示例： Web Bluetooth Samples 优缺点：  浏览器兼容性问题，只支持 Chrome 45+ 的版本 设备蓝牙兼容性问题 需要向浏">
+    
+        <link rel="alternate" type="application/atom+xml" title="神奇的战士" href="../../../../atom.xml">
+    
+    <link rel="shortcut icon" href="../../../../img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+
+</head>
+
+<body>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="loading" class="active"></div>
+
+    <aside id="menu">
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(../../../../img/brand.jpg)">
+      <div class="brand">
+        <a href="../../../../index.html" class="avatar waves-effect waves-circle waves-light">
+          <img src="../../../../img/avatar.jpg">
+        </a>
+        <a href="https://github.com/wangshub" target="_blank" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:rgb(36, 196, 174); color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+        <hgroup class="introduce">
+          <h5 class="nickname">神奇的战士</h5>
+          <a href="mailto:rocksong.hit@gmail.com" title="rocksong.hit@gmail.com" class="mail">rocksong.hit@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../index.html">
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../archives">
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../tags">
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../categories">
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="../../../../about">
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/wangshub" target="_blank">
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+
+      </ul>
+    </div>
+
+  <!-- <div>
+      <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=5qjbjjqxta5&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" width=10% async="async"></script>
+  </div> -->
+  <!-- <div style="text-align:center"><img src ="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525173043.png" width="40%" /></div> -->
+  <div style="text-align:center">
+      <img src="https://thinkhard.tech/img/wxpubqrcode.png" width="60%">
+      <p> </p>
+
+    </div>
+  </div>
+  
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Web端连接智能硬件的方案</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Web端连接智能硬件的方案</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-29T09:24:15.000Z" itemprop="datePublished" class="page-time">
+  2019-11-29
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#web-bluetooth"><span class="post-toc-text">Web Bluetooth</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#web-serial-api"><span class="post-toc-text">Web Serial API</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#scratch-link"><span class="post-toc-text">Scratch Link</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#codelab-adapter"><span class="post-toc-text">Codelab Adapter</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Web端连接智能硬件的方案" class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Web端连接智能硬件的方案</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-29 17:24:15" datetime="2019-11-29T09:24:15.000Z" itemprop="datePublished">2019-11-29</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style="display:none">
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Web 适合与服务器通信，但不适合与设备通信，目前可以通过 webBLE，WebSerial 和 WebSocket 等方式与外围设备进行连接。</p>
+<h2 id="web-bluetooth">Web Bluetooth</h2>
+<p>网页通过 Web Bluetooth API 向浏览器申请蓝牙控制的权限</p>
+<p><strong>参考示例</strong>： <a href="https://googlechrome.github.io/samples/web-bluetooth/" target="_blank" rel="noopener">Web Bluetooth Samples</a></p>
+<p><strong>优缺点</strong>：</p>
+<ul>
+<li>浏览器兼容性问题，只支持 Chrome 45+ 的版本</li>
+<li>设备蓝牙兼容性问题</li>
+<li>需要向浏览器申请权限请求用户同意</li>
+</ul>
+<h2 id="web-serial-api">Web Serial API</h2>
+<p>网页通过向浏览器申请串口的权限，进而和支持串口的设备进行通信</p>
+<p><strong>草案地址</strong>：<a href="https://wicg.github.io/serial/" target="_blank" rel="noopener">Draft Community Group Report 22 November 2019</a></p>
+<p><strong>优缺点</strong>：</p>
+<ul>
+<li>该协议目前处于草案阶段，暂不稳定</li>
+<li>需要做一个 USB Dongle，协议会比较复杂</li>
+<li>USB 驱动也可能有兼容性的问题</li>
+<li>浏览器兼容问题</li>
+</ul>
+<h2 id="scratch-link">Scratch Link</h2>
+<p><strong>介绍</strong>：</p>
+<p>Scratch Link 是 MIT 开发团队 LLK 提出的方案，帮助 Scratch 3.0 web 端与蓝牙外围设备进行连接。Scratch Link 是一个桌面应用，可以运行在 Windows 和 MacOS 平台，起代理的作用，在内部运行了一个 websocket 服务，与网页进行通信，再通过蓝牙服务与外围设备进行通信。</p>
+<p><strong>项目地址</strong>：<a href="https://github.com/LLK/scratch-link" target="_blank" rel="noopener">https://github.com/LLK/scratch-link</a></p>
+<p><strong>优缺点</strong>：</p>
+<ul>
+<li>依赖桌面应用进行代理</li>
+<li>轻量、开源，支持 Win/MacOS 系统</li>
+<li>暂时只支持乐高 Mindstorm 机器人、Micro:bit 等蓝牙设备</li>
+<li>蓝牙兼容性问题</li>
+</ul>
+<h2 id="codelab-adapter">Codelab Adapter</h2>
+<p><strong>介绍</strong>：</p>
+<p>CodeLab Adapter 是由 CodeLab 构建的基础项目(v2 是最新版本)，可以用于连接 Scratch 3.0 和其他设备，无论是软件还是硬件，无论是 AI、开源硬件、现实世界的物体、还是虚拟世界的动画角色，在 CodeLab Adapter 的驱动下，皆可彼此互动。</p>
+<p>软件的核心架构与 Scratch Link 类似，是代理软件 CodeLab Adapter 内部是 WebSocket Server 用于与 Scratch3.0 网页通信，然后通过 ZeroMQ 与各个设备之间连接通信，比如机器人、无人机等</p>
+<p>架构参考 <a href="https://codelab-adapter-docs.codelab.club/dev_guide/Architecture/" target="_blank" rel="noopener">https://codelab-adapter-docs.codelab.club/dev_guide/Architecture/</a></p>
+<p><strong>项目地址</strong>：</p>
+<ul>
+<li><a href="https://codelab-adapter-docs.codelab.club/" target="_blank" rel="noopener">CodeLab Adapter v2</a></li>
+<li><a href="https://github.com/CodeLabClub/codelab_adapter_extensions" target="_blank" rel="noopener">codelab_adapter_extensions 各类设备插件地址</a>，设备兼容性可是由接入的设备商自行解决。</li>
+<li><a href="https://github.com/CodeLabClub/scratch3_eim" target="_blank" rel="noopener">Scratch 3.0 端核心插件 EIM</a>,是一个 Scratch 3.0 插件，用于 Scratch 网页端与代理软件 CodeLab Adapter v2 之间通信。</li>
+</ul>
+<p><strong>优缺点</strong>：</p>
+<ul>
+<li>依赖桌面应用进行代理</li>
+<li>接入灵活，可以兼容任意的设备</li>
+<li>代理软件部署在如树莓派的设备上，可以兼容移动端，比如 iPad 设备</li>
+</ul>
+<p><strong>机器人案例</strong>：</p>
+<ul>
+<li><a href="https://thinkhard.tech/2019/05/23/control-robot-in-scratch3/">在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！</a></li>
+<li><a href="https://thinkhard.tech/2019/04/17/codelab-pando-tutorial/">当遇到 Scratch3-Codelab，Pando 觉醒了！</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-11-29T09:24:58.712Z" itemprop="dateUpdated">2019-11-29 17:24:58</time>
+</span><br>
+
+
+        
+        讨论是绝佳的反思，留下点什么吧！
+        
+    </div>
+    <footer>
+        <a href="http://thinkhard.tech">
+            <img src="../../../../img/avatar.jpg" alt="神奇的战士">
+            神奇的战士
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="../../../../tags/Scratch/">Scratch</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://thinkhard.tech/2019/11/29/Web端连接智能硬件的方案/&title=《Web端连接智能硬件的方案》 — 神奇的战士&pic=http://thinkhard.tech/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://thinkhard.tech/2019/11/29/Web端连接智能硬件的方案/&title=《Web端连接智能硬件的方案》 — 神奇的战士&source=📚 书写是为了更好地思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://thinkhard.tech/2019/11/29/Web端连接智能硬件的方案/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Web端连接智能硬件的方案》 — 神奇的战士&url=http://thinkhard.tech/2019/11/29/Web端连接智能硬件的方案/&via=http://thinkhard.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://thinkhard.tech/2019/11/29/Web端连接智能硬件的方案/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="../../05/双足机器人如何行走？/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">双足机器人如何行走？</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        请作者喝杯咖啡 ☕️
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="../../../../img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check" data-wechat="../../../../img/wechat.jpg" data-alipay="../../../../img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style="display:none">
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style="display:none">
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="../../../../atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+            <span>
+                
+                <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备19073942号-1</a><br>
+                
+                🍉 <a href="https://github.com/wangshub" target="_blank">Github@wangshub</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://thinkhard.tech/2019/11/29/Web端连接智能硬件的方案/&title=《Web端连接智能硬件的方案》 — 神奇的战士&pic=http://thinkhard.tech/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://thinkhard.tech/2019/11/29/Web端连接智能硬件的方案/&title=《Web端连接智能硬件的方案》 — 神奇的战士&source=📚 书写是为了更好地思考" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://thinkhard.tech/2019/11/29/Web端连接智能硬件的方案/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Web端连接智能硬件的方案》 — 神奇的战士&url=http://thinkhard.tech/2019/11/29/Web端连接智能硬件的方案/&via=http://thinkhard.tech" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://thinkhard.tech/2019/11/29/Web端连接智能硬件的方案/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACr0lEQVR42u3awY7qQAwEQP7/p9nrk1hI93gmy5MqJwQhSeVgW7Yfj/h4/nO8fv/6+d2/dp2z+cDDw8MbPPrrkd/g8znvAMl983/9cnc8PDy8Y7z8gfJv2rC+Rr14Bjw8PLyv5K3h19IAHh4e3v/IS6iT4N7i8fDw8P6Klz9W/t829Cev7GCvBQ8PDy/m5VOk7/l8ZL6Hh4eHN56qt0miHfx/DujP8YGHh4d3gpcH3GSZ4HPJ2yaednHh7Zl4eHh4h3nJRYugvHR+i7xIXXh4eHgHePlCwK6SN1/JSor7ooGLh4eHN+blQTwvbfNhVb58sLgchoeHh3cLbzJdWovJayOuOsvh4eHhbeIlQTkJx21ToF23Gq1e4eHh4R3gJeG+baGuLRDsGsjh4eHh3c87ty4wWSbI0xgeHh7eOV7bWm0HV+1LqReqPhfleHh4eAd4aw+at1MTWBvu23SFh4eHdycvb+Cuja/axkSxO7aWT/Dw8PDGqwB5q3TvKkC+pFUkKjw8PLxjvCT0J2Vxu2rQMtrr4OHh4e3lJTfO1wvaK0zWF6KCGw8PD28rbzL0mryCfFVrkh7w8PDwTvDWWqtrS1pt86JtauDh4eF9A69tLiStgcmD5mmp3mLAw8PDK3nzoVeeWhLwhPS2JYGHh4d3Cy8vcJNCPB/2t2X6RXrAw8PDO8abrEPl4X7Srs3L6IsxGB4eHt5WXhK+83WBtlx+LB0XzQ48PDy8rbxneawNxtZ+3ZBa8PDw8A7w2uA7Ye9aTZi/Pjw8PLw5b95cmJfI8+u//RUPDw/vGK8Nynkboh2nLeautkuNh4eHdzsvD+6TNkSLv+hS4+Hh4f0Rb942zcdpSUOkrtbx8PDwNvHmZfFa6TzvQEebEXh4eHhbeZM266TwbRdPJ+0JPDw8vE28H1rDxTqNyhmeAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+lazyScripts.push('//s95.cnzz.com/z_stat.php?id=1277645084&web_id=1277645084')
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+</body>
+</html>
