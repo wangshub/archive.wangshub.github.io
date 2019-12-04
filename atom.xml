@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://thinkhard.tech/"/>
-  <updated>2019-11-29T09:24:58.712Z</updated>
+  <updated>2019-12-04T03:07:00.468Z</updated>
   <id>http://thinkhard.tech/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>双连杆机械臂运动学正向和逆向 Python 仿真</title>
+    <link href="http://thinkhard.tech/2019/12/03/kinematics-dh-method/"/>
+    <id>http://thinkhard.tech/2019/12/03/kinematics-dh-method/</id>
+    <published>2019-12-03T12:47:54.000Z</published>
+    <updated>2019-12-04T03:07:00.468Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="双连杆机械臂运动学正向和逆向-python-仿真">双连杆机械臂运动学正向和逆向 Python 仿真</h1><h2 id="dhdenavit-hartenberg方法">DH(Denavit-Hartenberg)方法</h2><p>DH 方法描述了相邻坐标系之间的旋转与移动的关系，只需要找到 4 个参数，以基座坐标 <span class="math inline">\((x_0, y_0, z_0)\)</span> 为参考，就可以依次求出相连接的连杆坐标系 <span class="math inline">\((x_i, y_i, z_i)\)</span> 和末端执行器坐标系 <span class="math inline">\((x_n, y_n, z_n)\)</span> 的远点与方向。</p><div style="text-align:center"><img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20191204102936.png" width="70%"></div><p>DH 方法要求相邻坐标系之间满足下面约定</p><ul><li><input type="checkbox" disabled checked><span class="math inline">\(x_i\)</span> 和 <span class="math inline">\(z_{i-1}\)</span> 轴垂直；</li><li><input type="checkbox" disabled checked><span class="math inline">\(x_i\)</span> 和 <span class="math inline">\(z_{i-1}\)</span> 轴相交；</li></ul><p>4 个 DH 参数分别为：</p><ul><li>关节转角(joint angle) <span class="math inline">\(\theta_{i}\)</span></li><li>连杆扭角(link twist) <span class="math inline">\(\alpha_{i}\)</span></li><li>连杆距离(link offset) <span class="math inline">\(d_{i}\)</span></li><li>连杆长度(link length) <span class="math inline">\(a_{i}\)</span></li></ul><h3 id="正运动学公式">正运动学公式</h3><div style="text-align:center"><img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20191204105817.png" width="60%"></div><h3 id="逆运动学公式">逆运动学公式</h3><p><span class="math display">\[\theta _ { 2 } = \tan ^ { - 1 } \left( \frac { \sin \theta _ { 2 } } { \cos \theta _ { 2 } } \right) = \tan ^ { - 1 } \left( \frac { \frac { - S _ { 1 } ^ { \theta } p _ { x } ^ { 0 } + C _ { 1 } ^ { \theta } p _ { y } ^ { 0 } } { l _ { 2 } } } { \frac { C _ { 1 } ^ { \theta } p _ { x } ^ { 0 } + S _ { 1 } ^ { \theta } p _ { y } ^ { 0 } - l _ { 1 } } { l _ { 2 } } } \right) = \tan ^ { - 1 } \left( \frac { - S _ { 1 } ^ { \theta } p _ { x } ^ { 0 } + C _ { 1 } ^ { \theta } p _ { y } ^ { 0 } } { C _ { 1 } ^ { \theta } p _ { x } ^ { 0 } + S _ { 1 } ^ { \theta } p _ { y } ^ { 0 } - l _ { 1 } } \right)\]</span></p><h2 id="平面连杆正运动学仿真">平面连杆正运动学仿真</h2><div style="text-align:center"><img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/twp_link_planar_robot.png" width="60%"></div><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> sin, cos</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dhmat</span><span class="params">(delta, d, a, alpha)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.array([[cos(delta), -sin(delta)*cos(alpha), sin(delta)*sin(alpha), a*cos(delta)],</span><br><span class="line">                     [sin(delta), cos(delta)*cos(alpha), -cos(delta)*sin(alpha), a*sin(delta)],</span><br><span class="line">                     [<span class="number">0</span>, sin(alpha), cos(alpha), d],</span><br><span class="line">                     [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    theta_1 = np.radians(np.arange(<span class="number">20</span>, <span class="number">50</span>, <span class="number">1</span>))</span><br><span class="line">    theta_2 = np.radians(np.arange(<span class="number">0</span>, <span class="number">30</span>, <span class="number">1</span>))</span><br><span class="line">    d_1 = <span class="number">0</span></span><br><span class="line">    d_2 = <span class="number">0</span></span><br><span class="line">    l_1 = <span class="number">0.1</span></span><br><span class="line">    l_2 = <span class="number">0.2</span></span><br><span class="line">    alpha_1 = <span class="number">0</span></span><br><span class="line">    alpha_2 = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    P_0 = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]).T</span><br><span class="line">    P_1 = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]).T</span><br><span class="line">    P_2 = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]).T</span><br><span class="line"></span><br><span class="line">    fig, ax = plt.subplots()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(theta_1)):</span><br><span class="line">        P1_0 = dhmat(theta_1[i], d_1, l_1, alpha_1).dot(P_1)</span><br><span class="line">        P2_0 = dhmat(theta_1[i], d_1, l_1, alpha_1).dot(dhmat(theta_2[i], d_2, l_2, alpha_2)).dot(P_2)</span><br><span class="line">        ax.plot([P_0[<span class="number">0</span>], P1_0[<span class="number">0</span>], P2_0[<span class="number">0</span>]], [P_0[<span class="number">1</span>], P1_0[<span class="number">1</span>], P2_0[<span class="number">1</span>]], <span class="string">'-bo'</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">'x (m)'</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">'y (m)'</span>)</span><br><span class="line">    fig.savefig(<span class="string">'./twp_link_planar_robot.png'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure><h2 id="平面连杆逆运动学仿真">平面连杆逆运动学仿真</h2><div style="text-align:center"><img src="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/ik_two_link_planar_robot_0.png" width="60%"></div><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> linalg <span class="keyword">as</span> LA</span><br><span class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> sin, cos, arctan</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dhmat</span><span class="params">(delta, d, a, alpha)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.array([[cos(delta), -sin(delta)*cos(alpha), sin(delta)*sin(alpha), a*cos(delta)],</span><br><span class="line">                     [sin(delta), cos(delta)*cos(alpha), -cos(delta)*sin(alpha), a*sin(delta)],</span><br><span class="line">                     [<span class="number">0</span>, sin(alpha), cos(alpha), d],</span><br><span class="line">                     [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]])</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    d_1 = <span class="number">0</span></span><br><span class="line">    d_2 = <span class="number">0</span></span><br><span class="line">    l_1 = <span class="number">0.1</span></span><br><span class="line">    l_2 = <span class="number">0.2</span></span><br><span class="line">    alpha_1 = <span class="number">0</span></span><br><span class="line">    alpha_2 = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    theta_1 = np.radians(np.arange(<span class="number">20</span>, <span class="number">50</span>, <span class="number">1</span>))</span><br><span class="line">    theta_2 = np.zeros(len(theta_1))</span><br><span class="line"></span><br><span class="line">    st = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    des_P2_0 = np.array([<span class="number">0.22</span>, <span class="number">0.2</span>, <span class="number">0</span>, <span class="number">1</span>]).T</span><br><span class="line">    err_dist = np.zeros(len(theta_1))</span><br><span class="line"></span><br><span class="line">    P_0 = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]).T</span><br><span class="line">    P_1 = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]).T</span><br><span class="line">    P_2 = np.array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>]).T</span><br><span class="line"></span><br><span class="line">    fig, ax = plt.subplots()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(theta_1)):</span><br><span class="line">        P1_0 = dhmat(theta_1[i], d_1, l_1, alpha_1).dot(P_1)</span><br><span class="line">        theta_2[i] = arctan((-sin(theta_1[i]) * des_P2_0[<span class="number">0</span>] + cos(theta_1[i]) * des_P2_0[<span class="number">1</span>])</span><br><span class="line">                            / (cos(theta_1[i]) * des_P2_0[<span class="number">0</span>] + sin(theta_1[i]) * des_P2_0[<span class="number">1</span>] - l_1))</span><br><span class="line">        P2_0 = dhmat(theta_1[i], d_1, l_1, alpha_1).dot(dhmat(theta_2[i], d_2, l_2, alpha_2)).dot(P_2)</span><br><span class="line">        err_dist[i] = LA.norm(des_P2_0 - P2_0)</span><br><span class="line">        ax.plot([P_0[<span class="number">0</span>], P1_0[<span class="number">0</span>], P2_0[<span class="number">0</span>]], [P_0[<span class="number">1</span>], P1_0[<span class="number">1</span>], P2_0[<span class="number">1</span>]], <span class="string">'-bo'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 双连杆平面机械运动逆向运动学仿真</span></span><br><span class="line">    ax.plot(des_P2_0[<span class="number">0</span>], des_P2_0[<span class="number">1</span>], <span class="string">'-rx'</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">'x (m)'</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">'y (m)'</span>)</span><br><span class="line">    fig.savefig(<span class="string">'./ik_two_link_planar_robot_0.png'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># theta_1, theta_2 角度变化轨迹</span></span><br><span class="line">    fig, ax = plt.subplots(nrows=<span class="number">2</span>)</span><br><span class="line">    ax[<span class="number">0</span>].plot(theta_1, <span class="string">'k'</span>)</span><br><span class="line">    ax[<span class="number">0</span>].set_ylabel(<span class="string">'theta_1'</span>)</span><br><span class="line">    ax[<span class="number">1</span>].plot(theta_2, <span class="string">'k'</span>)</span><br><span class="line">    ax[<span class="number">1</span>].set_ylabel(<span class="string">'theta_2'</span>)</span><br><span class="line">    ax[<span class="number">1</span>].set_xlabel(<span class="string">'time (s)'</span>)</span><br><span class="line">    fig.savefig(<span class="string">'./ik_two_link_planar_robot_1.png'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 目标点与实际点之间的距离误差</span></span><br><span class="line">    fig, ax = plt.subplots()</span><br><span class="line">    ax.plot(err_dist, <span class="string">'k'</span>)</span><br><span class="line">    ax.set_ylabel(<span class="string">'distance error (m)'</span>)</span><br><span class="line">    ax.set_xlabel(<span class="string">'time (s)'</span>)</span><br><span class="line">    fig.savefig(<span class="string">'./ik_two_link_planar_robot_2.png'</span>)</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure><h2 id="参考">参考</h2><ul><li><a href="https://zhuanlan.zhihu.com/p/20944328" target="_blank" rel="noopener">机器人运动学中的D-H变换</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;双连杆机械臂运动学正向和逆向-python-仿真&quot;&gt;双连杆机械臂运动学正向和逆向 Python 仿真&lt;/h1&gt;
+&lt;h2 id=&quot;dhdenavit-hartenberg方法&quot;&gt;DH(Denavit-Hartenberg)方法&lt;/h2&gt;
+&lt;p&gt;DH 方法描述了相邻坐
+      
+    
+    </summary>
+    
+    
+      <category term="Python" scheme="http://thinkhard.tech/tags/Python/"/>
+    
+      <category term="Robotics" scheme="http://thinkhard.tech/tags/Robotics/"/>
+    
+      <category term="Kinematics" scheme="http://thinkhard.tech/tags/Kinematics/"/>
+    
+  </entry>
   
   <entry>
     <title>Web端连接智能硬件的方案</title>
@@ -115,9 +144,9 @@
     </summary>
     
     
-      <category term="Python" scheme="http://thinkhard.tech/tags/Python/"/>
-    
       <category term="Reinforcement Learning" scheme="http://thinkhard.tech/tags/Reinforcement-Learning/"/>
+    
+      <category term="Python" scheme="http://thinkhard.tech/tags/Python/"/>
     
       <category term="Simulation" scheme="http://thinkhard.tech/tags/Simulation/"/>
     
@@ -144,9 +173,9 @@
     </summary>
     
     
-      <category term="Python" scheme="http://thinkhard.tech/tags/Python/"/>
-    
       <category term="Reinforcement Learning" scheme="http://thinkhard.tech/tags/Reinforcement-Learning/"/>
+    
+      <category term="Python" scheme="http://thinkhard.tech/tags/Python/"/>
     
   </entry>
   
@@ -314,9 +343,9 @@
     </summary>
     
     
-      <category term="Robot" scheme="http://thinkhard.tech/tags/Robot/"/>
-    
       <category term="Python" scheme="http://thinkhard.tech/tags/Python/"/>
+    
+      <category term="Robot" scheme="http://thinkhard.tech/tags/Robot/"/>
     
       <category term="PID" scheme="http://thinkhard.tech/tags/PID/"/>
     
@@ -727,9 +756,9 @@
     </summary>
     
     
-      <category term="Python" scheme="http://thinkhard.tech/tags/Python/"/>
-    
       <category term="Reinforcement Learning" scheme="http://thinkhard.tech/tags/Reinforcement-Learning/"/>
+    
+      <category term="Python" scheme="http://thinkhard.tech/tags/Python/"/>
     
       <category term="Tensorflow" scheme="http://thinkhard.tech/tags/Tensorflow/"/>
     
@@ -758,9 +787,9 @@
     </summary>
     
     
-      <category term="Python" scheme="http://thinkhard.tech/tags/Python/"/>
-    
       <category term="Reinforcement Learning" scheme="http://thinkhard.tech/tags/Reinforcement-Learning/"/>
+    
+      <category term="Python" scheme="http://thinkhard.tech/tags/Python/"/>
     
   </entry>
   
