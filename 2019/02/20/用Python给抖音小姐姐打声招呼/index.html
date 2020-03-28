@@ -49,7 +49,7 @@ ga('send', 'pageview');
 <meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img20190220191645.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/wangshub/image-hosting/master/img20190220195516.png">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/c3a916a7gy1fs09ydtc98j20vd06p759.jpg">
-<meta property="og:updated_time" content="2019-11-23T05:39:24.446Z">
+<meta property="og:updated_time" content="2019-12-11T07:15:09.589Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用Python给抖音小姐姐打声招呼">
 <meta name="twitter:description" content="用 Python 自动给抖音小姐姐评论一个 666 前一段时间写了一篇 《抖音 Python 机器人，论如何在抖音上找到漂亮小姐姐？》，没想到有相当多的同学有着相同的需求！ 大家皆为  程序的基本思路请见 原理与使用教程 当程序在抖音上刷到一个漂亮小姐姐的时候就会自动点赞加关注  作为一个闷骚程序员，见到漂亮小姐姐总是在背后默默点赞加关注。 但是鲁迅曾经说过 喜欢就要大声说出来！ 于是我又给">
@@ -245,7 +245,7 @@ ga('send', 'pageview');
 <p>完整代码请参考 <a href="https://github.com/wangshub/Douyin-Bot" target="_blank" rel="noopener">wangshub/Douyin-Bot</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">auto_reply</span><span class="params">()</span>:</span></span><br><span class="line">    msg = <span class="string">"垆边人似月，皓腕凝霜雪。就在刚刚，我的心动了一下，小姐姐你好可爱呀_Powered_By_Python"</span></span><br><span class="line">    tap(config[<span class="string">'comment_bottom'</span>][<span class="string">'x'</span>], config[<span class="string">'comment_bottom'</span>][<span class="string">'y'</span>])</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    tap(config[<span class="string">'comment_text'</span>][<span class="string">'x'</span>], config[<span class="string">'comment_text'</span>][<span class="string">'y'</span>])</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    cmd = <span class="string">'shell am broadcast -a ADB_INPUT_TEXT --es msg &#123;text&#125;'</span>.format(text=msg)</span><br><span class="line">    adb.run(cmd)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    tap(config[<span class="string">'comment_send'</span>][<span class="string">'x'</span>], config[<span class="string">'comment_send'</span>][<span class="string">'y'</span>])</span><br><span class="line">    time.sleep(<span class="number">0.5</span>)</span><br><span class="line">    cmd = <span class="string">'shell input keyevent 4'</span></span><br><span class="line">    adb.run(cmd)</span><br></pre></td></tr></table></figure>
 <h2 id="存在的问题">存在的问题</h2>
-<ul>
+<ul class="task-list">
 <li><input type="checkbox" disabled>
 ADB 不支持 Unicode 编码，所以需要用 ADB KeyBoard 操作比较繁琐；</li>
 <li><input type="checkbox" disabled>
@@ -272,7 +272,7 @@ ADB 不支持 Unicode 编码，所以需要用 ADB KeyBoard 操作比较繁琐�
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-11-23T05:39:24.446Z" itemprop="dateUpdated">2019-11-23 13:39:24</time>
+    最后更新时间：<time datetime="2019-12-11T07:15:09.589Z" itemprop="dateUpdated">2019-12-11 15:15:09</time>
 </span><br>
 
 
@@ -450,7 +450,7 @@ ADB 不支持 Unicode 编码，所以需要用 ADB KeyBoard 操作比较繁琐�
         </p>
     </div>
     <div class="bottom">
-        <p><span>神奇的战士 &copy; 2015 - 2019</span>
+        <p><span>神奇的战士 &copy; 2015 - 2020</span>
             <span>
                 
                 <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备19073942号-1</a><br>
