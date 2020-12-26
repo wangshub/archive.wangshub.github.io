@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gait on 🍉 神奇的战士</title><link>https://wangshub.github.io/tags/gait/</link><description>Recent content in Gait on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 05 Nov 2019 10:03:35 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/gait/index.xml" rel="self" type="application/rss+xml"/><item><title>双足机器人如何行走？</title><link>https://wangshub.github.io/posts/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0/</link><pubDate>Tue, 05 Nov 2019 10:03:35 +0000</pubDate><guid>https://wangshub.github.io/posts/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0/</guid><description>[双足机器人如何行走？] 译文：how-do-biped-robots-walk 早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gait on 🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/tags/gait/</link>
+    <description>Recent content in Gait on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 05 Nov 2019 10:03:35 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/gait/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>双足机器人如何行走？</title>
+      <link>https://wangshub.github.io/posts/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0/</link>
+      <pubDate>Tue, 05 Nov 2019 10:03:35 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0/</guid>
+      <description>[双足机器人如何行走？] 译文：how-do-biped-robots-walk 早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足</description>
+    </item>
+    
+  </channel>
+</rss>

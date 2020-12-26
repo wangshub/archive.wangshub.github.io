@@ -1,21 +1,324 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/><link rel=next href=https://wangshub.github.io/posts/cerebro%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%94%B5%E5%BD%B1%E7%A3%81%E5%8A%9B%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8/><link rel=canonical href=https://wangshub.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>如何解决EDAS上传论文时fonts问题 | 🍉 神奇的战士</title><meta name=title content="如何解决EDAS上传论文时fonts问题 | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"如何解决EDAS上传论文时fonts问题","headline":"如何解决EDAS上传论文时fonts问题","description":"如何解决 EDAS 上传论文时 PDF fonts 问题 问题描述 今天在上传 IEEE xplore 论文时遇到上传字体出错的问题 upload failed: One or more fonts are not embedded. See EDAS FAQ 解决办法 检查字体子集 在 EDAS 上传 Latex 输出的 PDF","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2018","datePublished":"2018-02-10 17:29:54 \u002b0000 UTC","dateModified":"2018-02-10 17:29:54 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98\/","wordCount":"399","keywords":["latex","🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
-<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
-<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
-<a class=menu-item href=/categories/>Categories</a>
-<a class=menu-item href=/tags/>Tags</a>
-<a class=menu-item href=/about/>About</a>
-<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">如何解决EDAS上传论文时fonts问题</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
-<span class=post-time>on <time datetime=2018-02-10 itemprop=datePublished>February 10, 2018</time></span>
-in
-<span class=post-word-count>399 words</span></div></header><div class=post-content><h1 id=如何解决-edas-上传论文时-pdf-fonts-问题>如何解决 EDAS 上传论文时 PDF fonts 问题</h1><h2 id=问题描述>问题描述</h2><p>今天在上传 <strong>IEEE xplore</strong> 论文时遇到上传字体出错的问题</p><pre><code>upload failed: One or more fonts are not embedded. See EDAS FAQ
-</code></pre><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fo91n03t4pj20z1079t8y.jpg alt></p><h2 id=解决办法>解决办法</h2><h3 id=检查字体子集>检查字体子集</h3><p>在 <strong>EDAS</strong> 上传 <strong>Latex</strong> 输出的 PDF 文档时，需要检查 PDF 文档的中所有的字体是否是都是 <strong>已嵌入子集</strong>，检查方式是：</p><ol><li>用 <code>Acrobat pdf</code>或 <code>Foxit PDF</code>工具打开待检查的 PDF 文件 <code>paper.pdf</code></li><li>打开 <code>文件(file)->属性(property)->字体(fonts)</code></li><li>查看所有的字体是否是<strong>已嵌入</strong>或者<strong>已嵌入子集</strong></li></ol><h3 id=更改字体>更改字体</h3><p>如果出现未嵌入的子集</p><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fo91n01ymzj209k060743.jpg alt=helvitica loading=lazy></p><p><code>helvitica</code>字体未嵌入的原因是论文中使用了<strong>Matlab</strong>生成的图像，<strong>Matlab</strong> 默认使用了 <code>Helvetica</code> 字体，Latex 在引用该图片时，也默认使用了 <code>Helvetica</code> 字体，导致生成的 PDF 文件不能将这个字体嵌入。</p><p><strong>解决步骤：</strong></p><ol><li><p>如果是引用的图片是pdf格式，需要使用 <code>shell</code> 命令<code>ps2pdf13</code>，将<code>Helvetica</code> 进行转化</p><pre><code>ps2pdf13 -dPDFSETTINGS=/prepress fig_non_embedded.pdf fig_embedded.pdf
-</code></pre></li><li><p>如果你需要嵌入 <code>*.esp</code>图片文件到你的 Latex 文章中，还需要将<strong>步骤1</strong>中的 <code>*.pdf</code> 转成 <code>*.esp</code> 文件</p><pre><code>pdftops -eps -level2 [pdfname] [epsname]
-</code></pre><h2 id=参考链接>参考链接</h2><p><a href=https://sites.google.com/site/xyzliwen/resource/embed_font_ieee_pdf_explore>https://sites.google.com/site/xyzliwen/resource/embed_font_ieee_pdf_explore</a></p><p><a href=http://www.mit.edu/~kimo/blog/matlab_figures.html>http://www.mit.edu/~kimo/blog/matlab_figures.html</a></p><p>​</p></li></ol></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
-<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
-<a href=https://wangshub.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98/>https://wangshub.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98/</span></p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
-<span class=tag><a href=https://wangshub.github.io/tags/latex/>#latex</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ class=prev rel=prev title=python装饰器学习笔记><i class="iconfont icon-left"></i>&nbsp;python装饰器学习笔记</a>
-<a href=https://wangshub.github.io/posts/cerebro%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%94%B5%E5%BD%B1%E7%A3%81%E5%8A%9B%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8/ class=next rel=next title=Cerebro插件之电影磁力搜索神器>Cerebro插件之电影磁力搜索神器&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
-<span itemprop=copyrightYear>2016 - 2020</span>
-<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
-<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="神奇的战士">
+    
+    
+    
+    <link rel="prev" href="https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+    <link rel="next" href="https://wangshub.github.io/posts/cerebro%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%94%B5%E5%BD%B1%E7%A3%81%E5%8A%9B%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8/" />
+    <link rel="canonical" href="https://wangshub.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            如何解决EDAS上传论文时fonts问题 | 🍉 神奇的战士
+        
+    </title>
+    <meta name="title" content="如何解决EDAS上传论文时fonts问题 | 🍉 神奇的战士">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wangshub.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "如何解决EDAS上传论文时fonts问题",
+    "headline" : "如何解决EDAS上传论文时fonts问题",
+    "description" : "如何解决 EDAS 上传论文时 PDF fonts 问题 问题描述 今天在上传 IEEE xplore 论文时遇到上传字体出错的问题 upload failed: One or more fonts are not embedded. See EDAS FAQ 解决办法 检查字体子集 在 EDAS 上传 Latex 输出的 PDF",
+    "inLanguage" : "zh-cn",
+    "author" : "神奇的战士",
+    "creator" : "神奇的战士",
+    "publisher": "神奇的战士",
+    "accountablePerson" : "神奇的战士",
+    "copyrightHolder" : "神奇的战士",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-02-10 17:29:54 \u002b0000 UTC",
+    "dateModified" : "2018-02-10 17:29:54 \u002b0000 UTC",
+    "url" : "https:\/\/wangshub.github.io\/posts\/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98\/",
+    "wordCount" : "399",
+    "keywords" : [ "latex", "🍉 神奇的战士"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://wangshub.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://wangshub.github.io">🍉 神奇的战士</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/categories/" title="">
+                            <h3>Categories</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">如何解决EDAS上传论文时fonts问题</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wangshub.github.io" rel="author">神奇的战士</a> with ♥
+                <span class="post-time">
+                on <time datetime=2018-02-10 itemprop="datePublished">February 10, 2018</time>
+                </span>
+                in
+                
+                <span class="post-word-count">399 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+            
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <h1 id="如何解决-edas-上传论文时-pdf-fonts-问题">如何解决 EDAS 上传论文时 PDF fonts 问题</h1>
+<h2 id="问题描述">问题描述</h2>
+<p>今天在上传 <strong>IEEE xplore</strong> 论文时遇到上传字体出错的问题</p>
+<pre><code>upload failed: One or more fonts are not embedded. See EDAS FAQ
+</code></pre><p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fo91n03t4pj20z1079t8y.jpg" alt=""></p>
+<h2 id="解决办法">解决办法</h2>
+<h3 id="检查字体子集">检查字体子集</h3>
+<p>在  <strong>EDAS</strong> 上传  <strong>Latex</strong>  输出的 PDF 文档时，需要检查 PDF 文档的中所有的字体是否是都是 <strong>已嵌入子集</strong>，检查方式是：</p>
+<ol>
+<li>用 <code>Acrobat pdf</code>或 <code>Foxit PDF</code>工具打开待检查的 PDF 文件 <code>paper.pdf</code></li>
+<li>打开 <code>文件(file)-&gt;属性(property)-&gt;字体(fonts)</code></li>
+<li>查看所有的字体是否是<strong>已嵌入</strong>或者<strong>已嵌入子集</strong></li>
+</ol>
+<h3 id="更改字体">更改字体</h3>
+<p>如果出现未嵌入的子集</p>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fo91n01ymzj209k060743.jpg" alt="helvitica" loading="lazy" ></p>
+<p><code>helvitica</code>字体未嵌入的原因是论文中使用了<strong>Matlab</strong>生成的图像，<strong>Matlab</strong> 默认使用了 <code>Helvetica</code> 字体，Latex 在引用该图片时，也默认使用了 <code>Helvetica</code> 字体，导致生成的 PDF 文件不能将这个字体嵌入。</p>
+<p><strong>解决步骤：</strong></p>
+<ol>
+<li>
+<p>如果是引用的图片是pdf格式，需要使用 <code>shell</code> 命令<code>ps2pdf13</code>，将<code>Helvetica</code> 进行转化</p>
+<pre><code>ps2pdf13 -dPDFSETTINGS=/prepress fig_non_embedded.pdf fig_embedded.pdf
+</code></pre></li>
+<li>
+<p>如果你需要嵌入 <code>*.esp</code>图片文件到你的 Latex 文章中，还需要将<strong>步骤1</strong>中的 <code>*.pdf</code> 转成 <code>*.esp</code> 文件</p>
+<pre><code>pdftops -eps -level2 [pdfname] [epsname]
+</code></pre><h2 id="参考链接">参考链接</h2>
+<p><a href="https://sites.google.com/site/xyzliwen/resource/embed_font_ieee_pdf_explore">https://sites.google.com/site/xyzliwen/resource/embed_font_ieee_pdf_explore</a></p>
+<p><a href="http://www.mit.edu/~kimo/blog/matlab_figures.html">http://www.mit.edu/~kimo/blog/matlab_figures.html</a></p>
+<p>​</p>
+</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>神奇的战士 </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wangshub.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98/>https://wangshub.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98/</span>
+            </p>
+            
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s):
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/latex/">
+                    #latex</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://wangshub.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="prev" rel="prev" title="python装饰器学习笔记"><i class="iconfont icon-left"></i>&nbsp;python装饰器学习笔记</a>
+        
+        
+        <a href="https://wangshub.github.io/posts/cerebro%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%94%B5%E5%BD%B1%E7%A3%81%E5%8A%9B%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8/" class="next" rel="next" title="Cerebro插件之电影磁力搜索神器">Cerebro插件之电影磁力搜索神器&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2016 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wangshub.github.io">神奇的战士</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+        </div>
+    </body>
+</html>

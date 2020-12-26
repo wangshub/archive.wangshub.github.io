@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Douyin on 🍉 神奇的战士</title><link>https://wangshub.github.io/tags/douyin/</link><description>Recent content in Douyin on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 20 Feb 2019 17:04:28 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/douyin/index.xml" rel="self" type="application/rss+xml"/><item><title>用Python给抖音小姐姐打声招呼</title><link>https://wangshub.github.io/posts/%E7%94%A8python%E7%BB%99%E6%8A%96%E9%9F%B3%E5%B0%8F%E5%A7%90%E5%A7%90%E6%89%93%E5%A3%B0%E6%8B%9B%E5%91%BC/</link><pubDate>Wed, 20 Feb 2019 17:04:28 +0000</pubDate><guid>https://wangshub.github.io/posts/%E7%94%A8python%E7%BB%99%E6%8A%96%E9%9F%B3%E5%B0%8F%E5%A7%90%E5%A7%90%E6%89%93%E5%A3%B0%E6%8B%9B%E5%91%BC/</guid><description>用 Python 自动给抖音小姐姐评论一个 666 前一段时间写了一篇 《抖音 Python 机器人，论如何在抖音上找到漂亮小姐姐？》，没想到有相当多的同学有着相同的需求！ 大家</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Douyin on 🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/tags/douyin/</link>
+    <description>Recent content in Douyin on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 20 Feb 2019 17:04:28 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/douyin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用Python给抖音小姐姐打声招呼</title>
+      <link>https://wangshub.github.io/posts/%E7%94%A8python%E7%BB%99%E6%8A%96%E9%9F%B3%E5%B0%8F%E5%A7%90%E5%A7%90%E6%89%93%E5%A3%B0%E6%8B%9B%E5%91%BC/</link>
+      <pubDate>Wed, 20 Feb 2019 17:04:28 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E7%94%A8python%E7%BB%99%E6%8A%96%E9%9F%B3%E5%B0%8F%E5%A7%90%E5%A7%90%E6%89%93%E5%A3%B0%E6%8B%9B%E5%91%BC/</guid>
+      <description>用 Python 自动给抖音小姐姐评论一个 666 前一段时间写了一篇 《抖音 Python 机器人，论如何在抖音上找到漂亮小姐姐？》，没想到有相当多的同学有着相同的需求！ 大家</description>
+    </item>
+    
+  </channel>
+</rss>

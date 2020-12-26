@@ -1,15 +1,53 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>🍉 神奇的战士</title><link>https://wangshub.github.io/</link><description>Recent content on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 28 Mar 2020 11:26:03 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/" rel="self" type="application/rss+xml"/><item><title>Posts</title><link>https://wangshub.github.io/posts/</link><pubDate>Sat, 28 Mar 2020 11:26:03 +0000</pubDate><guid>https://wangshub.github.io/posts/</guid><description/></item><item><title/><link>https://wangshub.github.io/archives/</link><pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate><guid>https://wangshub.github.io/archives/</guid><description/></item><item><title>About Me</title><link>https://wangshub.github.io/about/</link><pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate><guid>https://wangshub.github.io/about/</guid><description>&lt;img align="right" src="https://wangshub.github.io/image/avatar_artline.png" width="160px">
-&lt;p align="left">
-&lt;em> ❤️ 讨论是绝佳的反思 👻 &lt;/em>
-&lt;/p>
-&lt;p>&lt;strong>Contact me:&lt;/strong>&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="https://www.zhihu.com/people/da-bai-cai-97-60">💻 知乎@神奇的战士&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://www.github.com/wangshub">👨‍💻 Github@wangshub&lt;/a>&lt;/li>
-&lt;li>📧 邮箱：&lt;code>rocksong.hit[at]gmail.com&lt;/code>&lt;/li>
-&lt;li>🗣 公众号【神奇的战士】：&lt;code>thinkhardtech&lt;/code>&lt;/li>
-&lt;/ul>
-&lt;p>&lt;strong>My Github Chart:&lt;/strong>&lt;/p>
-&lt;!-- &lt;img align="center" src="https://github-readme-stats.vercel.app/api?username=wangshub&amp;show_icons=true&amp;theme=default" width="500px"> -->
-&lt;p>&lt;img src="https://ghchart.rshah.org/wangshub" alt="Github Activity">&lt;/p>
-&lt;img align="center" src="https://visitor-badge.glitch.me/badge?page_id=Github@wangshub" width="60px"></description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/</link>
+    <description>Recent content on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 28 Mar 2020 11:26:03 +0000</lastBuildDate>
+    <atom:link href="https://wangshub.github.io/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Posts</title>
+      <link>https://wangshub.github.io/posts/</link>
+      <pubDate>Sat, 28 Mar 2020 11:26:03 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://wangshub.github.io/archives/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/archives/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>About Me</title>
+      <link>https://wangshub.github.io/about/</link>
+      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/about/</guid>
+      <description>&lt;img align=&#34;right&#34; src=&#34;https://wangshub.github.io/image/avatar_artline.png&#34; width=&#34;160px&#34;&gt;
+&lt;p align=&#34;left&#34;&gt;
+    &lt;em&gt; ❤️ 讨论是绝佳的反思 🤔 &lt;/em&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Contact me:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.zhihu.com/people/da-bai-cai-97-60&#34;&gt;💻 知乎@神奇的战士&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.github.com/wangshub&#34;&gt;👨‍💻 Github@wangshub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;📧 邮箱：&lt;code&gt;rocksong.hit[at]gmail.com&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;🗣 公众号【神奇的战士】：&lt;code&gt;thinkhardtech&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;My Github Chart:&lt;/strong&gt;&lt;/p&gt;
+&lt;!-- &lt;img align=&#34;center&#34; src=&#34;https://github-readme-stats.vercel.app/api?username=wangshub&amp;show_icons=true&amp;theme=default&#34; width=&#34;500px&#34;&gt; --&gt;
+&lt;p&gt;&lt;img src=&#34;https://ghchart.rshah.org/wangshub&#34; alt=&#34;Github Activity&#34;&gt;&lt;/p&gt;
+&lt;img align=&#34;center&#34; src=&#34;https://visitor-badge.glitch.me/badge?page_id=Github@wangshub&#34; width=&#34;60px&#34;&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

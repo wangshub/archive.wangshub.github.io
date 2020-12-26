@@ -1,23 +1,361 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/><link rel=next href=https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/><link rel=canonical href=https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>用python对github用户followers分析 | 🍉 神奇的战士</title><meta name=title content="用python对github用户followers分析 | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"用python对github用户followers分析","headline":"用python对github用户followers分析","description":"github 用户 followers 分析 如何分析一个github用户的followers？ 周末手痒，用python分析了一下自己 github 的 followers 用户，统计结果如下 问题分析 在git","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2018","datePublished":"2018-01-15 09:40:16 \u002b0000 UTC","dateModified":"2018-01-15 09:40:16 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90\/","wordCount":"1231","keywords":["python","github","🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
-<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
-<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
-<a class=menu-item href=/categories/>Categories</a>
-<a class=menu-item href=/tags/>Tags</a>
-<a class=menu-item href=/about/>About</a>
-<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">用python对github用户followers分析</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
-<span class=post-time>on <time datetime=2018-01-15 itemprop=datePublished>January 15, 2018</time></span>
-in
-<span class=post-word-count>1231 words</span></div></header><div class=post-content><h1 id=github-用户-followers-分析>github 用户 followers 分析</h1><p><strong>如何分析一个github用户的followers？</strong></p><p>周末手痒，用python分析了一下自己 <a href=https://github.com/wangshub>github</a> 的 <strong>followers</strong> 用户，统计结果如下</p><h2 id=问题分析>问题分析</h2><p>在github上，一个用户的主页显示如下，主要对如下用户信息进行提取</p><ul><li>用户名称</li><li>所在的位置</li><li>用户仓库、stars、Followers、Following数量</li><li>去年一年的贡献度</li></ul><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fngknl9cckj20uh0g6wfm.jpg alt></p><p>我们需要对上图红框里面的数据进行提取，最直接的方法是使用<code>requests</code>，通过<code>BeautifulSoup</code>对<code>html</code>中的信息进行提取。</p><h2 id=一些弯路>一些弯路</h2><p>最开始没打算用爬虫的方式来获取用户信息，因为github有公开的<a href=https://developer.github.com/v3/>REST API v3</a>可以对指定用户的信息进行访问，并且已经有打包好的<a href=https://github.com/PyGithub/PyGithub>PyGithub</a>方便调用。但是我实验下来有如下问题所以放弃使用<a href=https://developer.github.com/v3/>REST API v3</a></p><ol><li>API请求频率有限制，无法运用多线程快速获取批量的用户信息</li><li>不知道是不是小BUG，通过API无法获得用户去年一年的贡献度<strong>contributions</strong></li></ol><h2 id=工具>工具</h2><ul><li><strong>python 3</strong> ： 彻底告别我的py2</li><li><strong>BeaufulSoup</strong> ：从HTML或XML文件中提取数据</li><li><strong>Requests</strong> ： 请求网页</li><li><strong>多进程</strong> ： 为了更快</li><li><strong>pyecharts</strong> ： 美的令人窒息的绘图工具</li></ul><h2 id=操作步骤>操作步骤</h2><ol><li>获取目标用户如<code>https://github.com/wangshub?page=1&tab=followers</code>的所有followers；</li><li>改变<code>page</code>编号，遍历所有用户；</li><li>提取用户关键信息，保存成<code>csv</code>文件；</li><li>数据清洗，过滤；</li><li>利用<a href=https://github.com/pyecharts/pyecharts>pyecharts</a>绘图；</li><li>进行地点词频统计；</li></ol><h2 id=实验结果>实验结果</h2><p>截止<code>2018-01-15</code>,我的github账号一共有<code>1214</code>名follower，分析结果如下</p><h3 id=用户地点分析>用户地点分析</h3><p>排除掉没有填写地点信息的用户，将中文转化成pinyin后，词云如下</p><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fngljy93kjj20rs0nwtdv.jpg alt></p><p>用户基本上都是来自<code>北京、上海、深圳</code>等地</p><h3 id=去年一年用户贡献度分析>去年一年用户贡献度分析</h3><p>如果看用户是否活跃，肯定是看<code>contributions</code>啦</p><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fngln8yfgij20m80b4t94.jpg alt></p><p>可以看出超过一般多的用户，去年的贡献度都在都在 <strong>1~50</strong> 之间，新的一年要加油啦。其中一年贡献最多的用户是<a href=https://github.com/dragon-yuan>@dragon-yuan</a>, 在2017年有整整 <strong>4,197</strong> 个贡献度，不多说了，前去关注一波。</p><h3 id=用户followers分析>用户followers分析</h3><p>哇，有大牛，别拦着我，我要去点关注了</p><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fngmed2kovj20m80b474m.jpg alt></p><h3 id=用户仓库数量分析>用户仓库数量分析</h3><p>通过爬取用户的仓库数量，进行统计如下</p><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fnglp9onenj20m80b4jrs.jpg alt></p><p>可以看到一个有意思的现象，有少数的人仓库数量超过了<strong>1000</strong>，打开这几位仁兄的github主页，大部分是fork的项目，其中仓库最多的用户有<strong>13100个</strong>仓库，叫<a href=https://github.com/ProgrammerAndHacker>@ProgrammerAndHacker</a>，他是这么介绍自己的</p><pre><code>I follow best programmer and hacker， 
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="神奇的战士">
+    
+    
+    
+    <link rel="prev" href="https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/" />
+    <link rel="next" href="https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+    <link rel="canonical" href="https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            用python对github用户followers分析 | 🍉 神奇的战士
+        
+    </title>
+    <meta name="title" content="用python对github用户followers分析 | 🍉 神奇的战士">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wangshub.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "用python对github用户followers分析",
+    "headline" : "用python对github用户followers分析",
+    "description" : "github 用户 followers 分析 如何分析一个github用户的followers？ 周末手痒，用python分析了一下自己 github 的 followers 用户，统计结果如下 问题分析 在git",
+    "inLanguage" : "zh-cn",
+    "author" : "神奇的战士",
+    "creator" : "神奇的战士",
+    "publisher": "神奇的战士",
+    "accountablePerson" : "神奇的战士",
+    "copyrightHolder" : "神奇的战士",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-01-15 09:40:16 \u002b0000 UTC",
+    "dateModified" : "2018-01-15 09:40:16 \u002b0000 UTC",
+    "url" : "https:\/\/wangshub.github.io\/posts\/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90\/",
+    "wordCount" : "1231",
+    "keywords" : [ "python","github", "🍉 神奇的战士"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://wangshub.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://wangshub.github.io">🍉 神奇的战士</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/categories/" title="">
+                            <h3>Categories</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">用python对github用户followers分析</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wangshub.github.io" rel="author">神奇的战士</a> with ♥
+                <span class="post-time">
+                on <time datetime=2018-01-15 itemprop="datePublished">January 15, 2018</time>
+                </span>
+                in
+                
+                <span class="post-word-count">1231 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+            
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <h1 id="github-用户-followers-分析">github 用户 followers 分析</h1>
+<p><strong>如何分析一个github用户的followers？</strong></p>
+<p>周末手痒，用python分析了一下自己 <a href="https://github.com/wangshub">github</a> 的 <strong>followers</strong> 用户，统计结果如下</p>
+<h2 id="问题分析">问题分析</h2>
+<p>在github上，一个用户的主页显示如下，主要对如下用户信息进行提取</p>
+<ul>
+<li>用户名称</li>
+<li>所在的位置</li>
+<li>用户仓库、stars、Followers、Following数量</li>
+<li>去年一年的贡献度</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngknl9cckj20uh0g6wfm.jpg" alt=""></p>
+<p>我们需要对上图红框里面的数据进行提取，最直接的方法是使用<code>requests</code>，通过<code>BeautifulSoup</code>对<code>html</code>中的信息进行提取。</p>
+<h2 id="一些弯路">一些弯路</h2>
+<p>最开始没打算用爬虫的方式来获取用户信息，因为github有公开的<a href="https://developer.github.com/v3/">REST API v3</a>可以对指定用户的信息进行访问，并且已经有打包好的<a href="https://github.com/PyGithub/PyGithub">PyGithub</a>方便调用。但是我实验下来有如下问题所以放弃使用<a href="https://developer.github.com/v3/">REST API v3</a></p>
+<ol>
+<li>API请求频率有限制，无法运用多线程快速获取批量的用户信息</li>
+<li>不知道是不是小BUG，通过API无法获得用户去年一年的贡献度<strong>contributions</strong></li>
+</ol>
+<h2 id="工具">工具</h2>
+<ul>
+<li><strong>python 3</strong> ： 彻底告别我的py2</li>
+<li><strong>BeaufulSoup</strong> ：从HTML或XML文件中提取数据</li>
+<li><strong>Requests</strong> ： 请求网页</li>
+<li><strong>多进程</strong> ： 为了更快</li>
+<li><strong>pyecharts</strong> ： 美的令人窒息的绘图工具</li>
+</ul>
+<h2 id="操作步骤">操作步骤</h2>
+<ol>
+<li>获取目标用户如<code>https://github.com/wangshub?page=1&amp;tab=followers</code>的所有followers；</li>
+<li>改变<code>page</code>编号，遍历所有用户；</li>
+<li>提取用户关键信息，保存成<code>csv</code>文件；</li>
+<li>数据清洗，过滤；</li>
+<li>利用<a href="https://github.com/pyecharts/pyecharts">pyecharts</a>绘图；</li>
+<li>进行地点词频统计；</li>
+</ol>
+<h2 id="实验结果">实验结果</h2>
+<p>截止<code>2018-01-15</code>,我的github账号一共有<code>1214</code>名follower，分析结果如下</p>
+<h3 id="用户地点分析">用户地点分析</h3>
+<p>排除掉没有填写地点信息的用户，将中文转化成pinyin后，词云如下</p>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngljy93kjj20rs0nwtdv.jpg" alt=""></p>
+<p>用户基本上都是来自<code>北京、上海、深圳</code>等地</p>
+<h3 id="去年一年用户贡献度分析">去年一年用户贡献度分析</h3>
+<p>如果看用户是否活跃，肯定是看<code>contributions</code>啦</p>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngln8yfgij20m80b4t94.jpg" alt=""></p>
+<p>可以看出超过一般多的用户，去年的贡献度都在都在 <strong>1~50</strong> 之间，新的一年要加油啦。其中一年贡献最多的用户是<a href="https://github.com/dragon-yuan">@dragon-yuan</a>, 在2017年有整整 <strong>4,197</strong> 个贡献度，不多说了，前去关注一波。</p>
+<h3 id="用户followers分析">用户followers分析</h3>
+<p>哇，有大牛，别拦着我，我要去点关注了</p>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngmed2kovj20m80b474m.jpg" alt=""></p>
+<h3 id="用户仓库数量分析">用户仓库数量分析</h3>
+<p>通过爬取用户的仓库数量，进行统计如下</p>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fnglp9onenj20m80b4jrs.jpg" alt=""></p>
+<p>可以看到一个有意思的现象，有少数的人仓库数量超过了<strong>1000</strong>，打开这几位仁兄的github主页，大部分是fork的项目，其中仓库最多的用户有<strong>13100个</strong>仓库，叫<a href="https://github.com/ProgrammerAndHacker">@ProgrammerAndHacker</a>，他是这么介绍自己的</p>
+<pre><code>I follow best programmer and hacker， 
 Do you want to hacked by them? ^_^ 
 Best programmers and hackers are here: 
 ...
-</code></pre><h3 id=用户stars分析>用户stars分析</h3><p>都说点击star是一个好习惯，</p><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fngm1vx9oij20m80b4dg8.jpg alt></p><p>不得不说，github上面还是有点赞狂魔的，这位老铁<a href=https://github.com/chenruibin>@chenruibin</a>一共点击了<code>10100</code>个赞，真是好习惯～</p><h3 id=用户-following-分析>用户 following 分析</h3><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fngm814cbgj20m80b43yw.jpg alt></p><p>同样是<a href=https://github.com/ProgrammerAndHacker>@ProgrammerAndHacker</a>这位仁兄，一共follow了<strong>19600</strong>个用户，严重怀疑是不是机器人。</p><h2 id=最后>最后</h2><p>不搞了，我要去写论文了TAT，要代码的，来这里找<a href=https://github.com/wangshub/who_is_following>https://github.com/wangshub/who_is_following</a></p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
-<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
-<a href=https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/>https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/</span></p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
-<span class=tag><a href=https://wangshub.github.io/tags/python/>#python</a></span>
-<span class=tag><a href=https://wangshub.github.io/tags/github/>#github</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/ class=prev rel=prev title=教你用Python来玩微信跳一跳><i class="iconfont icon-left"></i>&nbsp;教你用Python来玩微信跳一跳</a>
-<a href=https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ class=next rel=next title=python装饰器学习笔记>python装饰器学习笔记&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
-<span itemprop=copyrightYear>2016 - 2020</span>
-<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
-<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>
+</code></pre><h3 id="用户stars分析">用户stars分析</h3>
+<p>都说点击star是一个好习惯，</p>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngm1vx9oij20m80b4dg8.jpg" alt=""></p>
+<p>不得不说，github上面还是有点赞狂魔的，这位老铁<a href="https://github.com/chenruibin">@chenruibin</a>一共点击了<code>10100</code>个赞，真是好习惯～</p>
+<h3 id="用户-following-分析">用户 following 分析</h3>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fngm814cbgj20m80b43yw.jpg" alt=""></p>
+<p>同样是<a href="https://github.com/ProgrammerAndHacker">@ProgrammerAndHacker</a>这位仁兄，一共follow了<strong>19600</strong>个用户，严重怀疑是不是机器人。</p>
+<h2 id="最后">最后</h2>
+<p>不搞了，我要去写论文了TAT，要代码的，来这里找<a href="https://github.com/wangshub/who_is_following">https://github.com/wangshub/who_is_following</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>神奇的战士 </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/>https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/</span>
+            </p>
+            
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s):
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/python/">
+                    #python</a></span>
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/github/">
+                    #github</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://wangshub.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/" class="prev" rel="prev" title="教你用Python来玩微信跳一跳"><i class="iconfont icon-left"></i>&nbsp;教你用Python来玩微信跳一跳</a>
+        
+        
+        <a href="https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="next" rel="next" title="python装饰器学习笔记">python装饰器学习笔记&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2016 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wangshub.github.io">神奇的战士</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+        </div>
+    </body>
+</html>

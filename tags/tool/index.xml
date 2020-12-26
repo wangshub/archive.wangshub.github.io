@@ -1,1 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tool on 🍉 神奇的战士</title><link>https://wangshub.github.io/tags/tool/</link><description>Recent content in tool on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 09 Jun 2018 09:58:48 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/tool/index.xml" rel="self" type="application/rss+xml"/><item><title>效率工具网站推荐</title><link>https://wangshub.github.io/posts/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/</link><pubDate>Sat, 09 Jun 2018 09:58:48 +0000</pubDate><guid>https://wangshub.github.io/posts/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/</guid><description>提升生活品质——个人效率工具与资讯网站推荐 这个世界上软件太多，懂你的工具太少； 我是个工具控，经常搜集和自己写一些工具和插件来提高生活品质； 本</description></item><item><title>从机sshfs访问主机文件系统</title><link>https://wangshub.github.io/posts/sshfs-mount-net-disk/</link><pubDate>Wed, 31 May 2017 21:16:00 +0000</pubDate><guid>https://wangshub.github.io/posts/sshfs-mount-net-disk/</guid><description>说明 需要在PC主机(Linux)上编写代码,每次都要将代码拷贝到从机(Linux)上编译运行程序.这里用到scp命令 scp -r /主机/文件 从机名@</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tool on 🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/tags/tool/</link>
+    <description>Recent content in tool on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 09 Jun 2018 09:58:48 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/tool/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>效率工具网站推荐</title>
+      <link>https://wangshub.github.io/posts/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/</link>
+      <pubDate>Sat, 09 Jun 2018 09:58:48 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/</guid>
+      <description>提升生活品质——个人效率工具与资讯网站推荐 这个世界上软件太多，懂你的工具太少； 我是个工具控，经常搜集和自己写一些工具和插件来提高生活品质； 本</description>
+    </item>
+    
+    <item>
+      <title>从机sshfs访问主机文件系统</title>
+      <link>https://wangshub.github.io/posts/sshfs-mount-net-disk/</link>
+      <pubDate>Wed, 31 May 2017 21:16:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/sshfs-mount-net-disk/</guid>
+      <description>说明 需要在PC主机(Linux)上编写代码,每次都要将代码拷贝到从机(Linux)上编译运行程序.这里用到scp命令 scp -r /主机/文件 从机名@</description>
+    </item>
+    
+  </channel>
+</rss>

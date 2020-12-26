@@ -1,61 +1,369 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/hello-world/><link rel=next href=https://wangshub.github.io/posts/atom-editor/><link rel=canonical href=https://wangshub.github.io/posts/cmake-tutorial/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>Cmake 模板 | 🍉 神奇的战士</title><meta name=title content="Cmake 模板 | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"Cmake 模板","headline":"Cmake 模板","description":"\u003cp\u003e\u003cimg src=\u0022https:\/\/ooo.0o0.ooo\/2017\/05\/25\/5925af646160e.png\u0022 alt=\u0022\u0022\u003e\u003c\/p\u003e","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2017","datePublished":"2017-05-25 00:03:34 \u002b0000 UTC","dateModified":"2017-05-25 00:03:34 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/cmake-tutorial\/","wordCount":"377","keywords":["Code","Linux","🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
-<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
-<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
-<a class=menu-item href=/categories/>Categories</a>
-<a class=menu-item href=/tags/>Tags</a>
-<a class=menu-item href=/about/>About</a>
-<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">Cmake 模板</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
-<span class=post-time>on <time datetime=2017-05-25 itemprop=datePublished>May 25, 2017</time></span>
-in
-<i class="iconfont icon-folder"></i><span class=post-category><a href=https://wangshub.github.io/categories/programming/>Programming,</a>
-<a href=https://wangshub.github.io/categories/linux/>Linux,</a>
-<a href=https://wangshub.github.io/categories/c/c++/>c/c++,</a></span>
-<span class=post-word-count>377 words</span></div></header><div class=post-content><p><img src=https://ooo.0o0.ooo/2017/05/25/5925af646160e.png alt></p><p>由于之前的代码Cmake写的比较混乱，库链接的不规范，今天花了一些时间，重写Cmakelist.txt，方便后来的开发。可以根据我的模板开始进行C/C++的项目开发.主要分下面几个方面</p><blockquote><ul><li>更新CMakeList.txt文件</li><li>改变头文件位置，索引文件夹</li><li>上传新的gitlab</li></ul></blockquote><h2 id=cmakelisttxt模板>CMakeList.txt模板</h2><h4 id=全局cmakelisttxt文件>全局CMakeList.txt文件</h4><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cmake data-lang=cmake><span style=color:#75715e># CMake 最低版本号要求
-</span><span style=color:#75715e></span>cmake_minimum_required (<span style=color:#e6db74>VERSION</span> <span style=color:#e6db74>2.8</span>)<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#75715e># 项目信息
-</span><span style=color:#75715e></span>project (<span style=color:#e6db74>aelos1s</span>)<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#75715e># sys dir
-</span><span style=color:#75715e></span>find_package (<span style=color:#e6db74>Threads</span>)<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#75715e># 查找目录下的所有源文件
-</span><span style=color:#75715e># 并将名称保存到 DIR_SRCS 变量
-</span><span style=color:#75715e></span>aux_source_directory(<span style=color:#e6db74>.</span> <span style=color:#e6db74>DIR_SRCS</span>)<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#75715e># 添加 math 子目录
-</span><span style=color:#75715e></span>add_subdirectory(<span style=color:#e6db74>math</span>)<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span>add_subdirectory(<span style=color:#e6db74>lib</span>)<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#75715e># 指定生成目标
-</span><span style=color:#75715e></span>add_executable(<span style=color:#e6db74>aelos</span> <span style=color:#f92672>${</span>DIR_SRCS<span style=color:#f92672>}</span>)<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#75715e># 添加链接库
-</span><span style=color:#75715e># 生成链接库
-</span><span style=color:#75715e></span>target_link_libraries(<span style=color:#e6db74>aelos</span> <span style=color:#e6db74>aeloslib</span>)<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#75715e># 多线程链接库
-</span><span style=color:#75715e></span>target_link_libraries (<span style=color:#e6db74>aelos</span> <span style=color:#f92672>${</span>CMAKE_THREAD_LIBS_INIT<span style=color:#f92672>}</span>)<span style=color:#960050;background-color:#1e0010>
-</span><span style=color:#960050;background-color:#1e0010>
-</span></code></pre></div><h4 id=头文件库cmakelisttxt文件>头文件库CMakeList.txt文件</h4><pre><code># 查找当前目录下的所有源文件
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="神奇的战士">
+    
+    
+    
+    <link rel="prev" href="https://wangshub.github.io/posts/hello-world/" />
+    <link rel="next" href="https://wangshub.github.io/posts/atom-editor/" />
+    <link rel="canonical" href="https://wangshub.github.io/posts/cmake-tutorial/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            Cmake 模板 | 🍉 神奇的战士
+        
+    </title>
+    <meta name="title" content="Cmake 模板 | 🍉 神奇的战士">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wangshub.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "Cmake 模板",
+    "headline" : "Cmake 模板",
+    "description" : "\u003cp\u003e\u003cimg src=\u0022https:\/\/ooo.0o0.ooo\/2017\/05\/25\/5925af646160e.png\u0022 alt=\u0022\u0022\u003e\u003c\/p\u003e",
+    "inLanguage" : "zh-cn",
+    "author" : "神奇的战士",
+    "creator" : "神奇的战士",
+    "publisher": "神奇的战士",
+    "accountablePerson" : "神奇的战士",
+    "copyrightHolder" : "神奇的战士",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-05-25 00:03:34 \u002b0000 UTC",
+    "dateModified" : "2017-05-25 00:03:34 \u002b0000 UTC",
+    "url" : "https:\/\/wangshub.github.io\/posts\/cmake-tutorial\/",
+    "wordCount" : "377",
+    "keywords" : [ "Code","Linux", "🍉 神奇的战士"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://wangshub.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://wangshub.github.io">🍉 神奇的战士</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/categories/" title="">
+                            <h3>Categories</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Cmake 模板</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wangshub.github.io" rel="author">神奇的战士</a> with ♥
+                <span class="post-time">
+                on <time datetime=2017-05-25 itemprop="datePublished">May 25, 2017</time>
+                </span>
+                in
+                
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        
+                        
+                        
+                          <a href="https://wangshub.github.io/categories/programming/"> Programming, </a>
+                        
+                        
+                        
+                        
+                          <a href="https://wangshub.github.io/categories/linux/"> Linux, </a>
+                        
+                        
+                        
+                        
+                          <a href="https://wangshub.github.io/categories/c/c&#43;&#43;/"> c/c&#43;&#43;, </a>
+                        
+                        
+                </span>
+                <span class="post-word-count">377 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+            
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <p><img src="https://ooo.0o0.ooo/2017/05/25/5925af646160e.png" alt=""></p>
+<p>由于之前的代码Cmake写的比较混乱，库链接的不规范，今天花了一些时间，重写Cmakelist.txt，方便后来的开发。可以根据我的模板开始进行C/C++的项目开发.主要分下面几个方面</p>
+<blockquote>
+<ul>
+<li>更新CMakeList.txt文件</li>
+<li>改变头文件位置，索引文件夹</li>
+<li>上传新的gitlab</li>
+</ul>
+</blockquote>
+<h2 id="cmakelisttxt模板">CMakeList.txt模板</h2>
+<h4 id="全局cmakelisttxt文件">全局CMakeList.txt文件</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake"><span style="color:#75715e"># CMake 最低版本号要求
+</span><span style="color:#75715e"></span>cmake_minimum_required (<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">2.8</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 项目信息
+</span><span style="color:#75715e"></span>project (<span style="color:#e6db74">aelos1s</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># sys dir
+</span><span style="color:#75715e"></span>find_package (<span style="color:#e6db74">Threads</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 查找目录下的所有源文件
+</span><span style="color:#75715e"># 并将名称保存到 DIR_SRCS 变量
+</span><span style="color:#75715e"></span>aux_source_directory(<span style="color:#e6db74">.</span> <span style="color:#e6db74">DIR_SRCS</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加 math 子目录
+</span><span style="color:#75715e"></span>add_subdirectory(<span style="color:#e6db74">math</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>add_subdirectory(<span style="color:#e6db74">lib</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 指定生成目标
+</span><span style="color:#75715e"></span>add_executable(<span style="color:#e6db74">aelos</span> <span style="color:#f92672">${</span>DIR_SRCS<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加链接库
+</span><span style="color:#75715e"># 生成链接库
+</span><span style="color:#75715e"></span>target_link_libraries(<span style="color:#e6db74">aelos</span> <span style="color:#e6db74">aeloslib</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 多线程链接库
+</span><span style="color:#75715e"></span>target_link_libraries (<span style="color:#e6db74">aelos</span> <span style="color:#f92672">${</span>CMAKE_THREAD_LIBS_INIT<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><h4 id="头文件库cmakelisttxt文件">头文件库CMakeList.txt文件</h4>
+<pre><code># 查找当前目录下的所有源文件
 # 并将名称保存到 DIR_LIB_SRCS 变量
 aux_source_directory(. DIR_LIB_SRCS)
 
 # 指定生成 aeloslib 链接库
 add_library (aeloslib ${DIR_LIB_SRCS})
 
-</code></pre><h4 id=工程目录结构>工程目录结构</h4><pre><code>the file structure is   
+</code></pre><h4 id="工程目录结构">工程目录结构</h4>
+<pre><code>the file structure is   
 |----main.cpp    #主程序    
 |----lib/        #*.cpp and *.h       
 |----build/      #可执行文件生成文件夹      
-</code></pre><h4 id=工程参考模板的github地址>工程参考模板的github地址</h4><blockquote><p><a href=https://github.com/wangshub/cmake>https://github.com/wangshub/cmake</a></p></blockquote></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
-<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
-<a href=https://wangshub.github.io/posts/cmake-tutorial/>https://wangshub.github.io/posts/cmake-tutorial/</span></p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
-<span class=tag><a href=https://wangshub.github.io/tags/code/>#Code</a></span>
-<span class=tag><a href=https://wangshub.github.io/tags/linux/>#Linux</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/hello-world/ class=prev rel=prev title="Hello World"><i class="iconfont icon-left"></i>&nbsp;Hello World</a>
-<a href=https://wangshub.github.io/posts/atom-editor/ class=next rel=next title="Atom editor">Atom editor&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
-<span itemprop=copyrightYear>2016 - 2020</span>
-<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
-<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>
+</code></pre><h4 id="工程参考模板的github地址">工程参考模板的github地址</h4>
+<blockquote>
+<p><a href="https://github.com/wangshub/cmake">https://github.com/wangshub/cmake</a></p>
+</blockquote>
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>神奇的战士 </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wangshub.github.io/posts/cmake-tutorial/>https://wangshub.github.io/posts/cmake-tutorial/</span>
+            </p>
+            
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s):
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/code/">
+                    #Code</a></span>
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/linux/">
+                    #Linux</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://wangshub.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wangshub.github.io/posts/hello-world/" class="prev" rel="prev" title="Hello World"><i class="iconfont icon-left"></i>&nbsp;Hello World</a>
+        
+        
+        <a href="https://wangshub.github.io/posts/atom-editor/" class="next" rel="next" title="Atom editor">Atom editor&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2016 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wangshub.github.io">神奇的战士</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+        </div>
+    </body>
+</html>

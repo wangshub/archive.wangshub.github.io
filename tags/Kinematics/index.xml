@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kinematics on 🍉 神奇的战士</title><link>https://wangshub.github.io/tags/kinematics/</link><description>Recent content in Kinematics on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 03 Dec 2019 20:47:54 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/kinematics/index.xml" rel="self" type="application/rss+xml"/><item><title>双连杆机械臂运动学正向和逆向 Python 仿真</title><link>https://wangshub.github.io/posts/kinematics-dh-method/</link><pubDate>Tue, 03 Dec 2019 20:47:54 +0000</pubDate><guid>https://wangshub.github.io/posts/kinematics-dh-method/</guid><description>双连杆机械臂运动学正向和逆向 Python 仿真 DH(Denavit-Hartenberg)方法 DH 方法描述了相邻坐标系之间的旋转与移动的关系，只需要找到 4</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kinematics on 🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/tags/kinematics/</link>
+    <description>Recent content in Kinematics on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 03 Dec 2019 20:47:54 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/kinematics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>双连杆机械臂运动学正向和逆向 Python 仿真</title>
+      <link>https://wangshub.github.io/posts/kinematics-dh-method/</link>
+      <pubDate>Tue, 03 Dec 2019 20:47:54 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/kinematics-dh-method/</guid>
+      <description>双连杆机械臂运动学正向和逆向 Python 仿真 DH(Denavit-Hartenberg)方法 DH 方法描述了相邻坐标系之间的旋转与移动的关系，只需要找到 4</description>
+    </item>
+    
+  </channel>
+</rss>

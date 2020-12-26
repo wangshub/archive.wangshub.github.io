@@ -1,23 +1,330 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/><link rel=next href=https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/><link rel=canonical href=https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>教你用Python来玩微信跳一跳 | 🍉 神奇的战士</title><meta name=title content="教你用Python来玩微信跳一跳 | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"教你用Python来玩微信跳一跳","headline":"教你用Python来玩微信跳一跳","description":"教你用Python来玩微信跳一跳 2017年12月28日下午，微信发布了 6.6.1 版本，加入了「小游戏」功能，并提供了官方 demo「跳一跳」。 blog 地址 github","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2017","datePublished":"2017-12-29 10:02:41 \u002b0000 UTC","dateModified":"2017-12-29 10:02:41 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3\/","wordCount":"461","keywords":["python","🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
-<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
-<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
-<a class=menu-item href=/categories/>Categories</a>
-<a class=menu-item href=/tags/>Tags</a>
-<a class=menu-item href=/about/>About</a>
-<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">教你用Python来玩微信跳一跳</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
-<span class=post-time>on <time datetime=2017-12-29 itemprop=datePublished>December 29, 2017</time></span>
-in
-<span class=post-word-count>461 words</span></div></header><div class=post-content><h1 id=教你用python来玩微信跳一跳>教你用Python来玩微信跳一跳</h1><blockquote><p>2017年12月28日下午，微信发布了 6.6.1 版本，加入了「小游戏」功能，并提供了官方 demo「跳一跳」。</p></blockquote><p><a href=https://wangshub.github.io>blog 地址</a></p><p><a href=https://github.com/wangshub/wechat_jump_game>github 地址</a></p><p><a href=https://zhuanlan.zhihu.com/p/32452473>知乎专栏</a></p><h2 id=游戏模式>游戏模式</h2><p>这是一个 2.5D 插画风格的益智游戏，玩家可以通过按压屏幕时间的长短来控制这个「小人」跳跃的距离。可能刚开始上手的时候，因为时间距离之间的关系把握不恰当，只能跳出几个就掉到了台子下面。
-玩法类似于《flappy bird》</p><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fmxe4gnfhnj20hs0a0t8q.jpg alt></p><p><strong>如果能精确测量出起始和目标点之间测距离，就可以估计按压的时间来精确跳跃？所以花2个小时写了一个python脚本进行验证</strong></p><h2 id=工具介绍>工具介绍</h2><ul><li>Python 2.7</li><li>Android 手机</li><li>Adb 驱动</li><li>Python Matplot绘图</li></ul><h2 id=原理说明>原理说明</h2><ol><li>将手机点击到《跳一跳》小程序界面；</li><li>用Adb 工具获取当前手机截图，并用adb将截图pull上来</li></ol><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>    adb shell screencap -p /sdcard/1.png
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="神奇的战士">
+    
+    
+    
+    <link rel="prev" href="https://wangshub.github.io/posts/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/" />
+    <link rel="next" href="https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/" />
+    <link rel="canonical" href="https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            教你用Python来玩微信跳一跳 | 🍉 神奇的战士
+        
+    </title>
+    <meta name="title" content="教你用Python来玩微信跳一跳 | 🍉 神奇的战士">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wangshub.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "教你用Python来玩微信跳一跳",
+    "headline" : "教你用Python来玩微信跳一跳",
+    "description" : "教你用Python来玩微信跳一跳 2017年12月28日下午，微信发布了 6.6.1 版本，加入了「小游戏」功能，并提供了官方 demo「跳一跳」。 blog 地址 github",
+    "inLanguage" : "zh-cn",
+    "author" : "神奇的战士",
+    "creator" : "神奇的战士",
+    "publisher": "神奇的战士",
+    "accountablePerson" : "神奇的战士",
+    "copyrightHolder" : "神奇的战士",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-12-29 10:02:41 \u002b0000 UTC",
+    "dateModified" : "2017-12-29 10:02:41 \u002b0000 UTC",
+    "url" : "https:\/\/wangshub.github.io\/posts\/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3\/",
+    "wordCount" : "461",
+    "keywords" : [ "python", "🍉 神奇的战士"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://wangshub.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://wangshub.github.io">🍉 神奇的战士</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/categories/" title="">
+                            <h3>Categories</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">教你用Python来玩微信跳一跳</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wangshub.github.io" rel="author">神奇的战士</a> with ♥
+                <span class="post-time">
+                on <time datetime=2017-12-29 itemprop="datePublished">December 29, 2017</time>
+                </span>
+                in
+                
+                <span class="post-word-count">461 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+            
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <h1 id="教你用python来玩微信跳一跳">教你用Python来玩微信跳一跳</h1>
+<blockquote>
+<p>2017年12月28日下午，微信发布了 6.6.1 版本，加入了「小游戏」功能，并提供了官方 demo「跳一跳」。</p>
+</blockquote>
+<p><a href="https://wangshub.github.io">blog 地址</a></p>
+<p><a href="https://github.com/wangshub/wechat_jump_game">github 地址</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/32452473">知乎专栏</a></p>
+<h2 id="游戏模式">游戏模式</h2>
+<p>这是一个 2.5D 插画风格的益智游戏，玩家可以通过按压屏幕时间的长短来控制这个「小人」跳跃的距离。可能刚开始上手的时候，因为时间距离之间的关系把握不恰当，只能跳出几个就掉到了台子下面。
+玩法类似于《flappy bird》</p>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fmxe4gnfhnj20hs0a0t8q.jpg" alt=""></p>
+<p><strong>如果能精确测量出起始和目标点之间测距离，就可以估计按压的时间来精确跳跃？所以花2个小时写了一个python脚本进行验证</strong></p>
+<h2 id="工具介绍">工具介绍</h2>
+<ul>
+<li>Python 2.7</li>
+<li>Android 手机</li>
+<li>Adb 驱动</li>
+<li>Python Matplot绘图</li>
+</ul>
+<h2 id="原理说明">原理说明</h2>
+<ol>
+<li>将手机点击到《跳一跳》小程序界面；</li>
+<li>用Adb 工具获取当前手机截图，并用adb将截图pull上来</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    adb shell screencap -p /sdcard/1.png
     adb pull /sdcard/1.png .
-</code></pre></div><ol start=3><li>用matplot显示截图；</li><li>用鼠标点击起始点和目标位置，计算像素距离；</li><li>根据像素距离，计算按压时间；</li><li>用Adb工具点击屏幕蓄力一跳；</li></ol><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>    adb shell input swipe x y x y time
-</code></pre></div><h2 id=实验结果>实验结果</h2><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fmxel5dkxvj20u01hcmzx.jpg alt></p><h2 id=todo>TODO</h2><p>可以对拉上来的图片进行颜色分割，识别小人和目标中心店，这样就不需要手动点击自动弹跳。
-事实证明，机器人比人更会玩儿游戏。</p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
-<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
-<a href=https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/>https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/</span></p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
-<span class=tag><a href=https://wangshub.github.io/tags/python/>#python</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/ class=prev rel=prev title=Python蔡英文facebook主页分析_by神奇的战士><i class="iconfont icon-left"></i>&nbsp;Python蔡英文facebook主页分析_by神奇的战士</a>
-<a href=https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/ class=next rel=next title=用python对github用户followers分析>用python对github用户followers分析&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
-<span itemprop=copyrightYear>2016 - 2020</span>
-<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
-<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>
+</code></pre></div><ol start="3">
+<li>用matplot显示截图；</li>
+<li>用鼠标点击起始点和目标位置，计算像素距离；</li>
+<li>根据像素距离，计算按压时间；</li>
+<li>用Adb工具点击屏幕蓄力一跳；</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    adb shell input swipe x y x y time
+</code></pre></div><h2 id="实验结果">实验结果</h2>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fmxel5dkxvj20u01hcmzx.jpg" alt=""></p>
+<h2 id="todo">TODO</h2>
+<p>可以对拉上来的图片进行颜色分割，识别小人和目标中心店，这样就不需要手动点击自动弹跳。
+事实证明，机器人比人更会玩儿游戏。</p>
+
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>神奇的战士 </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/>https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/</span>
+            </p>
+            
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s):
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/python/">
+                    #python</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://wangshub.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wangshub.github.io/posts/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/" class="prev" rel="prev" title="Python蔡英文facebook主页分析_by神奇的战士"><i class="iconfont icon-left"></i>&nbsp;Python蔡英文facebook主页分析_by神奇的战士</a>
+        
+        
+        <a href="https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/" class="next" rel="next" title="用python对github用户followers分析">用python对github用户followers分析&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2016 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wangshub.github.io">神奇的战士</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+        </div>
+    </body>
+</html>

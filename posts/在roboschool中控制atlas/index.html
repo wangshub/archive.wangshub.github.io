@@ -1,27 +1,343 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/turn-kindle-to-electron-clock/><link rel=next href=https://wangshub.github.io/posts/%E7%94%A8python%E5%86%99alfred3%E6%8F%92%E4%BB%B6/><link rel=canonical href=https://wangshub.github.io/posts/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>在roboschool中控制Atlas | 🍉 神奇的战士</title><meta name=title content="在roboschool中控制Atlas | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"在roboschool中控制Atlas","headline":"在roboschool中控制Atlas","description":"利用 Python 在 OpenAI 的 roboschool 中控制 Atlas 机器人 作者：神奇的战士 Blog: http:\/\/thinkhard.tech\/ 背景介绍 Atlas: Atlas 机器人是一个双足人形机器人，由\u0008鼎鼎大名的美国波士顿动力公司为主开发，身高 1.75 米，","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2018","datePublished":"2018-09-20 17:28:18 \u002b0000 UTC","dateModified":"2018-09-20 17:28:18 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas\/","wordCount":"925","keywords":["🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
-<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
-<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
-<a class=menu-item href=/categories/>Categories</a>
-<a class=menu-item href=/tags/>Tags</a>
-<a class=menu-item href=/about/>About</a>
-<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">在roboschool中控制Atlas</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
-<span class=post-time>on <time datetime=2018-09-20 itemprop=datePublished>September 20, 2018</time></span>
-in
-<span class=post-word-count>925 words</span></div></header><div class=post-content><h1 id=利用-python-在-openai-的-roboschool-中控制-atlas-机器人>利用 Python 在 OpenAI 的 roboschool 中控制 Atlas 机器人</h1><blockquote><p>作者：神奇的战士
-Blog: <a href=http://thinkhard.tech/>http://thinkhard.tech/</a></p></blockquote><h2 id=背景介绍>背景介绍</h2><ul><li><strong>Atlas</strong>: Atlas 机器人是一个双足人形机器人，由鼎鼎大名的美国波士顿动力公司为主开发，身高 1.75 米，体重 82kg，它的出现将人形机器人的发展带到了更高的高度。目前可以完成行走、跑步和翻跟头等一系列复杂的动作。作为机器人当中的贵族，价格自然不菲 T_T (更何况还买不到&mldr;)。所以只能通过<strong>仿真软件</strong>在里面过下干瘾。</li><li><strong>Roboschool</strong>: Roboschool 是基于 OpenAI Gym 强化学习仿真包的物理仿真引擎。由于 MuJuCo 不开源且收费，所以 OpenAI 的大佬们将 Roboschool 作为 MuJuCo 的替代品。可以在一个场景当中训练多个 Agent 并且完成一挑战任务。</li></ul><h2 id=软件环境安装>软件环境安装</h2><ul><li><a href=https://github.com/openai/roboschool>Rooboschool</a></li><li><a href=https://github.com/openai/gym>Gym</a></li></ul><h2 id=示例代码>示例代码</h2><p>在 2017 年 7 月 17 号，Roboschool 发布了 Version 1.1 版本，其中导入了 Atlat 机器人模型，相关新闻可见 <a href=https://github.com/openai/roboschool#news>NEWS</a></p><p>所以在安装好环境后，可以从 <a href=https://github.com/openai/roboschool/blob/master/agent_zoo/RoboschoolAtlasForwardWalk_v1_2017jul.py>RoboschoolAtlasForwardWalk_v1_2017jul.py</a> 中找到控制 Atlas 前进走路的源码。</p><ul><li><a href=https://github.com/openai/roboschool/blob/master/agent_zoo/RoboschoolAtlasForwardWalk_v1_2017jul.py>RoboschoolAtlasForwardWalk_v1_2017jul.py</a></li></ul><h2 id=仿真>仿真</h2><p>Python 运行代码，由于在 Train 的时候，没有对机器人上肢运动进行约束和优化，只关注了下肢的移动，最终训练的结果有点辣眼睛，我们可以看到一段魔性嚣张的步伐</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell> python3 RoboschoolAtlasForwardWalk_v1_2017jul.py  
-</code></pre></div><p><img src=./picture/atlas_run.gif alt></p><ul><li>鼠标左键 ： 旋转镜头</li><li>鼠标右键 ： 镜头平移</li><li>按键 <code>F1</code> : 开/关 慢动作</li><li>按键 <code>F2</code> : 隐藏/显示 仿真步数和累积 Rewards</li><li>按键 <code>F3</code> : 隐藏/显示 Action 和 Observation</li></ul><p>在 <a href=https://zhuanlan.zhihu.com/p/40673328>机器人强化学习之使用 OpenAI Gym 教程与笔记</a> 中介绍过使用导入 Gym 模型和查看 Observation 和 Action 的相关参数，对于 Atlas 也同样适用：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>import</span> roboschool
-<span style=color:#f92672>import</span> gym
-env <span style=color:#f92672>=</span> gym<span style=color:#f92672>.</span>make(<span style=color:#e6db74>&#34;RoboschoolAtlasForwardWalk-v1&#34;</span>)
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;action_space = &#39;</span>, env<span style=color:#f92672>.</span>action_space)
-<span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;observation_space = &#39;</span>, env<span style=color:#f92672>.</span>observation_space)
-</code></pre></div><p>输出</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>action_space <span style=color:#f92672>=</span> Box<span style=color:#f92672>(</span>30,<span style=color:#f92672>)</span>
-observation_space <span style=color:#f92672>=</span> Box<span style=color:#f92672>(</span>70,<span style=color:#f92672>)</span>
-</code></pre></div><p>从 <code>env.action_space</code> 和 <code>env.observation_space</code> 可知 Action 维度为 30，Observation 维度为 70。</p><ul><li>Action 可以理解为机器人有 30 个自由度，可以通过 PD 控制器控制关节角度；</li><li>Observation 为当前环境的观测向量；</li></ul><p>至于Atlas 机器人 Action 和 Observation 详细解释，在 Roboschool 的 Wiki 中没有相关说明，OpenAI 的开发者建议用户靠<strong>猜</strong>的方式来确定 :)。
-确定方式为</p><ol><li>修改 Roboschool 源码，将 <a href=https://github.com/openai/roboschool/blob/master/roboschool/gym_atlas.py#L21>gym_atlas.py</a> 重力修改为 0</li><li>按照排除法，控制变量 Action，然后 <code>env.step(action)</code> ，分别记下向量每个元素对应的自由度关节。</li></ol><h2 id=代码说明>代码说明</h2><p>Roboschool 开发者解释到由于强化学习训练 Atlas 走路的代码太杂乱了，所以暂时没有 Train 的代码，所以求人不如求己，后面得自己撸代码 ~ 总体思路是获得 weight 矩阵，即最佳 Policy，输入当前观测向量 Observation 获得下一步的 Action 向量来控制 Atlas 行走。</p><h2 id=总结>总结</h2><ul><li>Roboschool 这个项目适合验证一些简单的强化学习任务，对于新引入的模型支持得还不太友好。</li><li>基本上没有什么成体系的说明文档，所以需要靠多阅读 Roboschool 和 Gym 的 Python 源码来使用。</li></ul></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
-<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
-<a href=https://wangshub.github.io/posts/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas/>https://wangshub.github.io/posts/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/turn-kindle-to-electron-clock/ class=prev rel=prev title="将 Kindle 转换成文艺电子时钟"><i class="iconfont icon-left"></i>&nbsp;将 Kindle 转换成文艺电子时钟</a>
-<a href=https://wangshub.github.io/posts/%E7%94%A8python%E5%86%99alfred3%E6%8F%92%E4%BB%B6/ class=next rel=next title=用Python写Alfred3插件>用Python写Alfred3插件&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
-<span itemprop=copyrightYear>2016 - 2020</span>
-<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
-<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="神奇的战士">
+    
+    
+    
+    <link rel="prev" href="https://wangshub.github.io/posts/turn-kindle-to-electron-clock/" />
+    <link rel="next" href="https://wangshub.github.io/posts/%E7%94%A8python%E5%86%99alfred3%E6%8F%92%E4%BB%B6/" />
+    <link rel="canonical" href="https://wangshub.github.io/posts/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            在roboschool中控制Atlas | 🍉 神奇的战士
+        
+    </title>
+    <meta name="title" content="在roboschool中控制Atlas | 🍉 神奇的战士">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wangshub.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "在roboschool中控制Atlas",
+    "headline" : "在roboschool中控制Atlas",
+    "description" : "利用 Python 在 OpenAI 的 roboschool 中控制 Atlas 机器人 作者：神奇的战士 Blog: http:\/\/thinkhard.tech\/ 背景介绍 Atlas: Atlas 机器人是一个双足人形机器人，由\u0008鼎鼎大名的美国波士顿动力公司为主开发，身高 1.75 米，",
+    "inLanguage" : "zh-cn",
+    "author" : "神奇的战士",
+    "creator" : "神奇的战士",
+    "publisher": "神奇的战士",
+    "accountablePerson" : "神奇的战士",
+    "copyrightHolder" : "神奇的战士",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-09-20 17:28:18 \u002b0000 UTC",
+    "dateModified" : "2018-09-20 17:28:18 \u002b0000 UTC",
+    "url" : "https:\/\/wangshub.github.io\/posts\/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas\/",
+    "wordCount" : "925",
+    "keywords" : [  "🍉 神奇的战士"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://wangshub.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://wangshub.github.io">🍉 神奇的战士</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/categories/" title="">
+                            <h3>Categories</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">在roboschool中控制Atlas</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wangshub.github.io" rel="author">神奇的战士</a> with ♥
+                <span class="post-time">
+                on <time datetime=2018-09-20 itemprop="datePublished">September 20, 2018</time>
+                </span>
+                in
+                
+                <span class="post-word-count">925 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+            
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <h1 id="利用-python-在-openai-的-roboschool-中控制-atlas-机器人">利用 Python 在 OpenAI 的 roboschool 中控制 Atlas 机器人</h1>
+<blockquote>
+<p>作者：神奇的战士
+Blog: <a href="http://thinkhard.tech/">http://thinkhard.tech/</a></p>
+</blockquote>
+<h2 id="背景介绍">背景介绍</h2>
+<ul>
+<li><strong>Atlas</strong>: Atlas 机器人是一个双足人形机器人，由鼎鼎大名的美国波士顿动力公司为主开发，身高 1.75 米，体重 82kg，它的出现将人形机器人的发展带到了更高的高度。目前可以完成行走、跑步和翻跟头等一系列复杂的动作。作为机器人当中的贵族，价格自然不菲 T_T (更何况还买不到&hellip;)。所以只能通过<strong>仿真软件</strong>在里面过下干瘾。</li>
+<li><strong>Roboschool</strong>: Roboschool 是基于 OpenAI Gym 强化学习仿真包的物理仿真引擎。由于 MuJuCo 不开源且收费，所以 OpenAI 的大佬们将 Roboschool 作为 MuJuCo 的替代品。可以在一个场景当中训练多个 Agent 并且完成一挑战任务。</li>
+</ul>
+<h2 id="软件环境安装">软件环境安装</h2>
+<ul>
+<li><a href="https://github.com/openai/roboschool">Rooboschool</a></li>
+<li><a href="https://github.com/openai/gym">Gym</a></li>
+</ul>
+<h2 id="示例代码">示例代码</h2>
+<p>在 2017 年 7 月 17 号，Roboschool 发布了 Version 1.1 版本，其中导入了 Atlat 机器人模型，相关新闻可见 <a href="https://github.com/openai/roboschool#news">NEWS</a></p>
+<p>所以在安装好环境后，可以从 <a href="https://github.com/openai/roboschool/blob/master/agent_zoo/RoboschoolAtlasForwardWalk_v1_2017jul.py">RoboschoolAtlasForwardWalk_v1_2017jul.py</a> 中找到控制 Atlas 前进走路的源码。</p>
+<ul>
+<li><a href="https://github.com/openai/roboschool/blob/master/agent_zoo/RoboschoolAtlasForwardWalk_v1_2017jul.py">RoboschoolAtlasForwardWalk_v1_2017jul.py</a></li>
+</ul>
+<h2 id="仿真">仿真</h2>
+<p>Python 运行代码，由于在 Train 的时候，没有对机器人上肢运动进行约束和优化，只关注了下肢的移动，最终训练的结果有点辣眼睛，我们可以看到一段魔性嚣张的步伐</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> python3 RoboschoolAtlasForwardWalk_v1_2017jul.py  
+</code></pre></div><p><img src="./picture/atlas_run.gif" alt=""></p>
+<ul>
+<li>鼠标左键 ： 旋转镜头</li>
+<li>鼠标右键 ： 镜头平移</li>
+<li>按键 <code>F1</code> : 开/关 慢动作</li>
+<li>按键 <code>F2</code> : 隐藏/显示 仿真步数和累积 Rewards</li>
+<li>按键 <code>F3</code> : 隐藏/显示 Action 和 Observation</li>
+</ul>
+<p>在 <a href="https://zhuanlan.zhihu.com/p/40673328">机器人强化学习之使用 OpenAI Gym 教程与笔记</a> 中介绍过使用导入 Gym 模型和查看 Observation 和 Action 的相关参数，对于 Atlas 也同样适用：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> roboschool
+<span style="color:#f92672">import</span> gym
+env <span style="color:#f92672">=</span> gym<span style="color:#f92672">.</span>make(<span style="color:#e6db74">&#34;RoboschoolAtlasForwardWalk-v1&#34;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;action_space = &#39;</span>, env<span style="color:#f92672">.</span>action_space)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;observation_space = &#39;</span>, env<span style="color:#f92672">.</span>observation_space)
+</code></pre></div><p>输出</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">action_space <span style="color:#f92672">=</span> Box<span style="color:#f92672">(</span>30,<span style="color:#f92672">)</span>
+observation_space <span style="color:#f92672">=</span> Box<span style="color:#f92672">(</span>70,<span style="color:#f92672">)</span>
+</code></pre></div><p>从 <code>env.action_space</code> 和 <code>env.observation_space</code> 可知 Action 维度为 30，Observation 维度为 70。</p>
+<ul>
+<li>Action 可以理解为机器人有 30 个自由度，可以通过 PD 控制器控制关节角度；</li>
+<li>Observation 为当前环境的观测向量；</li>
+</ul>
+<p>至于Atlas 机器人 Action 和 Observation 详细解释，在 Roboschool 的 Wiki 中没有相关说明，OpenAI 的开发者建议用户靠<strong>猜</strong>的方式来确定 :)。
+确定方式为</p>
+<ol>
+<li>修改 Roboschool 源码，将 <a href="https://github.com/openai/roboschool/blob/master/roboschool/gym_atlas.py#L21">gym_atlas.py</a> 重力修改为 0</li>
+<li>按照排除法，控制变量 Action，然后 <code>env.step(action)</code> ，分别记下向量每个元素对应的自由度关节。</li>
+</ol>
+<h2 id="代码说明">代码说明</h2>
+<p>Roboschool 开发者解释到由于强化学习训练 Atlas 走路的代码太杂乱了，所以暂时没有 Train 的代码，所以求人不如求己，后面得自己撸代码 ~ 总体思路是获得 weight 矩阵，即最佳 Policy，输入当前观测向量 Observation 获得下一步的 Action 向量来控制 Atlas 行走。</p>
+<h2 id="总结">总结</h2>
+<ul>
+<li>Roboschool 这个项目适合验证一些简单的强化学习任务，对于新引入的模型支持得还不太友好。</li>
+<li>基本上没有什么成体系的说明文档，所以需要靠多阅读 Roboschool 和 Gym 的 Python 源码来使用。</li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>神奇的战士 </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wangshub.github.io/posts/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas/>https://wangshub.github.io/posts/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas/</span>
+            </p>
+            
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://wangshub.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wangshub.github.io/posts/turn-kindle-to-electron-clock/" class="prev" rel="prev" title="将 Kindle 转换成文艺电子时钟"><i class="iconfont icon-left"></i>&nbsp;将 Kindle 转换成文艺电子时钟</a>
+        
+        
+        <a href="https://wangshub.github.io/posts/%E7%94%A8python%E5%86%99alfred3%E6%8F%92%E4%BB%B6/" class="next" rel="next" title="用Python写Alfred3插件">用Python写Alfred3插件&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2016 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wangshub.github.io">神奇的战士</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+        </div>
+    </body>
+</html>

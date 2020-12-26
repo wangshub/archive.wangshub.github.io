@@ -1,31 +1,245 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/><link rel=next href=https://wangshub.github.io/posts/turn-kindle-to-electron-clock/><link rel=canonical href=https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>机器人强化学习之使用 OpenAI Gym 教程与笔记 | 🍉 神奇的战士</title><meta name=title content="机器人强化学习之使用 OpenAI Gym 教程与笔记 | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"机器人强化学习之使用 OpenAI Gym 教程与笔记","headline":"机器人强化学习之使用 OpenAI Gym 教程与笔记","description":"机器人强化学习之使用 OpenAI Gym 教程与笔记 除了试图直接去建立一个可以模拟成人大脑的程序之外， 为什么不试图建立一个可以模拟小孩大脑的程序呢?如果它接 受","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2018","datePublished":"2018-07-27 10:34:40 \u002b0000 UTC","dateModified":"2018-07-27 10:34:40 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0\/","wordCount":"1873","keywords":["🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
-<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
-<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
-<a class=menu-item href=/categories/>Categories</a>
-<a class=menu-item href=/tags/>Tags</a>
-<a class=menu-item href=/about/>About</a>
-<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">机器人强化学习之使用 OpenAI Gym 教程与笔记</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
-<span class=post-time>on <time datetime=2018-07-27 itemprop=datePublished>July 27, 2018</time></span>
-in
-<span class=post-word-count>1873 words</span></div></header><div class=post-content><h1 id=机器人强化学习之使用-openai-gym-教程与笔记>机器人强化学习之使用 OpenAI Gym 教程与笔记</h1><blockquote><p>除了试图直接去建立一个可以模拟成人大脑的程序之外， 为什么不试图建立一个可以模拟小孩大脑的程序呢?如果它接 受适当的教育，就会获得成人的大脑。 — 阿兰·图灵</p></blockquote><h2 id=介绍>介绍</h2><p>强化学习 (Reinforcement learning) 是机器学习的一个子领域用于制定决策和运动自由度控制。强化学习主要研究在复杂未知的环境中，智体(agent)实现某个目标。强化学习最引人入胜的两个特点是</p><ul><li><p>**强化学习非常通用，可以用来解决需要作出一些列决策的所有问题：**例如，训练机器人跑步和弹跳，制定商品价格和库存管理，玩 Atari 游戏和棋盘游戏等等。</p></li><li><p>**强化学习已经可以在许多复杂的环境中取得较好的实验结果：**例如 Deep RL 的 Alpha Go等</p></li></ul><p><a href=https://gym.openai.com/docs/>Gym</a> 是一个研究和开发强化学习相关算法的仿真平台。</p><ul><li>无需智体先验知识；</li><li>兼容常见的数值运算库如 TensorFlow、Theano 等</li></ul><h2 id=gym-的一个最小例子-cartpole-v0>Gym 的一个最小例子 <code>CartPole-v0</code></h2><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>import</span> gym
-env <span style=color:#f92672>=</span> gym<span style=color:#f92672>.</span>make(<span style=color:#e6db74>&#39;CartPole-v0&#39;</span>)
-env<span style=color:#f92672>.</span>reset()
-<span style=color:#66d9ef>for</span> _ <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>1000</span>):
-    env<span style=color:#f92672>.</span>render()
-    env<span style=color:#f92672>.</span>step(env<span style=color:#f92672>.</span>action_space<span style=color:#f92672>.</span>sample()) <span style=color:#75715e># take a random action</span>
-</code></pre></div><p><strong>运行效果</strong></p><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1ftmzl7ss9aj20a804a0sj.jpg alt></p><p>至此，第一个 Hello world 就算正式地跑起来了！</p><h2 id=观测observations>观测(Observations)</h2><p>在第一个小栗子中，使用了 <code>env.step()</code> 函数来对每一步进行仿真，在 Gym 中，<code>env.step()</code> 会返回 4 个参数：</p><ul><li><p><strong>观测</strong> Observation (Object)：当前 step 执行后，环境的观测(类型为对象)。例如，从相机获取的像素点，机器人各个关节的角度或棋盘游戏当前的状态等；</p></li><li><p><strong>奖励</strong> Reward (Float): 执行上一步动作(action)后，智体(agent)获得的奖励(浮点类型)，不同的环境中奖励值变化范围也不相同，但是强化学习的目标就是使得总奖励值最大；</p></li><li><p><strong>完成</strong> Done (Boolen): 表示是否需要将环境重置 <code>env.reset</code>。大多数情况下，当 <code>Done</code> 为 <code>True</code> 时，就表明当前回合(episode)或者试验(tial)结束。例如当机器人摔倒或者掉出台面，就应当终止当前回合进行重置(reset);</p></li><li><p><strong>信息</strong> Info (Dict): 针对调试过程的诊断信息。在标准的智体仿真评估当中不会使用到这个 info，具体用到的时候再说。</p></li></ul><p>总结来说，这就是一个强化学习的基本流程，在每个时间点上，智体执行 action，环境返回上一次 action 的观测和奖励，用图表示为</p><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1ftn0jm54q0j20gm082t8y.jpg alt=智体与环境交互 loading=lazy></p><p>在 Gym 仿真中，每一次回合开始，需要先执行 <code>reset()</code> 函数，返回初始观测信息，然后根据标志位 <code>done</code> 的状态，来决定是否进行下一次回合。代码表示为</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>import</span> gym
-env <span style=color:#f92672>=</span> gym<span style=color:#f92672>.</span>make(<span style=color:#e6db74>&#39;CartPole-v0&#39;</span>)
-<span style=color:#66d9ef>for</span> i_episode <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>20</span>):
-    observation <span style=color:#f92672>=</span> env<span style=color:#f92672>.</span>reset()
-    <span style=color:#66d9ef>for</span> t <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>100</span>):
-        env<span style=color:#f92672>.</span>render()
-        <span style=color:#66d9ef>print</span>(observation)
-        action <span style=color:#f92672>=</span> env<span style=color:#f92672>.</span>action_space<span style=color:#f92672>.</span>sample()
-        observation, reward, done, info <span style=color:#f92672>=</span> env<span style=color:#f92672>.</span>step(action)
-        <span style=color:#66d9ef>if</span> done:
-            <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#34;Episode finished after {} timesteps&#34;</span><span style=color:#f92672>.</span>format(t<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>))
-            <span style=color:#66d9ef>break</span>
-</code></pre></div><p>仿真截图如下</p><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fto3j0pf0yj20go0bqdfu.jpg alt></p><p>每次 <code>action</code> 前，将上一次 <code>observation</code> 打印，可以得到打印日志如下</p><pre><code>[ 0.0349103   1.14771978 -0.03934506 -1.64631971]
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="神奇的战士">
+    
+    
+    
+    <link rel="prev" href="https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" />
+    <link rel="next" href="https://wangshub.github.io/posts/turn-kindle-to-electron-clock/" />
+    <link rel="canonical" href="https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            机器人强化学习之使用 OpenAI Gym 教程与笔记 | 🍉 神奇的战士
+        
+    </title>
+    <meta name="title" content="机器人强化学习之使用 OpenAI Gym 教程与笔记 | 🍉 神奇的战士">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wangshub.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "机器人强化学习之使用 OpenAI Gym 教程与笔记",
+    "headline" : "机器人强化学习之使用 OpenAI Gym 教程与笔记",
+    "description" : "机器人强化学习之使用 OpenAI Gym 教程与笔记 除了试图直接去建立一个可以模拟成人大脑的程序之外， 为什么不试图建立一个可以模拟小孩大脑的程序呢?如果它接 受",
+    "inLanguage" : "zh-cn",
+    "author" : "神奇的战士",
+    "creator" : "神奇的战士",
+    "publisher": "神奇的战士",
+    "accountablePerson" : "神奇的战士",
+    "copyrightHolder" : "神奇的战士",
+    "copyrightYear" : "2018",
+    "datePublished": "2018-07-27 10:34:40 \u002b0000 UTC",
+    "dateModified" : "2018-07-27 10:34:40 \u002b0000 UTC",
+    "url" : "https:\/\/wangshub.github.io\/posts\/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0\/",
+    "wordCount" : "1873",
+    "keywords" : [  "🍉 神奇的战士"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://wangshub.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://wangshub.github.io">🍉 神奇的战士</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/categories/" title="">
+                            <h3>Categories</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">机器人强化学习之使用 OpenAI Gym 教程与笔记</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wangshub.github.io" rel="author">神奇的战士</a> with ♥
+                <span class="post-time">
+                on <time datetime=2018-07-27 itemprop="datePublished">July 27, 2018</time>
+                </span>
+                in
+                
+                <span class="post-word-count">1873 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+            
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <h1 id="机器人强化学习之使用-openai-gym-教程与笔记">机器人强化学习之使用 OpenAI Gym 教程与笔记</h1>
+<blockquote>
+<p>除了试图直接去建立一个可以模拟成人大脑的程序之外， 为什么不试图建立一个可以模拟小孩大脑的程序呢?如果它接 受适当的教育，就会获得成人的大脑。 — 阿兰·图灵</p>
+</blockquote>
+<h2 id="介绍">介绍</h2>
+<p>强化学习 (Reinforcement learning) 是机器学习的一个子领域用于制定决策和运动自由度控制。强化学习主要研究在复杂未知的环境中，智体(agent)实现某个目标。强化学习最引人入胜的两个特点是</p>
+<ul>
+<li>
+<p>**强化学习非常通用，可以用来解决需要作出一些列决策的所有问题：**例如，训练机器人跑步和弹跳，制定商品价格和库存管理，玩 Atari 游戏和棋盘游戏等等。</p>
+</li>
+<li>
+<p>**强化学习已经可以在许多复杂的环境中取得较好的实验结果：**例如 Deep RL 的 Alpha Go等</p>
+</li>
+</ul>
+<p><a href="https://gym.openai.com/docs/">Gym</a> 是一个研究和开发强化学习相关算法的仿真平台。</p>
+<ul>
+<li>无需智体先验知识；</li>
+<li>兼容常见的数值运算库如 TensorFlow、Theano 等</li>
+</ul>
+<h2 id="gym-的一个最小例子-cartpole-v0">Gym 的一个最小例子 <code>CartPole-v0</code></h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> gym
+env <span style="color:#f92672">=</span> gym<span style="color:#f92672">.</span>make(<span style="color:#e6db74">&#39;CartPole-v0&#39;</span>)
+env<span style="color:#f92672">.</span>reset()
+<span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1000</span>):
+    env<span style="color:#f92672">.</span>render()
+    env<span style="color:#f92672">.</span>step(env<span style="color:#f92672">.</span>action_space<span style="color:#f92672">.</span>sample()) <span style="color:#75715e"># take a random action</span>
+</code></pre></div><p><strong>运行效果</strong></p>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1ftmzl7ss9aj20a804a0sj.jpg" alt=""></p>
+<p>至此，第一个 Hello world 就算正式地跑起来了！</p>
+<h2 id="观测observations">观测(Observations)</h2>
+<p>在第一个小栗子中，使用了 <code>env.step()</code> 函数来对每一步进行仿真，在 Gym 中，<code>env.step()</code> 会返回 4 个参数：</p>
+<ul>
+<li>
+<p><strong>观测</strong> Observation (Object)：当前 step 执行后，环境的观测(类型为对象)。例如，从相机获取的像素点，机器人各个关节的角度或棋盘游戏当前的状态等；</p>
+</li>
+<li>
+<p><strong>奖励</strong> Reward (Float): 执行上一步动作(action)后，智体(agent)获得的奖励(浮点类型)，不同的环境中奖励值变化范围也不相同，但是强化学习的目标就是使得总奖励值最大；</p>
+</li>
+<li>
+<p><strong>完成</strong> Done (Boolen): 表示是否需要将环境重置 <code>env.reset</code>。大多数情况下，当 <code>Done</code> 为 <code>True</code> 时，就表明当前回合(episode)或者试验(tial)结束。例如当机器人摔倒或者掉出台面，就应当终止当前回合进行重置(reset);</p>
+</li>
+<li>
+<p><strong>信息</strong> Info (Dict): 针对调试过程的诊断信息。在标准的智体仿真评估当中不会使用到这个 info，具体用到的时候再说。</p>
+</li>
+</ul>
+<p>总结来说，这就是一个强化学习的基本流程，在每个时间点上，智体执行 action，环境返回上一次 action 的观测和奖励，用图表示为</p>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1ftn0jm54q0j20gm082t8y.jpg" alt="智体与环境交互" loading="lazy" ></p>
+<p>在 Gym 仿真中，每一次回合开始，需要先执行 <code>reset()</code> 函数，返回初始观测信息，然后根据标志位 <code>done</code> 的状态，来决定是否进行下一次回合。代码表示为</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> gym
+env <span style="color:#f92672">=</span> gym<span style="color:#f92672">.</span>make(<span style="color:#e6db74">&#39;CartPole-v0&#39;</span>)
+<span style="color:#66d9ef">for</span> i_episode <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">20</span>):
+    observation <span style="color:#f92672">=</span> env<span style="color:#f92672">.</span>reset()
+    <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">100</span>):
+        env<span style="color:#f92672">.</span>render()
+        <span style="color:#66d9ef">print</span>(observation)
+        action <span style="color:#f92672">=</span> env<span style="color:#f92672">.</span>action_space<span style="color:#f92672">.</span>sample()
+        observation, reward, done, info <span style="color:#f92672">=</span> env<span style="color:#f92672">.</span>step(action)
+        <span style="color:#66d9ef">if</span> done:
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Episode finished after {} timesteps&#34;</span><span style="color:#f92672">.</span>format(t<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>))
+            <span style="color:#66d9ef">break</span>
+</code></pre></div><p>仿真截图如下</p>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fto3j0pf0yj20go0bqdfu.jpg" alt=""></p>
+<p>每次 <code>action</code> 前，将上一次 <code>observation</code> 打印，可以得到打印日志如下</p>
+<pre><code>[ 0.0349103   1.14771978 -0.03934506 -1.64631971]
 [ 0.0578647   1.34327926 -0.07227145 -1.95099638]
 [ 0.08473028  1.14899616 -0.11129138 -1.68156178]
 [ 0.1077102   0.95532555 -0.14492261 -1.42550525]
@@ -36,40 +250,193 @@ Episode finished after 16 timesteps
 [ 0.03565035 -0.22672696 -0.01947196  0.31160431]
 [ 0.03111581 -0.42156616 -0.01323988  0.59808332]
 [ 0.02268449 -0.61650037 -0.00127821  0.8865666 ]
-</code></pre><h2 id=空间spaces>空间（Spaces）</h2><p>在前面的两个小栗子中，每次执行的动作(action)都是从环境动作空间中随机进行选取的，但是这些动作 (action) 是什么?在 Gym 的仿真环境中，有运动空间 <code>action_space</code> 和观测空间 <code>observation_space</code> 两个指标，程序中被定义为 <code>Space</code> 类型，用于描述有效的运动和观测的格式和范围。下面是一个代码示例</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>import</span> gym
-env <span style=color:#f92672>=</span> gym<span style=color:#f92672>.</span>make(<span style=color:#e6db74>&#39;CartPole-v0&#39;</span>)
-<span style=color:#66d9ef>print</span>(env<span style=color:#f92672>.</span>action_space)
-<span style=color:#75715e>#&gt; Discrete(2)</span>
-<span style=color:#66d9ef>print</span>(env<span style=color:#f92672>.</span>observation_space)
-<span style=color:#75715e>#&gt; Box(4,)</span>
+</code></pre><h2 id="空间spaces">空间（Spaces）</h2>
+<p>在前面的两个小栗子中，每次执行的动作(action)都是从环境动作空间中随机进行选取的，但是这些动作 (action) 是什么?在 Gym 的仿真环境中，有运动空间 <code>action_space</code> 和观测空间 <code>observation_space</code> 两个指标，程序中被定义为 <code>Space</code> 类型，用于描述有效的运动和观测的格式和范围。下面是一个代码示例</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> gym
+env <span style="color:#f92672">=</span> gym<span style="color:#f92672">.</span>make(<span style="color:#e6db74">&#39;CartPole-v0&#39;</span>)
+<span style="color:#66d9ef">print</span>(env<span style="color:#f92672">.</span>action_space)
+<span style="color:#75715e">#&gt; Discrete(2)</span>
+<span style="color:#66d9ef">print</span>(env<span style="color:#f92672">.</span>observation_space)
+<span style="color:#75715e">#&gt; Box(4,)</span>
 </code></pre></div><pre><code>[33mWARN: gym.spaces.Box autodetected dtype as &lt;class 'numpy.float32'&gt;. Please provide explicit dtype.[0m
 Discrete(2)
 Box(4,)
-</code></pre><p>从程序运行结果来看</p><ul><li><p><code>action_space</code> 是一个离散 <code>Discrete</code> 类型，从 <a href=https://github.com/openai/gym/blob/master/gym/spaces/discrete.py>discrete.py</a> 源码可知，范围是一个 <code>{0,1,...,n-1}</code> 长度为 <code>n</code> 的非负整数集合，在 <code>CartPole-v0</code> 例子中，动作空间表示为 <code>{0,1}</code>。</p></li><li><p><code>observation_space</code> 是一个 <code>Box</code> 类型，从 <a href=https://github.com/openai/gym/blob/master/gym/spaces/box.py>box.py</a> 源码可知，表示一个 <code>n</code> 维的盒子，所以在上一节打印出来的 <code>observation</code> 是一个长度为 4 的数组。数组中的每个元素都具有上下界。</p></li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>print</span>(env<span style=color:#f92672>.</span>observation_space<span style=color:#f92672>.</span>high)
-<span style=color:#66d9ef>print</span>(env<span style=color:#f92672>.</span>observation_space<span style=color:#f92672>.</span>low)
+</code></pre>
+<p>从程序运行结果来看</p>
+<ul>
+<li>
+<p><code>action_space</code> 是一个离散 <code>Discrete</code> 类型，从 <a href="https://github.com/openai/gym/blob/master/gym/spaces/discrete.py">discrete.py</a> 源码可知，范围是一个 <code>{0,1,...,n-1}</code> 长度为 <code>n</code> 的非负整数集合，在 <code>CartPole-v0</code> 例子中，动作空间表示为 <code>{0,1}</code>。</p>
+</li>
+<li>
+<p><code>observation_space</code> 是一个 <code>Box</code> 类型，从 <a href="https://github.com/openai/gym/blob/master/gym/spaces/box.py">box.py</a> 源码可知，表示一个 <code>n</code> 维的盒子，所以在上一节打印出来的 <code>observation</code> 是一个长度为 4 的数组。数组中的每个元素都具有上下界。</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(env<span style="color:#f92672">.</span>observation_space<span style="color:#f92672">.</span>high)
+<span style="color:#66d9ef">print</span>(env<span style="color:#f92672">.</span>observation_space<span style="color:#f92672">.</span>low)
 </code></pre></div><pre><code>[4.8000002e+00 3.4028235e+38 4.1887903e-01 3.4028235e+38]
 [-4.8000002e+00 -3.4028235e+38 -4.1887903e-01 -3.4028235e+38]
-</code></pre><p>利用运动空间和观测空间的定义和范围，可以将代码写得更加通用。在许多仿真环境中，<code>Box</code> 和 <code>Discrete</code> 是最常见的空间描述，在智体每次执行动作时，都属于这些空间范围内，代码示例为</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>from</span> gym <span style=color:#f92672>import</span> spaces
-space <span style=color:#f92672>=</span> spaces<span style=color:#f92672>.</span>Discrete(<span style=color:#ae81ff>8</span>) <span style=color:#75715e># Set with 8 elements {0, 1, 2, ..., 7}</span>
-x <span style=color:#f92672>=</span> space<span style=color:#f92672>.</span>sample()
-<span style=color:#66d9ef>print</span>(space<span style=color:#f92672>.</span>contains(x)) 
-<span style=color:#66d9ef>print</span>(space<span style=color:#f92672>.</span>n <span style=color:#f92672>==</span> <span style=color:#ae81ff>8</span>) 
+</code></pre>
+<p>利用运动空间和观测空间的定义和范围，可以将代码写得更加通用。在许多仿真环境中，<code>Box</code> 和 <code>Discrete</code> 是最常见的空间描述，在智体每次执行动作时，都属于这些空间范围内，代码示例为</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> gym <span style="color:#f92672">import</span> spaces
+space <span style="color:#f92672">=</span> spaces<span style="color:#f92672">.</span>Discrete(<span style="color:#ae81ff">8</span>) <span style="color:#75715e"># Set with 8 elements {0, 1, 2, ..., 7}</span>
+x <span style="color:#f92672">=</span> space<span style="color:#f92672">.</span>sample()
+<span style="color:#66d9ef">print</span>(space<span style="color:#f92672">.</span>contains(x)) 
+<span style="color:#66d9ef">print</span>(space<span style="color:#f92672">.</span>n <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span>) 
 </code></pre></div><pre><code>True
 True
-</code></pre><p>在 <code>CartPole-v0</code> 栗子中，运动只能选择左和右，分别用 <code>{0,1}</code> 表示</p><h2 id=gym-中可用的环境>Gym 中可用的环境</h2><p>Gym 中从简单到复杂，包含了许多经典的<a href=https://gym.openai.com/envs/#classic_control>仿真环境</a>和各种数据，其中包括</p><ul><li><p>经典控制和文字游戏：经典的强化学习示例，方便入门；</p></li><li><p>算法：从例子中学习强化学习的相关算法，在 Gym 的仿真算法中，由易到难方便新手入坑；</p></li><li><p>雅达利游戏：利用强化学习来玩雅达利的游戏。Gym 中集成了对强化学习有着重要影响的 <a href=http://www.arcadelearningenvironment.org/>Arcade Learning Environment</a>，并且方便用户安装；</p></li><li><p>2D 和 3D 的机器人：这个是我一直很感兴趣的一部分，在 Gym 中控制机器人进行仿真。需要利用第三方的物理引擎如 <code>MuJoCo</code> 。</p></li></ul><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fto4z7mno0j20oa0ikqbs.jpg alt></p><h2 id=注册表>注册表</h2><p>Gym 是一个包含各种各样强化学习仿真环境的大集合，并且封装成通用的接口暴露给用户，查看所有环境的代码如下：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>from</span> gym <span style=color:#f92672>import</span> envs
-<span style=color:#66d9ef>print</span>(envs<span style=color:#f92672>.</span>registry<span style=color:#f92672>.</span>all())
+</code></pre>
+<p>在 <code>CartPole-v0</code> 栗子中，运动只能选择左和右，分别用 <code>{0,1}</code> 表示</p>
+<h2 id="gym-中可用的环境">Gym 中可用的环境</h2>
+<p>Gym 中从简单到复杂，包含了许多经典的<a href="https://gym.openai.com/envs/#classic_control">仿真环境</a>和各种数据，其中包括</p>
+<ul>
+<li>
+<p>经典控制和文字游戏：经典的强化学习示例，方便入门；</p>
+</li>
+<li>
+<p>算法：从例子中学习强化学习的相关算法，在 Gym 的仿真算法中，由易到难方便新手入坑；</p>
+</li>
+<li>
+<p>雅达利游戏：利用强化学习来玩雅达利的游戏。Gym 中集成了对强化学习有着重要影响的 <a href="http://www.arcadelearningenvironment.org/">Arcade Learning Environment</a>，并且方便用户安装；</p>
+</li>
+<li>
+<p>2D 和 3D 的机器人：这个是我一直很感兴趣的一部分，在 Gym 中控制机器人进行仿真。需要利用第三方的物理引擎如 <code>MuJoCo</code> 。</p>
+</li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fto4z7mno0j20oa0ikqbs.jpg" alt=""></p>
+<h2 id="注册表">注册表</h2>
+<p>Gym 是一个包含各种各样强化学习仿真环境的大集合，并且封装成通用的接口暴露给用户，查看所有环境的代码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> gym <span style="color:#f92672">import</span> envs
+<span style="color:#66d9ef">print</span>(envs<span style="color:#f92672">.</span>registry<span style="color:#f92672">.</span>all())
 </code></pre></div><pre><code>dict_values([EnvSpec(Copy-v0), EnvSpec(RepeatCopy-v0), EnvSpec(ReversedAddition-v0), EnvSpec(ReversedAddition3-v0), EnvSpec(DuplicatedInput-v0), EnvSpec(Reverse-v0), EnvSpec(CartPole-v0), EnvSpec(CartPole-v1), EnvSpec(MountainCar-v0), EnvSpec(MountainCarContinuous-v0), EnvSpec(Pendulum-v0), EnvSpec(Acrobot-v1), EnvSpec(LunarLander-v2), EnvSpec(LunarLanderContinuous-v2), EnvSpec(BipedalWalker-v2),...
-</code></pre><p>Gym 支持将用户制作的环境写入到注册表中，需要执行 <code>gym.make()</code> 和在启动时注册 <code>register</code>，例如</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>register(
-    id<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;CartPole-v0&#39;</span>,
-    entry_point<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gym.envs.classic_control:CartPoleEnv&#39;</span>,
-    max_episode_steps<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,
-    reward_threshold<span style=color:#f92672>=</span><span style=color:#ae81ff>195.0</span>,
+</code></pre><p>Gym 支持将用户制作的环境写入到注册表中，需要执行 <code>gym.make()</code> 和在启动时注册 <code>register</code>，例如</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">register(
+    id<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;CartPole-v0&#39;</span>,
+    entry_point<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gym.envs.classic_control:CartPoleEnv&#39;</span>,
+    max_episode_steps<span style="color:#f92672">=</span><span style="color:#ae81ff">200</span>,
+    reward_threshold<span style="color:#f92672">=</span><span style="color:#ae81ff">195.0</span>,
 )
-</code></pre></div><h2 id=参考链接>参考链接</h2><ul><li><p><a href=https://gym.openai.com/docs/>https://gym.openai.com/docs/</a></p></li><li><p><a href=https://nndl.github.io/>https://nndl.github.io/</a></p></li></ul><h2 id=结语>结语</h2><p>emmmm &mldr; 第一篇强化学习入坑笔记写完，大多是从官方文档看过来的加上了一点点自己的理解，建议文档这东西还是直接看官方的吧，原汁原味</p><h2 id=关于作者>关于作者</h2><ul><li>神奇的战士</li><li>博客：<a href=http://thinkhard.tech/>http://thinkhard.tech/</a></li><li>Github: <a href=https://github.com/wangshub>https://github.com/wangshub</a></li><li>微信公众号：<strong>神奇的战士</strong></li></ul><p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fs09ydtc98j20vd06p759.jpg alt></p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
-<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
-<a href=https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/>https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/</span></p></div><div class=post-tags><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/ class=prev rel=prev title=机器人强化学习笔记（0）><i class="iconfont icon-left"></i>&nbsp;机器人强化学习笔记（0）</a>
-<a href=https://wangshub.github.io/posts/turn-kindle-to-electron-clock/ class=next rel=next title="将 Kindle 转换成文艺电子时钟">将 Kindle 转换成文艺电子时钟&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
-<span itemprop=copyrightYear>2016 - 2020</span>
-<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
-<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>
+</code></pre></div><h2 id="参考链接">参考链接</h2>
+<ul>
+<li>
+<p><a href="https://gym.openai.com/docs/">https://gym.openai.com/docs/</a></p>
+</li>
+<li>
+<p><a href="https://nndl.github.io/">https://nndl.github.io/</a></p>
+</li>
+</ul>
+<h2 id="结语">结语</h2>
+<p>emmmm &hellip; 第一篇强化学习入坑笔记写完，大多是从官方文档看过来的加上了一点点自己的理解，建议文档这东西还是直接看官方的吧，原汁原味</p>
+<h2 id="关于作者">关于作者</h2>
+<ul>
+<li>神奇的战士</li>
+<li>博客：<a href="http://thinkhard.tech/">http://thinkhard.tech/</a></li>
+<li>Github: <a href="https://github.com/wangshub">https://github.com/wangshub</a></li>
+<li>微信公众号：<strong>神奇的战士</strong></li>
+</ul>
+<p><img src="https://ws1.sinaimg.cn/large/c3a916a7gy1fs09ydtc98j20vd06p759.jpg" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>神奇的战士 </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/>https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/</span>
+            </p>
+            
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://wangshub.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="prev" rel="prev" title="机器人强化学习笔记（0）"><i class="iconfont icon-left"></i>&nbsp;机器人强化学习笔记（0）</a>
+        
+        
+        <a href="https://wangshub.github.io/posts/turn-kindle-to-electron-clock/" class="next" rel="next" title="将 Kindle 转换成文艺电子时钟">将 Kindle 转换成文艺电子时钟&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2016 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wangshub.github.io">神奇的战士</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+        </div>
+    </body>
+</html>

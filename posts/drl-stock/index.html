@@ -1,30 +1,508 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/kinematics-dh-method/><link rel=canonical href=https://wangshub.github.io/posts/drl-stock/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>如何用深度强化学习模拟炒股 | 🍉 神奇的战士</title><meta name=title content="如何用深度强化学习模拟炒股 | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"如何用深度强化学习模拟炒股","headline":"如何用深度强化学习模拟炒股","description":"💡 初衷 最近一段时间，受到新冠疫情的影响，股市接连下跌，作为一棵小白菜兼小韭菜，竟然产生了抄底的大胆想法，拿出仅存的一点私房钱梭哈了一把。 第二","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2020","datePublished":"2020-03-28 11:26:03 \u002b0000 UTC","dateModified":"2020-03-28 11:26:03 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/drl-stock\/","wordCount":"1742","keywords":["Python","Reinforcement Learning","Simulation","🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
-<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
-<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
-<a class=menu-item href=/categories/>Categories</a>
-<a class=menu-item href=/tags/>Tags</a>
-<a class=menu-item href=/about/>About</a>
-<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">如何用深度强化学习模拟炒股</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
-<span class=post-time>on <time datetime=2020-03-28 itemprop=datePublished>March 28, 2020</time></span>
-in
-<span class=post-word-count>1742 words</span></div></header><div class=post-content><h2 id=-初衷>💡 初衷</h2><p>最近一段时间，受到新冠疫情的影响，股市接连下跌，作为一棵小白菜兼小韭菜，竟然产生了抄底的大胆想法，拿出仅存的一点私房钱梭哈了一把。</p><p>第二天，暴跌，俺加仓</p><p>第三天，又跌，俺加仓</p><p>第三天，又跌，俺又加仓&mldr;</p><img src=https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/2020-03-27-10-45-59.png alt=drawing width=50%><p>一番错误操作后，结果惨不忍睹，第一次买股票就被股市一段暴打，受到了媳妇无情的嘲讽。痛定思痛，俺决定换一个思路：<strong>如何用深度强化学习来自动模拟炒股？</strong> 实验验证一下能否获得收益。</p><h2 id=-监督学习与强化学习的区别>📖 监督学习与强化学习的区别</h2><p>监督学习（如 LSTM）可以根据各种历史数据来预测未来的股票的价格，判断股票是涨还是跌，帮助人做决策。</p><img src=https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/2020-03-25-18-55-13.png alt=drawing width=50%><p>而强化学习是机器学习的另一个分支，在决策的时候采取合适的行动 (Action) 使最后的奖励最大化。与监督学习预测未来的数值不同，强化学习根据输入的状态（如当日开盘价、收盘价等），输出系列动作（例如：买进、持有、卖出），使得最后的收益最大化，实现自动交易。</p><img src=https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/2020-03-25-18-19-03.png alt=drawing width=50%><h2 id=-openai-gym-股票交易环境>🤖 OpenAI Gym 股票交易环境</h2><h3 id=观测-observation>观测 Observation</h3><p>策略网络观测的就是一只股票的各项参数，比如开盘价、收盘价、成交数量等。部分数值会是一个很大的数值，比如成交金额或者成交量，有可能百万、千万乃至更大，为了训练时网络收敛，观测的状态数据输入时，必须要进行归一化，变换到 <code>[-1, 1]</code> 的区间内。</p><table><thead><tr><th>参数名称</th><th>参数描述</th><th>说明</th></tr></thead><tbody><tr><td>date</td><td>交易所行情日期</td><td>格式：YYYY-MM-DD</td></tr><tr><td>code</td><td>证券代码</td><td>格式：sh.600000。sh：上海，sz：深圳</td></tr><tr><td>open</td><td>今开盘价格</td><td>精度：小数点后4位；单位：人民币元</td></tr><tr><td>high</td><td>最高价</td><td>精度：小数点后4位；单位：人民币元</td></tr><tr><td>low</td><td>最低价</td><td>精度：小数点后4位；单位：人民币元</td></tr><tr><td>close</td><td>今收盘价</td><td>精度：小数点后4位；单位：人民币元</td></tr><tr><td>preclose</td><td>昨日收盘价</td><td>精度：小数点后4位；单位：人民币元</td></tr><tr><td>volume</td><td>成交数量</td><td>单位：股</td></tr><tr><td>amount</td><td>成交金额</td><td>精度：小数点后4位；单位：人民币元</td></tr><tr><td>adjustflag</td><td>复权状态</td><td>不复权、前复权、后复权</td></tr><tr><td>turn</td><td>换手率</td><td>精度：小数点后6位；单位：%</td></tr><tr><td>tradestatus</td><td>交易状态</td><td>1：正常交易 0：停牌</td></tr><tr><td>pctChg</td><td>涨跌幅（百分比）</td><td>精度：小数点后6位</td></tr><tr><td>peTTM</td><td>滚动市盈率</td><td>精度：小数点后6位</td></tr><tr><td>psTTM</td><td>滚动市销率</td><td>精度：小数点后6位</td></tr><tr><td>pcfNcfTTM</td><td>滚动市现率</td><td>精度：小数点后6位</td></tr><tr><td>pbMRQ</td><td>市净率</td><td>精度：小数点后6位</td></tr></tbody></table><h3 id=动作-action>动作 Action</h3><p>假设交易共有<strong>买入</strong>、<strong>卖出</strong>和<strong>保持</strong> 3 种操作，定义动作(<code>action</code>)为长度为 2 的数组</p><ul><li><code>action[0]</code> 为操作类型；</li><li><code>action[1]</code> 表示买入或卖出百分比；</li></ul><table><thead><tr><th>动作类型 <code>action[0]</code></th><th>说明</th></tr></thead><tbody><tr><td>1</td><td>买入 <code>action[1]</code></td></tr><tr><td>2</td><td>卖出 <code>action[1]</code></td></tr><tr><td>3</td><td>保持</td></tr></tbody></table><p>注意，当动作类型 <code>action[0] = 3</code> 时，表示不买也不抛售股票，此时 <code>action[1]</code> 的值无实际意义，网络在训练过程中，Agent 会慢慢学习到这一信息。</p><h3 id=奖励-reward>奖励 Reward</h3><p>奖励函数的设计，对强化学习的目标至关重要。在股票交易的环境下，最应该关心的就是当前的盈利情况，故用当前的利润作为奖励函数。即<code>当前本金 + 股票价值 - 初始本金 = 利润</code>。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># profits</span>
-reward <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>net_worth <span style=color:#f92672>-</span> INITIAL_ACCOUNT_BALANCE
-reward <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>if</span> reward <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>else</span> reward <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>100</span>
-</code></pre></div><p>为了使网络更快学习到盈利的策略，当利润为负值时，给予网络一个较大的惩罚 (<code>-100</code>)。</p><h3 id=策略梯度>策略梯度</h3><p>因为动作输出的数值是连续，因此使用基于策略梯度的优化算法，其中比较知名的是 <a href=https://arxiv.org/abs/1707.06347>PPO 算法</a>，OpenAI 和许多文献已把 PPO 作为强化学习研究中首选的算法。PPO 优化算法 Python 实现参考 <a href=https://stable-baselines.readthedocs.io/en/master/modules/ppo2.html>stable-baselines</a>。</p><h2 id=-模拟实验>🕵️‍♀️ 模拟实验</h2><h3 id=环境安装>环境安装</h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=color:#75715e># 虚拟环境</span>
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="神奇的战士">
+    
+    
+    
+    <link rel="prev" href="https://wangshub.github.io/posts/kinematics-dh-method/" />
+    
+    <link rel="canonical" href="https://wangshub.github.io/posts/drl-stock/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            如何用深度强化学习模拟炒股 | 🍉 神奇的战士
+        
+    </title>
+    <meta name="title" content="如何用深度强化学习模拟炒股 | 🍉 神奇的战士">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wangshub.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "如何用深度强化学习模拟炒股",
+    "headline" : "如何用深度强化学习模拟炒股",
+    "description" : "💡 初衷 最近一段时间，受到新冠疫情的影响，股市接连下跌，作为一棵小白菜兼小韭菜，竟然产生了抄底的大胆想法，拿出仅存的一点私房钱梭哈了一把。 第二",
+    "inLanguage" : "zh-cn",
+    "author" : "神奇的战士",
+    "creator" : "神奇的战士",
+    "publisher": "神奇的战士",
+    "accountablePerson" : "神奇的战士",
+    "copyrightHolder" : "神奇的战士",
+    "copyrightYear" : "2020",
+    "datePublished": "2020-03-28 11:26:03 \u002b0000 UTC",
+    "dateModified" : "2020-03-28 11:26:03 \u002b0000 UTC",
+    "url" : "https:\/\/wangshub.github.io\/posts\/drl-stock\/",
+    "wordCount" : "1742",
+    "keywords" : [ "Python","Reinforcement Learning","Simulation", "🍉 神奇的战士"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://wangshub.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://wangshub.github.io">🍉 神奇的战士</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/categories/" title="">
+                            <h3>Categories</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">如何用深度强化学习模拟炒股</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wangshub.github.io" rel="author">神奇的战士</a> with ♥
+                <span class="post-time">
+                on <time datetime=2020-03-28 itemprop="datePublished">March 28, 2020</time>
+                </span>
+                in
+                
+                <span class="post-word-count">1742 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+            
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <h2 id="-初衷">💡 初衷</h2>
+<p>最近一段时间，受到新冠疫情的影响，股市接连下跌，作为一棵小白菜兼小韭菜，竟然产生了抄底的大胆想法，拿出仅存的一点私房钱梭哈了一把。</p>
+<p>第二天，暴跌，俺加仓</p>
+<p>第三天，又跌，俺加仓</p>
+<p>第三天，又跌，俺又加仓&hellip;</p>
+<img src="https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/2020-03-27-10-45-59.png" alt="drawing" width="50%"/>
+<p>一番错误操作后，结果惨不忍睹，第一次买股票就被股市一段暴打，受到了媳妇无情的嘲讽。痛定思痛，俺决定换一个思路：<strong>如何用深度强化学习来自动模拟炒股？</strong> 实验验证一下能否获得收益。</p>
+<h2 id="-监督学习与强化学习的区别">📖 监督学习与强化学习的区别</h2>
+<p>监督学习（如 LSTM）可以根据各种历史数据来预测未来的股票的价格，判断股票是涨还是跌，帮助人做决策。</p>
+<img src="https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/2020-03-25-18-55-13.png" alt="drawing" width="50%"/>
+<p>而强化学习是机器学习的另一个分支，在决策的时候采取合适的行动 (Action) 使最后的奖励最大化。与监督学习预测未来的数值不同，强化学习根据输入的状态（如当日开盘价、收盘价等），输出系列动作（例如：买进、持有、卖出），使得最后的收益最大化，实现自动交易。</p>
+<img src="https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/2020-03-25-18-19-03.png" alt="drawing" width="50%"/>
+<h2 id="-openai-gym-股票交易环境">🤖 OpenAI Gym 股票交易环境</h2>
+<h3 id="观测-observation">观测 Observation</h3>
+<p>策略网络观测的就是一只股票的各项参数，比如开盘价、收盘价、成交数量等。部分数值会是一个很大的数值，比如成交金额或者成交量，有可能百万、千万乃至更大，为了训练时网络收敛，观测的状态数据输入时，必须要进行归一化，变换到 <code>[-1, 1]</code> 的区间内。</p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数描述</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>date</td>
+<td>交易所行情日期</td>
+<td>格式：YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>code</td>
+<td>证券代码</td>
+<td>格式：sh.600000。sh：上海，sz：深圳</td>
+</tr>
+<tr>
+<td>open</td>
+<td>今开盘价格</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>high</td>
+<td>最高价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>low</td>
+<td>最低价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>close</td>
+<td>今收盘价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>preclose</td>
+<td>昨日收盘价</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>成交数量</td>
+<td>单位：股</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>成交金额</td>
+<td>精度：小数点后4位；单位：人民币元</td>
+</tr>
+<tr>
+<td>adjustflag</td>
+<td>复权状态</td>
+<td>不复权、前复权、后复权</td>
+</tr>
+<tr>
+<td>turn</td>
+<td>换手率</td>
+<td>精度：小数点后6位；单位：%</td>
+</tr>
+<tr>
+<td>tradestatus</td>
+<td>交易状态</td>
+<td>1：正常交易 0：停牌</td>
+</tr>
+<tr>
+<td>pctChg</td>
+<td>涨跌幅（百分比）</td>
+<td>精度：小数点后6位</td>
+</tr>
+<tr>
+<td>peTTM</td>
+<td>滚动市盈率</td>
+<td>精度：小数点后6位</td>
+</tr>
+<tr>
+<td>psTTM</td>
+<td>滚动市销率</td>
+<td>精度：小数点后6位</td>
+</tr>
+<tr>
+<td>pcfNcfTTM</td>
+<td>滚动市现率</td>
+<td>精度：小数点后6位</td>
+</tr>
+<tr>
+<td>pbMRQ</td>
+<td>市净率</td>
+<td>精度：小数点后6位</td>
+</tr>
+</tbody>
+</table>
+<h3 id="动作-action">动作 Action</h3>
+<p>假设交易共有<strong>买入</strong>、<strong>卖出</strong>和<strong>保持</strong> 3 种操作，定义动作(<code>action</code>)为长度为 2 的数组</p>
+<ul>
+<li><code>action[0]</code> 为操作类型；</li>
+<li><code>action[1]</code> 表示买入或卖出百分比；</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>动作类型 <code>action[0]</code></th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>买入 <code>action[1]</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>卖出 <code>action[1]</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>保持</td>
+</tr>
+</tbody>
+</table>
+<p>注意，当动作类型 <code>action[0] = 3</code> 时，表示不买也不抛售股票，此时 <code>action[1]</code> 的值无实际意义，网络在训练过程中，Agent 会慢慢学习到这一信息。</p>
+<h3 id="奖励-reward">奖励 Reward</h3>
+<p>奖励函数的设计，对强化学习的目标至关重要。在股票交易的环境下，最应该关心的就是当前的盈利情况，故用当前的利润作为奖励函数。即<code>当前本金 + 股票价值 - 初始本金 = 利润</code>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># profits</span>
+reward <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>net_worth <span style="color:#f92672">-</span> INITIAL_ACCOUNT_BALANCE
+reward <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> reward <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">else</span> reward <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">100</span>
+</code></pre></div><p>为了使网络更快学习到盈利的策略，当利润为负值时，给予网络一个较大的惩罚 (<code>-100</code>)。</p>
+<h3 id="策略梯度">策略梯度</h3>
+<p>因为动作输出的数值是连续，因此使用基于策略梯度的优化算法，其中比较知名的是 <a href="https://arxiv.org/abs/1707.06347">PPO 算法</a>，OpenAI 和许多文献已把 PPO 作为强化学习研究中首选的算法。PPO 优化算法 Python 实现参考 <a href="https://stable-baselines.readthedocs.io/en/master/modules/ppo2.html">stable-baselines</a>。</p>
+<h2 id="-模拟实验">🕵️‍♀️ 模拟实验</h2>
+<h3 id="环境安装">环境安装</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># 虚拟环境</span>
 virtualenv -p python3.6 venv
 source ./venv/bin/activate
-<span style=color:#75715e># 安装库依赖</span>
+<span style="color:#75715e"># 安装库依赖</span>
 pip install -r requirements.txt
-</code></pre></div><h3 id=股票数据获取>股票数据获取</h3><p>股票证券数据集来自于 <a href=http://baostock.com/baostock/index.php/%E9%A6%96%E9%A1%B5>baostock</a>，一个免费、开源的证券数据平台，提供 Python API。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>&gt;&gt; pip install baostock -i https://pypi.tuna.tsinghua.edu.cn/simple/ --trusted-host pypi.tuna.tsinghua.edu.cn
-</code></pre></div><p>数据获取代码参考 <a href=https://github.com/wangshub/RL-Stock/blob/master/get_data.py>get_stock_data.py</a></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>&gt;&gt;</span> python get_stock_data<span style=color:#f92672>.</span>py
-</code></pre></div><p>将过去 20 多年的股票数据划分为训练集，和末尾 1 个月数据作为测试集，来验证强化学习策略的有效性。划分如下</p><table><thead><tr><th><code>1990-01-01</code> ~ <code>2019-11-29</code></th><th><code>2019-12-01</code> ~ <code>2019-12-31</code></th></tr></thead><tbody><tr><td>训练集</td><td>测试集</td></tr></tbody></table><h3 id=验证结果>验证结果</h3><p><strong>单只股票</strong></p><ul><li>初始本金 <code>10000</code></li><li>股票代码：<code>sh.600036</code>(招商银行)</li><li>训练集： <code>stockdata/train/sh.600036.招商银行.csv</code></li><li>测试集： <code>stockdata/test/sh.600036.招商银行.csv</code></li><li>模拟操作 <code>20</code> 天，最终盈利约 <code>400</code></li></ul><img src=https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/sh.600036.png alt=drawing width=70%><p><strong>多只股票</strong></p><p>选取 <code>1002</code> 只股票，进行训练，共计</p><ul><li>盈利： <code>44.5%</code></li><li>不亏不赚： <code>46.5%</code></li><li>亏损：<code>9.0%</code></li></ul><img src=https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/pie.png alt=drawing width=50%>
-<img src=https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/hist.png alt=drawing width=50%><h2 id=-最后>👻 最后</h2><ul><li>股票 Gym 环境主要参考 <a href=https://github.com/notadamking/Stock-Trading-Environment>Stock-Trading-Environment</a>，对观测状态、奖励函数和训练集做了修改。</li><li>俺完全是股票没入门的新手，难免存在错误，欢迎指正！</li><li>数据和方法皆来源于网络，无法保证有效性。</li><li><strong>Just For Fun</strong>！</li></ul><h2 id=-参考资料>📚 参考资料</h2><ul><li>Y. Deng, F. Bao, Y. Kong, Z. Ren and Q. Dai, &ldquo;Deep Direct Reinforcement Learning for Financial Signal Representation and Trading,&rdquo; in IEEE Transactions on Neural Networks and Learning Systems, vol. 28, no. 3, pp. 653-664, March 2017.</li><li><a href=http://stanford.edu/class/msande448/2019/Final_reports/gr2.pdf>Yuqin Dai, Chris Wang, Iris Wang, Yilun Xu, &ldquo;Reinforcement Learning for FX trading&rdquo;</a></li><li>Chien Yi Huang. Financial trading as a game: A deep reinforcement learning approach. arXiv preprint arXiv:1807.02787, 2018.</li><li><a href=https://towardsdatascience.com/creating-a-custom-openai-gym-environment-for-stock-trading-be532be3910e>Create custom gym environments from scratch — A stock market example</a></li><li><a href=https://github.com/notadamking/Stock-Trading-Environment>notadamking/Stock-Trading-Environment</a></li><li><a href=https://stable-baselines.readthedocs.io/en/master>Welcome to Stable Baselines docs! - RL Baselines Made Easy</a></li></ul><h2 id=源码>源码</h2><p>Github 源码地址： <a href=https://github.com/wangshub/RL-Stock>https://github.com/wangshub/RL-Stock</a></p></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
-<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
-<a href=https://wangshub.github.io/posts/drl-stock/>https://wangshub.github.io/posts/drl-stock/</span></p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
-<span class=tag><a href=https://wangshub.github.io/tags/python/>#Python</a></span>
-<span class=tag><a href=https://wangshub.github.io/tags/reinforcement-learning/>#Reinforcement Learning</a></span>
-<span class=tag><a href=https://wangshub.github.io/tags/simulation/>#Simulation</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/kinematics-dh-method/ class=prev rel=prev title="双连杆机械臂运动学正向和逆向 Python 仿真"><i class="iconfont icon-left"></i>&nbsp;双连杆机械臂运动学正向和逆向 Python 仿真</a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
-<span itemprop=copyrightYear>2016 - 2020</span>
-<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
-<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>
+</code></pre></div><h3 id="股票数据获取">股票数据获取</h3>
+<p>股票证券数据集来自于 <a href="http://baostock.com/baostock/index.php/%E9%A6%96%E9%A1%B5">baostock</a>，一个免费、开源的证券数据平台，提供 Python API。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt;&gt; pip install baostock -i https://pypi.tuna.tsinghua.edu.cn/simple/ --trusted-host pypi.tuna.tsinghua.edu.cn
+</code></pre></div><p>数据获取代码参考 <a href="https://github.com/wangshub/RL-Stock/blob/master/get_data.py">get_stock_data.py</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;</span> python get_stock_data<span style="color:#f92672">.</span>py
+</code></pre></div><p>将过去 20 多年的股票数据划分为训练集，和末尾 1 个月数据作为测试集，来验证强化学习策略的有效性。划分如下</p>
+<table>
+<thead>
+<tr>
+<th><code>1990-01-01</code> ~ <code>2019-11-29</code></th>
+<th><code>2019-12-01</code> ~ <code>2019-12-31</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>训练集</td>
+<td>测试集</td>
+</tr>
+</tbody>
+</table>
+<h3 id="验证结果">验证结果</h3>
+<p><strong>单只股票</strong></p>
+<ul>
+<li>初始本金 <code>10000</code></li>
+<li>股票代码：<code>sh.600036</code>(招商银行)</li>
+<li>训练集： <code>stockdata/train/sh.600036.招商银行.csv</code></li>
+<li>测试集： <code>stockdata/test/sh.600036.招商银行.csv</code></li>
+<li>模拟操作 <code>20</code> 天，最终盈利约 <code>400</code></li>
+</ul>
+<img src="https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/sh.600036.png" alt="drawing" width="70%"/>
+<p><strong>多只股票</strong></p>
+<p>选取 <code>1002</code> 只股票，进行训练，共计</p>
+<ul>
+<li>盈利： <code>44.5%</code></li>
+<li>不亏不赚： <code>46.5%</code></li>
+<li>亏损：<code>9.0%</code></li>
+</ul>
+<img src="https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/pie.png" alt="drawing" width="50%"/>
+<img src="https://raw.githubusercontent.com/wangshub/RL-Stock/master/img/hist.png" alt="drawing" width="50%"/>
+<h2 id="-最后">👻 最后</h2>
+<ul>
+<li>股票 Gym 环境主要参考 <a href="https://github.com/notadamking/Stock-Trading-Environment">Stock-Trading-Environment</a>，对观测状态、奖励函数和训练集做了修改。</li>
+<li>俺完全是股票没入门的新手，难免存在错误，欢迎指正！</li>
+<li>数据和方法皆来源于网络，无法保证有效性。</li>
+<li><strong>Just For Fun</strong>！</li>
+</ul>
+<h2 id="-参考资料">📚 参考资料</h2>
+<ul>
+<li>Y. Deng, F. Bao, Y. Kong, Z. Ren and Q. Dai, &ldquo;Deep Direct Reinforcement Learning for Financial Signal Representation and Trading,&rdquo; in IEEE Transactions on Neural Networks and Learning Systems, vol. 28, no. 3, pp. 653-664, March 2017.</li>
+<li><a href="http://stanford.edu/class/msande448/2019/Final_reports/gr2.pdf">Yuqin Dai, Chris Wang, Iris Wang, Yilun Xu, &ldquo;Reinforcement Learning for FX trading&rdquo;</a></li>
+<li>Chien Yi Huang. Financial trading as a game: A deep reinforcement learning approach. arXiv preprint arXiv:1807.02787, 2018.</li>
+<li><a href="https://towardsdatascience.com/creating-a-custom-openai-gym-environment-for-stock-trading-be532be3910e">Create custom gym environments from scratch — A stock market example</a></li>
+<li><a href="https://github.com/notadamking/Stock-Trading-Environment">notadamking/Stock-Trading-Environment</a></li>
+<li><a href="https://stable-baselines.readthedocs.io/en/master">Welcome to Stable Baselines docs! - RL Baselines Made Easy</a></li>
+</ul>
+<h2 id="源码">源码</h2>
+<p>Github 源码地址： <a href="https://github.com/wangshub/RL-Stock">https://github.com/wangshub/RL-Stock</a></p>
+
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>神奇的战士 </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wangshub.github.io/posts/drl-stock/>https://wangshub.github.io/posts/drl-stock/</span>
+            </p>
+            
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s):
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/python/">
+                    #Python</a></span>
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/reinforcement-learning/">
+                    #Reinforcement Learning</a></span>
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/simulation/">
+                    #Simulation</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://wangshub.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wangshub.github.io/posts/kinematics-dh-method/" class="prev" rel="prev" title="双连杆机械臂运动学正向和逆向 Python 仿真"><i class="iconfont icon-left"></i>&nbsp;双连杆机械臂运动学正向和逆向 Python 仿真</a>
+        
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2016 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wangshub.github.io">神奇的战士</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+        </div>
+    </body>
+</html>

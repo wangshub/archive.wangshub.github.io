@@ -1,1 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Lua on 🍉 神奇的战士</title><link>https://wangshub.github.io/tags/lua/</link><description>Recent content in Lua on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 08 Apr 2019 22:26:58 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/lua/index.xml" rel="self" type="application/rss+xml"/><item><title>推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和我的配置方案</title><link>https://wangshub.github.io/posts/hammerspoon-introduce/</link><pubDate>Mon, 08 Apr 2019 22:26:58 +0000</pubDate><guid>https://wangshub.github.io/posts/hammerspoon-introduce/</guid><description>推荐一个 MacOS 上用了就无法自拔的 App Hammerspoon！ Hammerspoon 是 MacOS 上的自动化工具，许多介绍 Hammerspoon 的文章都主要介绍了它是一个窗口管理工具，但是 Hammerspoon 能做到的</description></item><item><title>『Hamerspoon』蓝牙自动开关</title><link>https://wangshub.github.io/posts/mac-bluetooth-auto-toggle-when-lock-unlock-screen/</link><pubDate>Tue, 19 Mar 2019 14:08:10 +0000</pubDate><guid>https://wangshub.github.io/posts/mac-bluetooth-auto-toggle-when-lock-unlock-screen/</guid><description>『Hamerspoon』Mac 蓝牙自动开关 前言 如果你也像我一样使用 Mac 连接蓝牙耳机，下班后总是忘记关耳机，第二天耳机没电的话，那么这篇文章也许</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lua on 🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/tags/lua/</link>
+    <description>Recent content in Lua on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 08 Apr 2019 22:26:58 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/lua/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和我的配置方案</title>
+      <link>https://wangshub.github.io/posts/hammerspoon-introduce/</link>
+      <pubDate>Mon, 08 Apr 2019 22:26:58 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/hammerspoon-introduce/</guid>
+      <description>推荐一个 MacOS 上用了就无法自拔的 App Hammerspoon！ Hammerspoon 是 MacOS 上的自动化工具，许多介绍 Hammerspoon 的文章都主要介绍了它是一个窗口管理工具，但是 Hammerspoon 能做到的</description>
+    </item>
+    
+    <item>
+      <title>『Hamerspoon』蓝牙自动开关</title>
+      <link>https://wangshub.github.io/posts/mac-bluetooth-auto-toggle-when-lock-unlock-screen/</link>
+      <pubDate>Tue, 19 Mar 2019 14:08:10 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/mac-bluetooth-auto-toggle-when-lock-unlock-screen/</guid>
+      <description>『Hamerspoon』Mac 蓝牙自动开关 前言 如果你也像我一样使用 Mac 连接蓝牙耳机，下班后总是忘记关耳机，第二天耳机没电的话，那么这篇文章也许</description>
+    </item>
+    
+  </channel>
+</rss>

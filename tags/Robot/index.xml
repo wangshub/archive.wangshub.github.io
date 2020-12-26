@@ -1,1 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Robot on 🍉 神奇的战士</title><link>https://wangshub.github.io/tags/robot/</link><description>Recent content in Robot on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 19 Jun 2019 17:12:18 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/robot/index.xml" rel="self" type="application/rss+xml"/><item><title>现实世界中的机器人强化学习</title><link>https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/</link><pubDate>Wed, 19 Jun 2019 17:12:18 +0000</pubDate><guid>https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/</guid><description>现实世界中的机器人强化学习 原载：Reinforcement Learning for Real-World Robotics 译者：神奇的战士 机器人 - 愿景 机器人在现代工业中无处不在。与上个世纪大多数科</description></item><item><title>基于 face_recognition 和 PID 的人脸识别和跟踪</title><link>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</link><pubDate>Mon, 03 Jun 2019 15:42:59 +0000</pubDate><guid>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</guid><description>基于 face_recognition 和 PID 的舵机云台人脸识别和跟踪 如何让机器人头部摄像头跟随识别到人脸位置变化而转动？一帧图像是 2 维的，人脸位置用坐标 (x,y) 表示，要实现跟踪人脸</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Robot on 🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/tags/robot/</link>
+    <description>Recent content in Robot on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 19 Jun 2019 17:12:18 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/robot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>现实世界中的机器人强化学习</title>
+      <link>https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/</link>
+      <pubDate>Wed, 19 Jun 2019 17:12:18 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/</guid>
+      <description>现实世界中的机器人强化学习 原载：Reinforcement Learning for Real-World Robotics 译者：神奇的战士 机器人 - 愿景 机器人在现代工业中无处不在。与上个世纪大多数科</description>
+    </item>
+    
+    <item>
+      <title>基于 face_recognition 和 PID 的人脸识别和跟踪</title>
+      <link>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</link>
+      <pubDate>Mon, 03 Jun 2019 15:42:59 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</guid>
+      <description>基于 face_recognition 和 PID 的舵机云台人脸识别和跟踪 如何让机器人头部摄像头跟随识别到人脸位置变化而转动？一帧图像是 2 维的，人脸位置用坐标 (x,y) 表示，要实现跟踪人脸</description>
+    </item>
+    
+  </channel>
+</rss>

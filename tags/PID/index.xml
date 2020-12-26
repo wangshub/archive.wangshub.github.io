@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>PID on 🍉 神奇的战士</title><link>https://wangshub.github.io/tags/pid/</link><description>Recent content in PID on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 03 Jun 2019 15:42:59 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/pid/index.xml" rel="self" type="application/rss+xml"/><item><title>基于 face_recognition 和 PID 的人脸识别和跟踪</title><link>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</link><pubDate>Mon, 03 Jun 2019 15:42:59 +0000</pubDate><guid>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</guid><description>基于 face_recognition 和 PID 的舵机云台人脸识别和跟踪 如何让机器人头部摄像头跟随识别到人脸位置变化而转动？一帧图像是 2 维的，人脸位置用坐标 (x,y) 表示，要实现跟踪人脸</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PID on 🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/tags/pid/</link>
+    <description>Recent content in PID on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 03 Jun 2019 15:42:59 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/pid/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于 face_recognition 和 PID 的人脸识别和跟踪</title>
+      <link>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</link>
+      <pubDate>Mon, 03 Jun 2019 15:42:59 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</guid>
+      <description>基于 face_recognition 和 PID 的舵机云台人脸识别和跟踪 如何让机器人头部摄像头跟随识别到人脸位置变化而转动？一帧图像是 2 维的，人脸位置用坐标 (x,y) 表示，要实现跟踪人脸</description>
+    </item>
+    
+  </channel>
+</rss>

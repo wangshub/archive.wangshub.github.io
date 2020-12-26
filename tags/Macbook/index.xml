@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Macbook on 🍉 神奇的战士</title><link>https://wangshub.github.io/tags/macbook/</link><description>Recent content in Macbook on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 04 Apr 2019 19:18:36 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/macbook/index.xml" rel="self" type="application/rss+xml"/><item><title>升级 Macbook 2015 固态硬盘为 M.2 2280 PCIE NVME 接口 SSD</title><link>https://wangshub.github.io/posts/macbook2015upgradessd/</link><pubDate>Thu, 04 Apr 2019 19:18:36 +0000</pubDate><guid>https://wangshub.github.io/posts/macbook2015upgradessd/</guid><description>升级 Macbook 2015 固态硬盘为 M.2 2280 PCIE NVME 接口 SSD 东西没有坏掉，只有修不好的 由于苹果原装接口 SSD 价格太高(512G ≈ 2000RMB)，采用 M2.0 接口转苹果 SSD 专用接口</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Macbook on 🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/tags/macbook/</link>
+    <description>Recent content in Macbook on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 04 Apr 2019 19:18:36 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/macbook/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>升级 Macbook 2015 固态硬盘为  M.2 2280 PCIE NVME 接口 SSD</title>
+      <link>https://wangshub.github.io/posts/macbook2015upgradessd/</link>
+      <pubDate>Thu, 04 Apr 2019 19:18:36 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/macbook2015upgradessd/</guid>
+      <description>升级 Macbook 2015 固态硬盘为 M.2 2280 PCIE NVME 接口 SSD 东西没有坏掉，只有修不好的 由于苹果原装接口 SSD 价格太高(512G ≈ 2000RMB)，采用 M2.0 接口转苹果 SSD 专用接口</description>
+    </item>
+    
+  </channel>
+</rss>

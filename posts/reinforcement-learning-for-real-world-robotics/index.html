@@ -1,21 +1,353 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/on-dynamicland/><link rel=next href=https://wangshub.github.io/posts/tracking-my-phone/><link rel=canonical href=https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>现实世界中的机器人强化学习 | 🍉 神奇的战士</title><meta name=title content="现实世界中的机器人强化学习 | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"现实世界中的机器人强化学习","headline":"现实世界中的机器人强化学习","description":"现实世界中的机器人强化学习 原载：Reinforcement Learning for Real-World Robotics 译者：神奇的战士 机器人 - 愿景 机器人在现代工业中无处不在。与上个世纪大多数科","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2019","datePublished":"2019-06-19 17:12:18 \u002b0000 UTC","dateModified":"2019-06-19 17:12:18 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/reinforcement-learning-for-real-world-robotics\/","wordCount":"3581","keywords":["ReinfocementLearning","Robot","DeepLearning","AI","🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
-<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
-<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
-<a class=menu-item href=/categories/>Categories</a>
-<a class=menu-item href=/tags/>Tags</a>
-<a class=menu-item href=/about/>About</a>
-<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">现实世界中的机器人强化学习</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
-<span class=post-time>on <time datetime=2019-06-19 itemprop=datePublished>June 19, 2019</time></span>
-in
-<span class=post-word-count>3581 words</span></div></header><div class=post-content><h1 id=现实世界中的机器人强化学习>现实世界中的机器人强化学习</h1><blockquote><p>原载：<a href=https://towardsdatascience.com/reinforcement-learning-for-real-world-robotics-148c81dbdcff>Reinforcement Learning for Real-World Robotics</a></p><p>译者：神奇的战士</p></blockquote><h2 id=机器人---愿景>机器人 - 愿景</h2><p>机器人在现代工业中无处不在。与上个世纪大多数科幻作品中的机器人不同，现如今的机器人仍没有为人类洗盘子和倒垃圾，在战场上也没有出现像施瓦辛格那样的机器人终结者。但是，在所有的工厂车间内都能发现机器人的身影，机器人正在做人类工人几十年前做的那种单调而繁重的工作。任何具有重复性和精细的工作，如果可以被精确控制和监控的话，那么机器就能很好替代人工。目前的前沿的一些研究将以前我们认为非常难以机器实现且乏味的工作用机器自动化了（如自动驾驶）。</p><div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190619212510.png width=40%></div><p>我们对机器人的痴迷的原因是显而易见的；对于许多人来说，一个人类摆脱繁重乏味的体力劳动的未来似乎是非常值得憧憬的。另外，机器特有的精确性和一致性可以减少因为认为错误而引发的灾难，例如车祸和手术时的医疗事故。我们可以在工厂的生产线上看到这场革命的一点前兆：在一些像亚马逊的大型仓库中，机器人被用来代替人工运输板箱。</p><div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190619214718.png width=40%></div><p>虽然我们在战场上还没有杀人的仿人机器人，但我们确实有半自主无人机在世界各地运行，执行军事侦察和作战任务。军队的研究机构正在做大量的工作减少对人类士兵的伤害，将机器人投入战斗，我预计未来的几十年内我们将看到这样的进展。</p><h2 id=机器人强化学习>机器人强化学习</h2><p>为什么几十年前的科幻作品总是认为在不久的将来智能机器人可以做任何事，但是站在今天的角度我们认为这是一件遥远的事情？为什么现在工厂车间里到处都是机器人，但是我们的大街上却没有机器人的身影？在特定环境中运作的机器人，必须以某种方式理解自身的行为，规划动作和利用某种执行器执行动作，同时使用反馈来确保控制的准确性。</p><p>事实证明，上面的每一个部分都是难点，对人类来说再简单不过的事（如视觉场景下识别物体和某种程度上预测人的意图）对电脑来说却充满了挑战。近些年来，深度学习使得计算机视觉有了较大的突破，但是要理解普通街道的场景需要大量的相关技术，以现在的水平还远远做不到。</p><p>事实证明，在工厂装配线上的机器人与能走在大街上的机器人之间有着天壤之别。在装配线上，环境中的所有情况都可被精确控制，机器人需要完成的任务也相对具体和单一。尽管有这些优点，但是设计工业机器人的运动规划和控制算法仍然是一个枯燥且漫长的过程，这需要集成多个领域的专家的成果。这使得研发机器人昂贵和耗时，这进一步突出了我们当前的技术与让机器人在一般性的环境中执行一系列任务所需能力之间的巨大差距。在特性场景下开发专用机器人的算法都这么费劲，那么如何能让机器人再进入家庭呢？与洗碗机器人和喷漆机器人相比，这些机器人不得不在复杂的城市空间内导航和确保安全条件下与人交流。</p><div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190621211516.png width=40%></div><p>近些年随着深度学习和强化的发展，许多研究人员开始研究使用强化学习方法控制机器人。这样做的动机显而易见，我们可以让让机器人自主学习而不是专门为机器人开发感知、规划和控制算法吗？如果我们能做到的话，那么就能立马解决两个问题：节省花在开发设计机器人算法上的时间、为当前我们无法解决的难题提供解决方案。</p><p>深度强化学习在各种电子游戏、棋盘类游戏和相对简单仿真控制问题上取得了巨大的成功，并走进公众的视野。在这些任务当中，智体学习的环境和实际运行的环境是相同的，并且我们可以有效地利用仿真让智体学会解决问题之前进行多次尝试。众所周知，深度强化学习算法对数据的利用率很低，在学会玩雅达利游戏之前必须要经过数百万次的尝试。如果我们以同样的方法在实际环境中训练机器人，那将花费大量的时间并且对机器人硬件造成极大地磨损。或者，我们可以尝试在仿真环境中训练智体然后把训练好的策略部署在实体机器人上。但是要去模拟错综复杂的现实世界是异常困难的，这种预训练好的策略在实体机器人上常常表现糟糕。</p><p>将强化学习应用在机器人上仍然困难重重，在我看来，这些问题可以分为 4 类：</p><p><strong>采样效率</strong>：如果我们希望使用实体机器人训练策略，那么我们必须开发出使用很少试验就可以学习的算法，训练过程才是可行的。</p><p><strong>仿真到实际</strong>：如果我们希望在仿真环境中训练策略并且部署在机器人上</p><p><strong>奖励规则</strong>：当我们在玩《星际争霸2》时，游戏的目标清晰明了：获胜或失败。然而我们如何量化像洗盘子或者叠衣服这样的行为的成功度？</p><p><strong>安全性</strong>：无论是仿真还是部署在真实环境中，我们的机器人策略要是安全的，必须确保机器人自身的完整性和环境中人身和财产的安全。</p><p>我将着重强调机器人前两个问题，简要描述第三个问题，最后个问题暂且不讨论。</p><h2 id=采样效率>采样效率</h2><p>通常在低采样复杂度情况下首选的方法是基于模型的强化学习方法。在基于模型的强化学习中，与基于和环境交互获得的奖励来学习一个策略的方法不同，智体会尝试学习环境的模型并且使用它来规划和提升策略，因此可以大幅减少所需的与环境交互的次数。然而，这种方法与基于模型方法相比有较低的渐进性能，有时会因为所学模型中的错误而遭受灾难性的失败。</p><p>基于模型的强化学习在可以简单表示的动力学模型上取得了巨大的成功，例如线性模型，但是在更为复杂的环境中就需要非线性的模型了（如深度神经网络）。在 2018 年，来着伯克利的学者就这个问题发表了一篇<a href=https://arxiv.org/pdf/1802.10592.pdf>论文</a>[1]，在其中他们找到不稳定问题的一个可疑的原因，并提出了解决办法。</p><p>在论文中，作者表示在学习和规划的过程中，策略倾向利用状态空间区域，在这些区域学习到的策略表现不佳，这使得智体偏离了“航线”，无法在这个区域内使用学习好的策略提前规划导致了智体策略失效。他们的解决办法相对简单：学习环境的多种模型，在规划过程中，从这些不同的模型中均匀抽取样本，有效地规范了学习过程。这种方式就更容易将基于模型的强化学习应用到复杂任务中，实现了使用较少的试验而达到无模型方法那样的渐进性。</p><p>有趣的是，最近的无模型算法在采样的复杂性上有较大突破，以至于可以短时间内在实体机器人上训练策略。在 2019 年，来自伯克利和谷歌大脑团队的学者发表了一篇<a href=https://arxiv.org/pdf/1812.05905.pdf>论文</a>[2]，提出称为 Soft Actor Critic (SAC) 的异步策略 Actor Critic 算法。论文证明了该算法在几个传统的强化学习控制测试结果中具有很好的低样本复杂度性能，然后让机器人在 4 个小时的训练后就学会了走路。</p><div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190624143743.png width=40%></div><p>在平面上训练机器人，然后在有障碍物的表面测试机器人，展示了学习的策略的鲁棒性。</p><p>另一篇很棒的<a href=https://arxiv.org/pdf/1812.03201.pdf>论文</a>[3]以另一种不同的方式看待采样效率：通过摈弃策略必须从零开始学习的概念，利用现有的不完善的控制算法来提供一个“框架”，在此基础上训练策略。通过利用现有的控制算法可以很好地对该问题进行表征的优点，策略能够学习有效地调节控制系统而不是像大多数强化学习算法那样采取随机动作。文章中使用了这种方法训练机器人完成了在动力学上极其复杂的装配任务。</p><h2 id=从仿真到现实>从仿真到现实</h2><p>在过去的几年里，许多论文展示了训练好的强化学习策略运用在实体机器人平台上的能力，但是常常局限于一些特定的任务，通常需要大量的手动调整才能完成。特别是对于使用视觉来感知的机器人来说，要真实地模拟机器人所感知到的所有视觉图像是异常困难的，这就产生了著名的仿真和现实差异性问题。</p><p>在那些仿真里可以充分描述动力学的问题中，强化学习也可以很好地工作，正如这篇<a href="https://arxiv.org/pdf/1901.07517.pdf?fbclid=IwAR21IneQ5Lusw62bCyh0oDzRJYh2nKercXP53vp35dIGtT-edIcITZBeetc">文章</a>[4]，使用仿真训练策略让四足机器人恢复动作，训练好的策略在实体机器人上效果也很不错，拥有 97% 的成功率。然而，不像视觉问题，在这篇论文中的状态的维度相对较低。</p><p>为了解决视觉输入的问题，OpenAI 和伯克利团队在 2017 年的论文中提出了一个非常完美的解决方案：随机化环境提供的视觉输入，然后训练策略对这些随机的鲁棒性，现实世界可能是另一种仿真的随机变化。</p><div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190624152851.png width=40%></div><p>这种方法效果不错，他们能够在一个真正的机器人抓取系统中使用一个只接受过模拟仿真训练的目标检测器。</p><p>在 2019 年又发表了后续的另一篇很棒的<a href=https://arxiv.org/pdf/1812.07252.pdf>论文</a>[5]。在这片论文中，作者使用一个类似的随机仿真来帮助训练鲁棒的策略，但是同时训练了一个条件生成对抗网络 (cGAN) 来将随机图像转换回原始模拟仿真的标准形式。在测试时，条件生成对抗网络将真实图像转换为策略所熟悉的规范图像形式，这样可以有效地减小仿真到现实之间的差别。使用这种方法，论文中仿真训练好的智体应用在实体机器人上有 70% 的成功率。在实体机器人进行一些微调，他们能够达到 91% 甚至是 99% 的成功率。</p><div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190624153832.png width=80%></div><h2 id=奖励规则>奖励规则</h2><p>假设你希望你的机器人学会把书放在书架上，并且你有一个非常低样本复杂度的算法。如何设计奖励函数呢？在 2019 年一篇<a href=https://arxiv.org/pdf/1904.07854.pdf>论文</a>[6]中，来自伯克利的作者做到了。他们没有指定奖励函数，而是为算法提供了几张目标图像（排列好的书架），允许训练过程中询问（很少几次）用户当前状态是否是目标状态。通过令奖励 r = 前面提到的 Soft Actor Critic 算法，作者在实体机器人上训练了几个小时的策略。他们为不同的任务训练了不同的策略，例如把书放到书架上和把一块布搭在盒子上。</p><div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190624154635.png width=40%></div><h2 id=结论>结论</h2><p>要解决将强化学习应用于现实世界中的机器人问题还有很长的路要走，但是，我们正在取得很多的进展，希望我们在这个激动人心的领域看到进一步的突破。</p><h2 id=文献链接>文献链接</h2><ul><li>[1] <a href=https://arxiv.org/pdf/1802.10592.pdf>https://arxiv.org/pdf/1802.10592.pdf</a></li><li>[2] <a href=https://arxiv.org/pdf/1812.05905.pdf>https://arxiv.org/pdf/1812.05905.pdf</a></li><li>[3] <a href=https://arxiv.org/pdf/1812.03201.pdf>https://arxiv.org/pdf/1812.03201.pdf</a></li><li>[4] <a href=https://arxiv.org/pdf/1901.07517.pdf>https://arxiv.org/pdf/1901.07517.pdf</a></li><li>[5] <a href=https://arxiv.org/pdf/1812.07252.pdf>https://arxiv.org/pdf/1812.07252.pdf</a></li><li>[6] <a href=https://arxiv.org/pdf/1904.07854.pdf>https://arxiv.org/pdf/1904.07854.pdf</a></li></ul></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
-<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
-<a href=https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/>https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/</span></p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
-<span class=tag><a href=https://wangshub.github.io/tags/reinfocementlearning/>#ReinfocementLearning</a></span>
-<span class=tag><a href=https://wangshub.github.io/tags/robot/>#Robot</a></span>
-<span class=tag><a href=https://wangshub.github.io/tags/deeplearning/>#DeepLearning</a></span>
-<span class=tag><a href=https://wangshub.github.io/tags/ai/>#AI</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/on-dynamicland/ class=prev rel=prev title="Dynamicland, 可视空间和设计工坊"><i class="iconfont icon-left"></i>&nbsp;Dynamicland, 可视空间和设计工坊</a>
-<a href=https://wangshub.github.io/posts/tracking-my-phone/ class=next rel=next title=监视我的手机：数据都去哪儿了？>监视我的手机：数据都去哪儿了？&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
-<span itemprop=copyrightYear>2016 - 2020</span>
-<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
-<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="神奇的战士">
+    
+    
+    
+    <link rel="prev" href="https://wangshub.github.io/posts/on-dynamicland/" />
+    <link rel="next" href="https://wangshub.github.io/posts/tracking-my-phone/" />
+    <link rel="canonical" href="https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            现实世界中的机器人强化学习 | 🍉 神奇的战士
+        
+    </title>
+    <meta name="title" content="现实世界中的机器人强化学习 | 🍉 神奇的战士">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wangshub.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "现实世界中的机器人强化学习",
+    "headline" : "现实世界中的机器人强化学习",
+    "description" : "现实世界中的机器人强化学习 原载：Reinforcement Learning for Real-World Robotics 译者：神奇的战士 机器人 - 愿景 机器人在现代工业中无处不在。与上个世纪大多数科",
+    "inLanguage" : "zh-cn",
+    "author" : "神奇的战士",
+    "creator" : "神奇的战士",
+    "publisher": "神奇的战士",
+    "accountablePerson" : "神奇的战士",
+    "copyrightHolder" : "神奇的战士",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-06-19 17:12:18 \u002b0000 UTC",
+    "dateModified" : "2019-06-19 17:12:18 \u002b0000 UTC",
+    "url" : "https:\/\/wangshub.github.io\/posts\/reinforcement-learning-for-real-world-robotics\/",
+    "wordCount" : "3581",
+    "keywords" : [ "ReinfocementLearning","Robot","DeepLearning","AI", "🍉 神奇的战士"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://wangshub.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://wangshub.github.io">🍉 神奇的战士</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/categories/" title="">
+                            <h3>Categories</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">现实世界中的机器人强化学习</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wangshub.github.io" rel="author">神奇的战士</a> with ♥
+                <span class="post-time">
+                on <time datetime=2019-06-19 itemprop="datePublished">June 19, 2019</time>
+                </span>
+                in
+                
+                <span class="post-word-count">3581 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <h1 id="现实世界中的机器人强化学习">现实世界中的机器人强化学习</h1>
+<blockquote>
+<p>原载：<a href="https://towardsdatascience.com/reinforcement-learning-for-real-world-robotics-148c81dbdcff">Reinforcement Learning for Real-World Robotics</a></p>
+<p>译者：神奇的战士</p>
+</blockquote>
+<h2 id="机器人---愿景">机器人 - 愿景</h2>
+<p>机器人在现代工业中无处不在。与上个世纪大多数科幻作品中的机器人不同，现如今的机器人仍没有为人类洗盘子和倒垃圾，在战场上也没有出现像施瓦辛格那样的机器人终结者。但是，在所有的工厂车间内都能发现机器人的身影，机器人正在做人类工人几十年前做的那种单调而繁重的工作。任何具有重复性和精细的工作，如果可以被精确控制和监控的话，那么机器就能很好替代人工。目前的前沿的一些研究将以前我们认为非常难以机器实现且乏味的工作用机器自动化了（如自动驾驶）。</p>
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190619212510.png" width="40%" /></div>
+<p>我们对机器人的痴迷的原因是显而易见的；对于许多人来说，一个人类摆脱繁重乏味的体力劳动的未来似乎是非常值得憧憬的。另外，机器特有的精确性和一致性可以减少因为认为错误而引发的灾难，例如车祸和手术时的医疗事故。我们可以在工厂的生产线上看到这场革命的一点前兆：在一些像亚马逊的大型仓库中，机器人被用来代替人工运输板箱。</p>
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190619214718.png" width="40%" /></div>
+<p>虽然我们在战场上还没有杀人的仿人机器人，但我们确实有半自主无人机在世界各地运行，执行军事侦察和作战任务。军队的研究机构正在做大量的工作减少对人类士兵的伤害，将机器人投入战斗，我预计未来的几十年内我们将看到这样的进展。</p>
+<h2 id="机器人强化学习">机器人强化学习</h2>
+<p>为什么几十年前的科幻作品总是认为在不久的将来智能机器人可以做任何事，但是站在今天的角度我们认为这是一件遥远的事情？为什么现在工厂车间里到处都是机器人，但是我们的大街上却没有机器人的身影？在特定环境中运作的机器人，必须以某种方式理解自身的行为，规划动作和利用某种执行器执行动作，同时使用反馈来确保控制的准确性。</p>
+<p>事实证明，上面的每一个部分都是难点，对人类来说再简单不过的事（如视觉场景下识别物体和某种程度上预测人的意图）对电脑来说却充满了挑战。近些年来，深度学习使得计算机视觉有了较大的突破，但是要理解普通街道的场景需要大量的相关技术，以现在的水平还远远做不到。</p>
+<p>事实证明，在工厂装配线上的机器人与能走在大街上的机器人之间有着天壤之别。在装配线上，环境中的所有情况都可被精确控制，机器人需要完成的任务也相对具体和单一。尽管有这些优点，但是设计工业机器人的运动规划和控制算法仍然是一个枯燥且漫长的过程，这需要集成多个领域的专家的成果。这使得研发机器人昂贵和耗时，这进一步突出了我们当前的技术与让机器人在一般性的环境中执行一系列任务所需能力之间的巨大差距。在特性场景下开发专用机器人的算法都这么费劲，那么如何能让机器人再进入家庭呢？与洗碗机器人和喷漆机器人相比，这些机器人不得不在复杂的城市空间内导航和确保安全条件下与人交流。</p>
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190621211516.png" width="40%" /></div>
+<p>近些年随着深度学习和强化的发展，许多研究人员开始研究使用强化学习方法控制机器人。这样做的动机显而易见，我们可以让让机器人自主学习而不是专门为机器人开发感知、规划和控制算法吗？如果我们能做到的话，那么就能立马解决两个问题：节省花在开发设计机器人算法上的时间、为当前我们无法解决的难题提供解决方案。</p>
+<p>深度强化学习在各种电子游戏、棋盘类游戏和相对简单仿真控制问题上取得了巨大的成功，并走进公众的视野。在这些任务当中，智体学习的环境和实际运行的环境是相同的，并且我们可以有效地利用仿真让智体学会解决问题之前进行多次尝试。众所周知，深度强化学习算法对数据的利用率很低，在学会玩雅达利游戏之前必须要经过数百万次的尝试。如果我们以同样的方法在实际环境中训练机器人，那将花费大量的时间并且对机器人硬件造成极大地磨损。或者，我们可以尝试在仿真环境中训练智体然后把训练好的策略部署在实体机器人上。但是要去模拟错综复杂的现实世界是异常困难的，这种预训练好的策略在实体机器人上常常表现糟糕。</p>
+<p>将强化学习应用在机器人上仍然困难重重，在我看来，这些问题可以分为 4 类：</p>
+<p><strong>采样效率</strong>：如果我们希望使用实体机器人训练策略，那么我们必须开发出使用很少试验就可以学习的算法，训练过程才是可行的。</p>
+<p><strong>仿真到实际</strong>：如果我们希望在仿真环境中训练策略并且部署在机器人上</p>
+<p><strong>奖励规则</strong>：当我们在玩《星际争霸2》时，游戏的目标清晰明了：获胜或失败。然而我们如何量化像洗盘子或者叠衣服这样的行为的成功度？</p>
+<p><strong>安全性</strong>：无论是仿真还是部署在真实环境中，我们的机器人策略要是安全的，必须确保机器人自身的完整性和环境中人身和财产的安全。</p>
+<p>我将着重强调机器人前两个问题，简要描述第三个问题，最后个问题暂且不讨论。</p>
+<h2 id="采样效率">采样效率</h2>
+<p>通常在低采样复杂度情况下首选的方法是基于模型的强化学习方法。在基于模型的强化学习中，与基于和环境交互获得的奖励来学习一个策略的方法不同，智体会尝试学习环境的模型并且使用它来规划和提升策略，因此可以大幅减少所需的与环境交互的次数。然而，这种方法与基于模型方法相比有较低的渐进性能，有时会因为所学模型中的错误而遭受灾难性的失败。</p>
+<p>基于模型的强化学习在可以简单表示的动力学模型上取得了巨大的成功，例如线性模型，但是在更为复杂的环境中就需要非线性的模型了（如深度神经网络）。在 2018 年，来着伯克利的学者就这个问题发表了一篇<a href="https://arxiv.org/pdf/1802.10592.pdf">论文</a>[1]，在其中他们找到不稳定问题的一个可疑的原因，并提出了解决办法。</p>
+<p>在论文中，作者表示在学习和规划的过程中，策略倾向利用状态空间区域，在这些区域学习到的策略表现不佳，这使得智体偏离了“航线”，无法在这个区域内使用学习好的策略提前规划导致了智体策略失效。他们的解决办法相对简单：学习环境的多种模型，在规划过程中，从这些不同的模型中均匀抽取样本，有效地规范了学习过程。这种方式就更容易将基于模型的强化学习应用到复杂任务中，实现了使用较少的试验而达到无模型方法那样的渐进性。</p>
+<p>有趣的是，最近的无模型算法在采样的复杂性上有较大突破，以至于可以短时间内在实体机器人上训练策略。在 2019 年，来自伯克利和谷歌大脑团队的学者发表了一篇<a href="https://arxiv.org/pdf/1812.05905.pdf">论文</a>[2]，提出称为 Soft Actor Critic (SAC) 的异步策略 Actor Critic 算法。论文证明了该算法在几个传统的强化学习控制测试结果中具有很好的低样本复杂度性能，然后让机器人在 4 个小时的训练后就学会了走路。</p>
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190624143743.png" width="40%" /></div>
+<p>在平面上训练机器人，然后在有障碍物的表面测试机器人，展示了学习的策略的鲁棒性。</p>
+<p>另一篇很棒的<a href="https://arxiv.org/pdf/1812.03201.pdf">论文</a>[3]以另一种不同的方式看待采样效率：通过摈弃策略必须从零开始学习的概念，利用现有的不完善的控制算法来提供一个“框架”，在此基础上训练策略。通过利用现有的控制算法可以很好地对该问题进行表征的优点，策略能够学习有效地调节控制系统而不是像大多数强化学习算法那样采取随机动作。文章中使用了这种方法训练机器人完成了在动力学上极其复杂的装配任务。</p>
+<h2 id="从仿真到现实">从仿真到现实</h2>
+<p>在过去的几年里，许多论文展示了训练好的强化学习策略运用在实体机器人平台上的能力，但是常常局限于一些特定的任务，通常需要大量的手动调整才能完成。特别是对于使用视觉来感知的机器人来说，要真实地模拟机器人所感知到的所有视觉图像是异常困难的，这就产生了著名的仿真和现实差异性问题。</p>
+<p>在那些仿真里可以充分描述动力学的问题中，强化学习也可以很好地工作，正如这篇<a href="https://arxiv.org/pdf/1901.07517.pdf?fbclid=IwAR21IneQ5Lusw62bCyh0oDzRJYh2nKercXP53vp35dIGtT-edIcITZBeetc">文章</a>[4]，使用仿真训练策略让四足机器人恢复动作，训练好的策略在实体机器人上效果也很不错，拥有 97% 的成功率。然而，不像视觉问题，在这篇论文中的状态的维度相对较低。</p>
+<p>为了解决视觉输入的问题，OpenAI 和伯克利团队在 2017 年的论文中提出了一个非常完美的解决方案：随机化环境提供的视觉输入，然后训练策略对这些随机的鲁棒性，现实世界可能是另一种仿真的随机变化。</p>
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190624152851.png" width="40%" /></div>
+<p>这种方法效果不错，他们能够在一个真正的机器人抓取系统中使用一个只接受过模拟仿真训练的目标检测器。</p>
+<p>在 2019 年又发表了后续的另一篇很棒的<a href="https://arxiv.org/pdf/1812.07252.pdf">论文</a>[5]。在这片论文中，作者使用一个类似的随机仿真来帮助训练鲁棒的策略，但是同时训练了一个条件生成对抗网络 (cGAN) 来将随机图像转换回原始模拟仿真的标准形式。在测试时，条件生成对抗网络将真实图像转换为策略所熟悉的规范图像形式，这样可以有效地减小仿真到现实之间的差别。使用这种方法，论文中仿真训练好的智体应用在实体机器人上有 70% 的成功率。在实体机器人进行一些微调，他们能够达到 91% 甚至是 99% 的成功率。</p>
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190624153832.png" width="80%" /></div>
+<h2 id="奖励规则">奖励规则</h2>
+<p>假设你希望你的机器人学会把书放在书架上，并且你有一个非常低样本复杂度的算法。如何设计奖励函数呢？在 2019 年一篇<a href="https://arxiv.org/pdf/1904.07854.pdf">论文</a>[6]中，来自伯克利的作者做到了。他们没有指定奖励函数，而是为算法提供了几张目标图像（排列好的书架），允许训练过程中询问（很少几次）用户当前状态是否是目标状态。通过令奖励 r = 前面提到的 Soft Actor Critic 算法，作者在实体机器人上训练了几个小时的策略。他们为不同的任务训练了不同的策略，例如把书放到书架上和把一块布搭在盒子上。</p>
+<div style="text-align:center"><img src ="https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190624154635.png" width="40%" /></div>
+<h2 id="结论">结论</h2>
+<p>要解决将强化学习应用于现实世界中的机器人问题还有很长的路要走，但是，我们正在取得很多的进展，希望我们在这个激动人心的领域看到进一步的突破。</p>
+<h2 id="文献链接">文献链接</h2>
+<ul>
+<li>[1] <a href="https://arxiv.org/pdf/1802.10592.pdf">https://arxiv.org/pdf/1802.10592.pdf</a></li>
+<li>[2] <a href="https://arxiv.org/pdf/1812.05905.pdf">https://arxiv.org/pdf/1812.05905.pdf</a></li>
+<li>[3] <a href="https://arxiv.org/pdf/1812.03201.pdf">https://arxiv.org/pdf/1812.03201.pdf</a></li>
+<li>[4] <a href="https://arxiv.org/pdf/1901.07517.pdf">https://arxiv.org/pdf/1901.07517.pdf</a></li>
+<li>[5] <a href="https://arxiv.org/pdf/1812.07252.pdf">https://arxiv.org/pdf/1812.07252.pdf</a></li>
+<li>[6] <a href="https://arxiv.org/pdf/1904.07854.pdf">https://arxiv.org/pdf/1904.07854.pdf</a></li>
+</ul>
+
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>神奇的战士 </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/>https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/</span>
+            </p>
+            
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s):
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/reinfocementlearning/">
+                    #ReinfocementLearning</a></span>
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/robot/">
+                    #Robot</a></span>
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/deeplearning/">
+                    #DeepLearning</a></span>
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/ai/">
+                    #AI</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://wangshub.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wangshub.github.io/posts/on-dynamicland/" class="prev" rel="prev" title="Dynamicland, 可视空间和设计工坊"><i class="iconfont icon-left"></i>&nbsp;Dynamicland, 可视空间和设计工坊</a>
+        
+        
+        <a href="https://wangshub.github.io/posts/tracking-my-phone/" class="next" rel="next" title="监视我的手机：数据都去哪儿了？">监视我的手机：数据都去哪儿了？&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2016 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wangshub.github.io">神奇的战士</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+        </div>
+    </body>
+</html>

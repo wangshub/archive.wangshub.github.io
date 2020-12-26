@@ -1,1 +1,119 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Categories on 🍉 神奇的战士</title><link>https://wangshub.github.io/categories/</link><description>Recent content in Categories on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/categories/index.xml" rel="self" type="application/rss+xml"/><item><title>syntax</title><link>https://wangshub.github.io/categories/syntax/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wangshub.github.io/categories/syntax/</guid><description/></item><item><title>themes</title><link>https://wangshub.github.io/categories/themes/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wangshub.github.io/categories/themes/</guid><description/></item><item><title>Python</title><link>https://wangshub.github.io/categories/python/</link><pubDate>Thu, 20 Jul 2017 22:33:15 +0000</pubDate><guid>https://wangshub.github.io/categories/python/</guid><description/></item><item><title>VPN</title><link>https://wangshub.github.io/categories/vpn/</link><pubDate>Thu, 20 Jul 2017 22:33:15 +0000</pubDate><guid>https://wangshub.github.io/categories/vpn/</guid><description/></item><item><title>code</title><link>https://wangshub.github.io/categories/code/</link><pubDate>Thu, 20 Jul 2017 22:22:06 +0000</pubDate><guid>https://wangshub.github.io/categories/code/</guid><description/></item><item><title>Mail</title><link>https://wangshub.github.io/categories/mail/</link><pubDate>Thu, 20 Jul 2017 22:22:06 +0000</pubDate><guid>https://wangshub.github.io/categories/mail/</guid><description/></item><item><title>markdown</title><link>https://wangshub.github.io/categories/markdown/</link><pubDate>Mon, 05 Jun 2017 23:09:29 +0000</pubDate><guid>https://wangshub.github.io/categories/markdown/</guid><description/></item><item><title>Linux</title><link>https://wangshub.github.io/categories/linux/</link><pubDate>Wed, 31 May 2017 21:16:00 +0000</pubDate><guid>https://wangshub.github.io/categories/linux/</guid><description/></item><item><title>Tool</title><link>https://wangshub.github.io/categories/tool/</link><pubDate>Wed, 31 May 2017 21:16:00 +0000</pubDate><guid>https://wangshub.github.io/categories/tool/</guid><description/></item><item><title>algorithm</title><link>https://wangshub.github.io/categories/algorithm/</link><pubDate>Mon, 29 May 2017 23:06:12 +0000</pubDate><guid>https://wangshub.github.io/categories/algorithm/</guid><description/></item><item><title>Programming</title><link>https://wangshub.github.io/categories/programming/</link><pubDate>Thu, 25 May 2017 00:03:34 +0000</pubDate><guid>https://wangshub.github.io/categories/programming/</guid><description/></item><item><title>c/c++</title><link>https://wangshub.github.io/categories/c/c++/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wangshub.github.io/categories/c/c++/</guid><description/></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/categories/</link>
+    <description>Recent content in Categories on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 11 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>syntax</title>
+      <link>https://wangshub.github.io/categories/syntax/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/syntax/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>themes</title>
+      <link>https://wangshub.github.io/categories/themes/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/themes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://wangshub.github.io/categories/python/</link>
+      <pubDate>Thu, 20 Jul 2017 22:33:15 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VPN</title>
+      <link>https://wangshub.github.io/categories/vpn/</link>
+      <pubDate>Thu, 20 Jul 2017 22:33:15 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/vpn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>code</title>
+      <link>https://wangshub.github.io/categories/code/</link>
+      <pubDate>Thu, 20 Jul 2017 22:22:06 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/code/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mail</title>
+      <link>https://wangshub.github.io/categories/mail/</link>
+      <pubDate>Thu, 20 Jul 2017 22:22:06 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/mail/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>markdown</title>
+      <link>https://wangshub.github.io/categories/markdown/</link>
+      <pubDate>Mon, 05 Jun 2017 23:09:29 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/markdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://wangshub.github.io/categories/linux/</link>
+      <pubDate>Wed, 31 May 2017 21:16:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tool</title>
+      <link>https://wangshub.github.io/categories/tool/</link>
+      <pubDate>Wed, 31 May 2017 21:16:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/tool/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>algorithm</title>
+      <link>https://wangshub.github.io/categories/algorithm/</link>
+      <pubDate>Mon, 29 May 2017 23:06:12 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/algorithm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Programming</title>
+      <link>https://wangshub.github.io/categories/programming/</link>
+      <pubDate>Thu, 25 May 2017 00:03:34 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>c/c&#43;&#43;</title>
+      <link>https://wangshub.github.io/categories/c/c&#43;&#43;/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/categories/c/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

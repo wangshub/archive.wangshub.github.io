@@ -1,1 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>c/c++ on 🍉 神奇的战士</title><link>https://wangshub.github.io/categories/c/c++/</link><description>Recent content in c/c++ on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><atom:link href="https://wangshub.github.io/categories/c/c++/index.xml" rel="self" type="application/rss+xml"/><item><title>Cmake 模板</title><link>https://wangshub.github.io/posts/cmake-tutorial/</link><pubDate>Thu, 25 May 2017 00:03:34 +0000</pubDate><guid>https://wangshub.github.io/posts/cmake-tutorial/</guid><description>&lt;p>&lt;img src="https://ooo.0o0.ooo/2017/05/25/5925af646160e.png" alt="">&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>c/c&#43;&#43; on 🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/categories/c/c&#43;&#43;/</link>
+    <description>Recent content in c/c&#43;&#43; on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language><atom:link href="https://wangshub.github.io/categories/c/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cmake 模板</title>
+      <link>https://wangshub.github.io/posts/cmake-tutorial/</link>
+      <pubDate>Thu, 25 May 2017 00:03:34 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/cmake-tutorial/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://ooo.0o0.ooo/2017/05/25/5925af646160e.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

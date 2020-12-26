@@ -1,61 +1,656 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 🍉 神奇的战士</title><link>https://wangshub.github.io/posts/</link><description>Recent content in Posts on 🍉 神奇的战士</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sat, 28 Mar 2020 11:26:03 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>如何用深度强化学习模拟炒股</title><link>https://wangshub.github.io/posts/drl-stock/</link><pubDate>Sat, 28 Mar 2020 11:26:03 +0000</pubDate><guid>https://wangshub.github.io/posts/drl-stock/</guid><description>💡 初衷 最近一段时间，受到新冠疫情的影响，股市接连下跌，作为一棵小白菜兼小韭菜，竟然产生了抄底的大胆想法，拿出仅存的一点私房钱梭哈了一把。 第二</description></item><item><title>双连杆机械臂运动学正向和逆向 Python 仿真</title><link>https://wangshub.github.io/posts/kinematics-dh-method/</link><pubDate>Tue, 03 Dec 2019 20:47:54 +0000</pubDate><guid>https://wangshub.github.io/posts/kinematics-dh-method/</guid><description>双连杆机械臂运动学正向和逆向 Python 仿真 DH(Denavit-Hartenberg)方法 DH 方法描述了相邻坐标系之间的旋转与移动的关系，只需要找到 4</description></item><item><title>Web端连接智能硬件的方案</title><link>https://wangshub.github.io/posts/web%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%99%BA%E8%83%BD%E7%A1%AC%E4%BB%B6%E7%9A%84%E6%96%B9%E6%A1%88/</link><pubDate>Fri, 29 Nov 2019 17:24:15 +0000</pubDate><guid>https://wangshub.github.io/posts/web%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%99%BA%E8%83%BD%E7%A1%AC%E4%BB%B6%E7%9A%84%E6%96%B9%E6%A1%88/</guid><description>Web 适合与服务器通信，但不适合与设备通信，目前可以通过 webBLE，WebSerial 和 WebSocket 等方式与外围设备进行连接。 Web Bluetooth 网页通过 Web Bluetooth API 向浏览器</description></item><item><title>双足机器人如何行走？</title><link>https://wangshub.github.io/posts/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0/</link><pubDate>Tue, 05 Nov 2019 10:03:35 +0000</pubDate><guid>https://wangshub.github.io/posts/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0/</guid><description>[双足机器人如何行走？] 译文：how-do-biped-robots-walk 早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足</description></item><item><title>强化学习策略网络复杂度的影响</title><link>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E7%BD%91%E7%BB%9C%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%BD%B1%E5%93%8D/</link><pubDate>Mon, 04 Nov 2019 17:20:29 +0000</pubDate><guid>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E7%BD%91%E7%BB%9C%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%BD%B1%E5%93%8D/</guid><description>强化学习策略网络调参 传统的基于状态-动作强化学习方法会遇到维度诅咒的问题，为了解决这个问题，基于策略的强化学习方法被提出，比如经典的策略梯度</description></item><item><title>Pybulet Gym 源码解析：双足机器人模型 HumanoidPyBulletEnv-v0</title><link>https://wangshub.github.io/posts/pybulet-gym%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8Bhumanoidpybulletenv-v0/</link><pubDate>Fri, 23 Aug 2019 16:19:36 +0000</pubDate><guid>https://wangshub.github.io/posts/pybulet-gym%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8Bhumanoidpybulletenv-v0/</guid><description>OpenAI gym 是当前使用最为广泛的用于研究强化学习的工具箱，但 Gym 的物理仿真环境使用的是 Mujoco，不开源且收费，这一点一直被人诟病。而 Pybullet-gym 是对 Openai Gym Mujoco 环</description></item><item><title>OpenAI Gym 源码阅读:创建自定义强化学习环境</title><link>https://wangshub.github.io/posts/openai-gym-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83/</link><pubDate>Wed, 21 Aug 2019 16:24:35 +0000</pubDate><guid>https://wangshub.github.io/posts/openai-gym-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83/</guid><description>OpenAI Gym 源码阅读：创建自定义强化学习环境 Gym 介绍 Gym 是一套开发强化学习算法的工具箱，包含了一系列内置的环境，结合强化学习算法就可以对内置的环境进行求</description></item><item><title>《我的团长我的团》书摘</title><link>https://wangshub.github.io/posts/%E6%88%91%E7%9A%84%E5%9B%A2%E9%95%BF%E6%88%91%E7%9A%84%E5%9B%A2%E4%B9%A6%E6%91%98/</link><pubDate>Fri, 09 Aug 2019 09:27:33 +0000</pubDate><guid>https://wangshub.github.io/posts/%E6%88%91%E7%9A%84%E5%9B%A2%E9%95%BF%E6%88%91%E7%9A%84%E5%9B%A2%E4%B9%A6%E6%91%98/</guid><description>《我的团长我的团》书摘 兰晓龙 ◆ 第二章 对我们之中很多人来说，他是神仙，有把一摊烂泥变成标枪的魔力。我看着他，看着凤凰，凤凰飞临鸡群之上，让鸡们</description></item><item><title>监视我的手机：数据都去哪儿了？</title><link>https://wangshub.github.io/posts/tracking-my-phone/</link><pubDate>Mon, 15 Jul 2019 18:32:54 +0000</pubDate><guid>https://wangshub.github.io/posts/tracking-my-phone/</guid><description>监视我的手机：数据都去哪儿了？ 警告: 请勿用于非法目的，非法获取他人隐私属于犯罪! “现在的人几乎是全部透明的。我心里就想，马化腾肯定天天在看我</description></item><item><title>现实世界中的机器人强化学习</title><link>https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/</link><pubDate>Wed, 19 Jun 2019 17:12:18 +0000</pubDate><guid>https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/</guid><description>现实世界中的机器人强化学习 原载：Reinforcement Learning for Real-World Robotics 译者：神奇的战士 机器人 - 愿景 机器人在现代工业中无处不在。与上个世纪大多数科</description></item><item><title>Dynamicland, 可视空间和设计工坊</title><link>https://wangshub.github.io/posts/on-dynamicland/</link><pubDate>Thu, 13 Jun 2019 14:51:57 +0000</pubDate><guid>https://wangshub.github.io/posts/on-dynamicland/</guid><description>Dynamicland, 可视空间和设计工坊 Vitorio Miliano 从 2017 年 9 月 11 日星期一开始 Dynamicland 发布的一系列照片和视频剪辑让我意识到，我可能错过了一个有意思的东西 &amp;ndash; 并且是最佳实践 &amp;ndash; 那就是</description></item><item><title>两种硬件编程的风格：离线下载和在线交互</title><link>https://wangshub.github.io/posts/about-interpreter/</link><pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate><guid>https://wangshub.github.io/posts/about-interpreter/</guid><description>两种硬件编程的风格：离线下载和在线交互 少儿编程教育+智能硬件似乎是天生的一对，二者的结合很容易产生 1 + 1 &amp;gt; 2 的双赢局面。不管是在线编程教育企</description></item><item><title>基于 face_recognition 和 PID 的人脸识别和跟踪</title><link>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</link><pubDate>Mon, 03 Jun 2019 15:42:59 +0000</pubDate><guid>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</guid><description>基于 face_recognition 和 PID 的舵机云台人脸识别和跟踪 如何让机器人头部摄像头跟随识别到人脸位置变化而转动？一帧图像是 2 维的，人脸位置用坐标 (x,y) 表示，要实现跟踪人脸</description></item><item><title>用 Docker 部署 Sentry Bug 日志收集服务</title><link>https://wangshub.github.io/posts/docker-sentry-deploy/</link><pubDate>Sat, 25 May 2019 10:44:27 +0000</pubDate><guid>https://wangshub.github.io/posts/docker-sentry-deploy/</guid><description>用 Docker 部署 Sentry Bug 日志收集服务 Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大部分主流的编程语言，并提供 SDK，当程序出现异常就向服务</description></item><item><title>在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！</title><link>https://wangshub.github.io/posts/control-robot-in-scratch3/</link><pubDate>Thu, 23 May 2019 21:21:12 +0000</pubDate><guid>https://wangshub.github.io/posts/control-robot-in-scratch3/</guid><description>在 Scratch 中玩转机器人：Python、Deep Learning、Posenet and Robot！ 所有的边界都被打破了 &amp;ndash;《Mindstorm</description></item><item><title>【译】Kill Math(Bret Victor)：让数学不只是符号</title><link>https://wangshub.github.io/posts/kill-math/</link><pubDate>Thu, 16 May 2019 20:51:18 +0000</pubDate><guid>https://wangshub.github.io/posts/kill-math/</guid><description>Author: Bret Victor / April 11, 2011 Translator: 神奇的战士 Bret Victor 是苹果公司的前 IPAD 的交互设计师, 大神级的人物。他的理想是：改造我们的低幼化社会。为人们提供工具，用以抵抗和摧毁消</description></item><item><title>当遇到 Scratch3-Codelab，Pando 觉醒了！</title><link>https://wangshub.github.io/posts/codelab-pando-tutorial/</link><pubDate>Wed, 17 Apr 2019 15:17:02 +0000</pubDate><guid>https://wangshub.github.io/posts/codelab-pando-tutorial/</guid><description>当遇到 Scratch3-Codelab，Pando 觉醒了！ Explore Amazing Moment With Pando Pando 是由乐聚机器人研发，可以进行情感互动的益智编程机器人。主要功能包括情感</description></item><item><title>推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和我的配置方案</title><link>https://wangshub.github.io/posts/hammerspoon-introduce/</link><pubDate>Mon, 08 Apr 2019 22:26:58 +0000</pubDate><guid>https://wangshub.github.io/posts/hammerspoon-introduce/</guid><description>推荐一个 MacOS 上用了就无法自拔的 App Hammerspoon！ Hammerspoon 是 MacOS 上的自动化工具，许多介绍 Hammerspoon 的文章都主要介绍了它是一个窗口管理工具，但是 Hammerspoon 能做到的</description></item><item><title>升级 Macbook 2015 固态硬盘为 M.2 2280 PCIE NVME 接口 SSD</title><link>https://wangshub.github.io/posts/macbook2015upgradessd/</link><pubDate>Thu, 04 Apr 2019 19:18:36 +0000</pubDate><guid>https://wangshub.github.io/posts/macbook2015upgradessd/</guid><description>升级 Macbook 2015 固态硬盘为 M.2 2280 PCIE NVME 接口 SSD 东西没有坏掉，只有修不好的 由于苹果原装接口 SSD 价格太高(512G ≈ 2000RMB)，采用 M2.0 接口转苹果 SSD 专用接口</description></item><item><title>『Hamerspoon』蓝牙自动开关</title><link>https://wangshub.github.io/posts/mac-bluetooth-auto-toggle-when-lock-unlock-screen/</link><pubDate>Tue, 19 Mar 2019 14:08:10 +0000</pubDate><guid>https://wangshub.github.io/posts/mac-bluetooth-auto-toggle-when-lock-unlock-screen/</guid><description>『Hamerspoon』Mac 蓝牙自动开关 前言 如果你也像我一样使用 Mac 连接蓝牙耳机，下班后总是忘记关耳机，第二天耳机没电的话，那么这篇文章也许</description></item><item><title>强化学习之 Deep Q­-Learning</title><link>https://wangshub.github.io/posts/rldeepqlearning/</link><pubDate>Mon, 11 Mar 2019 20:27:30 +0000</pubDate><guid>https://wangshub.github.io/posts/rldeepqlearning/</guid><description>Deep Q­-Learning Q-Learning 在 Q-Learning 中定义函数 $Q(s, a)$ 表示在当前状态 $s$ 下采取动作 $a$ 获得的最大有损奖励 $$ Q\left(s_{t}, a_{t}\right)=\max R_{t+1} $$ 可以将 $Q(s, a)$ 理解为在一局游戏中，如果在状态</description></item><item><title>Markdown Syntax Guide</title><link>https://wangshub.github.io/posts/markdown-syntax/</link><pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate><guid>https://wangshub.github.io/posts/markdown-syntax/</guid><description>&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p></description></item><item><title>Rich Content</title><link>https://wangshub.github.io/posts/rich-content/</link><pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate><guid>https://wangshub.github.io/posts/rich-content/</guid><description>&lt;p>Hugo ships with several &lt;a href="https://gohugo.io/content-management/shortcodes/#use-hugo-s-built-in-shortcodes">Built-in Shortcodes&lt;/a> for rich content, along with a &lt;a href="https://gohugo.io/about/hugo-and-gdpr/">Privacy Config&lt;/a> and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.&lt;/p></description></item><item><title>Placeholder Text</title><link>https://wangshub.github.io/posts/placeholder-text/</link><pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate><guid>https://wangshub.github.io/posts/placeholder-text/</guid><description>&lt;p>Lorem est tota propiore conpellat pectoribus de
-pectora summo.&lt;/p></description></item><item><title>树莓派FM小电台背后的原理解析</title><link>https://wangshub.github.io/posts/%E6%A0%91%E8%8E%93%E6%B4%BEfm%E5%B0%8F%E7%94%B5%E5%8F%B0%E8%83%8C%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/</link><pubDate>Tue, 26 Feb 2019 20:53:30 +0000</pubDate><guid>https://wangshub.github.io/posts/%E6%A0%91%E8%8E%93%E6%B4%BEfm%E5%B0%8F%E7%94%B5%E5%8F%B0%E8%83%8C%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/</guid><description>树莓派 FM 发送机小电台背后的原理解析 介绍 在知乎上有个问题 你在 GitHub 上看到过的最有意思的项目是什么？ 我介绍了个很有意思的无线 FM 电台的项目，可以在不借</description></item><item><title>用Python给抖音小姐姐打声招呼</title><link>https://wangshub.github.io/posts/%E7%94%A8python%E7%BB%99%E6%8A%96%E9%9F%B3%E5%B0%8F%E5%A7%90%E5%A7%90%E6%89%93%E5%A3%B0%E6%8B%9B%E5%91%BC/</link><pubDate>Wed, 20 Feb 2019 17:04:28 +0000</pubDate><guid>https://wangshub.github.io/posts/%E7%94%A8python%E7%BB%99%E6%8A%96%E9%9F%B3%E5%B0%8F%E5%A7%90%E5%A7%90%E6%89%93%E5%A3%B0%E6%8B%9B%E5%91%BC/</guid><description>用 Python 自动给抖音小姐姐评论一个 666 前一段时间写了一篇 《抖音 Python 机器人，论如何在抖音上找到漂亮小姐姐？》，没想到有相当多的同学有着相同的需求！ 大家</description></item><item><title>在GitHub上看到过的最有意思的项目</title><link>https://wangshub.github.io/posts/%E5%9C%A8github%E4%B8%8A%E7%9C%8B%E5%88%B0%E8%BF%87%E7%9A%84%E6%9C%80%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E9%A1%B9%E7%9B%AE/</link><pubDate>Mon, 18 Feb 2019 15:02:53 +0000</pubDate><guid>https://wangshub.github.io/posts/%E5%9C%A8github%E4%B8%8A%E7%9C%8B%E5%88%B0%E8%BF%87%E7%9A%84%E6%9C%80%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E9%A1%B9%E7%9B%AE/</guid><description>在GitHub上看到过的最有意思的项目 键盘听声识键 地址：ggerganov/kbd-audio 通过麦克风录取键盘的敲击声，判断你按下的</description></item><item><title>Vanilla_Policy_Gradient</title><link>https://wangshub.github.io/posts/vanilla-policy-gradient/</link><pubDate>Tue, 29 Jan 2019 16:48:53 +0000</pubDate><guid>https://wangshub.github.io/posts/vanilla-policy-gradient/</guid><description>强化学习 Vanilla Policy Gradient 令 $\pi _ { \theta }$ 表示参数为 $\theta$ 的策略，$J \left( \pi _ { \theta } \right)$ 表示策略 $\pi _ { \theta }$ 的返回值，则优化函数梯度为 $$\nabla _ { \theta } J \left( \pi _ { \theta } \right) = \underset {</description></item><item><title>用Python获取B站播放历史记录</title><link>https://wangshub.github.io/posts/%E7%94%A8python%E8%8E%B7%E5%8F%96b%E7%AB%99%E6%92%AD%E6%94%BE%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</link><pubDate>Tue, 22 Jan 2019 18:40:22 +0000</pubDate><guid>https://wangshub.github.io/posts/%E7%94%A8python%E8%8E%B7%E5%8F%96b%E7%AB%99%E6%92%AD%E6%94%BE%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</guid><description>用 Python 获取 B 站播放历史记录 最近 B 站出了一个年度报告，统计用户一年当中在 B 站上观看视频的总时长和总个数。过去一年我居然在 B 站上看了 2600+ 个视频，总计</description></item><item><title>强化学习:策略梯度算法</title><link>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/</link><pubDate>Tue, 15 Jan 2019 19:46:17 +0000</pubDate><guid>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/</guid><description>强化学习:策略梯度算法 策略梯度的公式推导 ​ 学习参数化表示的策略 (Parameterized policy), 输入环境状态 $ S $ 来选择动作 $a$ ，这里使用 $\theta \in \mathbb { R } ^ { d }$ 来表示策略的参</description></item><item><title>MLPGaussianPolicy</title><link>https://wangshub.github.io/posts/mlpgaussianpolicy/</link><pubDate>Mon, 14 Jan 2019 19:42:41 +0000</pubDate><guid>https://wangshub.github.io/posts/mlpgaussianpolicy/</guid><description>MLP Gaussian policy Looks like a Gaussian policy whose mean and std are outputs of a neural network. 参考文献 https://arxiv.org/pdf/1502.05477.pdf</description></item><item><title>强化学习随机策略之高斯似然数原理与代码实现</title><link>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%9C%BA%E7%AD%96%E7%95%A5%E4%B9%8B%E9%AB%98%E6%96%AF%E4%BC%BC%E7%84%B6%E6%95%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/</link><pubDate>Sat, 12 Jan 2019 14:47:50 +0000</pubDate><guid>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%9C%BA%E7%AD%96%E7%95%A5%E4%B9%8B%E9%AB%98%E6%96%AF%E4%BC%BC%E7%84%B6%E6%95%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/</guid><description>强化学习随机策略之高斯似然数原理与代码实现 一、原理介绍 使用随机策略有两个关键点 从策略当中进行采样，获得动作 $a$ (Action) 计算特定动作的似然数 $\log \pi _ { \theta</description></item><item><title>每个会做饭的人都是人生赢家</title><link>https://wangshub.github.io/posts/%E6%AF%8F%E4%B8%AA%E4%BC%9A%E5%81%9A%E9%A5%AD%E7%9A%84%E4%BA%BA%E9%83%BD%E6%98%AF%E4%BA%BA%E7%94%9F%E8%B5%A2%E5%AE%B6/</link><pubDate>Fri, 11 Jan 2019 21:19:55 +0000</pubDate><guid>https://wangshub.github.io/posts/%E6%AF%8F%E4%B8%AA%E4%BC%9A%E5%81%9A%E9%A5%AD%E7%9A%84%E4%BA%BA%E9%83%BD%E6%98%AF%E4%BA%BA%E7%94%9F%E8%B5%A2%E5%AE%B6/</guid><description>摘自 《会做饭的，都是人生赢家》 不紧不慢地做一顿好吃的饭菜， 是一场可以避世与收获宁静的禅修； 而爱做饭、会做饭的人， 也可以称作是有信仰的人。 这样</description></item><item><title>Alfred-Gitlab-Workflow</title><link>https://wangshub.github.io/posts/alfred-gitlab-workflow/</link><pubDate>Fri, 12 Oct 2018 08:31:33 +0000</pubDate><guid>https://wangshub.github.io/posts/alfred-gitlab-workflow/</guid><description>Alfred Gitlab Workflow：Gitlab 快速浏览工具 GitLab 是一个类似于 GitHub 的开源源码托管服务，除了代码托管外，Gitlab 还具备了像 Issue、Merg</description></item><item><title>用Python写Alfred3插件</title><link>https://wangshub.github.io/posts/%E7%94%A8python%E5%86%99alfred3%E6%8F%92%E4%BB%B6/</link><pubDate>Sun, 30 Sep 2018 18:18:16 +0000</pubDate><guid>https://wangshub.github.io/posts/%E7%94%A8python%E5%86%99alfred3%E6%8F%92%E4%BB%B6/</guid><description>用 Python 写 Alfred3 workflow 插件，一个最小示例 以前一直在使用 Cerebro 作为效率工具(开源免费)，但是 Cerebro 原作者似乎很久没有更新，今天抱着试一试的心态用了一把 Alfred 才发现，哎</description></item><item><title>在roboschool中控制Atlas</title><link>https://wangshub.github.io/posts/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas/</link><pubDate>Thu, 20 Sep 2018 17:28:18 +0000</pubDate><guid>https://wangshub.github.io/posts/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas/</guid><description>利用 Python 在 OpenAI 的 roboschool 中控制 Atlas 机器人 作者：神奇的战士 Blog: http://thinkhard.tech/ 背景介绍 Atlas: Atlas 机器人是一个双足人形机器人，由鼎鼎大名的美国波士顿动力公司为主开发，身高 1.75 米，</description></item><item><title>将 Kindle 转换成文艺电子时钟</title><link>https://wangshub.github.io/posts/turn-kindle-to-electron-clock/</link><pubDate>Sun, 05 Aug 2018 10:30:01 +0000</pubDate><guid>https://wangshub.github.io/posts/turn-kindle-to-electron-clock/</guid><description>破解 Kindle，改造成文艺电子时钟 前言 原材料准备 硬件 亚马逊 Kindle 6 inch Micro USB 线 软件 SSH 工具 破解 Kindle 为了让 Kindle 显示我们想要的内容，需要能够登录进 Kindle 系统并</description></item><item><title>机器人强化学习之使用 OpenAI Gym 教程与笔记</title><link>https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/</link><pubDate>Fri, 27 Jul 2018 10:34:40 +0000</pubDate><guid>https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/</guid><description>机器人强化学习之使用 OpenAI Gym 教程与笔记 除了试图直接去建立一个可以模拟成人大脑的程序之外， 为什么不试图建立一个可以模拟小孩大脑的程序呢?如果它接 受</description></item><item><title>机器人强化学习笔记（0）</title><link>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Tue, 03 Jul 2018 22:34:36 +0000</pubDate><guid>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>机器人强化学习笔记（0） 机器学习分类 强化学习问题 监督学习：监督学习由任务驱动，需要创造外部的“导师”，“导师”拥有外部环境的所有先验信息，</description></item><item><title>效率工具网站推荐</title><link>https://wangshub.github.io/posts/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/</link><pubDate>Sat, 09 Jun 2018 09:58:48 +0000</pubDate><guid>https://wangshub.github.io/posts/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/</guid><description>提升生活品质——个人效率工具与资讯网站推荐 这个世界上软件太多，懂你的工具太少； 我是个工具控，经常搜集和自己写一些工具和插件来提高生活品质； 本</description></item><item><title>Python抖音机器人，论如何在抖音上找到漂亮小姐姐？</title><link>https://wangshub.github.io/posts/python%E6%8A%96%E9%9F%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BA%E5%A6%82%E4%BD%95%E5%9C%A8%E6%8A%96%E9%9F%B3%E4%B8%8A%E6%89%BE%E5%88%B0%E6%BC%82%E4%BA%AE%E5%B0%8F%E5%A7%90%E5%A7%90/</link><pubDate>Mon, 28 May 2018 14:38:32 +0000</pubDate><guid>https://wangshub.github.io/posts/python%E6%8A%96%E9%9F%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BA%E5%A6%82%E4%BD%95%E5%9C%A8%E6%8A%96%E9%9F%B3%E4%B8%8A%E6%89%BE%E5%88%B0%E6%BC%82%E4%BA%AE%E5%B0%8F%E5%A7%90%E5%A7%90/</guid><description>如何在抖音上找到漂亮小姐姐&amp;mdash;-抖音机器人 最近沉迷于抖音无法自拔，常常花好几个小时在抖音漂亮小姐姐身上。 为了高效、直接地找到漂亮小</description></item><item><title>给博客网站加个球(访客统计)</title><link>https://wangshub.github.io/posts/%E7%BB%99%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA%E7%90%83-%E8%AE%BF%E5%AE%A2%E7%BB%9F%E8%AE%A1/</link><pubDate>Sun, 20 May 2018 17:09:18 +0000</pubDate><guid>https://wangshub.github.io/posts/%E7%BB%99%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA%E7%90%83-%E8%AE%BF%E5%AE%A2%E7%BB%9F%E8%AE%A1/</guid><description>给博客网站加个球-访客统计脚本 最近无意中发现了 Revolvermaps 这个网站，可以对网站页面上的访客进行统计。 Demo 演示 神奇的战士的博客 主要特征 访客 IP 地点统计； 访客</description></item><item><title>使用Emacs进行日程管理（GTD）</title><link>https://wangshub.github.io/posts/%E4%BD%BF%E7%94%A8emacs%E8%BF%9B%E8%A1%8C%E6%97%A5%E7%A8%8B%E7%AE%A1%E7%90%86gtd/</link><pubDate>Sun, 13 May 2018 14:19:22 +0000</pubDate><guid>https://wangshub.github.io/posts/%E4%BD%BF%E7%94%A8emacs%E8%BF%9B%E8%A1%8C%E6%97%A5%E7%A8%8B%E7%AE%A1%E7%90%86gtd/</guid><description>使用 Emacs 进行日程管理 (GTD) 什么是 GTD ? Your mind is for having ideas, not holding them. &amp;mdash; David Allen GTD (Getting Things Done) 是一个组织和跟进任务或待办事项的系统架构，但是它的目标要高于仅仅是将事情做完，</description></item><item><title>开源跨平台效率软件Cerebro</title><link>https://wangshub.github.io/posts/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%95%88%E7%8E%87%E8%BD%AF%E4%BB%B6cerebro/</link><pubDate>Mon, 30 Apr 2018 20:26:25 +0000</pubDate><guid>https://wangshub.github.io/posts/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%95%88%E7%8E%87%E8%BD%AF%E4%BB%B6cerebro/</guid><description>开源跨平台效率软件Cerebro 开源跨平台效率软件Cerebro 主要特性 功能展示 应用与文件搜索 基于 Electron，什么都能看 易上手的插件</description></item><item><title>cerebro-codelf给变量起名的事情上，为你生命省3s</title><link>https://wangshub.github.io/posts/cerebro-codelf%E7%BB%99%E5%8F%98%E9%87%8F%E8%B5%B7%E5%90%8D%E7%9A%84%E4%BA%8B%E6%83%85%E4%B8%8A%E4%B8%BA%E4%BD%A0%E7%94%9F%E5%91%BD%E7%9C%813s/</link><pubDate>Mon, 30 Apr 2018 20:11:27 +0000</pubDate><guid>https://wangshub.github.io/posts/cerebro-codelf%E7%BB%99%E5%8F%98%E9%87%8F%E8%B5%B7%E5%90%8D%E7%9A%84%E4%BA%8B%E6%83%85%E4%B8%8A%E4%B8%BA%E4%BD%A0%E7%94%9F%E5%91%BD%E7%9C%813s/</guid><description>cerebro-codelf There are only two hard things in Computer Science: cache invalidation and naming things. &amp;ndash; Phil Karlton 给变量起名的事情上，为你生命省 3s。 Cerebro 变量名搜索插件，项目灵感来源 codelf。通过 Cerebro 的搜索窗口快速查找</description></item><item><title>python插件式爬虫</title><link>https://wangshub.github.io/posts/python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%88%AC%E8%99%AB/</link><pubDate>Wed, 25 Apr 2018 15:51:05 +0000</pubDate><guid>https://wangshub.github.io/posts/python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%88%AC%E8%99%AB/</guid><description>Python 插件式的信息爬虫 🐝 一群不辞劳苦采花小蜜蜂 项目代码地址 本项目运行在可以运行在本地或者服务器端，将不同插件程序获取的信息如：每日天气、新闻等，</description></item><item><title>Python插件式程序结构设计</title><link>https://wangshub.github.io/posts/python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/</link><pubDate>Mon, 23 Apr 2018 14:27:19 +0000</pubDate><guid>https://wangshub.github.io/posts/python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/</guid><description>Python 插件式程序结构设计 小姐姐，你的插件掉了 本文源码在 github/wangshub 最近有个问题一直困扰着我，我经常会遇到对以前的程序或者代码进行功能的扩充，但是由于前</description></item><item><title>Cerebro插件之电影磁力搜索神器</title><link>https://wangshub.github.io/posts/cerebro%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%94%B5%E5%BD%B1%E7%A3%81%E5%8A%9B%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8/</link><pubDate>Sat, 31 Mar 2018 15:34:51 +0000</pubDate><guid>https://wangshub.github.io/posts/cerebro%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%94%B5%E5%BD%B1%E7%A3%81%E5%8A%9B%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8/</guid><description>Cerebro 插件之电影磁力搜索神器 Cerebro plugin to search torrent of movies 什么？看个片儿还要打开网页慢慢找?！ 这周在学 Node.js, 看了 @carlos-wong 推荐的《Eloquent JavaScript》 这本</description></item><item><title>如何解决EDAS上传论文时fonts问题</title><link>https://wangshub.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98/</link><pubDate>Sat, 10 Feb 2018 17:29:54 +0000</pubDate><guid>https://wangshub.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98/</guid><description>如何解决 EDAS 上传论文时 PDF fonts 问题 问题描述 今天在上传 IEEE xplore 论文时遇到上传字体出错的问题 upload failed: One or more fonts are not embedded. See EDAS FAQ 解决办法 检查字体子集 在 EDAS 上传 Latex 输出的 PDF</description></item><item><title>python装饰器学习笔记</title><link>https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link><pubDate>Wed, 07 Feb 2018 14:02:39 +0000</pubDate><guid>https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid><description>python 装饰器学习笔记 概括 装饰器的作用就是为已经存在的对象添加额外的功能 我们可以继续调用装饰器来修饰函数，而不用重复修改函数或者增加新的封装。这样</description></item><item><title>用python对github用户followers分析</title><link>https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/</link><pubDate>Mon, 15 Jan 2018 09:40:16 +0000</pubDate><guid>https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/</guid><description>github 用户 followers 分析 如何分析一个github用户的followers？ 周末手痒，用python分析了一下自己 github 的 followers 用户，统计结果如下 问题分析 在git</description></item><item><title>教你用Python来玩微信跳一跳</title><link>https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/</link><pubDate>Fri, 29 Dec 2017 10:02:41 +0000</pubDate><guid>https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/</guid><description>教你用Python来玩微信跳一跳 2017年12月28日下午，微信发布了 6.6.1 版本，加入了「小游戏」功能，并提供了官方 demo「跳一跳」。 blog 地址 github</description></item><item><title>Python蔡英文facebook主页分析_by神奇的战士</title><link>https://wangshub.github.io/posts/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/</link><pubDate>Mon, 25 Dec 2017 15:14:39 +0000</pubDate><guid>https://wangshub.github.io/posts/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/</guid><description>Python蔡英文facebook主页分析(by神奇的战士) 博客地址：https://wangshub.github.io/ 公众号：神奇的战</description></item><item><title>linux驱动器和分区的备份，使用dd命令示例</title><link>https://wangshub.github.io/posts/linux%E9%A9%B1%E5%8A%A8%E5%99%A8%E5%92%8C%E5%88%86%E5%8C%BA%E7%9A%84%E5%A4%87%E4%BB%BD%E4%BD%BF%E7%94%A8dd%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B/</link><pubDate>Mon, 18 Dec 2017 20:04:51 +0000</pubDate><guid>https://wangshub.github.io/posts/linux%E9%A9%B1%E5%8A%A8%E5%99%A8%E5%92%8C%E5%88%86%E5%8C%BA%E7%9A%84%E5%A4%87%E4%BB%BD%E4%BD%BF%E7%94%A8dd%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B/</guid><description>dd命令是Linux发行版非常简单的备份工具。 “dd”工具简单的拷贝标准输入到标准输出，在512字节块读取。 dd 命令是Linux发行版非常简单</description></item><item><title>python数字图像处理-图像噪声与去噪算法</title><link>https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/</link><pubDate>Sat, 16 Dec 2017 17:19:29 +0000</pubDate><guid>https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/</guid><description>python数字图像处理-图像噪声与去噪算法 图像噪声 椒盐噪声 概述： 椒盐噪声（salt &amp;amp; pepper noise）是数字图像的一个常见噪声，所谓椒盐，椒就</description></item><item><title>python数字图像处理-图像的基本结构和基础知识</title><link>https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link><pubDate>Sat, 16 Dec 2017 17:10:39 +0000</pubDate><guid>https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid><description>数字图像处理-图像的基本结构和基础知识 一、python实现BMP图像的读取和显示 BMP文件格式，又称为Bitmap（位图）或是DIB(Dev</description></item><item><title>python check hosts update</title><link>https://wangshub.github.io/posts/python-check-hosts-update/</link><pubDate>Thu, 20 Jul 2017 22:33:15 +0000</pubDate><guid>https://wangshub.github.io/posts/python-check-hosts-update/</guid><description>用Python检查 hosts 更新 最近各种代理纷纷关闭，常见的翻墙方式就剩lantern和更改hosts的方式依旧坚挺，关注了一些更新hosts的gi</description></item><item><title>python mail sender</title><link>https://wangshub.github.io/posts/python-mail-sender/</link><pubDate>Thu, 20 Jul 2017 22:22:06 +0000</pubDate><guid>https://wangshub.github.io/posts/python-mail-sender/</guid><description>python 发送邮件 配置服务器和邮箱 mail_info.py mail_host = &amp;#39;smtp.yeah.net&amp;#39; mail_user = &amp;#39;mail_name&amp;#39; mail_pass = &amp;#39;mail_password&amp;#39; sender = &amp;#39;mail_name@yeah.net&amp;#39; receivers = [&amp;#39;target@mail.com&amp;#39;] 发送邮件 mail_trans.py from .mail_info import * import smtplib from email.mime.text import MIMEText def mail_text_send(title, text): message = MIMEText(text, &amp;#39;plain&amp;#39;, &amp;#39;utf-8&amp;#39;) message[&amp;#39;Subject&amp;#39;] = title message[&amp;#39;From&amp;#39;] = sender message[&amp;#39;To&amp;#39;] = receivers[0] try: smtpObj = smtplib.SMTP() # connect host smtpObj.connect(mail_host, 25)</description></item><item><title>使用python备份博客图床图片</title><link>https://wangshub.github.io/posts/use-python-to-backup-markdown-images/</link><pubDate>Mon, 05 Jun 2017 23:09:29 +0000</pubDate><guid>https://wangshub.github.io/posts/use-python-to-backup-markdown-images/</guid><description>说明 最近在写markdown文档的过程中,经常需要插入一些图片.因为托管博客的服务器空间有限,所以上传图片到图床再插入到markdown中.</description></item><item><title>从机sshfs访问主机文件系统</title><link>https://wangshub.github.io/posts/sshfs-mount-net-disk/</link><pubDate>Wed, 31 May 2017 21:16:00 +0000</pubDate><guid>https://wangshub.github.io/posts/sshfs-mount-net-disk/</guid><description>说明 需要在PC主机(Linux)上编写代码,每次都要将代码拷贝到从机(Linux)上编译运行程序.这里用到scp命令 scp -r /主机/文件 从机名@</description></item><item><title>python 数据结构之二叉搜索树</title><link>https://wangshub.github.io/posts/python-data-structure-bst/</link><pubDate>Mon, 29 May 2017 23:06:12 +0000</pubDate><guid>https://wangshub.github.io/posts/python-data-structure-bst/</guid><description>二叉搜索树定义 一颗二叉搜索树是以二叉树来组织的,每个节点除了 Key 还包括 左孩子, 右孩子, 父节点 等信息. BST满足限制条件: 对于任意节点的X,他的</description></item><item><title>python的webrtc库实现语音端点检测</title><link>https://wangshub.github.io/posts/python-vad/</link><pubDate>Thu, 25 May 2017 21:47:56 +0000</pubDate><guid>https://wangshub.github.io/posts/python-vad/</guid><description>&lt;p>刚刚搭了博客&lt;a href="thinkhard.tech">thinkhard.tech&lt;/a>,欢迎踩踩~&lt;/p>
-&lt;h2 id="引言">引言&lt;/h2>
-&lt;p>语音端点检测最早应用于电话传输和检测系统当中,用于通信信道的时间分配,提高传输线路的利用效率.端点检测属于语音处理系统的前端操作,在语音检测领域意义重大.&lt;br>
-但是目前的语音端点检测,尤其是检测 &lt;em>人声&lt;/em> 开始和结束的端点始终是属于技术难点,各家公司始终处于 &lt;strong>能判断&lt;/strong>,但是不敢保证 &lt;strong>判别准确性&lt;/strong> 的阶段.&lt;br>
-&lt;img src="https://ooo.0o0.ooo/2017/05/25/5926ed7fcc2b3.png" alt="Screenshot from 2017-05-25 22-42-50.png"> &lt;br>
-现在基于云端语义库的聊天机器人层出不穷,其中最著名的当属amazon的 &lt;strong>Alexa/Echo&lt;/strong> 智能音箱.&lt;br>
-&lt;img src="https://ooo.0o0.ooo/2017/05/25/5926ee0cbc85b.jpg" alt="timg.jpg">&lt;/p>
-&lt;p>国内如雨后春笋般出现了各种搭载语音聊天的智能音箱(如前几天在知乎上广告的若琪机器人)和各类智能机器人产品.国内语音服务提供商主要面对中文语音服务,由于语音不像图像有分辨率等等较为客观的指标,很多时候凭主观判断,所以较难判断各家语音识别和合成技术的好坏.但是我个人认为,国内的中文语音服务和国外的英文语音服务,在某些方面已经有超越的趋势. &lt;br>
-&lt;img src="https://ooo.0o0.ooo/2017/05/25/5926f2220cae2.jpg" alt="timg (1).jpg">&lt;/p>
-&lt;p>通常搭建机器人聊天系统主要包括以下三个方面:&lt;/p>
-&lt;ul>
-&lt;li>语音转文字(ASR/STT)&lt;/li>
-&lt;li>语义内容(NLU/NLP)&lt;/li>
-&lt;li>文字转语音(TTS)&lt;/li>
-&lt;/ul>
-&lt;h2 id="语音转文字asrstt">语音转文字(ASR/STT)&lt;/h2>
-&lt;p>在将语音传给云端API之前,是本地前端的语音采集,这部分主要包括如下几个方面:&lt;/p>
-&lt;ul>
-&lt;li>麦克风降噪&lt;/li>
-&lt;li>声源定位&lt;/li>
-&lt;li>回声消除&lt;/li>
-&lt;li>唤醒词&lt;/li>
-&lt;li>语音端点检测&lt;/li>
-&lt;li>音频格式压缩&lt;/li>
-&lt;/ul></description></item><item><title>Atom editor</title><link>https://wangshub.github.io/posts/atom-editor/</link><pubDate>Thu, 25 May 2017 21:27:42 +0000</pubDate><guid>https://wangshub.github.io/posts/atom-editor/</guid><description>&lt;p>&lt;img src="http://www.clker.com/cliparts/3/8/9/1/1195436863389690204logomancer_Atom_Model.svg.hi.png" alt="">&lt;/p>
-&lt;p>网上一直存在着vim和emacs两大阵营，两边的拥护者把这两个编辑器说的神乎其神。私以为，只是工具而已，对个人来说好用就行。Atom使用下来，我的感受就是&lt;/p>
-&lt;blockquote>
-&lt;ul>
-&lt;li>易安装，上手容易&lt;/li>
-&lt;li>插件安装方便&lt;/li>
-&lt;li>配置可备份&lt;/li>
-&lt;/ul>
-&lt;/blockquote>
-&lt;h1 id="atom的安装">Atom的安装&lt;/h1>
-&lt;p>我的系统是ubuntu16.04,直接&lt;a href="atom.io">官网下载&lt;/a>&lt;code>*.deb&lt;/code>安装包，运行&lt;code>dpkg -i atom.deb&lt;/code>.&lt;/p>
-&lt;h1 id="atom插件">Atom插件&lt;/h1>
-&lt;p>Atom下的插件安装十分便捷，在&lt;code>install a package&lt;/code>下就能搜索安装。但是&lt;code>GUI&lt;/code>的安装方式常常会安装失败，建议终端使用&lt;code>apm install PackageName&lt;/code>安装插件。下面是我安装的一些插件：&lt;/p>
-&lt;ol>
-&lt;li>&lt;code>highlight-selected&lt;/code> 代码高亮插件；&lt;/li>
-&lt;li>&lt;code>terminal-fusion&lt;/code>Atom下的终端插件，强烈推荐，再也不用切换屏幕运行终端程序了；&lt;/li>
-&lt;li>&lt;code>simplified-chinese-menu&lt;/code>：简体中文插件；&lt;/li>
-&lt;li>待补充。。。&lt;/li>
-&lt;/ol>
-&lt;h1 id="atom配置">Atom配置&lt;/h1>
-&lt;p>Atom自带的插件就能满足基本的日常需求，我能记起来的配置&lt;/p>
-&lt;ul>
-&lt;li>&lt;code>Markdown&lt;/code>文件预览：快捷键&lt;code>Ctl-Shift-m&lt;/code>；&lt;/li>
-&lt;li>文件树，快捷键：&lt;code>ctrl-\&lt;/code>；&lt;/li>
-&lt;li>文件查找：&lt;code>ctrl-F&lt;/code>当前buffer中查找，&lt;code>ctrl-shift-f&lt;/code>当前工程中查找；&lt;/li>
-&lt;li>代码跳转：首先首先&lt;code>ctrl-alt-g&lt;/code>生成&lt;code>.tags&lt;/code>文件，选中待跳转的函数，&lt;code>ctrl-shift-r&lt;/code>完成跳转；&lt;/li>
-&lt;li>&lt;code>alt&lt;/code>键隐藏菜单栏，对于笔记本太有用了，整个界面也变得清爽；&lt;/li>
-&lt;/ul>
-&lt;h1 id="atom备份">Atom备份&lt;/h1>
-&lt;p>经常在windows和Linux下进行切换，对于我常常作死把系统搞崩，所以需要备份Atom编辑器的配置，和&lt;code>emacs&lt;/code>类似，可以将配置&lt;code>～/.atom/&lt;/code>文件目录上传github,新装Atom的时候直接clone下来就好，我的配置github地址在&lt;a href="https://github.com/wangshub/.atom.git">这里&lt;/a>&lt;/p>
-&lt;p>最后，上一张我的Atom效果图
-&lt;img src="https://ooo.0o0.ooo/2017/05/25/5926dc8d83d5c.png" alt="Screenshot from 2017-05-25 21-29-45.png">&lt;/p></description></item><item><title>Cmake 模板</title><link>https://wangshub.github.io/posts/cmake-tutorial/</link><pubDate>Thu, 25 May 2017 00:03:34 +0000</pubDate><guid>https://wangshub.github.io/posts/cmake-tutorial/</guid><description>&lt;p>&lt;img src="https://ooo.0o0.ooo/2017/05/25/5925af646160e.png" alt="">&lt;/p></description></item><item><title>Hello World</title><link>https://wangshub.github.io/posts/hello-world/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://wangshub.github.io/posts/hello-world/</guid><description>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 🍉 神奇的战士</title>
+    <link>https://wangshub.github.io/posts/</link>
+    <description>Recent content in Posts on 🍉 神奇的战士</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 28 Mar 2020 11:26:03 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>如何用深度强化学习模拟炒股</title>
+      <link>https://wangshub.github.io/posts/drl-stock/</link>
+      <pubDate>Sat, 28 Mar 2020 11:26:03 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/drl-stock/</guid>
+      <description>💡 初衷 最近一段时间，受到新冠疫情的影响，股市接连下跌，作为一棵小白菜兼小韭菜，竟然产生了抄底的大胆想法，拿出仅存的一点私房钱梭哈了一把。 第二</description>
+    </item>
+    
+    <item>
+      <title>双连杆机械臂运动学正向和逆向 Python 仿真</title>
+      <link>https://wangshub.github.io/posts/kinematics-dh-method/</link>
+      <pubDate>Tue, 03 Dec 2019 20:47:54 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/kinematics-dh-method/</guid>
+      <description>双连杆机械臂运动学正向和逆向 Python 仿真 DH(Denavit-Hartenberg)方法 DH 方法描述了相邻坐标系之间的旋转与移动的关系，只需要找到 4</description>
+    </item>
+    
+    <item>
+      <title>Web端连接智能硬件的方案</title>
+      <link>https://wangshub.github.io/posts/web%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%99%BA%E8%83%BD%E7%A1%AC%E4%BB%B6%E7%9A%84%E6%96%B9%E6%A1%88/</link>
+      <pubDate>Fri, 29 Nov 2019 17:24:15 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/web%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%99%BA%E8%83%BD%E7%A1%AC%E4%BB%B6%E7%9A%84%E6%96%B9%E6%A1%88/</guid>
+      <description>Web 适合与服务器通信，但不适合与设备通信，目前可以通过 webBLE，WebSerial 和 WebSocket 等方式与外围设备进行连接。 Web Bluetooth 网页通过 Web Bluetooth API 向浏览器</description>
+    </item>
+    
+    <item>
+      <title>双足机器人如何行走？</title>
+      <link>https://wangshub.github.io/posts/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0/</link>
+      <pubDate>Tue, 05 Nov 2019 10:03:35 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0/</guid>
+      <description>[双足机器人如何行走？] 译文：how-do-biped-robots-walk 早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足</description>
+    </item>
+    
+    <item>
+      <title>强化学习策略网络复杂度的影响</title>
+      <link>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E7%BD%91%E7%BB%9C%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%BD%B1%E5%93%8D/</link>
+      <pubDate>Mon, 04 Nov 2019 17:20:29 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E7%BD%91%E7%BB%9C%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%BD%B1%E5%93%8D/</guid>
+      <description>强化学习策略网络调参 传统的基于状态-动作强化学习方法会遇到维度诅咒的问题，为了解决这个问题，基于策略的强化学习方法被提出，比如经典的策略梯度</description>
+    </item>
+    
+    <item>
+      <title>Pybulet Gym 源码解析：双足机器人模型 HumanoidPyBulletEnv-v0</title>
+      <link>https://wangshub.github.io/posts/pybulet-gym%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8Bhumanoidpybulletenv-v0/</link>
+      <pubDate>Fri, 23 Aug 2019 16:19:36 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/pybulet-gym%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8Bhumanoidpybulletenv-v0/</guid>
+      <description>OpenAI gym 是当前使用最为广泛的用于研究强化学习的工具箱，但 Gym 的物理仿真环境使用的是 Mujoco，不开源且收费，这一点一直被人诟病。而 Pybullet-gym 是对 Openai Gym Mujoco 环</description>
+    </item>
+    
+    <item>
+      <title>OpenAI Gym 源码阅读:创建自定义强化学习环境</title>
+      <link>https://wangshub.github.io/posts/openai-gym-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Wed, 21 Aug 2019 16:24:35 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/openai-gym-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83/</guid>
+      <description>OpenAI Gym 源码阅读：创建自定义强化学习环境 Gym 介绍 Gym 是一套开发强化学习算法的工具箱，包含了一系列内置的环境，结合强化学习算法就可以对内置的环境进行求</description>
+    </item>
+    
+    <item>
+      <title>《我的团长我的团》书摘</title>
+      <link>https://wangshub.github.io/posts/%E6%88%91%E7%9A%84%E5%9B%A2%E9%95%BF%E6%88%91%E7%9A%84%E5%9B%A2%E4%B9%A6%E6%91%98/</link>
+      <pubDate>Fri, 09 Aug 2019 09:27:33 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E6%88%91%E7%9A%84%E5%9B%A2%E9%95%BF%E6%88%91%E7%9A%84%E5%9B%A2%E4%B9%A6%E6%91%98/</guid>
+      <description>《我的团长我的团》书摘 兰晓龙 ◆ 第二章 对我们之中很多人来说，他是神仙，有把一摊烂泥变成标枪的魔力。我看着他，看着凤凰，凤凰飞临鸡群之上，让鸡们</description>
+    </item>
+    
+    <item>
+      <title>监视我的手机：数据都去哪儿了？</title>
+      <link>https://wangshub.github.io/posts/tracking-my-phone/</link>
+      <pubDate>Mon, 15 Jul 2019 18:32:54 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/tracking-my-phone/</guid>
+      <description>监视我的手机：数据都去哪儿了？ 警告: 请勿用于非法目的，非法获取他人隐私属于犯罪! “现在的人几乎是全部透明的。我心里就想，马化腾肯定天天在看我</description>
+    </item>
+    
+    <item>
+      <title>现实世界中的机器人强化学习</title>
+      <link>https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/</link>
+      <pubDate>Wed, 19 Jun 2019 17:12:18 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/</guid>
+      <description>现实世界中的机器人强化学习 原载：Reinforcement Learning for Real-World Robotics 译者：神奇的战士 机器人 - 愿景 机器人在现代工业中无处不在。与上个世纪大多数科</description>
+    </item>
+    
+    <item>
+      <title>Dynamicland, 可视空间和设计工坊</title>
+      <link>https://wangshub.github.io/posts/on-dynamicland/</link>
+      <pubDate>Thu, 13 Jun 2019 14:51:57 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/on-dynamicland/</guid>
+      <description>Dynamicland, 可视空间和设计工坊 Vitorio Miliano 从 2017 年 9 月 11 日星期一开始 Dynamicland 发布的一系列照片和视频剪辑让我意识到，我可能错过了一个有意思的东西 &amp;ndash; 并且是最佳实践 &amp;ndash; 那就是</description>
+    </item>
+    
+    <item>
+      <title>两种硬件编程的风格：离线下载和在线交互</title>
+      <link>https://wangshub.github.io/posts/about-interpreter/</link>
+      <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/about-interpreter/</guid>
+      <description>两种硬件编程的风格：离线下载和在线交互 少儿编程教育+智能硬件似乎是天生的一对，二者的结合很容易产生 1 + 1 &amp;gt; 2 的双赢局面。不管是在线编程教育企</description>
+    </item>
+    
+    <item>
+      <title>基于 face_recognition 和 PID 的人脸识别和跟踪</title>
+      <link>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</link>
+      <pubDate>Mon, 03 Jun 2019 15:42:59 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</guid>
+      <description>基于 face_recognition 和 PID 的舵机云台人脸识别和跟踪 如何让机器人头部摄像头跟随识别到人脸位置变化而转动？一帧图像是 2 维的，人脸位置用坐标 (x,y) 表示，要实现跟踪人脸</description>
+    </item>
+    
+    <item>
+      <title>用 Docker 部署 Sentry Bug 日志收集服务</title>
+      <link>https://wangshub.github.io/posts/docker-sentry-deploy/</link>
+      <pubDate>Sat, 25 May 2019 10:44:27 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/docker-sentry-deploy/</guid>
+      <description>用 Docker 部署 Sentry Bug 日志收集服务 Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大部分主流的编程语言，并提供 SDK，当程序出现异常就向服务</description>
+    </item>
+    
+    <item>
+      <title>在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！</title>
+      <link>https://wangshub.github.io/posts/control-robot-in-scratch3/</link>
+      <pubDate>Thu, 23 May 2019 21:21:12 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/control-robot-in-scratch3/</guid>
+      <description>在 Scratch 中玩转机器人：Python、Deep Learning、Posenet and Robot！ 所有的边界都被打破了 &amp;ndash;《Mindstorm</description>
+    </item>
+    
+    <item>
+      <title>【译】Kill Math(Bret Victor)：让数学不只是符号</title>
+      <link>https://wangshub.github.io/posts/kill-math/</link>
+      <pubDate>Thu, 16 May 2019 20:51:18 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/kill-math/</guid>
+      <description>Author: Bret Victor / April 11, 2011 Translator: 神奇的战士 Bret Victor 是苹果公司的前 IPAD 的交互设计师, 大神级的人物。他的理想是：改造我们的低幼化社会。为人们提供工具，用以抵抗和摧毁消</description>
+    </item>
+    
+    <item>
+      <title>当遇到 Scratch3-Codelab，Pando 觉醒了！</title>
+      <link>https://wangshub.github.io/posts/codelab-pando-tutorial/</link>
+      <pubDate>Wed, 17 Apr 2019 15:17:02 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/codelab-pando-tutorial/</guid>
+      <description>当遇到 Scratch3-Codelab，Pando 觉醒了！ Explore Amazing Moment With Pando Pando 是由乐聚机器人研发，可以进行情感互动的益智编程机器人。主要功能包括情感</description>
+    </item>
+    
+    <item>
+      <title>推荐一个 MacOS 上用了就无法自拔的神器 [Hammerspoon] 和我的配置方案</title>
+      <link>https://wangshub.github.io/posts/hammerspoon-introduce/</link>
+      <pubDate>Mon, 08 Apr 2019 22:26:58 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/hammerspoon-introduce/</guid>
+      <description>推荐一个 MacOS 上用了就无法自拔的 App Hammerspoon！ Hammerspoon 是 MacOS 上的自动化工具，许多介绍 Hammerspoon 的文章都主要介绍了它是一个窗口管理工具，但是 Hammerspoon 能做到的</description>
+    </item>
+    
+    <item>
+      <title>升级 Macbook 2015 固态硬盘为  M.2 2280 PCIE NVME 接口 SSD</title>
+      <link>https://wangshub.github.io/posts/macbook2015upgradessd/</link>
+      <pubDate>Thu, 04 Apr 2019 19:18:36 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/macbook2015upgradessd/</guid>
+      <description>升级 Macbook 2015 固态硬盘为 M.2 2280 PCIE NVME 接口 SSD 东西没有坏掉，只有修不好的 由于苹果原装接口 SSD 价格太高(512G ≈ 2000RMB)，采用 M2.0 接口转苹果 SSD 专用接口</description>
+    </item>
+    
+    <item>
+      <title>『Hamerspoon』蓝牙自动开关</title>
+      <link>https://wangshub.github.io/posts/mac-bluetooth-auto-toggle-when-lock-unlock-screen/</link>
+      <pubDate>Tue, 19 Mar 2019 14:08:10 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/mac-bluetooth-auto-toggle-when-lock-unlock-screen/</guid>
+      <description>『Hamerspoon』Mac 蓝牙自动开关 前言 如果你也像我一样使用 Mac 连接蓝牙耳机，下班后总是忘记关耳机，第二天耳机没电的话，那么这篇文章也许</description>
+    </item>
+    
+    <item>
+      <title>强化学习之 Deep Q­-Learning</title>
+      <link>https://wangshub.github.io/posts/rldeepqlearning/</link>
+      <pubDate>Mon, 11 Mar 2019 20:27:30 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/rldeepqlearning/</guid>
+      <description>Deep Q­-Learning Q-Learning 在 Q-Learning 中定义函数 $Q(s, a)$ 表示在当前状态 $s$ 下采取动作 $a$ 获得的最大有损奖励 $$ Q\left(s_{t}, a_{t}\right)=\max R_{t+1} $$ 可以将 $Q(s, a)$ 理解为在一局游戏中，如果在状态</description>
+    </item>
+    
+    <item>
+      <title>Markdown Syntax Guide</title>
+      <link>https://wangshub.github.io/posts/markdown-syntax/</link>
+      <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/markdown-syntax/</guid>
+      <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Rich Content</title>
+      <link>https://wangshub.github.io/posts/rich-content/</link>
+      <pubDate>Sun, 10 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/rich-content/</guid>
+      <description>&lt;p&gt;Hugo ships with several &lt;a href=&#34;https://gohugo.io/content-management/shortcodes/#use-hugo-s-built-in-shortcodes&#34;&gt;Built-in Shortcodes&lt;/a&gt; for rich content, along with a &lt;a href=&#34;https://gohugo.io/about/hugo-and-gdpr/&#34;&gt;Privacy Config&lt;/a&gt; and a set of Simple Shortcodes that enable static and no-JS versions of various social media embeds.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Placeholder Text</title>
+      <link>https://wangshub.github.io/posts/placeholder-text/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/placeholder-text/</guid>
+      <description>&lt;p&gt;Lorem est tota propiore conpellat pectoribus de
+pectora summo.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>树莓派FM小电台背后的原理解析</title>
+      <link>https://wangshub.github.io/posts/%E6%A0%91%E8%8E%93%E6%B4%BEfm%E5%B0%8F%E7%94%B5%E5%8F%B0%E8%83%8C%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/</link>
+      <pubDate>Tue, 26 Feb 2019 20:53:30 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E6%A0%91%E8%8E%93%E6%B4%BEfm%E5%B0%8F%E7%94%B5%E5%8F%B0%E8%83%8C%E5%90%8E%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90/</guid>
+      <description>树莓派 FM 发送机小电台背后的原理解析 介绍 在知乎上有个问题 你在 GitHub 上看到过的最有意思的项目是什么？ 我介绍了个很有意思的无线 FM 电台的项目，可以在不借</description>
+    </item>
+    
+    <item>
+      <title>用Python给抖音小姐姐打声招呼</title>
+      <link>https://wangshub.github.io/posts/%E7%94%A8python%E7%BB%99%E6%8A%96%E9%9F%B3%E5%B0%8F%E5%A7%90%E5%A7%90%E6%89%93%E5%A3%B0%E6%8B%9B%E5%91%BC/</link>
+      <pubDate>Wed, 20 Feb 2019 17:04:28 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E7%94%A8python%E7%BB%99%E6%8A%96%E9%9F%B3%E5%B0%8F%E5%A7%90%E5%A7%90%E6%89%93%E5%A3%B0%E6%8B%9B%E5%91%BC/</guid>
+      <description>用 Python 自动给抖音小姐姐评论一个 666 前一段时间写了一篇 《抖音 Python 机器人，论如何在抖音上找到漂亮小姐姐？》，没想到有相当多的同学有着相同的需求！ 大家</description>
+    </item>
+    
+    <item>
+      <title>在GitHub上看到过的最有意思的项目</title>
+      <link>https://wangshub.github.io/posts/%E5%9C%A8github%E4%B8%8A%E7%9C%8B%E5%88%B0%E8%BF%87%E7%9A%84%E6%9C%80%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Mon, 18 Feb 2019 15:02:53 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E5%9C%A8github%E4%B8%8A%E7%9C%8B%E5%88%B0%E8%BF%87%E7%9A%84%E6%9C%80%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E9%A1%B9%E7%9B%AE/</guid>
+      <description>在GitHub上看到过的最有意思的项目 键盘听声识键 地址：ggerganov/kbd-audio 通过麦克风录取键盘的敲击声，判断你按下的</description>
+    </item>
+    
+    <item>
+      <title>Vanilla_Policy_Gradient</title>
+      <link>https://wangshub.github.io/posts/vanilla-policy-gradient/</link>
+      <pubDate>Tue, 29 Jan 2019 16:48:53 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/vanilla-policy-gradient/</guid>
+      <description>强化学习 Vanilla Policy Gradient 令 $\pi _ { \theta }$ 表示参数为 $\theta$ 的策略，$J \left( \pi _ { \theta } \right)$ 表示策略 $\pi _ { \theta }$ 的返回值，则优化函数梯度为 $$\nabla _ { \theta } J \left( \pi _ { \theta } \right) = \underset {</description>
+    </item>
+    
+    <item>
+      <title>用Python获取B站播放历史记录</title>
+      <link>https://wangshub.github.io/posts/%E7%94%A8python%E8%8E%B7%E5%8F%96b%E7%AB%99%E6%92%AD%E6%94%BE%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Tue, 22 Jan 2019 18:40:22 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E7%94%A8python%E8%8E%B7%E5%8F%96b%E7%AB%99%E6%92%AD%E6%94%BE%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</guid>
+      <description>用 Python 获取 B 站播放历史记录 最近 B 站出了一个年度报告，统计用户一年当中在 B 站上观看视频的总时长和总个数。过去一年我居然在 B 站上看了 2600+ 个视频，总计</description>
+    </item>
+    
+    <item>
+      <title>强化学习:策略梯度算法</title>
+      <link>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Tue, 15 Jan 2019 19:46:17 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/</guid>
+      <description>强化学习:策略梯度算法 策略梯度的公式推导 ​ 学习参数化表示的策略 (Parameterized policy), 输入环境状态 $ S $ 来选择动作 $a$ ，这里使用 $\theta \in \mathbb { R } ^ { d }$ 来表示策略的参</description>
+    </item>
+    
+    <item>
+      <title>MLPGaussianPolicy</title>
+      <link>https://wangshub.github.io/posts/mlpgaussianpolicy/</link>
+      <pubDate>Mon, 14 Jan 2019 19:42:41 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/mlpgaussianpolicy/</guid>
+      <description>MLP Gaussian policy Looks like a Gaussian policy whose mean and std are outputs of a neural network. 参考文献 https://arxiv.org/pdf/1502.05477.pdf</description>
+    </item>
+    
+    <item>
+      <title>强化学习随机策略之高斯似然数原理与代码实现</title>
+      <link>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%9C%BA%E7%AD%96%E7%95%A5%E4%B9%8B%E9%AB%98%E6%96%AF%E4%BC%BC%E7%84%B6%E6%95%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Sat, 12 Jan 2019 14:47:50 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%9C%BA%E7%AD%96%E7%95%A5%E4%B9%8B%E9%AB%98%E6%96%AF%E4%BC%BC%E7%84%B6%E6%95%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/</guid>
+      <description>强化学习随机策略之高斯似然数原理与代码实现 一、原理介绍 使用随机策略有两个关键点 从策略当中进行采样，获得动作 $a$ (Action) 计算特定动作的似然数 $\log \pi _ { \theta</description>
+    </item>
+    
+    <item>
+      <title>每个会做饭的人都是人生赢家</title>
+      <link>https://wangshub.github.io/posts/%E6%AF%8F%E4%B8%AA%E4%BC%9A%E5%81%9A%E9%A5%AD%E7%9A%84%E4%BA%BA%E9%83%BD%E6%98%AF%E4%BA%BA%E7%94%9F%E8%B5%A2%E5%AE%B6/</link>
+      <pubDate>Fri, 11 Jan 2019 21:19:55 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E6%AF%8F%E4%B8%AA%E4%BC%9A%E5%81%9A%E9%A5%AD%E7%9A%84%E4%BA%BA%E9%83%BD%E6%98%AF%E4%BA%BA%E7%94%9F%E8%B5%A2%E5%AE%B6/</guid>
+      <description>摘自 《会做饭的，都是人生赢家》 不紧不慢地做一顿好吃的饭菜， 是一场可以避世与收获宁静的禅修； 而爱做饭、会做饭的人， 也可以称作是有信仰的人。 这样</description>
+    </item>
+    
+    <item>
+      <title>Alfred-Gitlab-Workflow</title>
+      <link>https://wangshub.github.io/posts/alfred-gitlab-workflow/</link>
+      <pubDate>Fri, 12 Oct 2018 08:31:33 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/alfred-gitlab-workflow/</guid>
+      <description>Alfred Gitlab Workflow：Gitlab 快速浏览工具 GitLab 是一个类似于 GitHub 的开源源码托管服务，除了代码托管外，Gitlab 还具备了像 Issue、Merg</description>
+    </item>
+    
+    <item>
+      <title>用Python写Alfred3插件</title>
+      <link>https://wangshub.github.io/posts/%E7%94%A8python%E5%86%99alfred3%E6%8F%92%E4%BB%B6/</link>
+      <pubDate>Sun, 30 Sep 2018 18:18:16 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E7%94%A8python%E5%86%99alfred3%E6%8F%92%E4%BB%B6/</guid>
+      <description>用 Python 写 Alfred3 workflow 插件，一个最小示例 以前一直在使用 Cerebro 作为效率工具(开源免费)，但是 Cerebro 原作者似乎很久没有更新，今天抱着试一试的心态用了一把 Alfred 才发现，哎</description>
+    </item>
+    
+    <item>
+      <title>在roboschool中控制Atlas</title>
+      <link>https://wangshub.github.io/posts/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas/</link>
+      <pubDate>Thu, 20 Sep 2018 17:28:18 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E5%9C%A8roboschool%E4%B8%AD%E6%8E%A7%E5%88%B6atlas/</guid>
+      <description>利用 Python 在 OpenAI 的 roboschool 中控制 Atlas 机器人 作者：神奇的战士 Blog: http://thinkhard.tech/ 背景介绍 Atlas: Atlas 机器人是一个双足人形机器人，由鼎鼎大名的美国波士顿动力公司为主开发，身高 1.75 米，</description>
+    </item>
+    
+    <item>
+      <title>将 Kindle 转换成文艺电子时钟</title>
+      <link>https://wangshub.github.io/posts/turn-kindle-to-electron-clock/</link>
+      <pubDate>Sun, 05 Aug 2018 10:30:01 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/turn-kindle-to-electron-clock/</guid>
+      <description>破解 Kindle，改造成文艺电子时钟 前言 原材料准备 硬件 亚马逊 Kindle 6 inch Micro USB 线 软件 SSH 工具 破解 Kindle 为了让 Kindle 显示我们想要的内容，需要能够登录进 Kindle 系统并</description>
+    </item>
+    
+    <item>
+      <title>机器人强化学习之使用 OpenAI Gym 教程与笔记</title>
+      <link>https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Fri, 27 Jul 2018 10:34:40 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/</guid>
+      <description>机器人强化学习之使用 OpenAI Gym 教程与笔记 除了试图直接去建立一个可以模拟成人大脑的程序之外， 为什么不试图建立一个可以模拟小孩大脑的程序呢?如果它接 受</description>
+    </item>
+    
+    <item>
+      <title>机器人强化学习笔记（0）</title>
+      <link>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Tue, 03 Jul 2018 22:34:36 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>机器人强化学习笔记（0） 机器学习分类 强化学习问题 监督学习：监督学习由任务驱动，需要创造外部的“导师”，“导师”拥有外部环境的所有先验信息，</description>
+    </item>
+    
+    <item>
+      <title>效率工具网站推荐</title>
+      <link>https://wangshub.github.io/posts/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/</link>
+      <pubDate>Sat, 09 Jun 2018 09:58:48 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/</guid>
+      <description>提升生活品质——个人效率工具与资讯网站推荐 这个世界上软件太多，懂你的工具太少； 我是个工具控，经常搜集和自己写一些工具和插件来提高生活品质； 本</description>
+    </item>
+    
+    <item>
+      <title>Python抖音机器人，论如何在抖音上找到漂亮小姐姐？</title>
+      <link>https://wangshub.github.io/posts/python%E6%8A%96%E9%9F%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BA%E5%A6%82%E4%BD%95%E5%9C%A8%E6%8A%96%E9%9F%B3%E4%B8%8A%E6%89%BE%E5%88%B0%E6%BC%82%E4%BA%AE%E5%B0%8F%E5%A7%90%E5%A7%90/</link>
+      <pubDate>Mon, 28 May 2018 14:38:32 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/python%E6%8A%96%E9%9F%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BA%E5%A6%82%E4%BD%95%E5%9C%A8%E6%8A%96%E9%9F%B3%E4%B8%8A%E6%89%BE%E5%88%B0%E6%BC%82%E4%BA%AE%E5%B0%8F%E5%A7%90%E5%A7%90/</guid>
+      <description>如何在抖音上找到漂亮小姐姐&amp;mdash;-抖音机器人 最近沉迷于抖音无法自拔，常常花好几个小时在抖音漂亮小姐姐身上。 为了高效、直接地找到漂亮小</description>
+    </item>
+    
+    <item>
+      <title>给博客网站加个球(访客统计)</title>
+      <link>https://wangshub.github.io/posts/%E7%BB%99%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA%E7%90%83-%E8%AE%BF%E5%AE%A2%E7%BB%9F%E8%AE%A1/</link>
+      <pubDate>Sun, 20 May 2018 17:09:18 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E7%BB%99%E5%8D%9A%E5%AE%A2%E5%8A%A0%E4%B8%AA%E7%90%83-%E8%AE%BF%E5%AE%A2%E7%BB%9F%E8%AE%A1/</guid>
+      <description>给博客网站加个球-访客统计脚本 最近无意中发现了 Revolvermaps 这个网站，可以对网站页面上的访客进行统计。 Demo 演示 神奇的战士的博客 主要特征 访客 IP 地点统计； 访客</description>
+    </item>
+    
+    <item>
+      <title>使用Emacs进行日程管理（GTD）</title>
+      <link>https://wangshub.github.io/posts/%E4%BD%BF%E7%94%A8emacs%E8%BF%9B%E8%A1%8C%E6%97%A5%E7%A8%8B%E7%AE%A1%E7%90%86gtd/</link>
+      <pubDate>Sun, 13 May 2018 14:19:22 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E4%BD%BF%E7%94%A8emacs%E8%BF%9B%E8%A1%8C%E6%97%A5%E7%A8%8B%E7%AE%A1%E7%90%86gtd/</guid>
+      <description>使用 Emacs 进行日程管理 (GTD) 什么是 GTD ? Your mind is for having ideas, not holding them. &amp;mdash; David Allen GTD (Getting Things Done) 是一个组织和跟进任务或待办事项的系统架构，但是它的目标要高于仅仅是将事情做完，</description>
+    </item>
+    
+    <item>
+      <title>开源跨平台效率软件Cerebro</title>
+      <link>https://wangshub.github.io/posts/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%95%88%E7%8E%87%E8%BD%AF%E4%BB%B6cerebro/</link>
+      <pubDate>Mon, 30 Apr 2018 20:26:25 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E8%B7%A8%E5%B9%B3%E5%8F%B0%E6%95%88%E7%8E%87%E8%BD%AF%E4%BB%B6cerebro/</guid>
+      <description>开源跨平台效率软件Cerebro 开源跨平台效率软件Cerebro 主要特性 功能展示 应用与文件搜索 基于 Electron，什么都能看 易上手的插件</description>
+    </item>
+    
+    <item>
+      <title>cerebro-codelf给变量起名的事情上，为你生命省3s</title>
+      <link>https://wangshub.github.io/posts/cerebro-codelf%E7%BB%99%E5%8F%98%E9%87%8F%E8%B5%B7%E5%90%8D%E7%9A%84%E4%BA%8B%E6%83%85%E4%B8%8A%E4%B8%BA%E4%BD%A0%E7%94%9F%E5%91%BD%E7%9C%813s/</link>
+      <pubDate>Mon, 30 Apr 2018 20:11:27 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/cerebro-codelf%E7%BB%99%E5%8F%98%E9%87%8F%E8%B5%B7%E5%90%8D%E7%9A%84%E4%BA%8B%E6%83%85%E4%B8%8A%E4%B8%BA%E4%BD%A0%E7%94%9F%E5%91%BD%E7%9C%813s/</guid>
+      <description>cerebro-codelf There are only two hard things in Computer Science: cache invalidation and naming things. &amp;ndash; Phil Karlton 给变量起名的事情上，为你生命省 3s。 Cerebro 变量名搜索插件，项目灵感来源 codelf。通过 Cerebro 的搜索窗口快速查找</description>
+    </item>
+    
+    <item>
+      <title>python插件式爬虫</title>
+      <link>https://wangshub.github.io/posts/python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%88%AC%E8%99%AB/</link>
+      <pubDate>Wed, 25 Apr 2018 15:51:05 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%88%AC%E8%99%AB/</guid>
+      <description>Python 插件式的信息爬虫 🐝 一群不辞劳苦采花小蜜蜂 项目代码地址 本项目运行在可以运行在本地或者服务器端，将不同插件程序获取的信息如：每日天气、新闻等，</description>
+    </item>
+    
+    <item>
+      <title>Python插件式程序结构设计</title>
+      <link>https://wangshub.github.io/posts/python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/</link>
+      <pubDate>Mon, 23 Apr 2018 14:27:19 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/python%E6%8F%92%E4%BB%B6%E5%BC%8F%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1/</guid>
+      <description>Python 插件式程序结构设计 小姐姐，你的插件掉了 本文源码在 github/wangshub 最近有个问题一直困扰着我，我经常会遇到对以前的程序或者代码进行功能的扩充，但是由于前</description>
+    </item>
+    
+    <item>
+      <title>Cerebro插件之电影磁力搜索神器</title>
+      <link>https://wangshub.github.io/posts/cerebro%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%94%B5%E5%BD%B1%E7%A3%81%E5%8A%9B%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8/</link>
+      <pubDate>Sat, 31 Mar 2018 15:34:51 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/cerebro%E6%8F%92%E4%BB%B6%E4%B9%8B%E7%94%B5%E5%BD%B1%E7%A3%81%E5%8A%9B%E6%90%9C%E7%B4%A2%E7%A5%9E%E5%99%A8/</guid>
+      <description>Cerebro 插件之电影磁力搜索神器 Cerebro plugin to search torrent of movies 什么？看个片儿还要打开网页慢慢找?！ 这周在学 Node.js, 看了 @carlos-wong 推荐的《Eloquent JavaScript》 这本</description>
+    </item>
+    
+    <item>
+      <title>如何解决EDAS上传论文时fonts问题</title>
+      <link>https://wangshub.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sat, 10 Feb 2018 17:29:54 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3edas%E4%B8%8A%E4%BC%A0%E8%AE%BA%E6%96%87%E6%97%B6fonts%E9%97%AE%E9%A2%98/</guid>
+      <description>如何解决 EDAS 上传论文时 PDF fonts 问题 问题描述 今天在上传 IEEE xplore 论文时遇到上传字体出错的问题 upload failed: One or more fonts are not embedded. See EDAS FAQ 解决办法 检查字体子集 在 EDAS 上传 Latex 输出的 PDF</description>
+    </item>
+    
+    <item>
+      <title>python装饰器学习笔记</title>
+      <link>https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 07 Feb 2018 14:02:39 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/python%E8%A3%85%E9%A5%B0%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
+      <description>python 装饰器学习笔记 概括 装饰器的作用就是为已经存在的对象添加额外的功能 我们可以继续调用装饰器来修饰函数，而不用重复修改函数或者增加新的封装。这样</description>
+    </item>
+    
+    <item>
+      <title>用python对github用户followers分析</title>
+      <link>https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/</link>
+      <pubDate>Mon, 15 Jan 2018 09:40:16 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E7%94%A8python%E5%AF%B9github%E7%94%A8%E6%88%B7followers%E5%88%86%E6%9E%90/</guid>
+      <description>github 用户 followers 分析 如何分析一个github用户的followers？ 周末手痒，用python分析了一下自己 github 的 followers 用户，统计结果如下 问题分析 在git</description>
+    </item>
+    
+    <item>
+      <title>教你用Python来玩微信跳一跳</title>
+      <link>https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/</link>
+      <pubDate>Fri, 29 Dec 2017 10:02:41 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/</guid>
+      <description>教你用Python来玩微信跳一跳 2017年12月28日下午，微信发布了 6.6.1 版本，加入了「小游戏」功能，并提供了官方 demo「跳一跳」。 blog 地址 github</description>
+    </item>
+    
+    <item>
+      <title>Python蔡英文facebook主页分析_by神奇的战士</title>
+      <link>https://wangshub.github.io/posts/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/</link>
+      <pubDate>Mon, 25 Dec 2017 15:14:39 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/</guid>
+      <description>Python蔡英文facebook主页分析(by神奇的战士) 博客地址：https://wangshub.github.io/ 公众号：神奇的战</description>
+    </item>
+    
+    <item>
+      <title>linux驱动器和分区的备份，使用dd命令示例</title>
+      <link>https://wangshub.github.io/posts/linux%E9%A9%B1%E5%8A%A8%E5%99%A8%E5%92%8C%E5%88%86%E5%8C%BA%E7%9A%84%E5%A4%87%E4%BB%BD%E4%BD%BF%E7%94%A8dd%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B/</link>
+      <pubDate>Mon, 18 Dec 2017 20:04:51 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/linux%E9%A9%B1%E5%8A%A8%E5%99%A8%E5%92%8C%E5%88%86%E5%8C%BA%E7%9A%84%E5%A4%87%E4%BB%BD%E4%BD%BF%E7%94%A8dd%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B/</guid>
+      <description>dd命令是Linux发行版非常简单的备份工具。 “dd”工具简单的拷贝标准输入到标准输出，在512字节块读取。 dd 命令是Linux发行版非常简单</description>
+    </item>
+    
+    <item>
+      <title>python数字图像处理-图像噪声与去噪算法</title>
+      <link>https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sat, 16 Dec 2017 17:19:29 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/</guid>
+      <description>python数字图像处理-图像噪声与去噪算法 图像噪声 椒盐噪声 概述： 椒盐噪声（salt &amp;amp; pepper noise）是数字图像的一个常见噪声，所谓椒盐，椒就</description>
+    </item>
+    
+    <item>
+      <title>python数字图像处理-图像的基本结构和基础知识</title>
+      <link>https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
+      <pubDate>Sat, 16 Dec 2017 17:10:39 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</guid>
+      <description>数字图像处理-图像的基本结构和基础知识 一、python实现BMP图像的读取和显示 BMP文件格式，又称为Bitmap（位图）或是DIB(Dev</description>
+    </item>
+    
+    <item>
+      <title>python check hosts update</title>
+      <link>https://wangshub.github.io/posts/python-check-hosts-update/</link>
+      <pubDate>Thu, 20 Jul 2017 22:33:15 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/python-check-hosts-update/</guid>
+      <description>用Python检查 hosts 更新 最近各种代理纷纷关闭，常见的翻墙方式就剩lantern和更改hosts的方式依旧坚挺，关注了一些更新hosts的gi</description>
+    </item>
+    
+    <item>
+      <title>python mail sender</title>
+      <link>https://wangshub.github.io/posts/python-mail-sender/</link>
+      <pubDate>Thu, 20 Jul 2017 22:22:06 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/python-mail-sender/</guid>
+      <description>python 发送邮件 配置服务器和邮箱 mail_info.py mail_host = &amp;#39;smtp.yeah.net&amp;#39; mail_user = &amp;#39;mail_name&amp;#39; mail_pass = &amp;#39;mail_password&amp;#39; sender = &amp;#39;mail_name@yeah.net&amp;#39; receivers = [&amp;#39;target@mail.com&amp;#39;] 发送邮件 mail_trans.py from .mail_info import * import smtplib from email.mime.text import MIMEText def mail_text_send(title, text): message = MIMEText(text, &amp;#39;plain&amp;#39;, &amp;#39;utf-8&amp;#39;) message[&amp;#39;Subject&amp;#39;] = title message[&amp;#39;From&amp;#39;] = sender message[&amp;#39;To&amp;#39;] = receivers[0] try: smtpObj = smtplib.SMTP() # connect host smtpObj.connect(mail_host, 25)</description>
+    </item>
+    
+    <item>
+      <title>使用python备份博客图床图片</title>
+      <link>https://wangshub.github.io/posts/use-python-to-backup-markdown-images/</link>
+      <pubDate>Mon, 05 Jun 2017 23:09:29 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/use-python-to-backup-markdown-images/</guid>
+      <description>说明 最近在写markdown文档的过程中,经常需要插入一些图片.因为托管博客的服务器空间有限,所以上传图片到图床再插入到markdown中.</description>
+    </item>
+    
+    <item>
+      <title>从机sshfs访问主机文件系统</title>
+      <link>https://wangshub.github.io/posts/sshfs-mount-net-disk/</link>
+      <pubDate>Wed, 31 May 2017 21:16:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/sshfs-mount-net-disk/</guid>
+      <description>说明 需要在PC主机(Linux)上编写代码,每次都要将代码拷贝到从机(Linux)上编译运行程序.这里用到scp命令 scp -r /主机/文件 从机名@</description>
+    </item>
+    
+    <item>
+      <title>python 数据结构之二叉搜索树</title>
+      <link>https://wangshub.github.io/posts/python-data-structure-bst/</link>
+      <pubDate>Mon, 29 May 2017 23:06:12 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/python-data-structure-bst/</guid>
+      <description>二叉搜索树定义 一颗二叉搜索树是以二叉树来组织的,每个节点除了 Key 还包括 左孩子, 右孩子, 父节点 等信息. BST满足限制条件: 对于任意节点的X,他的</description>
+    </item>
+    
+    <item>
+      <title>python的webrtc库实现语音端点检测</title>
+      <link>https://wangshub.github.io/posts/python-vad/</link>
+      <pubDate>Thu, 25 May 2017 21:47:56 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/python-vad/</guid>
+      <description>&lt;p&gt;刚刚搭了博客&lt;a href=&#34;thinkhard.tech&#34;&gt;thinkhard.tech&lt;/a&gt;,欢迎踩踩~&lt;/p&gt;
+&lt;h2 id=&#34;引言&#34;&gt;引言&lt;/h2&gt;
+&lt;p&gt;语音端点检测最早应用于电话传输和检测系统当中,用于通信信道的时间分配,提高传输线路的利用效率.端点检测属于语音处理系统的前端操作,在语音检测领域意义重大.&lt;br&gt;
+但是目前的语音端点检测,尤其是检测 &lt;em&gt;人声&lt;/em&gt; 开始和结束的端点始终是属于技术难点,各家公司始终处于 &lt;strong&gt;能判断&lt;/strong&gt;,但是不敢保证 &lt;strong&gt;判别准确性&lt;/strong&gt; 的阶段.&lt;br&gt;
+&lt;img src=&#34;https://ooo.0o0.ooo/2017/05/25/5926ed7fcc2b3.png&#34; alt=&#34;Screenshot from 2017-05-25 22-42-50.png&#34;&gt; &lt;br&gt;
+现在基于云端语义库的聊天机器人层出不穷,其中最著名的当属amazon的 &lt;strong&gt;Alexa/Echo&lt;/strong&gt; 智能音箱.&lt;br&gt;
+&lt;img src=&#34;https://ooo.0o0.ooo/2017/05/25/5926ee0cbc85b.jpg&#34; alt=&#34;timg.jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;国内如雨后春笋般出现了各种搭载语音聊天的智能音箱(如前几天在知乎上广告的若琪机器人)和各类智能机器人产品.国内语音服务提供商主要面对中文语音服务,由于语音不像图像有分辨率等等较为客观的指标,很多时候凭主观判断,所以较难判断各家语音识别和合成技术的好坏.但是我个人认为,国内的中文语音服务和国外的英文语音服务,在某些方面已经有超越的趋势. &lt;br&gt;
+&lt;img src=&#34;https://ooo.0o0.ooo/2017/05/25/5926f2220cae2.jpg&#34; alt=&#34;timg (1).jpg&#34;&gt;&lt;/p&gt;
+&lt;p&gt;通常搭建机器人聊天系统主要包括以下三个方面:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;语音转文字(ASR/STT)&lt;/li&gt;
+&lt;li&gt;语义内容(NLU/NLP)&lt;/li&gt;
+&lt;li&gt;文字转语音(TTS)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;语音转文字asrstt&#34;&gt;语音转文字(ASR/STT)&lt;/h2&gt;
+&lt;p&gt;在将语音传给云端API之前,是本地前端的语音采集,这部分主要包括如下几个方面:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;麦克风降噪&lt;/li&gt;
+&lt;li&gt;声源定位&lt;/li&gt;
+&lt;li&gt;回声消除&lt;/li&gt;
+&lt;li&gt;唤醒词&lt;/li&gt;
+&lt;li&gt;语音端点检测&lt;/li&gt;
+&lt;li&gt;音频格式压缩&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Atom editor</title>
+      <link>https://wangshub.github.io/posts/atom-editor/</link>
+      <pubDate>Thu, 25 May 2017 21:27:42 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/atom-editor/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://www.clker.com/cliparts/3/8/9/1/1195436863389690204logomancer_Atom_Model.svg.hi.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;网上一直存在着vim和emacs两大阵营，两边的拥护者把这两个编辑器说的神乎其神。私以为，只是工具而已，对个人来说好用就行。Atom使用下来，我的感受就是&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;易安装，上手容易&lt;/li&gt;
+&lt;li&gt;插件安装方便&lt;/li&gt;
+&lt;li&gt;配置可备份&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;atom的安装&#34;&gt;Atom的安装&lt;/h1&gt;
+&lt;p&gt;我的系统是ubuntu16.04,直接&lt;a href=&#34;atom.io&#34;&gt;官网下载&lt;/a&gt;&lt;code&gt;*.deb&lt;/code&gt;安装包，运行&lt;code&gt;dpkg -i atom.deb&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;atom插件&#34;&gt;Atom插件&lt;/h1&gt;
+&lt;p&gt;Atom下的插件安装十分便捷，在&lt;code&gt;install a package&lt;/code&gt;下就能搜索安装。但是&lt;code&gt;GUI&lt;/code&gt;的安装方式常常会安装失败，建议终端使用&lt;code&gt;apm install PackageName&lt;/code&gt;安装插件。下面是我安装的一些插件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;highlight-selected&lt;/code&gt; 代码高亮插件；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;terminal-fusion&lt;/code&gt;Atom下的终端插件，强烈推荐，再也不用切换屏幕运行终端程序了；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;simplified-chinese-menu&lt;/code&gt;：简体中文插件；&lt;/li&gt;
+&lt;li&gt;待补充。。。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;atom配置&#34;&gt;Atom配置&lt;/h1&gt;
+&lt;p&gt;Atom自带的插件就能满足基本的日常需求，我能记起来的配置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Markdown&lt;/code&gt;文件预览：快捷键&lt;code&gt;Ctl-Shift-m&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;文件树，快捷键：&lt;code&gt;ctrl-\&lt;/code&gt;；&lt;/li&gt;
+&lt;li&gt;文件查找：&lt;code&gt;ctrl-F&lt;/code&gt;当前buffer中查找，&lt;code&gt;ctrl-shift-f&lt;/code&gt;当前工程中查找；&lt;/li&gt;
+&lt;li&gt;代码跳转：首先首先&lt;code&gt;ctrl-alt-g&lt;/code&gt;生成&lt;code&gt;.tags&lt;/code&gt;文件，选中待跳转的函数，&lt;code&gt;ctrl-shift-r&lt;/code&gt;完成跳转；&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;alt&lt;/code&gt;键隐藏菜单栏，对于笔记本太有用了，整个界面也变得清爽；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;atom备份&#34;&gt;Atom备份&lt;/h1&gt;
+&lt;p&gt;经常在windows和Linux下进行切换，对于我常常作死把系统搞崩，所以需要备份Atom编辑器的配置，和&lt;code&gt;emacs&lt;/code&gt;类似，可以将配置&lt;code&gt;～/.atom/&lt;/code&gt;文件目录上传github,新装Atom的时候直接clone下来就好，我的配置github地址在&lt;a href=&#34;https://github.com/wangshub/.atom.git&#34;&gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;最后，上一张我的Atom效果图
+&lt;img src=&#34;https://ooo.0o0.ooo/2017/05/25/5926dc8d83d5c.png&#34; alt=&#34;Screenshot from 2017-05-25 21-29-45.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Cmake 模板</title>
+      <link>https://wangshub.github.io/posts/cmake-tutorial/</link>
+      <pubDate>Thu, 25 May 2017 00:03:34 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/cmake-tutorial/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://ooo.0o0.ooo/2017/05/25/5925af646160e.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hello World</title>
+      <link>https://wangshub.github.io/posts/hello-world/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/hello-world/</guid>
+      <description>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
 Quick Start Setup pages.
 Create a new post $ hexo new &amp;#34;My New Post&amp;#34; More info: Writing
 Run server $ hexo server More info: Server
-Generate static files $ hexo generate More info: Generating</description></item></channel></rss>
+Generate static files $ hexo generate More info: Generating</description>
+    </item>
+    
+  </channel>
+</rss>

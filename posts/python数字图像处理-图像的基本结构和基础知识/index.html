@@ -1,177 +1,510 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/python-check-hosts-update/><link rel=next href=https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/><link rel=canonical href=https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>python数字图像处理-图像的基本结构和基础知识 | 🍉 神奇的战士</title><meta name=title content="python数字图像处理-图像的基本结构和基础知识 | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"python数字图像处理-图像的基本结构和基础知识","headline":"python数字图像处理-图像的基本结构和基础知识","description":"数字图像处理-图像的基本结构和基础知识 一、python实现BMP图像的读取和显示 BMP文件格式，又称为Bitmap（位图）或是DIB(Dev","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2017","datePublished":"2017-12-16 17:10:39 \u002b0000 UTC","dateModified":"2017-12-16 17:10:39 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86\/","wordCount":"2671","keywords":["python","algorithm","image","🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
-<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
-<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
-<a class=menu-item href=/categories/>Categories</a>
-<a class=menu-item href=/tags/>Tags</a>
-<a class=menu-item href=/about/>About</a>
-<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">python数字图像处理-图像的基本结构和基础知识</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
-<span class=post-time>on <time datetime=2017-12-16 itemprop=datePublished>December 16, 2017</time></span>
-in
-<span class=post-word-count>2671 words</span></div></header><div class=post-content><h1 id=数字图像处理-图像的基本结构和基础知识>数字图像处理-图像的基本结构和基础知识</h1><p><img src=https://i.loli.net/2017/12/16/5a34e2a04b0bc.bmp alt=LenaRGB.bmp loading=lazy></p><h2 id=一python实现bmp图像的读取和显示>一、python实现BMP图像的读取和显示</h2><p>BMP文件格式，又称为Bitmap（位图）或是DIB(Device-Independent Device，设备无关位图)，是Windows系统中广泛使用的图像文件格式。由于它可以不作任何变换地保存图像像素域的数据，因此成为我们取得RAW数据的重要来源。Windows的图形用户界面（graphical user interfaces）也在它的内建图像子系统GDI中对BMP格式提供了支持。</p><p>BMP文件的数据按照从文件头开始的先后顺序分为四个部分：</p><ol><li><p><strong>bmp文件头(bmp file header)</strong> ：提供文件的格式、大小等信息</p></li><li><p><strong>位图信息头(bitmap information)</strong>：提供图像数据的尺寸、位平面数、压缩方式、颜色索引等信息</p></li><li><p><strong>调色板(color palette)</strong>：可选，如使用索引来表示图像，调色板就是索引与其对应的颜色的映射表</p></li><li><p><strong>位图数据(bitmap data)</strong>：就是图像数据</p></li></ol><blockquote><p>参考链接
-<a href=https://zh.wikipedia.org/wiki/BMP>https://zh.wikipedia.org/wiki/BMP</a></p></blockquote><h2 id=二python统计图像的直方图>二、python统计图像的直方图</h2><p><strong>图像直方图</strong>（英语：Image Histogram）是用以表示数字图像中亮度分布的直方图，标绘了图像中每个亮度值的像素数。可以借助观察该直方图了解需要如何调整亮度分布。这种直方图中，横坐标的左侧为纯黑、较暗的区域，而右侧为较亮、纯白的区域。因此，一张较暗图片的图像直方图中的数据多集中于左侧和中间部分；而整体明亮、只有少量阴影的图像则相反。
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp"/>
+    <meta name="author" content="神奇的战士">
+    
+    
+    
+    <link rel="prev" href="https://wangshub.github.io/posts/python-check-hosts-update/" />
+    <link rel="next" href="https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/" />
+    <link rel="canonical" href="https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>
+        
+        
+            python数字图像处理-图像的基本结构和基础知识 | 🍉 神奇的战士
+        
+    </title>
+    <meta name="title" content="python数字图像处理-图像的基本结构和基础知识 | 🍉 神奇的战士">
+    
+<link rel="stylesheet" href="/css/main.min.css">
+
+
+    
+    
+ 
+
+<script type="application/ld+json">
+{
+    "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https:\/\/wangshub.github.io"
+    },
+    "articleSection" : "posts",
+    "name" : "python数字图像处理-图像的基本结构和基础知识",
+    "headline" : "python数字图像处理-图像的基本结构和基础知识",
+    "description" : "数字图像处理-图像的基本结构和基础知识 一、python实现BMP图像的读取和显示 BMP文件格式，又称为Bitmap（位图）或是DIB(Dev",
+    "inLanguage" : "zh-cn",
+    "author" : "神奇的战士",
+    "creator" : "神奇的战士",
+    "publisher": "神奇的战士",
+    "accountablePerson" : "神奇的战士",
+    "copyrightHolder" : "神奇的战士",
+    "copyrightYear" : "2017",
+    "datePublished": "2017-12-16 17:10:39 \u002b0000 UTC",
+    "dateModified" : "2017-12-16 17:10:39 \u002b0000 UTC",
+    "url" : "https:\/\/wangshub.github.io\/posts\/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86\/",
+    "wordCount" : "2671",
+    "keywords" : [ "python","algorithm","image", "🍉 神奇的战士"]
+}
+</script>
+
+  </head>
+    <body class="">
+        <div class="wrapper">
+            <nav class="navbar">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+    <div class="container">
+        
+            <div class="navbar-header header-back2home-logo">
+                <span class="logo_mark" >>$</span>
+                <a href="https://wangshub.github.io">
+                    <span class="logo_text" >cd /home/</span>
+                    <span class="logo_cursor" ></span>
+                </a>
+            </div>
+        
+        <div class="navbar-right">
+                
+                <span class="menu">
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/tags/" title="">Tags</a>
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <span class="divide"></span>
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a>
+                </span>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+    
+        <progress class="content_progress" max="0" value="0"></progress>
+    
+     <div class="container">
+        <div class="navbar">
+            <div class="navbar-header header-logo">
+                    <a href="https://wangshub.github.io">🍉 神奇的战士</a>
+            </div>
+            <div class="navbar-right">
+                <div><a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-dark-mode"></i></a></div>
+                <div class="menu-toggle">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                <nav class="mb-md">
+                    
+                    
+                        <a class="menu-item" href="/posts/" title="">
+                            <h3>Blog</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/categories/" title="">
+                            <h3>Categories</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/tags/" title="">
+                            <h3>Tags</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                        <a class="menu-item" href="/about/" title="">
+                            <h3>About</h3>
+                            <div class="menu-active"></div>
+                        </a>
+                    
+                </nav>
+        </div>
+    </div>
+</nav>
+            <main class="main">
+                <div class="container">
+                    
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">python数字图像处理-图像的基本结构和基础知识</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="https://wangshub.github.io" rel="author">神奇的战士</a> with ♥
+                <span class="post-time">
+                on <time datetime=2017-12-16 itemprop="datePublished">December 16, 2017</time>
+                </span>
+                in
+                
+                <span class="post-word-count">2671 words</span>
+        </div>
+    </header>
+
+    <div class="post-content">
+        
+
+        
+        
+            
+        
+
+        
+        
+        
+        
+        
+
+        
+        
+        
+
+        <h1 id="数字图像处理-图像的基本结构和基础知识">数字图像处理-图像的基本结构和基础知识</h1>
+<p><img src="https://i.loli.net/2017/12/16/5a34e2a04b0bc.bmp" alt="LenaRGB.bmp" loading="lazy" ></p>
+<h2 id="一python实现bmp图像的读取和显示">一、python实现BMP图像的读取和显示</h2>
+<p>BMP文件格式，又称为Bitmap（位图）或是DIB(Device-Independent Device，设备无关位图)，是Windows系统中广泛使用的图像文件格式。由于它可以不作任何变换地保存图像像素域的数据，因此成为我们取得RAW数据的重要来源。Windows的图形用户界面（graphical user interfaces）也在它的内建图像子系统GDI中对BMP格式提供了支持。</p>
+<p>BMP文件的数据按照从文件头开始的先后顺序分为四个部分：</p>
+<ol>
+<li>
+<p><strong>bmp文件头(bmp file header)</strong> ：提供文件的格式、大小等信息</p>
+</li>
+<li>
+<p><strong>位图信息头(bitmap information)</strong>：提供图像数据的尺寸、位平面数、压缩方式、颜色索引等信息</p>
+</li>
+<li>
+<p><strong>调色板(color palette)</strong>：可选，如使用索引来表示图像，调色板就是索引与其对应的颜色的映射表</p>
+</li>
+<li>
+<p><strong>位图数据(bitmap data)</strong>：就是图像数据</p>
+</li>
+</ol>
+<blockquote>
+<p>参考链接
+<a href="https://zh.wikipedia.org/wiki/BMP">https://zh.wikipedia.org/wiki/BMP</a></p>
+</blockquote>
+<h2 id="二python统计图像的直方图">二、python统计图像的直方图</h2>
+<p><strong>图像直方图</strong>（英语：Image Histogram）是用以表示数字图像中亮度分布的直方图，标绘了图像中每个亮度值的像素数。可以借助观察该直方图了解需要如何调整亮度分布。这种直方图中，横坐标的左侧为纯黑、较暗的区域，而右侧为较亮、纯白的区域。因此，一张较暗图片的图像直方图中的数据多集中于左侧和中间部分；而整体明亮、只有少量阴影的图像则相反。
 很多数码相机提供图像直方图功能，拍摄者可以通过观察图像直方图了解到当前图像是否过分曝光或者曝光不足。
-计算机视觉领域常借助图像直方图来实现图像的二值化</p><p><img src=https://i.loli.net/2017/12/16/5a34e49c0fd38.png alt="2 统计直方图.png" loading=lazy></p><blockquote><p>参考链接
-<a href=https://zh.wikipedia.org/wiki/%E7%9B%B4%E6%96%B9%E5%9B%BE#%E5%9B%BE%E5%83%8F%E7%9B%B4%E6%96%B9%E5%9B%BE>https://zh.wikipedia.org/wiki/%E7%9B%B4%E6%96%B9%E5%9B%BE#%E5%9B%BE%E5%83%8F%E7%9B%B4%E6%96%B9%E5%9B%BE</a></p></blockquote><h2 id=三rgbyiqhsixyz颜色空间>三、RGB、YIQ、HSI、XYZ颜色空间</h2><h3 id=yiq>YIQ</h3><p>YIQ色彩空间通常被北美的电视系统所采用，属于NTSC（National Television Standards Committee）系统。这里Y不是指黄色，而是指颜色的明视度（Luminance），即亮度（Brightness）。其实Y就是图像的灰度值（Gray value），而I和Q则是指色调（Chrominance），即描述图像色彩及饱和度的属性。在YIQ系统中，Y分量代表图像的亮度信息，I、Q两个分量则携带颜色信息，I分量代表从橙色到青色的颜色变化，而Q分量则代表从紫色到黄绿色的颜色变化。</p><p>NTSC制为了进一步压缩色度带宽，用色差信号I,Q来代替U,V。若采用U,V色差信号，则色度、亮度信号的共频带部分极大，低端不共频带的亮度信号带宽很小，亮、色干扰大。将彩色图像从RGB转换到YIQ色彩空间，可以把彩色图像中的亮度信息与色度信息分开，分别独立进行处理。</p><p>RGB和YIQ的对应关系用下面的方程式表示：</p><pre><code>Y=0.299R+0.587G+0.114B
+计算机视觉领域常借助图像直方图来实现图像的二值化</p>
+<p><img src="https://i.loli.net/2017/12/16/5a34e49c0fd38.png" alt="2 统计直方图.png" loading="lazy" ></p>
+<blockquote>
+<p>参考链接
+<a href="https://zh.wikipedia.org/wiki/%E7%9B%B4%E6%96%B9%E5%9B%BE#%E5%9B%BE%E5%83%8F%E7%9B%B4%E6%96%B9%E5%9B%BE">https://zh.wikipedia.org/wiki/%E7%9B%B4%E6%96%B9%E5%9B%BE#%E5%9B%BE%E5%83%8F%E7%9B%B4%E6%96%B9%E5%9B%BE</a></p>
+</blockquote>
+<h2 id="三rgbyiqhsixyz颜色空间">三、RGB、YIQ、HSI、XYZ颜色空间</h2>
+<h3 id="yiq">YIQ</h3>
+<p>YIQ色彩空间通常被北美的电视系统所采用，属于NTSC（National Television Standards Committee）系统。这里Y不是指黄色，而是指颜色的明视度（Luminance），即亮度（Brightness）。其实Y就是图像的灰度值（Gray value），而I和Q则是指色调（Chrominance），即描述图像色彩及饱和度的属性。在YIQ系统中，Y分量代表图像的亮度信息，I、Q两个分量则携带颜色信息，I分量代表从橙色到青色的颜色变化，而Q分量则代表从紫色到黄绿色的颜色变化。</p>
+<p>NTSC制为了进一步压缩色度带宽，用色差信号I,Q来代替U,V。若采用U,V色差信号，则色度、亮度信号的共频带部分极大，低端不共频带的亮度信号带宽很小，亮、色干扰大。将彩色图像从RGB转换到YIQ色彩空间，可以把彩色图像中的亮度信息与色度信息分开，分别独立进行处理。</p>
+<p>RGB和YIQ的对应关系用下面的方程式表示：</p>
+<pre><code>Y=0.299R+0.587G+0.114B
 I=0.596R-0.274G-0.322B
 Q=0.211R-0.523G+0.312B
-</code></pre><p><img src=https://i.loli.net/2017/12/16/5a34e49c3a072.png alt="3 YIQ分量.png" loading=lazy></p><h3 id=hsi>HSI</h3><ul><li><p>色调H（Hue）：与光波的波长有关，它表示人的感官对不同颜色的感受，如红色、绿色、蓝色等，它也可表示一定范围的颜色，如暖色、冷色等。</p></li><li><p>饱和度S（Saturation）：表示颜色的纯度，纯光谱色是完全饱和的，加入白光会稀释饱和度。饱和度越大，颜色看起来就会越鲜艳，反之亦然。</p></li><li><p>亮度I（Intensity）：对应成像亮度和图像灰度，是颜色的明亮程度。
-若将RGB单位立方体沿主对角线进行投影，可得到六边形，这样，原来沿主对角线的灰色都投影到中心白色点，而红色点（1，0，0）则位于右边的角上，绿色点（0，1，0）位于左上角，蓝色点（0，0，1）则位于左下角。</p></li></ul><p>HSI颜色模型的双六棱锥表示，I是强度轴，色调H的角度范围为[0，2π]，其中，纯红色的角度为0，纯绿色的角度为2π/3，纯蓝色的角度为4π/3。饱和度S是颜色空间任一点距I轴的距离。当然，若用圆表示RGB模型的投影，则HSI色度空间为双圆锥3D表示。</p><p>注意： 当强度I=0时，色调H、饱和度S无定义；当S=0时，色调H无定义。
-HSI模型也可用圆柱来表示，如图9-5所示。若将其展开，并按图9-6进行定义，可得到HSI调色板。</p><p><img src=https://i.loli.net/2017/12/16/5a34e15929e62.jpg alt=HSI_Formula.jpg loading=lazy></p><p><img src=https://i.loli.net/2017/12/16/5a34e49c37be5.png alt="5 HSI分量.png" loading=lazy></p><h3 id=xyz>XYZ</h3><p>国际照明委员会(CIE)在进行了大量正常人视觉测量和统计,1931年建立了"标准色度观察者"， 从而奠定了现代CIE标准色度学的定量基础。由于"标准色度观察者"用来标定光谱色时出现负 刺激值，计算不便，也不易理解，因此1931年CIE在RGB系统基础上，改用三个假想的原色X、Y、 Z建立了一个新的色度系统。将它匹配等能光谱的三刺激值，定名为"CIE1931 标准色度观察者 光谱三刺激值"，简称为"CIE1931标准色度观察者"。这一系统叫做"CIE1931标准色度系统"或称为" 2° 视场XYZ色度系统"。CIEXYZ颜色空间稍加变换就可得到Yxy色彩空间，其中Y取三刺激值中Y的值， 表示亮度，x、y反映颜色的色度特性。定义如下：在色彩管理中，选择与设备无关的颜色空间是 十分重要的，与设备无关的颜色空间由国际照明委员会(CIE)制定，包括CIEXYZ和CIELAB两个标准。 它们包含了人眼所能辨别的全部颜色。而且，CIEYxy测色制的建立给定量的确定颜色创造了条件。 但是，在这一空间中，两种不同颜色之间的距离值并不能正确地反映人们色彩感觉差别的大小， 也就是说在CIEYxy色厦图中，在 不同的位置不同方向上颜色的宽容量是不同的，这就是Yxy颜色空间 的不均匀性。这一缺陷的存在，使得在Yxy及XYZ空间不能直观地评价颜色。</p><p><img src=https://i.loli.net/2017/12/16/5a34e26b25e70.jpg alt=xyz.jpg loading=lazy></p><p><img src=https://i.loli.net/2017/12/16/5a34e49c3b8d4.png alt="6 XYZ分量.png" loading=lazy></p><h2 id=四python代码实现>四、python代码实现</h2><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e>#encoding: utf-8</span>
+</code></pre><p><img src="https://i.loli.net/2017/12/16/5a34e49c3a072.png" alt="3 YIQ分量.png" loading="lazy" ></p>
+<h3 id="hsi">HSI</h3>
+<ul>
+<li>
+<p>色调H（Hue）：与光波的波长有关，它表示人的感官对不同颜色的感受，如红色、绿色、蓝色等，它也可表示一定范围的颜色，如暖色、冷色等。</p>
+</li>
+<li>
+<p>饱和度S（Saturation）：表示颜色的纯度，纯光谱色是完全饱和的，加入白光会稀释饱和度。饱和度越大，颜色看起来就会越鲜艳，反之亦然。</p>
+</li>
+<li>
+<p>亮度I（Intensity）：对应成像亮度和图像灰度，是颜色的明亮程度。
+若将RGB单位立方体沿主对角线进行投影，可得到六边形，这样，原来沿主对角线的灰色都投影到中心白色点，而红色点（1，0，0）则位于右边的角上，绿色点（0，1，0）位于左上角，蓝色点（0，0，1）则位于左下角。</p>
+</li>
+</ul>
+<p>HSI颜色模型的双六棱锥表示，I是强度轴，色调H的角度范围为[0，2π]，其中，纯红色的角度为0，纯绿色的角度为2π/3，纯蓝色的角度为4π/3。饱和度S是颜色空间任一点距I轴的距离。当然，若用圆表示RGB模型的投影，则HSI色度空间为双圆锥3D表示。</p>
+<p>注意： 当强度I=0时，色调H、饱和度S无定义；当S=0时，色调H无定义。
+HSI模型也可用圆柱来表示，如图9-5所示。若将其展开，并按图9-6进行定义，可得到HSI调色板。</p>
+<p><img src="https://i.loli.net/2017/12/16/5a34e15929e62.jpg" alt="HSI_Formula.jpg" loading="lazy" ></p>
+<p><img src="https://i.loli.net/2017/12/16/5a34e49c37be5.png" alt="5 HSI分量.png" loading="lazy" ></p>
+<h3 id="xyz">XYZ</h3>
+<p>国际照明委员会(CIE)在进行了大量正常人视觉测量和统计,1931年建立了&quot;标准色度观察者&quot;， 从而奠定了现代CIE标准色度学的定量基础。由于&quot;标准色度观察者&quot;用来标定光谱色时出现负 刺激值，计算不便，也不易理解，因此1931年CIE在RGB系统基础上，改用三个假想的原色X、Y、 Z建立了一个新的色度系统。将它匹配等能光谱的三刺激值，定名为&quot;CIE1931 标准色度观察者 光谱三刺激值&quot;，简称为&quot;CIE1931标准色度观察者&quot;。这一系统叫做&quot;CIE1931标准色度系统&quot;或称为&quot; 2° 视场XYZ色度系统&quot;。CIEXYZ颜色空间稍加变换就可得到Yxy色彩空间，其中Y取三刺激值中Y的值， 表示亮度，x、y反映颜色的色度特性。定义如下：在色彩管理中，选择与设备无关的颜色空间是 十分重要的，与设备无关的颜色空间由国际照明委员会(CIE)制定，包括CIEXYZ和CIELAB两个标准。 它们包含了人眼所能辨别的全部颜色。而且，CIEYxy测色制的建立给定量的确定颜色创造了条件。 但是，在这一空间中，两种不同颜色之间的距离值并不能正确地反映人们色彩感觉差别的大小， 也就是说在CIEYxy色厦图中，在 不同的位置不同方向上颜色的宽容量是不同的，这就是Yxy颜色空间 的不均匀性。这一缺陷的存在，使得在Yxy及XYZ空间不能直观地评价颜色。</p>
+<p><img src="https://i.loli.net/2017/12/16/5a34e26b25e70.jpg" alt="xyz.jpg" loading="lazy" ></p>
+<p><img src="https://i.loli.net/2017/12/16/5a34e49c3b8d4.png" alt="6 XYZ分量.png" loading="lazy" ></p>
+<h2 id="四python代码实现">四、python代码实现</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#encoding: utf-8</span>
 
-<span style=color:#f92672>import</span> numpy <span style=color:#f92672>as</span> np
-<span style=color:#f92672>from</span> PIL <span style=color:#f92672>import</span> Image
-<span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#f92672>as</span> plt
-<span style=color:#f92672>import</span> math
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+<span style="color:#f92672">from</span> PIL <span style="color:#f92672">import</span> Image
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> math
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>show_bmp</span>(img):
-    <span style=color:#75715e># BMP 的读取与显示</span>
-    plt<span style=color:#f92672>.</span>figure(<span style=color:#e6db74>&#34;LenaRGB.bmp&#34;</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#34;LenaRGB.bmp&#34;</span>)
-    plt<span style=color:#f92672>.</span>imshow(img)
-    plt<span style=color:#f92672>.</span>show()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_bmp</span>(img):
+    <span style="color:#75715e"># BMP 的读取与显示</span>
+    plt<span style="color:#f92672">.</span>figure(<span style="color:#e6db74">&#34;LenaRGB.bmp&#34;</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#34;LenaRGB.bmp&#34;</span>)
+    plt<span style="color:#f92672">.</span>imshow(img)
+    plt<span style="color:#f92672">.</span>show()
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>show_hist</span>(img):
-    <span style=color:#75715e># 直方图</span>
-    plt<span style=color:#f92672>.</span>figure(<span style=color:#e6db74>&#34;Lena hist&#34;</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Lena hist figure&#39;</span>)
-    arr <span style=color:#f92672>=</span> img<span style=color:#f92672>.</span>flatten()
-    n, bins, patches <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>hist(arr, bins<span style=color:#f92672>=</span><span style=color:#ae81ff>256</span>, normed<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, facecolor<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;green&#39;</span>, alpha<span style=color:#f92672>=</span><span style=color:#ae81ff>0.75</span>)  
-    plt<span style=color:#f92672>.</span>show()
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>show_rgb</span>(img):
-    <span style=color:#75715e># 显示RGB图像    </span>
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>221</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;orignal&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(img)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>222</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;R&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(img[:, :, <span style=color:#ae81ff>0</span>], cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>223</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;G&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(img[:, :, <span style=color:#ae81ff>1</span>], cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>224</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;B&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(img[:, :, <span style=color:#ae81ff>2</span>], cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>show()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_hist</span>(img):
+    <span style="color:#75715e"># 直方图</span>
+    plt<span style="color:#f92672">.</span>figure(<span style="color:#e6db74">&#34;Lena hist&#34;</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Lena hist figure&#39;</span>)
+    arr <span style="color:#f92672">=</span> img<span style="color:#f92672">.</span>flatten()
+    n, bins, patches <span style="color:#f92672">=</span> plt<span style="color:#f92672">.</span>hist(arr, bins<span style="color:#f92672">=</span><span style="color:#ae81ff">256</span>, normed<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, facecolor<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;green&#39;</span>, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.75</span>)  
+    plt<span style="color:#f92672">.</span>show()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_rgb</span>(img):
+    <span style="color:#75715e"># 显示RGB图像    </span>
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">221</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;orignal&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(img)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">222</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;R&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(img[:, :, <span style="color:#ae81ff">0</span>], cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">223</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;G&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(img[:, :, <span style="color:#ae81ff">1</span>], cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">224</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;B&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(img[:, :, <span style="color:#ae81ff">2</span>], cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>show()
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>shou_yiq</span>(img):
-    <span style=color:#75715e># 显示YIQ分量</span>
-    R <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(img[:, :, <span style=color:#ae81ff>0</span>])
-    G <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(img[:, :, <span style=color:#ae81ff>1</span>])
-    B <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(img[:, :, <span style=color:#ae81ff>2</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">shou_yiq</span>(img):
+    <span style="color:#75715e"># 显示YIQ分量</span>
+    R <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(img[:, :, <span style="color:#ae81ff">0</span>])
+    G <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(img[:, :, <span style="color:#ae81ff">1</span>])
+    B <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(img[:, :, <span style="color:#ae81ff">2</span>])
 
-    <span style=color:#75715e># aH = np.array([(0.299, 0.587, 0.114), </span>
-    <span style=color:#75715e>#               (0.596, -0.274, -0.322), </span>
-    <span style=color:#75715e>#               (0.211, -0.523, 0.312)])</span>
-    Y <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.299</span> <span style=color:#f92672>*</span> R <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.587</span> <span style=color:#f92672>*</span> G <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.114</span> <span style=color:#f92672>*</span> B
-    I <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.596</span> <span style=color:#f92672>*</span> R <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.274</span> <span style=color:#f92672>*</span> G <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.322</span> <span style=color:#f92672>*</span> B
-    Q <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.211</span> <span style=color:#f92672>*</span> R <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.523</span> <span style=color:#f92672>*</span> G <span style=color:#f92672>-</span> <span style=color:#ae81ff>0.312</span> <span style=color:#f92672>*</span> B
+    <span style="color:#75715e"># aH = np.array([(0.299, 0.587, 0.114), </span>
+    <span style="color:#75715e">#               (0.596, -0.274, -0.322), </span>
+    <span style="color:#75715e">#               (0.211, -0.523, 0.312)])</span>
+    Y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.299</span> <span style="color:#f92672">*</span> R <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.587</span> <span style="color:#f92672">*</span> G <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.114</span> <span style="color:#f92672">*</span> B
+    I <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.596</span> <span style="color:#f92672">*</span> R <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.274</span> <span style="color:#f92672">*</span> G <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.322</span> <span style="color:#f92672">*</span> B
+    Q <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.211</span> <span style="color:#f92672">*</span> R <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.523</span> <span style="color:#f92672">*</span> G <span style="color:#f92672">-</span> <span style="color:#ae81ff">0.312</span> <span style="color:#f92672">*</span> B
     
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>221</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;orignal&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(img)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>222</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Y&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(Y, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>223</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;I&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(I, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>224</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Q&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(Q, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>show()
-    <span style=color:#75715e># YIQ = </span>
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">221</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;orignal&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(img)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">222</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Y&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(Y, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">223</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;I&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(I, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">224</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Q&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(Q, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>show()
+    <span style="color:#75715e"># YIQ = </span>
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>show_xyz</span>(img):
-    <span style=color:#75715e># 显示YIQ分量</span>
-    R <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(img[:, :, <span style=color:#ae81ff>0</span>])
-    G <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(img[:, :, <span style=color:#ae81ff>1</span>])
-    B <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(img[:, :, <span style=color:#ae81ff>2</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_xyz</span>(img):
+    <span style="color:#75715e"># 显示YIQ分量</span>
+    R <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(img[:, :, <span style="color:#ae81ff">0</span>])
+    G <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(img[:, :, <span style="color:#ae81ff">1</span>])
+    B <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(img[:, :, <span style="color:#ae81ff">2</span>])
 
-    <span style=color:#75715e># aH = np.array([(0.299, 0.587, 0.114), </span>
-    <span style=color:#75715e>#               (0.596, -0.274, -0.322), </span>
-    <span style=color:#75715e>#               (0.211, -0.523, 0.312)])</span>
-    X <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.490</span> <span style=color:#f92672>*</span> R <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.310</span> <span style=color:#f92672>*</span> G <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.200</span> <span style=color:#f92672>*</span> B
-    Y <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.177</span> <span style=color:#f92672>*</span> R <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.813</span> <span style=color:#f92672>*</span> G <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.011</span> <span style=color:#f92672>*</span> B
-    Z <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.000</span> <span style=color:#f92672>*</span> R <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.010</span> <span style=color:#f92672>*</span> G <span style=color:#f92672>+</span> <span style=color:#ae81ff>0.990</span> <span style=color:#f92672>*</span> B
+    <span style="color:#75715e"># aH = np.array([(0.299, 0.587, 0.114), </span>
+    <span style="color:#75715e">#               (0.596, -0.274, -0.322), </span>
+    <span style="color:#75715e">#               (0.211, -0.523, 0.312)])</span>
+    X <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.490</span> <span style="color:#f92672">*</span> R <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.310</span> <span style="color:#f92672">*</span> G <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.200</span> <span style="color:#f92672">*</span> B
+    Y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.177</span> <span style="color:#f92672">*</span> R <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.813</span> <span style="color:#f92672">*</span> G <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.011</span> <span style="color:#f92672">*</span> B
+    Z <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.000</span> <span style="color:#f92672">*</span> R <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.010</span> <span style="color:#f92672">*</span> G <span style="color:#f92672">+</span> <span style="color:#ae81ff">0.990</span> <span style="color:#f92672">*</span> B
     
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>221</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;orignal&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(img)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>222</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;X&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(X, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>223</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Y&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(Y, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>224</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;Z&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(Z, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>show()
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">221</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;orignal&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(img)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">222</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;X&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(X, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">223</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Y&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(Y, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">224</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Z&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(Z, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>show()
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>show_hsi</span>(img):
-    rows, cols, dims <span style=color:#f92672>=</span> img<span style=color:#f92672>.</span>shape 
-    R <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(img[:, :, <span style=color:#ae81ff>0</span>])
-    G <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(img[:, :, <span style=color:#ae81ff>1</span>])
-    B <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(img[:, :, <span style=color:#ae81ff>2</span>])
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_hsi</span>(img):
+    rows, cols, dims <span style="color:#f92672">=</span> img<span style="color:#f92672">.</span>shape 
+    R <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(img[:, :, <span style="color:#ae81ff">0</span>])
+    G <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(img[:, :, <span style="color:#ae81ff">1</span>])
+    B <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(img[:, :, <span style="color:#ae81ff">2</span>])
     
-    I <span style=color:#f92672>=</span> (R <span style=color:#f92672>+</span> G <span style=color:#f92672>+</span> B) <span style=color:#f92672>/</span> <span style=color:#ae81ff>3</span>
+    I <span style="color:#f92672">=</span> (R <span style="color:#f92672">+</span> G <span style="color:#f92672">+</span> B) <span style="color:#f92672">/</span> <span style="color:#ae81ff">3</span>
 
-    E <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(np<span style=color:#f92672>.</span>ones([rows, cols]))
-    minRGB <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(img<span style=color:#f92672>.</span>min(<span style=color:#ae81ff>2</span>))
-    lv <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span> <span style=color:#f92672>*</span> E <span style=color:#f92672>/</span> (R <span style=color:#f92672>+</span> G <span style=color:#f92672>+</span> B)
-    S <span style=color:#f92672>=</span> E <span style=color:#f92672>-</span> np<span style=color:#f92672>.</span>multiply(lv, minRGB)
+    E <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(np<span style="color:#f92672">.</span>ones([rows, cols]))
+    minRGB <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(img<span style="color:#f92672">.</span>min(<span style="color:#ae81ff">2</span>))
+    lv <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> E <span style="color:#f92672">/</span> (R <span style="color:#f92672">+</span> G <span style="color:#f92672">+</span> B)
+    S <span style="color:#f92672">=</span> E <span style="color:#f92672">-</span> np<span style="color:#f92672">.</span>multiply(lv, minRGB)
 
-    <span style=color:#75715e># S = np.mat(np.zeros([rows, cols]))</span>
-    <span style=color:#75715e># for i in range(rows):</span>
-    <span style=color:#75715e>#     for j in range(cols):</span>
-    <span style=color:#75715e>#         S[i, j] = 1 - 3/(R[i, j] + G[i, j] + B[i, j]) * min([R[i, j], G[i, j], B[i, j]])</span>
+    <span style="color:#75715e"># S = np.mat(np.zeros([rows, cols]))</span>
+    <span style="color:#75715e"># for i in range(rows):</span>
+    <span style="color:#75715e">#     for j in range(cols):</span>
+    <span style="color:#75715e">#         S[i, j] = 1 - 3/(R[i, j] + G[i, j] + B[i, j]) * min([R[i, j], G[i, j], B[i, j]])</span>
 
-    H <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>mat(np<span style=color:#f92672>.</span>zeros([rows, cols]))
-    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(rows):
-        <span style=color:#66d9ef>for</span> j <span style=color:#f92672>in</span> range(cols):
-            up <span style=color:#f92672>=</span> (R[i, j] <span style=color:#f92672>-</span> G[i, j] <span style=color:#f92672>+</span> R[i, j] <span style=color:#f92672>-</span> B[i, j]) <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>
-            down <span style=color:#f92672>=</span> (R[i, j] <span style=color:#f92672>-</span> G[i, j])<span style=color:#f92672>**</span><span style=color:#ae81ff>2</span> <span style=color:#f92672>+</span> (R[i, j] <span style=color:#f92672>-</span> B[i, j]) <span style=color:#f92672>*</span> (G[i, j] <span style=color:#f92672>-</span> B[i, j])<span style=color:#f92672>**</span><span style=color:#ae81ff>0.5</span>
-            H[i, j] <span style=color:#f92672>=</span> math<span style=color:#f92672>.</span>acos(up <span style=color:#f92672>/</span> down)
+    H <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>mat(np<span style="color:#f92672">.</span>zeros([rows, cols]))
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(rows):
+        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(cols):
+            up <span style="color:#f92672">=</span> (R[i, j] <span style="color:#f92672">-</span> G[i, j] <span style="color:#f92672">+</span> R[i, j] <span style="color:#f92672">-</span> B[i, j]) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>
+            down <span style="color:#f92672">=</span> (R[i, j] <span style="color:#f92672">-</span> G[i, j])<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (R[i, j] <span style="color:#f92672">-</span> B[i, j]) <span style="color:#f92672">*</span> (G[i, j] <span style="color:#f92672">-</span> B[i, j])<span style="color:#f92672">**</span><span style="color:#ae81ff">0.5</span>
+            H[i, j] <span style="color:#f92672">=</span> math<span style="color:#f92672">.</span>acos(up <span style="color:#f92672">/</span> down)
             
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>221</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;orignal&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(img)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>222</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;I&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(I, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>223</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;S&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(S, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>224</span>)
-    plt<span style=color:#f92672>.</span>title(<span style=color:#e6db74>&#39;H&#39;</span>)
-    plt<span style=color:#f92672>.</span>imshow(H, cmap<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gray&#39;</span>)
-    plt<span style=color:#f92672>.</span>show()
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">221</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;orignal&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(img)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">222</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;I&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(I, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">223</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;S&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(S, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>subplot(<span style="color:#ae81ff">224</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;H&#39;</span>)
+    plt<span style="color:#f92672">.</span>imshow(H, cmap<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gray&#39;</span>)
+    plt<span style="color:#f92672">.</span>show()
 
-<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>main</span>():
-    img <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>array(Image<span style=color:#f92672>.</span>open(<span style=color:#e6db74>&#39;/home/sun/Desktop/PycharmProjects/Digital_image_process_lxk/lab1/LenaRGB.bmp&#39;</span>))
-    rows, cols, dims <span style=color:#f92672>=</span> img<span style=color:#f92672>.</span>shape
-    <span style=color:#66d9ef>print</span> img<span style=color:#f92672>.</span>shape  
-    <span style=color:#66d9ef>print</span> img<span style=color:#f92672>.</span>dtype 
-    <span style=color:#66d9ef>print</span> img<span style=color:#f92672>.</span>size 
-    <span style=color:#66d9ef>print</span> type(img)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    img <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array(Image<span style="color:#f92672">.</span>open(<span style="color:#e6db74">&#39;/home/sun/Desktop/PycharmProjects/Digital_image_process_lxk/lab1/LenaRGB.bmp&#39;</span>))
+    rows, cols, dims <span style="color:#f92672">=</span> img<span style="color:#f92672">.</span>shape
+    <span style="color:#66d9ef">print</span> img<span style="color:#f92672">.</span>shape  
+    <span style="color:#66d9ef">print</span> img<span style="color:#f92672">.</span>dtype 
+    <span style="color:#66d9ef">print</span> img<span style="color:#f92672">.</span>size 
+    <span style="color:#66d9ef">print</span> type(img)
     
-    <span style=color:#75715e># show_bmp(img)</span>
-    <span style=color:#75715e># show_hist(img)</span>
-    <span style=color:#75715e># show_rgb(img)</span>
-    <span style=color:#75715e># shou_yiq(img)</span>
-    <span style=color:#75715e># show_hsi(img)</span>
-    <span style=color:#75715e># show_xyz(img)</span>
+    <span style="color:#75715e"># show_bmp(img)</span>
+    <span style="color:#75715e"># show_hist(img)</span>
+    <span style="color:#75715e"># show_rgb(img)</span>
+    <span style="color:#75715e"># shou_yiq(img)</span>
+    <span style="color:#75715e"># show_hsi(img)</span>
+    <span style="color:#75715e"># show_xyz(img)</span>
 
-<span style=color:#66d9ef>if</span> __name__ <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;__main__&#39;</span>:
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
     main()
-</code></pre></div></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
-<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
-<a href=https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/>https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</span></p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
-<span class=tag><a href=https://wangshub.github.io/tags/python/>#python</a></span>
-<span class=tag><a href=https://wangshub.github.io/tags/algorithm/>#algorithm</a></span>
-<span class=tag><a href=https://wangshub.github.io/tags/image/>#image</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
-<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/python-check-hosts-update/ class=prev rel=prev title="python check hosts update"><i class="iconfont icon-left"></i>&nbsp;python check hosts update</a>
-<a href=https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/ class=next rel=next title=python数字图像处理-图像噪声与去噪算法>python数字图像处理-图像噪声与去噪算法&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
-<span itemprop=copyrightYear>2016 - 2020</span>
-<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
-<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>
+</code></pre></div>
+    </div>
+
+    <div class="post-copyright">
+            
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>神奇的战士 </span>
+                </p>
+            
+
+            
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/>https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84%E5%92%8C%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</span>
+            </p>
+            
+            
+    </div>
+
+
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s):
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/python/">
+                    #python</a></span>
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/algorithm/">
+                    #algorithm</a></span>
+            
+            <span class="tag"><a href="https://wangshub.github.io/tags/image/">
+                    #image</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> ·
+                <span><a href="https://wangshub.github.io">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://wangshub.github.io/posts/python-check-hosts-update/" class="prev" rel="prev" title="python check hosts update"><i class="iconfont icon-left"></i>&nbsp;python check hosts update</a>
+        
+        
+        <a href="https://wangshub.github.io/posts/python%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86-%E5%9B%BE%E5%83%8F%E5%99%AA%E5%A3%B0%E4%B8%8E%E5%8E%BB%E5%99%AA%E7%AE%97%E6%B3%95/" class="next" rel="next" title="python数字图像处理-图像噪声与去噪算法">python数字图像处理-图像噪声与去噪算法&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+        
+            
+        
+    </div>
+</article>
+                </div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2016 - 2020</span>
+        
+        <span class="with-love">
+    	 <i class="iconfont icon-love"></i>
+         </span>
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://wangshub.github.io">神奇的战士</a> | </span>
+         
+
+         
+		  <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/Mogeko/Mogege" target="_blank" rel="external nofollow">Mogege</a></span>
+    </div>
+</footer>
+
+
+
+
+
+
+<script defer src="/js/vendor_main.min.js"></script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script> pangu.spacingPage();</script>
+
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [["$", "$"]],
+    },
+    displayMath: [
+      ["$$", "$$"],
+      ["\[\[", "\]\]"],
+    ],
+    svg: {
+      fontCache: "global",
+    },
+  };
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+></script>
+
+        </div>
+    </body>
+</html>
