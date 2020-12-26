@@ -1,0 +1,163 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/python-vad/><link rel=next href=https://wangshub.github.io/posts/sshfs-mount-net-disk/><link rel=canonical href=https://wangshub.github.io/posts/python-data-structure-bst/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>python 数据结构之二叉搜索树 | 🍉 神奇的战士</title><meta name=title content="python 数据结构之二叉搜索树 | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"python 数据结构之二叉搜索树","headline":"python 数据结构之二叉搜索树","description":"二叉搜索树定义 一颗二叉搜索树是以二叉树来组织的,每个节点除了 Key 还包括 左孩子, 右孩子, 父节点 等信息. BST满足限制条件: 对于任意节点的X,他的","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2017","datePublished":"2017-05-29 23:06:12 \u002b0000 UTC","dateModified":"2017-05-29 23:06:12 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/python-data-structure-bst\/","wordCount":"1232","keywords":["python","code","algorithm","🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
+<a class=menu-item href=/categories/>Categories</a>
+<a class=menu-item href=/tags/>Tags</a>
+<a class=menu-item href=/about/>About</a>
+<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">python 数据结构之二叉搜索树</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>on <time datetime=2017-05-29 itemprop=datePublished>May 29, 2017</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=https://wangshub.github.io/categories/python/>python,</a>
+<a href=https://wangshub.github.io/categories/code/>code,</a>
+<a href=https://wangshub.github.io/categories/algorithm/>algorithm,</a></span>
+<span class=post-word-count>1232 words</span></div></header><div class=post-content><h1 id=二叉搜索树定义>二叉搜索树定义</h1><p>一颗二叉搜索树是以二叉树来组织的,每个节点除了 <em>Key</em> 还包括 <em>左孩子</em>, <em>右孩子</em>, <em>父节点</em> 等信息. BST满足限制条件: <em>对于任意节点的X,他的 <strong>左子树中关键字最大值&lt;=X.key</strong> , <strong>右子树关键字最小值>=X.key</strong></em> 这个关系表示如下<br><img src=http://algs4.cs.princeton.edu/32bst/images/bst-anatomy.png alt=二叉 loading=lazy><br>根据上图定义,一个二叉搜索树的例子是<br><img src=http://algs4.cs.princeton.edu/32bst/images/bst-subtree-count.png alt></p><h1 id=二叉树操作>二叉树操作</h1><ul><li>查询</li><li>插入</li><li>删除</li></ul><h2 id=查询搜索>查询(搜索)</h2><p>二叉树搜索采用递归的方式来进行查询,根据二叉搜索树的定义: 左子树存储小值, 右子树存储大值,一个完整的二叉搜索示意图如下<br><img src=http://algs4.cs.princeton.edu/32bst/images/bst-search.png alt><br>可以写成 <em>伪代码</em></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>TREE<span style=color:#f92672>-</span>SEARCH(x, k)
+  <span style=color:#66d9ef>if</span> x <span style=color:#f92672>==</span> NULL  <span style=color:#f92672>or</span> k <span style=color:#f92672>==</span> x<span style=color:#f92672>.</span>key
+    <span style=color:#66d9ef>return</span> x  
+  <span style=color:#66d9ef>if</span> k <span style=color:#f92672>&lt;</span> x<span style=color:#f92672>.</span>key
+    <span style=color:#66d9ef>return</span> TREE<span style=color:#f92672>-</span>SEARCH(x<span style=color:#f92672>.</span>left)
+  <span style=color:#66d9ef>if</span> k <span style=color:#f92672>&gt;</span> x<span style=color:#f92672>.</span>key
+    <span style=color:#66d9ef>return</span> TREE<span style=color:#f92672>-</span>SEARCH(x<span style=color:#f92672>.</span>right)
+</code></pre></div><p>转换成python代码</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_get</span>(self, key, node):
+        <span style=color:#66d9ef>if</span> node <span style=color:#f92672>is</span> None:
+            <span style=color:#66d9ef>return</span> None
+
+        <span style=color:#66d9ef>if</span> key <span style=color:#f92672>&lt;</span> node<span style=color:#f92672>.</span>key:
+            <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>_get(key, node<span style=color:#f92672>.</span>left)
+        <span style=color:#66d9ef>elif</span> key <span style=color:#f92672>&gt;</span> node<span style=color:#f92672>.</span>key:
+            <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>_get(key, node<span style=color:#f92672>.</span>right)
+        <span style=color:#66d9ef>else</span>:
+            <span style=color:#66d9ef>return</span> node<span style=color:#f92672>.</span>val
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get</span>(self, key):
+        <span style=color:#e6db74>&#34;&#34;&#34;
+</span><span style=color:#e6db74>        Return the value paired with &#39;key&#39;
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>        Worst Case Complexity: O(N)
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>        Balanced Tree Complexity: O(lg N)
+</span><span style=color:#e6db74>        &#34;&#34;&#34;</span>
+        <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>_get(key, self<span style=color:#f92672>.</span>root)
+</code></pre></div><h2 id=插入>插入</h2><p>插入和删除比查询呢稍微复杂一些,因为该操作会引起二叉搜索树的大小变化,会改变动态集合的结构.插入呢又比删除稍微容易实现.插入分为两部</p><ul><li>查询插入节点</li><li>改变目标节点附近的数据结构</li></ul><p>插入过程示意图如下<br><img src=http://algs4.cs.princeton.edu/32bst/images/bst-insert.png alt></p><p>相应的伪代码如下, 输入节点 <em>z</em> , <em>z.key = v</em>, <em>z.left = NULL</em>, <em>z.right = NULL</em>.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>TREE<span style=color:#f92672>-</span>INSERT(T, x)
+  y <span style=color:#f92672>=</span> NULL
+  x <span style=color:#f92672>=</span> T<span style=color:#f92672>.</span>root   <span style=color:#75715e># 从根节点开始</span>
+  <span style=color:#66d9ef>while</span> x <span style=color:#f92672>!=</span> NULL
+    y <span style=color:#f92672>=</span> x      <span style=color:#75715e># 保存上一节点</span>
+    <span style=color:#66d9ef>if</span> z<span style=color:#f92672>.</span>key <span style=color:#f92672>&lt;</span> x<span style=color:#f92672>.</span>key <span style=color:#75715e># 往左</span>
+      x <span style=color:#f92672>=</span> x<span style=color:#f92672>.</span>left
+    <span style=color:#66d9ef>else</span>             <span style=color:#75715e># 往右</span>
+      x <span style=color:#f92672>=</span> x<span style=color:#f92672>.</span>right
+
+  z<span style=color:#f92672>.</span>p <span style=color:#f92672>=</span> y        <span style=color:#75715e># 父节点</span>
+  <span style=color:#66d9ef>if</span> y <span style=color:#f92672>==</span> NULL   <span style=color:#75715e># tree T 为空</span>
+    T<span style=color:#f92672>.</span>root <span style=color:#f92672>=</span> z
+  <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> z<span style=color:#f92672>.</span>key <span style=color:#f92672>&lt;</span> y<span style=color:#f92672>.</span>key
+    y<span style=color:#f92672>.</span>left <span style=color:#f92672>=</span> z
+  <span style=color:#66d9ef>else</span> y<span style=color:#f92672>.</span>right <span style=color:#f92672>=</span> z
+</code></pre></div><p>程序的运行复杂度取决于二叉树的形状<br><img src=http://algs4.cs.princeton.edu/32bst/images/bst-typical.png alt><br>插入的运行时间取决于二叉搜索树的_高度h_,程序的运行时间_O(h)_ ,所以二叉树形状的好坏直接影响算法的运行时间.</p><p>python代码实现为</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_put</span>(self, key, val, node):
+
+        <span style=color:#75715e># If we hit the end of a branch, create a new node</span>
+        <span style=color:#66d9ef>if</span> node <span style=color:#f92672>is</span> None:
+            <span style=color:#66d9ef>return</span> Node(key, val)
+
+        <span style=color:#75715e># Follow left branch</span>
+        <span style=color:#66d9ef>if</span> key <span style=color:#f92672>&lt;</span> node<span style=color:#f92672>.</span>key:
+            node<span style=color:#f92672>.</span>left <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_put(key, val, node<span style=color:#f92672>.</span>left)
+        <span style=color:#75715e># Follow right branch</span>
+        <span style=color:#66d9ef>elif</span> key <span style=color:#f92672>&gt;</span> node<span style=color:#f92672>.</span>key:
+            node<span style=color:#f92672>.</span>right <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_put(key, val, node<span style=color:#f92672>.</span>right)
+        <span style=color:#75715e># Overwrite value</span>
+        <span style=color:#66d9ef>else</span>:
+            node<span style=color:#f92672>.</span>val <span style=color:#f92672>=</span> val
+
+        node<span style=color:#f92672>.</span>size_of_subtree <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_size(node<span style=color:#f92672>.</span>left) <span style=color:#f92672>+</span> self<span style=color:#f92672>.</span>_size(node<span style=color:#f92672>.</span>right)<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>
+        <span style=color:#66d9ef>return</span> node
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>put</span>(self, key, val):
+          <span style=color:#e6db74>&#34;&#34;&#34;
+</span><span style=color:#e6db74>        Add a new key-value pair.
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>        Worst Case Complexity: O(N)
+</span><span style=color:#e6db74>
+</span><span style=color:#e6db74>        Balanced Tree Complexity: O(lg N)
+</span><span style=color:#e6db74>        &#34;&#34;&#34;</span>
+        self<span style=color:#f92672>.</span>root <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_put(key, val, self<span style=color:#f92672>.</span>root)
+</code></pre></div><h2 id=删除>删除</h2><p>删除总共分为三种情况:</p><ul><li><p>如果删除节点x没有孩子,直接删除即可;</p></li><li><p>如果删除节点x有1个孩子,用孩子替换该节点位置;</p></li><li><p>如果删除节点x有2个孩子, 这个情况有些复杂.关键是要找到节点 <em>x的继承者</em> . 节点z的继承者在节点z的右子树中有最小的关键值.这种情况下的操作分为下面步骤:</p><ol><li>输入待删除的节点x 和 二叉搜索树T.</li><li>在节点x的右子树开始搜索:往右再往左找到最小值节点H;</li><li>H右孩子为H的父节点, H的左孩子为X的左孩子;</li></ol></li></ul><p>示意图如下,应该一目了然:<br><img src=http://algs4.cs.princeton.edu/32bst/images/bst-deletemin.png alt> <img src=http://algs4.cs.princeton.edu/32bst/images/bst-delete.png alt></p><p>根据上面的描述,删除的伪代码可以分为两部分:</p><ol><li>为了移动子树, 用一棵子树替换一棵子树,并成为双亲的孩子节点.</li></ol><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>TRANSPLANT(T, u, v)
+<span style=color:#66d9ef>if</span> u<span style=color:#f92672>.</span>p <span style=color:#f92672>==</span> NULL
+T<span style=color:#f92672>.</span>root <span style=color:#f92672>=</span> v
+<span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> u <span style=color:#f92672>=</span> u<span style=color:#f92672>.</span>p<span style=color:#f92672>.</span>left
+u<span style=color:#f92672>.</span>p<span style=color:#f92672>.</span>left <span style=color:#f92672>=</span> v
+<span style=color:#66d9ef>else</span> u<span style=color:#f92672>.</span>p<span style=color:#f92672>.</span>right <span style=color:#f92672>=</span> v
+
+<span style=color:#66d9ef>if</span> v<span style=color:#f92672>!=</span> NULL
+v<span style=color:#f92672>.</span>p <span style=color:#f92672>=</span> u<span style=color:#f92672>.</span>p
+</code></pre></div><ol start=2><li>根据第一步完成二叉搜索树的删除过程:</li></ol><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>TREE<span style=color:#f92672>-</span>DELETE(T, z)
+<span style=color:#66d9ef>if</span> z<span style=color:#f92672>.</span>left <span style=color:#f92672>=</span> NULL
+TRANSPLANT(T, z, z<span style=color:#f92672>.</span>right)
+<span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> (z<span style=color:#f92672>.</span>right <span style=color:#f92672>==</span> NULL)
+TRANSPLANT(T, z, z<span style=color:#f92672>.</span>left)
+<span style=color:#66d9ef>else</span>
+y <span style=color:#f92672>=</span> TREE<span style=color:#f92672>-</span>MINIMUM(z<span style=color:#f92672>.</span>right)
+<span style=color:#66d9ef>if</span> y<span style=color:#f92672>.</span>p <span style=color:#f92672>!=</span> z
+TRANSPLANT(T, y, y<span style=color:#f92672>.</span>right)
+y<span style=color:#f92672>.</span>right <span style=color:#f92672>=</span> z<span style=color:#f92672>.</span>right
+y<span style=color:#f92672>.</span>right<span style=color:#f92672>.</span>p <span style=color:#f92672>=</span> y
+TRANSPLANT(T, z, y)
+y<span style=color:#f92672>.</span>left <span style=color:#f92672>=</span> z<span style=color:#f92672>.</span>left
+y<span style=color:#f92672>.</span>left<span style=color:#f92672>.</span>p <span style=color:#f92672>=</span> y
+</code></pre></div><p>用python 实现如下:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_delete</span>(self, key, node):
+ <span style=color:#66d9ef>if</span> node <span style=color:#f92672>is</span> None:
+     <span style=color:#66d9ef>return</span> None
+ <span style=color:#66d9ef>if</span> key <span style=color:#f92672>&lt;</span> node<span style=color:#f92672>.</span>key:
+     node<span style=color:#f92672>.</span>left <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_delete(key, node<span style=color:#f92672>.</span>left)
+ <span style=color:#66d9ef>elif</span> key <span style=color:#f92672>&gt;</span> node<span style=color:#f92672>.</span>key:
+     node<span style=color:#f92672>.</span>right <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_delete(key, node<span style=color:#f92672>.</span>right)
+
+ <span style=color:#66d9ef>else</span>:
+     <span style=color:#66d9ef>if</span> node<span style=color:#f92672>.</span>right <span style=color:#f92672>is</span> None:
+         <span style=color:#66d9ef>return</span> node<span style=color:#f92672>.</span>left
+     <span style=color:#66d9ef>elif</span> node<span style=color:#f92672>.</span>left <span style=color:#f92672>is</span> None:
+         <span style=color:#66d9ef>return</span> node<span style=color:#f92672>.</span>right
+     <span style=color:#66d9ef>else</span>:
+         old_node <span style=color:#f92672>=</span> node
+         node <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_ceiling_node(key, node<span style=color:#f92672>.</span>right)
+         node<span style=color:#f92672>.</span>right <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_delete_min(old_node<span style=color:#f92672>.</span>right)
+         node<span style=color:#f92672>.</span>left <span style=color:#f92672>=</span> old_node<span style=color:#f92672>.</span>left
+ node<span style=color:#f92672>.</span>size_of_subtree <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_size(node<span style=color:#f92672>.</span>left) <span style=color:#f92672>+</span> self<span style=color:#f92672>.</span>_size(node<span style=color:#f92672>.</span>right)<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>
+ <span style=color:#66d9ef>return</span> node
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_delete_min</span>(self, node):
+ <span style=color:#66d9ef>if</span> node<span style=color:#f92672>.</span>left <span style=color:#f92672>is</span> None:
+     <span style=color:#66d9ef>return</span> node<span style=color:#f92672>.</span>right
+
+ node<span style=color:#f92672>.</span>left <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_delete_min(node<span style=color:#f92672>.</span>left)
+ node<span style=color:#f92672>.</span>size_of_subtree <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_size(node<span style=color:#f92672>.</span>left) <span style=color:#f92672>+</span> self<span style=color:#f92672>.</span>_size(node<span style=color:#f92672>.</span>right)<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>
+ <span style=color:#66d9ef>return</span> node
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>_ceiling_node</span>(self, key, node):
+ <span style=color:#e6db74>&#34;&#34;&#34;
+</span><span style=color:#e6db74> Returns the node with the smallest key that is greater than or equal to
+</span><span style=color:#e6db74> the given value &#39;key&#39;
+</span><span style=color:#e6db74> &#34;&#34;&#34;</span>
+ <span style=color:#66d9ef>if</span> node <span style=color:#f92672>is</span> None:
+     <span style=color:#66d9ef>return</span> None
+
+ <span style=color:#66d9ef>if</span> key <span style=color:#f92672>&lt;</span> node<span style=color:#f92672>.</span>key:
+     <span style=color:#75715e># Ceiling is either in left subtree or is this node</span>
+     attempt_in_left <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_ceiling_node(key, node<span style=color:#f92672>.</span>left)
+     <span style=color:#66d9ef>if</span> attempt_in_left <span style=color:#f92672>is</span> None:
+         <span style=color:#66d9ef>return</span> node
+     <span style=color:#66d9ef>else</span>:
+         <span style=color:#66d9ef>return</span> attempt_in_left
+ <span style=color:#66d9ef>elif</span> key <span style=color:#f92672>&gt;</span> node<span style=color:#f92672>.</span>key:
+     <span style=color:#75715e># Ceiling must be in right subtree</span>
+     <span style=color:#66d9ef>return</span> self<span style=color:#f92672>.</span>_ceiling_node(key, node<span style=color:#f92672>.</span>right)
+ <span style=color:#66d9ef>else</span>:
+     <span style=color:#75715e># Keys are equal so ceiling is node with this key</span>
+     <span style=color:#66d9ef>return</span> node
+</code></pre></div><h2 id=参考文献>参考文献</h2><ol><li>&#171;算法导论第三版&#187;</li><li><a href=http://algs4.cs.princeton.edu/32bst/>http://algs4.cs.princeton.edu/32bst/</a></li></ol></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
+<a href=https://wangshub.github.io/posts/python-data-structure-bst/>https://wangshub.github.io/posts/python-data-structure-bst/</span></p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/python/>#python</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/code/>#code</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/algorithm/>#algorithm</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/python-vad/ class=prev rel=prev title=python的webrtc库实现语音端点检测><i class="iconfont icon-left"></i>&nbsp;python的webrtc库实现语音端点检测</a>
+<a href=https://wangshub.github.io/posts/sshfs-mount-net-disk/ class=next rel=next title=从机sshfs访问主机文件系统>从机sshfs访问主机文件系统&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2016 - 2020</span>
+<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>

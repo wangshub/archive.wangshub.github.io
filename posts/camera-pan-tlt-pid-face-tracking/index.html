@@ -1,0 +1,138 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/docker-sentry-deploy/><link rel=next href=https://wangshub.github.io/posts/about-interpreter/><link rel=canonical href=https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>基于 face_recognition 和 PID 的人脸识别和跟踪 | 🍉 神奇的战士</title><meta name=title content="基于 face_recognition 和 PID 的人脸识别和跟踪 | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"基于 face_recognition 和 PID 的人脸识别和跟踪","headline":"基于 face_recognition 和 PID 的人脸识别和跟踪","description":"基于 face_recognition 和 PID 的舵机云台人脸识别和跟踪 如何让机器人头部摄像头跟随识别到人脸位置变化而转动？一帧图像是 2 维的，人脸位置用坐标 (x,y) 表示，要实现跟踪人脸","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2019","datePublished":"2019-06-03 15:42:59 \u002b0000 UTC","dateModified":"2019-06-03 15:42:59 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/camera-pan-tlt-pid-face-tracking\/","wordCount":"1538","keywords":["Python","PID","Robot","🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
+<a class=menu-item href=/categories/>Categories</a>
+<a class=menu-item href=/tags/>Tags</a>
+<a class=menu-item href=/about/>About</a>
+<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">基于 face_recognition 和 PID 的人脸识别和跟踪</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>on <time datetime=2019-06-03 itemprop=datePublished>June 3, 2019</time></span>
+in
+<span class=post-word-count>1538 words</span></div></header><div class=post-content><h1 id=基于-face_recognition-和-pid-的舵机云台人脸识别和跟踪>基于 face_recognition 和 PID 的舵机云台人脸识别和跟踪</h1><p>如何让机器人头部摄像头跟随识别到人脸位置变化而转动？一帧图像是 2 维的，人脸位置用坐标 (x,y) 表示，要实现跟踪人脸则需要两个轴 <strong>pan, tilt</strong></p><ul><li><strong>pan</strong>: 水平左右方向转头</li><li><strong>tilt</strong>: 竖直上下方向转头</li></ul><div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190603155412.png width=30%><p><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190603164238.png width=70%></p></div><h2 id=人脸识别>人脸识别</h2><p>首先需要在每一帧图像中识别到人脸，<a href=https://github.com/ageitgey/face_recognition>face_recognition</a> 一个简单易用的人脸识别开源项目，并且配备了完整的开发文档和示例代码，还特别兼容了树莓派。face_recognition 基于 C++ 开源库 dlib 的深度学习模型，使用 <a href=http://vis-www.cs.umass.edu/lfw/>Labeled Faces in the Wild</a> 人脸数据集进行测试，有高达99.38%的准确率。</p><h3 id=安装-face_recognition>安装 face_recognition</h3><p>安装步骤请参考: <a href=https://github.com/ageitgey/face_recognition#installation>face_recognition#installation</a></p><h3 id=识别人脸-python-代码>识别人脸 Python 代码</h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=color:#f92672>import</span> face_recognition
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>face_location</span>(frame, frame_center):
+    face_locations <span style=color:#f92672>=</span> face_recognition<span style=color:#f92672>.</span>face_locations(frame)
+    <span style=color:#66d9ef>if</span> len(face_locations) <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>:
+        y0, x0, y1, x1 <span style=color:#f92672>=</span> face_locations[<span style=color:#ae81ff>0</span>]
+        face_x <span style=color:#f92672>=</span> int((x0 <span style=color:#f92672>+</span> x1) <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>)
+        face_y <span style=color:#f92672>=</span> int((y0 <span style=color:#f92672>+</span> y1) <span style=color:#f92672>/</span> <span style=color:#ae81ff>2</span>)
+        <span style=color:#66d9ef>return</span> face_x, face_y
+    <span style=color:#66d9ef>return</span> frame_center
+</code></pre></div><h2 id=pid-控制>PID 控制</h2><p>使用 face_recognition 可以很容易地用 Python 代码实现人脸识别，计算出人脸在一帧图像中的像素坐标 <code>(x, y)</code>，接下来就是需要控制舵机对人脸进行跟踪。</p><p><strong>控制目标</strong>：<strong>调整横向和纵向两个自由度的舵机，使得摄像头中的人脸中心与图像的中心重合。</strong></p><p>这就需要引入 PID 控制了，先直接放公式</p><div>$$
+u(t)=K_{\mathrm{p}} e(t)+K_{\mathrm{i}} \int_{0}^{t} e\left(t^{\prime}\right) d t^{\prime}+K_{\mathrm{d}} \frac{d e(t)}{d t}
+$$</div><ul><li><strong>时间</strong> $t$，在这里时间是离散的；</li><li><strong>偏差</strong> $e(t)$，在人脸跟踪中指的是图像中心与人脸中心之间的距离（x 方向，y 方向）；</li><li><strong>系统输出</strong> $u(t)$，即输出的舵机角度(分水平和垂直方向两个舵机的角度)；</li></ul><p>接下来需要理解，$K_p$，$K_i$，$K_d$ 三个参数的作用</p><h3 id=比例p>比例(P)</h3><p>比例控制的输出信号与输入偏差成比例关系。偏差一旦产生，控制器立即产生控制作用以减小偏差，是最基本的控制规律。当仅有比例控制时系统输出存在稳态误差。</p><ul><li>当人脸与图像中心相距<strong>较远</strong>时，需要舵机<strong>大幅度</strong>运动对准人脸</li><li>当人脸与图像中心相距<strong>较近</strong>时，需要舵机<strong>小幅度</strong>靠近对准人脸</li></ul><p>根据 <code>kp</code> 取值不同，摄像头都会去对准人脸，只是 <code>kp</code> 大了到达的快，<code>kp</code> 小了到达的慢一些。</p><h3 id=积分i>积分(I)</h3><p>防止系统进入稳定后存在的稳定误差，即有可能摄像头稳定后停下来了，但是没有对准人脸的中心。为了消除稳态误差，必须引入积分控制。积分作用是对历史的偏差进行积分，随着时间的增加，积分输出会增大，使稳态误差进一步减小，直到偏差为零，才不再继续增加，最后系统稳定下来，才可能正好中心对准人脸。</p><h3 id=微分d>微分(D)</h3><p>在微分控制中，控制器的输出与输入偏差信号的微分(即偏差的变化率)成正比关系。微分控制反映偏差的变化率，只有当偏差随时间变化时，微分控制才会对系统起作用，而对无变化或缓慢变化的对象不起作用。通俗来说，是为了在人脸追踪时，防止<strong>追过劲了</strong>，在中心对准人脸后可以及时地停止，防止震荡。</p><h3 id=pid-代码实现>PID 代码实现</h3><p>在理解概念和公式后，就不难代码实现</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python><span style=color:#75715e># https://www.pyimagesearch.com/2019/04/01/pan-tilt-face-tracking-with-a-raspberry-pi-and-opencv/</span>
+<span style=color:#f92672>import</span> time
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>PID</span>:
+    <span style=color:#66d9ef>def</span> __init__(self, kP<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>, kI<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>, kD<span style=color:#f92672>=</span><span style=color:#ae81ff>0</span>):
+        <span style=color:#75715e># initialize gains</span>
+        self<span style=color:#f92672>.</span>kP <span style=color:#f92672>=</span> kP
+        self<span style=color:#f92672>.</span>kI <span style=color:#f92672>=</span> kI
+        self<span style=color:#f92672>.</span>kD <span style=color:#f92672>=</span> kD
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>initialize</span>(self):
+        <span style=color:#75715e># intialize the current and previous time</span>
+        self<span style=color:#f92672>.</span>currTime <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
+        self<span style=color:#f92672>.</span>prevTime <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>currTime
+
+        <span style=color:#75715e># initialize the previous error</span>
+        self<span style=color:#f92672>.</span>prevError <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+
+        <span style=color:#75715e># initialize the term result variables</span>
+        self<span style=color:#f92672>.</span>cP <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+        self<span style=color:#f92672>.</span>cI <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+        self<span style=color:#f92672>.</span>cD <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+
+    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>update</span>(self, error, sleep<span style=color:#f92672>=</span><span style=color:#ae81ff>0.2</span>):
+        <span style=color:#75715e># pause for a bit</span>
+        time<span style=color:#f92672>.</span>sleep(sleep)
+
+        <span style=color:#75715e># grab the current time and calculate delta time</span>
+        self<span style=color:#f92672>.</span>currTime <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
+        deltaTime <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>currTime <span style=color:#f92672>-</span> self<span style=color:#f92672>.</span>prevTime
+
+        <span style=color:#75715e># delta error</span>
+        deltaError <span style=color:#f92672>=</span> error <span style=color:#f92672>-</span> self<span style=color:#f92672>.</span>prevError
+
+        <span style=color:#75715e># proportional term</span>
+        self<span style=color:#f92672>.</span>cP <span style=color:#f92672>=</span> error
+
+        <span style=color:#75715e># integral term</span>
+        self<span style=color:#f92672>.</span>cI <span style=color:#f92672>+=</span> error <span style=color:#f92672>*</span> deltaTime
+
+        <span style=color:#75715e># derivative term and prevent divide by zero</span>
+        self<span style=color:#f92672>.</span>cD <span style=color:#f92672>=</span> (deltaError <span style=color:#f92672>/</span> deltaTime) <span style=color:#66d9ef>if</span> deltaTime <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span> <span style=color:#66d9ef>else</span> <span style=color:#ae81ff>0</span>
+
+        <span style=color:#75715e># save previous time and error for the next update</span>
+        self<span style=color:#f92672>.</span>prevTime <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>currTime
+        self<span style=color:#f92672>.</span>prevError <span style=color:#f92672>=</span> error
+
+        <span style=color:#75715e># sum the terms and return</span>
+        <span style=color:#66d9ef>return</span> sum([
+            self<span style=color:#f92672>.</span>kP <span style=color:#f92672>*</span> self<span style=color:#f92672>.</span>cP,
+            self<span style=color:#f92672>.</span>kI <span style=color:#f92672>*</span> self<span style=color:#f92672>.</span>cI,
+            self<span style=color:#f92672>.</span>kD <span style=color:#f92672>*</span> self<span style=color:#f92672>.</span>cD])
+
+</code></pre></div><h2 id=代码设计>代码设计</h2><p>由于云台有 2 个自由度（pan, tilt），所以需要用到 2 个 PID 控制器，来输出对应的角度</p><ul><li>$x$ 轴偏差 对应 水平左右转动 <strong>pan</strong></li><li>$y$ 轴偏差 对应 垂直上下转动 <strong>tilt</strong></li></ul><p>在代码设计时，需要考虑如下几点限制因素</p><ul><li>受限于设备的性能，使用 face_recognition 识别一帧图像里的人脸可能会非常耗时</li><li>舵机控制时，不同的舵机响应时间不同</li><li>PID 在代码中是通过循环累加来计算的；</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>thread_face_center</span>():
+    <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;face_center ..&#39;</span>)
+    process_this_frame <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+    <span style=color:#66d9ef>while</span> True:
+        time<span style=color:#f92672>.</span>sleep(<span style=color:#ae81ff>0.01</span>)
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> QUEUE_IMG<span style=color:#f92672>.</span>empty():
+            frame <span style=color:#f92672>=</span> QUEUE_IMG<span style=color:#f92672>.</span>get()
+        <span style=color:#66d9ef>else</span>:
+            <span style=color:#66d9ef>continue</span>
+
+        (h, w) <span style=color:#f92672>=</span> frame<span style=color:#f92672>.</span>shape[:<span style=color:#ae81ff>2</span>]
+        HEAD<span style=color:#f92672>.</span>center_x <span style=color:#f92672>=</span> w <span style=color:#f92672>//</span> <span style=color:#ae81ff>2</span>
+        HEAD<span style=color:#f92672>.</span>center_y <span style=color:#f92672>=</span> h <span style=color:#f92672>//</span> <span style=color:#ae81ff>2</span>
+
+        <span style=color:#66d9ef>if</span> process_this_frame <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>8</span>:
+            HEAD<span style=color:#f92672>.</span>obj_x, HEAD<span style=color:#f92672>.</span>obj_y <span style=color:#f92672>=</span> face_location(frame, (HEAD<span style=color:#f92672>.</span>center_x, HEAD<span style=color:#f92672>.</span>center_y))
+            <span style=color:#66d9ef>print</span>(HEAD<span style=color:#f92672>.</span>obj_x, HEAD<span style=color:#f92672>.</span>obj_y)
+            process_this_frame <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+        process_this_frame <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>thread_pid_pan</span>():
+    p, i, d <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.09</span>, <span style=color:#ae81ff>0.08</span>, <span style=color:#ae81ff>0.002</span>
+
+    pid <span style=color:#f92672>=</span> PID(p, i, d)
+    pid<span style=color:#f92672>.</span>initialize()
+    <span style=color:#66d9ef>while</span> True:
+        error <span style=color:#f92672>=</span> HEAD<span style=color:#f92672>.</span>center_x <span style=color:#f92672>-</span> HEAD<span style=color:#f92672>.</span>obj_x
+        HEAD<span style=color:#f92672>.</span>pan <span style=color:#f92672>=</span> pid<span style=color:#f92672>.</span>update(error)
+
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>thread_pid_tlt</span>():
+    p, i, d <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.11</span>, <span style=color:#ae81ff>0.10</span>, <span style=color:#ae81ff>0.002</span>
+
+    pid <span style=color:#f92672>=</span> PID(p, i, d)
+    pid<span style=color:#f92672>.</span>initialize()
+    <span style=color:#66d9ef>while</span> True:
+        error <span style=color:#f92672>=</span> HEAD<span style=color:#f92672>.</span>center_y <span style=color:#f92672>-</span> HEAD<span style=color:#f92672>.</span>obj_y
+        HEAD<span style=color:#f92672>.</span>tlt <span style=color:#f92672>=</span> pid<span style=color:#f92672>.</span>update(error)
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>thread_set_servos</span>():
+    set_head_servo([<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>90</span>])
+    <span style=color:#66d9ef>while</span> True:
+        time<span style=color:#f92672>.</span>sleep(<span style=color:#ae81ff>0.01</span>)
+        pan_angle <span style=color:#f92672>=</span> HEAD<span style=color:#f92672>.</span>pan <span style=color:#f92672>+</span> <span style=color:#ae81ff>0</span>
+        tlt_angle <span style=color:#f92672>=</span> <span style=color:#ae81ff>90</span> <span style=color:#f92672>-</span> HEAD<span style=color:#f92672>.</span>tlt
+        <span style=color:#66d9ef>print</span>(<span style=color:#e6db74>&#39;[pan_angle, tlt_angle] = &#39;</span>, pan_angle, tlt_angle)
+        set_head_servo([pan_angle, tlt_angle])
+
+</code></pre></div><p>需要将人脸识别、PID 过程、角度控制放到<strong>单独的线程</strong>处理。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>async_do_job(thread_face_center)
+async_do_job(thread_pid_pan)
+async_do_job(thread_pid_tlt)
+async_do_job(thread_set_servos)
+</code></pre></div><h2 id=参考链接>参考链接</h2><ul><li><a href=https://zh.wikipedia.org/wiki/PID%E6%8E%A7%E5%88%B6%E5%99%A8>Wikipedia: PID 控制器</a></li><li><a href=https://github.com/ageitgey/face_recognition>The world&rsquo;s simplest facial recognition api for Python and the command line</a></li><li><a href=https://www.pyimagesearch.com/2019/04/01/pan-tilt-face-tracking-with-a-raspberry-pi-and-opencv/>Pan/tilt face tracking with a Raspberry Pi and OpenCV</a></li></ul></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
+<a href=https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/>https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/</span></p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/python/>#Python</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/pid/>#PID</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/robot/>#Robot</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/docker-sentry-deploy/ class=prev rel=prev title="用 Docker 部署 Sentry Bug 日志收集服务"><i class="iconfont icon-left"></i>&nbsp;用 Docker 部署 Sentry Bug 日志收集服务</a>
+<a href=https://wangshub.github.io/posts/about-interpreter/ class=next rel=next title=两种硬件编程的风格：离线下载和在线交互>两种硬件编程的风格：离线下载和在线交互&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2016 - 2020</span>
+<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>

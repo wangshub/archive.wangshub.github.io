@@ -1,0 +1,55 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=author content="神奇的战士"><link rel=prev href=https://wangshub.github.io/posts/use-python-to-backup-markdown-images/><link rel=next href=https://wangshub.github.io/posts/python-check-hosts-update/><link rel=canonical href=https://wangshub.github.io/posts/python-mail-sender/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><title>python mail sender | 🍉 神奇的战士</title><meta name=title content="python mail sender | 🍉 神奇的战士"><link rel=stylesheet href=/css/main.min.css><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"python mail sender","headline":"python mail sender","description":"python 发送邮件 配置服务器和邮箱 mail_info.py mail_host = \u0026#39;smtp.yeah.net\u0026#39; mail_user = \u0026#39;mail_name\u0026#39; mail_pass = \u0026#39;mail_password\u0026#39; sender = \u0026#39;mail_name@yeah.net\u0026#39; receivers = [\u0026#39;target@mail.com\u0026#39;] 发送邮件 mail_trans.py from .mail_info import * import smtplib from email.mime.text import MIMEText def mail_text_send(title, text): message = MIMEText(text, \u0026#39;plain\u0026#39;, \u0026#39;utf-8\u0026#39;) message[\u0026#39;Subject\u0026#39;] = title message[\u0026#39;From\u0026#39;] = sender message[\u0026#39;To\u0026#39;] = receivers[0] try: smtpObj = smtplib.SMTP() # connect host smtpObj.connect(mail_host, 25)","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2017","datePublished":"2017-07-20 22:22:06 \u002b0000 UTC","dateModified":"2017-07-20 22:22:06 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/python-mail-sender\/","wordCount":"104","keywords":["Python","Code","Mail","🍉 神奇的战士"]}</script></head><body><div class=wrapper><nav class=navbar><progress class=content_progress max=0 value=0></progress><div class=container><div class="navbar-header header-back2home-logo"><span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io><span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span></a></div><div class=navbar-right><span class=menu><a class=menu-item href=/posts/>Blog</a>
+<a class=menu-item href=/categories/>Categories</a>
+<a class=menu-item href=/tags/>Tags</a>
+<a class=menu-item href=/about/>About</a>
+<span class=divide></span><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></span></div></div></nav><nav class=navbar-mobile id=nav-mobile style=display:none><progress class=content_progress max=0 value=0></progress><div class=container><div class=navbar><div class="navbar-header header-logo"><a href=https://wangshub.github.io>🍉 神奇的战士</a></div><div class=navbar-right><div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div><div class=menu-toggle><span></span><span></span><span></span></div></div></div><div class=menu id=mobile-menu><nav class=mb-md><a class=menu-item href=/posts/><h3>Blog</h3><div class=menu-active></div></a><a class=menu-item href=/categories/><h3>Categories</h3><div class=menu-active></div></a><a class=menu-item href=/tags/><h3>Tags</h3><div class=menu-active></div></a><a class=menu-item href=/about/><h3>About</h3><div class=menu-active></div></a></nav></div></div></nav><main class=main><div class=container><article class=post-warp itemscope itemtype=http://schema.org/Article><header class=post-header><h1 class=post-title itemprop="name headline">python mail sender</h1><div class=post-meta>Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>on <time datetime=2017-07-20 itemprop=datePublished>July 20, 2017</time></span>
+in
+<i class="iconfont icon-folder"></i><span class=post-category><a href=https://wangshub.github.io/categories/python/>Python,</a>
+<a href=https://wangshub.github.io/categories/code/>Code,</a>
+<a href=https://wangshub.github.io/categories/mail/>Mail,</a></span>
+<span class=post-word-count>104 words</span></div></header><div class=post-content><h1 id=python-发送邮件>python 发送邮件</h1><h2 id=配置服务器和邮箱>配置服务器和邮箱</h2><blockquote><p>mail_info.py</p></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-Python data-lang=Python>mail_host <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;smtp.yeah.net&#39;</span>
+mail_user <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;mail_name&#39;</span>
+mail_pass <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;mail_password&#39;</span>
+
+sender <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;mail_name@yeah.net&#39;</span>
+receivers <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#39;target@mail.com&#39;</span>]
+</code></pre></div><h2 id=发送邮件>发送邮件</h2><blockquote><p>mail_trans.py</p></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>from</span> .mail_info <span style=color:#f92672>import</span> <span style=color:#f92672>*</span>
+<span style=color:#f92672>import</span> smtplib
+<span style=color:#f92672>from</span> email.mime.text <span style=color:#f92672>import</span> MIMEText
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>mail_text_send</span>(title, text):
+    message <span style=color:#f92672>=</span> MIMEText(text, <span style=color:#e6db74>&#39;plain&#39;</span>, <span style=color:#e6db74>&#39;utf-8&#39;</span>)
+    message[<span style=color:#e6db74>&#39;Subject&#39;</span>] <span style=color:#f92672>=</span> title
+    message[<span style=color:#e6db74>&#39;From&#39;</span>] <span style=color:#f92672>=</span> sender
+    message[<span style=color:#e6db74>&#39;To&#39;</span>] <span style=color:#f92672>=</span> receivers[<span style=color:#ae81ff>0</span>]
+
+    <span style=color:#66d9ef>try</span>:
+        smtpObj <span style=color:#f92672>=</span> smtplib<span style=color:#f92672>.</span>SMTP()
+        <span style=color:#75715e># connect host</span>
+        smtpObj<span style=color:#f92672>.</span>connect(mail_host, <span style=color:#ae81ff>25</span>)
+        <span style=color:#75715e># login host</span>
+        smtpObj<span style=color:#f92672>.</span>login(mail_user, mail_pass)
+        <span style=color:#75715e># send</span>
+        smtpObj<span style=color:#f92672>.</span>sendmail(sender, receivers, message<span style=color:#f92672>.</span>as_string())
+        <span style=color:#75715e># quit</span>
+        smtpObj<span style=color:#f92672>.</span>quit()
+        <span style=color:#66d9ef>return</span> True
+    <span style=color:#66d9ef>except</span> smtplib<span style=color:#f92672>.</span>SMTPException <span style=color:#66d9ef>as</span> e:
+        <span style=color:#66d9ef>return</span> False
+
+</code></pre></div><h2 id=主程序调用>主程序调用</h2><blockquote><p>main.py</p></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>from</span> mail_trans <span style=color:#f92672>import</span> <span style=color:#f92672>*</span>
+mail_text_send(<span style=color:#e6db74>&#39;title&#39;</span>, <span style=color:#e6db74>&#39;hello world!&#39;</span>)
+</code></pre></div></div><div class=post-copyright><p class=copyright-item><span>Author:</span>
+<span>神奇的战士</span></p><p class=copyright-item><span>Link:</span>
+<a href=https://wangshub.github.io/posts/python-mail-sender/>https://wangshub.github.io/posts/python-mail-sender/</span></p></div><div class=post-tags><section><i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/python/>#Python</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/code/>#Code</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/mail/>#Mail</a></span></section><section><a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span></section></div><div class=post-nav><a href=https://wangshub.github.io/posts/use-python-to-backup-markdown-images/ class=prev rel=prev title=使用python备份博客图床图片><i class="iconfont icon-left"></i>&nbsp;使用python备份博客图床图片</a>
+<a href=https://wangshub.github.io/posts/python-check-hosts-update/ class=next rel=next title="python check hosts update">python check hosts update&nbsp;<i class="iconfont icon-right"></i></a></div><div class=post-comment></div></article></div></main><footer class=footer><div class=copyright>&copy;
+<span itemprop=copyrightYear>2016 - 2020</span>
+<span class=with-love><i class="iconfont icon-love"></i></span><span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> |</span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span></div></footer><script defer src=/js/vendor_main.min.js></script><script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script><script>pangu.spacingPage();</script><script>MathJax={tex:{inlineMath:[["$","$"]],},displayMath:[["$$","$$"],["\[\[","\]\]"],],svg:{fontCache:"global",},};</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js></script></div></body></html>
