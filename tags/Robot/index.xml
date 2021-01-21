@@ -6,7 +6,16 @@
     <description>Recent content in Robot on 🍉 神奇的战士</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 19 Jun 2019 17:12:18 +0000</lastBuildDate><atom:link href="https://wangshub.github.io/tags/robot/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Dec 2020 15:34:16 +0800</lastBuildDate><atom:link href="https://wangshub.github.io/tags/robot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>用 AI 教机器人走路 01：强化学习之连续动作控制环境</title>
+      <link>https://wangshub.github.io/posts/how-ai-teach-robot-walk-01/</link>
+      <pubDate>Thu, 31 Dec 2020 15:34:16 +0800</pubDate>
+      
+      <guid>https://wangshub.github.io/posts/how-ai-teach-robot-walk-01/</guid>
+      <description>网络上关于强化学习的资料很多，但是针对双足机器人运动控制的强化学习的入门资料很少，所以打算将自己的理解汇总成一个博客系列。 关于深度强化学习 行</description>
+    </item>
+    
     <item>
       <title>现实世界中的机器人强化学习</title>
       <link>https://wangshub.github.io/posts/reinforcement-learning-for-real-world-robotics/</link>
