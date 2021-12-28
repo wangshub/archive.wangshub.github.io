@@ -1,0 +1,158 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta name=author content="神奇的战士">
+<link rel=prev href=https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%9C%BA%E7%AD%96%E7%95%A5%E4%B9%8B%E9%AB%98%E6%96%AF%E4%BC%BC%E7%84%B6%E6%95%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/>
+<link rel=next href=https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/>
+<link rel=canonical href=https://wangshub.github.io/posts/mlpgaussianpolicy/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+<title>
+MLPGaussianPolicy | 🍉 神奇的战士
+</title>
+<meta name=title content="MLPGaussianPolicy | 🍉 神奇的战士">
+<link rel=stylesheet href=/css/main.min.css>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"MLPGaussianPolicy","headline":"MLPGaussianPolicy","description":"MLP Gaussian policy Looks like a Gaussian policy whose mean and std are outputs of a neural network. 参考文献 https:\/\/arxiv.org\/pdf\/1502.05477.pdf","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2019","datePublished":"2019-01-14 19:42:41 \u002b0000 UTC","dateModified":"2019-01-14 19:42:41 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/mlpgaussianpolicy\/","wordCount":"23","keywords":["Python","Reinforcement Learning","Tensorflow","🍉 神奇的战士"]}</script>
+</head>
+<body>
+<div class=wrapper>
+<nav class=navbar>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class="navbar-header header-back2home-logo">
+<span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io>
+<span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span>
+</a>
+</div>
+<div class=navbar-right>
+<span class=menu>
+<a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a>
+<span class=divide></span>
+<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a>
+</span>
+</div>
+</div>
+</nav>
+<nav class=navbar-mobile id=nav-mobile style=display:none>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class=navbar>
+<div class="navbar-header header-logo">
+<a href=https://wangshub.github.io>🍉 神奇的战士</a>
+</div>
+<div class=navbar-right>
+<div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div>
+<div class=menu-toggle>
+<span></span><span></span><span></span>
+</div>
+</div>
+</div>
+<div class=menu id=mobile-menu>
+<nav class=mb-md>
+<a class=menu-item href=/posts/ title>
+<h3>Blog</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/categories/ title>
+<h3>Categories</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/tags/ title>
+<h3>Tags</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/about/ title>
+<h3>About</h3>
+<div class=menu-active></div>
+</a>
+</nav>
+</div>
+</div>
+</nav>
+<main class=main>
+<div class=container>
+<article class=post-warp itemscope itemtype=http://schema.org/Article>
+<header class=post-header>
+<h1 class=post-title itemprop="name headline">MLPGaussianPolicy</h1>
+<div class=post-meta>
+Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>
+on <time datetime=2019-01-14 itemprop=datePublished>January 14, 2019</time>
+</span>
+in
+<span class=post-word-count>23 words</span>
+</div>
+</header>
+<div class=post-content>
+<h1 id=mlp-gaussian-policy>MLP Gaussian policy</h1>
+<p>Looks like a Gaussian policy whose mean and std are outputs of a neural network.</p>
+<p><img src=https://raw.githubusercontent.com/tuibot/ImgBed/master/img/20190114195919.png alt></p>
+<h2 id=参考文献>参考文献</h2>
+<ul>
+<li><a href=https://arxiv.org/pdf/1502.05477.pdf>https://arxiv.org/pdf/1502.05477.pdf</a></li>
+</ul>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span>Author:</span>
+<span>神奇的战士 </span>
+</p>
+<p class=copyright-item>
+<span>Link:</span>
+<a href=https://wangshub.github.io/posts/mlpgaussianpolicy/>https://wangshub.github.io/posts/mlpgaussianpolicy/</span>
+</p>
+</div>
+<div class=post-tags>
+<section>
+<i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/python/>
+#Python</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/reinforcement-learning/>
+#Reinforcement Learning</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/tensorflow/>
+#Tensorflow</a></span>
+</section>
+<section>
+<a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span>
+</section>
+</div>
+<div class=post-nav>
+<a href=https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E9%9A%8F%E6%9C%BA%E7%AD%96%E7%95%A5%E4%B9%8B%E9%AB%98%E6%96%AF%E4%BC%BC%E7%84%B6%E6%95%B0%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0/ class=prev rel=prev title=强化学习随机策略之高斯似然数原理与代码实现><i class="iconfont icon-left"></i>&nbsp;强化学习随机策略之高斯似然数原理与代码实现</a>
+<a href=https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95/ class=next rel=next title=强化学习策略梯度算法>强化学习策略梯度算法&nbsp;<i class="iconfont icon-right"></i></a>
+</div>
+<div class=post-comment>
+</div>
+</article>
+</div>
+</main>
+<footer class=footer>
+<div class=copyright>
+&copy;
+<span itemprop=copyrightYear>2016 - 2021</span>
+<span class=with-love>
+<i class="iconfont icon-love"></i>
+</span>
+<span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> | </span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span>
+</div>
+</footer>
+<script defer src=/js/vendor_main.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script>
+<script>pangu.spacingPage()</script>
+</div>
+</body>
+</html>

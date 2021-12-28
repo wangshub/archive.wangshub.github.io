@@ -1,0 +1,344 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta name=author content="神奇的战士">
+<link rel=prev href=https://wangshub.github.io/posts/atom-editor/>
+<link rel=next href=https://wangshub.github.io/posts/python-data-structure-bst/>
+<link rel=canonical href=https://wangshub.github.io/posts/python-vad/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+<title>
+python的webrtc库实现语音端点检测 | 🍉 神奇的战士
+</title>
+<meta name=title content="python的webrtc库实现语音端点检测 | 🍉 神奇的战士">
+<link rel=stylesheet href=/css/main.min.css>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"python的webrtc库实现语音端点检测","headline":"python的webrtc库实现语音端点检测","description":"\u003cp\u003e刚刚搭了博客\u003ca href=\u0022thinkhard.tech\u0022\u003ethinkhard.tech\u003c\/a\u003e,欢迎踩踩~\u003c\/p\u003e\n\u003ch2 id=\u0022引言\u0022\u003e引言\u003c\/h2\u003e\n\u003cp\u003e语音端点检测最早应用于电话传输和检测系统当中,用于通信信道的时间分配,提高传输线路的利用效率.端点检测属于语音处理系统的前端操作,在语音检测领域意义重大.\u003cbr\u003e\n但是目前的语音端点检测,尤其是检测 \u003cem\u003e人声\u003c\/em\u003e 开始和结束的端点始终是属于技术难点,各家公司始终处于 \u003cstrong\u003e能判断\u003c\/strong\u003e,但是不敢保证 \u003cstrong\u003e判别准确性\u003c\/strong\u003e 的阶段.\u003cbr\u003e\n\u003cimg src=\u0022https:\/\/ooo.0o0.ooo\/2017\/05\/25\/5926ed7fcc2b3.png\u0022 alt=\u0022Screenshot from 2017-05-25 22-42-50.png\u0022\u003e \u003cbr\u003e\n现在基于云端语义库的聊天机器人层出不穷,其中最著名的当属amazon的 \u003cstrong\u003eAlexa\/Echo\u003c\/strong\u003e 智能音箱.\u003cbr\u003e\n\u003cimg src=\u0022https:\/\/ooo.0o0.ooo\/2017\/05\/25\/5926ee0cbc85b.jpg\u0022 alt=\u0022timg.jpg\u0022\u003e\u003c\/p\u003e\n\u003cp\u003e国内如雨后春笋般出现了各种搭载语音聊天的智能音箱(如前几天在知乎上广告的若琪机器人)和各类智能机器人产品.国内语音服务提供商主要面对中文语音服务,由于语音不像图像有分辨率等等较为客观的指标,很多时候凭主观判断,所以较难判断各家语音识别和合成技术的好坏.但是我个人认为,国内的中文语音服务和国外的英文语音服务,在某些方面已经有超越的趋势. \u003cbr\u003e\n\u003cimg src=\u0022https:\/\/ooo.0o0.ooo\/2017\/05\/25\/5926f2220cae2.jpg\u0022 alt=\u0022timg (1).jpg\u0022\u003e\u003c\/p\u003e\n\u003cp\u003e通常搭建机器人聊天系统主要包括以下三个方面:\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e语音转文字(ASR\/STT)\u003c\/li\u003e\n\u003cli\u003e语义内容(NLU\/NLP)\u003c\/li\u003e\n\u003cli\u003e文字转语音(TTS)\u003c\/li\u003e\n\u003c\/ul\u003e\n\u003ch2 id=\u0022语音转文字asrstt\u0022\u003e语音转文字(ASR\/STT)\u003c\/h2\u003e\n\u003cp\u003e在将语音传给云端API之前,是本地前端的语音采集,这部分主要包括如下几个方面:\u003c\/p\u003e\n\u003cul\u003e\n\u003cli\u003e麦克风降噪\u003c\/li\u003e\n\u003cli\u003e声源定位\u003c\/li\u003e\n\u003cli\u003e回声消除\u003c\/li\u003e\n\u003cli\u003e唤醒词\u003c\/li\u003e\n\u003cli\u003e语音端点检测\u003c\/li\u003e\n\u003cli\u003e音频格式压缩\u003c\/li\u003e\n\u003c\/ul\u003e","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2017","datePublished":"2017-05-25 21:47:56 \u002b0000 UTC","dateModified":"2017-05-25 21:47:56 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/python-vad\/","wordCount":"1385","keywords":["Code","🍉 神奇的战士"]}</script>
+</head>
+<body>
+<div class=wrapper>
+<nav class=navbar>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class="navbar-header header-back2home-logo">
+<span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io>
+<span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span>
+</a>
+</div>
+<div class=navbar-right>
+<span class=menu>
+<a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a>
+<span class=divide></span>
+<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a>
+</span>
+</div>
+</div>
+</nav>
+<nav class=navbar-mobile id=nav-mobile style=display:none>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class=navbar>
+<div class="navbar-header header-logo">
+<a href=https://wangshub.github.io>🍉 神奇的战士</a>
+</div>
+<div class=navbar-right>
+<div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div>
+<div class=menu-toggle>
+<span></span><span></span><span></span>
+</div>
+</div>
+</div>
+<div class=menu id=mobile-menu>
+<nav class=mb-md>
+<a class=menu-item href=/posts/ title>
+<h3>Blog</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/categories/ title>
+<h3>Categories</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/tags/ title>
+<h3>Tags</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/about/ title>
+<h3>About</h3>
+<div class=menu-active></div>
+</a>
+</nav>
+</div>
+</div>
+</nav>
+<main class=main>
+<div class=container>
+<article class=post-warp itemscope itemtype=http://schema.org/Article>
+<header class=post-header>
+<h1 class=post-title itemprop="name headline">python的webrtc库实现语音端点检测</h1>
+<div class=post-meta>
+Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>
+on <time datetime=2017-05-25 itemprop=datePublished>May 25, 2017</time>
+</span>
+in
+<i class="iconfont icon-folder"></i>
+<span class=post-category>
+<a href=https://wangshub.github.io/categories/python/> Python, </a>
+<a href=https://wangshub.github.io/categories/code/> Code, </a>
+</span>
+<span class=post-word-count>1385 words</span>
+</div>
+</header>
+<div class=post-content>
+<p>刚刚搭了博客<a href=thinkhard.tech>thinkhard.tech</a>,欢迎踩踩~</p>
+<h2 id=引言>引言</h2>
+<p>语音端点检测最早应用于电话传输和检测系统当中,用于通信信道的时间分配,提高传输线路的利用效率.端点检测属于语音处理系统的前端操作,在语音检测领域意义重大.<br>
+但是目前的语音端点检测,尤其是检测 <em>人声</em> 开始和结束的端点始终是属于技术难点,各家公司始终处于 <strong>能判断</strong>,但是不敢保证 <strong>判别准确性</strong> 的阶段.<br>
+<img src=https://ooo.0o0.ooo/2017/05/25/5926ed7fcc2b3.png alt="Screenshot from 2017-05-25 22-42-50.png" loading=lazy> <br>
+现在基于云端语义库的聊天机器人层出不穷,其中最著名的当属amazon的 <strong>Alexa/Echo</strong> 智能音箱.<br>
+<img src=https://ooo.0o0.ooo/2017/05/25/5926ee0cbc85b.jpg alt=timg.jpg loading=lazy></p>
+<p>国内如雨后春笋般出现了各种搭载语音聊天的智能音箱(如前几天在知乎上广告的若琪机器人)和各类智能机器人产品.国内语音服务提供商主要面对中文语音服务,由于语音不像图像有分辨率等等较为客观的指标,很多时候凭主观判断,所以较难判断各家语音识别和合成技术的好坏.但是我个人认为,国内的中文语音服务和国外的英文语音服务,在某些方面已经有超越的趋势. <br>
+<img src=https://ooo.0o0.ooo/2017/05/25/5926f2220cae2.jpg alt="timg (1).jpg" loading=lazy></p>
+<p>通常搭建机器人聊天系统主要包括以下三个方面:</p>
+<ul>
+<li>语音转文字(ASR/STT)</li>
+<li>语义内容(NLU/NLP)</li>
+<li>文字转语音(TTS)</li>
+</ul>
+<h2 id=语音转文字asrstt>语音转文字(ASR/STT)</h2>
+<p>在将语音传给云端API之前,是本地前端的语音采集,这部分主要包括如下几个方面:</p>
+<ul>
+<li>麦克风降噪</li>
+<li>声源定位</li>
+<li>回声消除</li>
+<li>唤醒词</li>
+<li>语音端点检测</li>
+<li>音频格式压缩</li>
+</ul>
+<h2 id=python-端点检测>python 端点检测</h2>
+<p>由于实际应用中,单纯依靠能量检测特征检测等方法很难判断人声说话的起始点,所以市面上大多数的语音产品都是使用唤醒词判断语音起始.另外加上声音回路,还可以做语音打断.这样的交互方式可能有些傻,每次必须喊一下 <em>唤醒词</em> 才能继续聊天.这种方式聊多了,个人感觉会嘴巴疼:-O .现在github上有snowboy唤醒词的开源库,大家可以登录snowboy官网训练自己的唤醒词模型.</p>
+<ul>
+<li>Kitt-AI : <a href=https://github.com/Kitt-AI/snowboy>Snowboy</a></li>
+<li>Sensory : <a href=http://www.sensory.com/>Sensory</a></li>
+</ul>
+<p>考虑到用唤醒词嘴巴会累,所以大致调研了一下,python拥有丰富的库,直接import就能食用.这种方式容易受强噪声干扰,适合一个人在家玩玩.</p>
+<ul>
+<li>pyaudio: <code>pip install pyaudio</code> 可以从设备节点读取原始音频流数据,音频编码是PCM格式;</li>
+<li>webrtcvad: <code>pip install webrtcvad</code> 检测判断一组语音数据是否为空语音;
+当检测到持续时间长度 <em>T1</em> vad检测都有语音活动,可以判定为语音起始;
+当检测到持续时间长度 <em>T2</em> vad检测都没有有语音活动,可以判定为语音结束;</li>
+</ul>
+<p>完整程序代码可以从我的<a href=https://github.com/wangshub/python-vad>github</a>下载 <br>
+程序很简单,相信看一会儿就明白了</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#e6db74>&#39;&#39;&#39;
+</span><span style=color:#e6db74>Requirements:
+</span><span style=color:#e6db74>+ pyaudio - `pip install pyaudio`
+</span><span style=color:#e6db74>+ py-webrtcvad - `pip install webrtcvad`
+</span><span style=color:#e6db74>&#39;&#39;&#39;</span>
+<span style=color:#f92672>import</span> webrtcvad
+<span style=color:#f92672>import</span> collections
+<span style=color:#f92672>import</span> sys
+<span style=color:#f92672>import</span> signal
+<span style=color:#f92672>import</span> pyaudio
+
+<span style=color:#f92672>from</span> array <span style=color:#f92672>import</span> array
+<span style=color:#f92672>from</span> struct <span style=color:#f92672>import</span> pack
+<span style=color:#f92672>import</span> wave
+<span style=color:#f92672>import</span> time
+
+FORMAT <span style=color:#f92672>=</span> pyaudio<span style=color:#f92672>.</span>paInt16
+CHANNELS <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>
+RATE <span style=color:#f92672>=</span> <span style=color:#ae81ff>16000</span>
+CHUNK_DURATION_MS <span style=color:#f92672>=</span> <span style=color:#ae81ff>30</span>       <span style=color:#75715e># supports 10, 20 and 30 (ms)</span>
+PADDING_DURATION_MS <span style=color:#f92672>=</span> <span style=color:#ae81ff>1500</span>   <span style=color:#75715e># 1 sec jugement</span>
+CHUNK_SIZE <span style=color:#f92672>=</span> int(RATE <span style=color:#f92672>*</span> CHUNK_DURATION_MS <span style=color:#f92672>/</span> <span style=color:#ae81ff>1000</span>)  <span style=color:#75715e># chunk to read</span>
+CHUNK_BYTES <span style=color:#f92672>=</span> CHUNK_SIZE <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>  <span style=color:#75715e># 16bit = 2 bytes, PCM</span>
+NUM_PADDING_CHUNKS <span style=color:#f92672>=</span> int(PADDING_DURATION_MS <span style=color:#f92672>/</span> CHUNK_DURATION_MS)
+<span style=color:#75715e># NUM_WINDOW_CHUNKS = int(240 / CHUNK_DURATION_MS)</span>
+NUM_WINDOW_CHUNKS <span style=color:#f92672>=</span> int(<span style=color:#ae81ff>400</span> <span style=color:#f92672>/</span> CHUNK_DURATION_MS)  <span style=color:#75715e># 400 ms/ 30ms  ge</span>
+NUM_WINDOW_CHUNKS_END <span style=color:#f92672>=</span> NUM_WINDOW_CHUNKS <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>
+
+START_OFFSET <span style=color:#f92672>=</span> int(NUM_WINDOW_CHUNKS <span style=color:#f92672>*</span> CHUNK_DURATION_MS <span style=color:#f92672>*</span> <span style=color:#ae81ff>0.5</span> <span style=color:#f92672>*</span> RATE)
+
+vad <span style=color:#f92672>=</span> webrtcvad<span style=color:#f92672>.</span>Vad(<span style=color:#ae81ff>1</span>)
+
+pa <span style=color:#f92672>=</span> pyaudio<span style=color:#f92672>.</span>PyAudio()
+stream <span style=color:#f92672>=</span> pa<span style=color:#f92672>.</span>open(format<span style=color:#f92672>=</span>FORMAT,
+                 channels<span style=color:#f92672>=</span>CHANNELS,
+                 rate<span style=color:#f92672>=</span>RATE,
+                 input<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>,
+                 start<span style=color:#f92672>=</span><span style=color:#66d9ef>False</span>,
+                 <span style=color:#75715e># input_device_index=2,</span>
+                 frames_per_buffer<span style=color:#f92672>=</span>CHUNK_SIZE)
+
+
+got_a_sentence <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
+leave <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
+
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>handle_int</span>(sig, chunk):
+    <span style=color:#66d9ef>global</span> leave, got_a_sentence
+    leave <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+    got_a_sentence <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>record_to_file</span>(path, data, sample_width):
+    <span style=color:#e6db74>&#34;Records from the microphone and outputs the resulting data to &#39;path&#39;&#34;</span>
+    <span style=color:#75715e># sample_width, data = record()</span>
+    data <span style=color:#f92672>=</span> pack(<span style=color:#e6db74>&#39;&lt;&#39;</span> <span style=color:#f92672>+</span> (<span style=color:#e6db74>&#39;h&#39;</span> <span style=color:#f92672>*</span> len(data)), <span style=color:#f92672>*</span>data)
+    wf <span style=color:#f92672>=</span> wave<span style=color:#f92672>.</span>open(path, <span style=color:#e6db74>&#39;wb&#39;</span>)
+    wf<span style=color:#f92672>.</span>setnchannels(<span style=color:#ae81ff>1</span>)
+    wf<span style=color:#f92672>.</span>setsampwidth(sample_width)
+    wf<span style=color:#f92672>.</span>setframerate(RATE)
+    wf<span style=color:#f92672>.</span>writeframes(data)
+    wf<span style=color:#f92672>.</span>close()
+
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>normalize</span>(snd_data):
+    <span style=color:#e6db74>&#34;Average the volume out&#34;</span>
+    MAXIMUM <span style=color:#f92672>=</span> <span style=color:#ae81ff>32767</span>  <span style=color:#75715e># 16384</span>
+    times <span style=color:#f92672>=</span> float(MAXIMUM) <span style=color:#f92672>/</span> max(abs(i) <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> snd_data)
+    r <span style=color:#f92672>=</span> array(<span style=color:#e6db74>&#39;h&#39;</span>)
+    <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> snd_data:
+        r<span style=color:#f92672>.</span>append(int(i <span style=color:#f92672>*</span> times))
+    <span style=color:#66d9ef>return</span> r
+
+signal<span style=color:#f92672>.</span>signal(signal<span style=color:#f92672>.</span>SIGINT, handle_int)
+
+<span style=color:#66d9ef>while</span> <span style=color:#f92672>not</span> leave:
+    ring_buffer <span style=color:#f92672>=</span> collections<span style=color:#f92672>.</span>deque(maxlen<span style=color:#f92672>=</span>NUM_PADDING_CHUNKS)
+    triggered <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
+    voiced_frames <span style=color:#f92672>=</span> []
+    ring_buffer_flags <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> NUM_WINDOW_CHUNKS
+    ring_buffer_index <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+
+    ring_buffer_flags_end <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> NUM_WINDOW_CHUNKS_END
+    ring_buffer_index_end <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+    buffer_in <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;&#39;</span>
+    <span style=color:#75715e># WangS</span>
+    raw_data <span style=color:#f92672>=</span> array(<span style=color:#e6db74>&#39;h&#39;</span>)
+    index <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+    start_point <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>
+    StartTime <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time()
+    print(<span style=color:#e6db74>&#34;* recording: &#34;</span>)
+    stream<span style=color:#f92672>.</span>start_stream()
+
+    <span style=color:#66d9ef>while</span> <span style=color:#f92672>not</span> got_a_sentence <span style=color:#f92672>and</span> <span style=color:#f92672>not</span> leave:
+        chunk <span style=color:#f92672>=</span> stream<span style=color:#f92672>.</span>read(CHUNK_SIZE)
+        <span style=color:#75715e># add WangS</span>
+        raw_data<span style=color:#f92672>.</span>extend(array(<span style=color:#e6db74>&#39;h&#39;</span>, chunk))
+        index <span style=color:#f92672>+=</span> CHUNK_SIZE
+        TimeUse <span style=color:#f92672>=</span> time<span style=color:#f92672>.</span>time() <span style=color:#f92672>-</span> StartTime
+
+        active <span style=color:#f92672>=</span> vad<span style=color:#f92672>.</span>is_speech(chunk, RATE)
+
+        sys<span style=color:#f92672>.</span>stdout<span style=color:#f92672>.</span>write(<span style=color:#e6db74>&#39;1&#39;</span> <span style=color:#66d9ef>if</span> active <span style=color:#66d9ef>else</span> <span style=color:#e6db74>&#39;_&#39;</span>)
+        ring_buffer_flags[ring_buffer_index] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>if</span> active <span style=color:#66d9ef>else</span> <span style=color:#ae81ff>0</span>
+        ring_buffer_index <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+        ring_buffer_index <span style=color:#f92672>%=</span> NUM_WINDOW_CHUNKS
+
+        ring_buffer_flags_end[ring_buffer_index_end] <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span> <span style=color:#66d9ef>if</span> active <span style=color:#66d9ef>else</span> <span style=color:#ae81ff>0</span>
+        ring_buffer_index_end <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>
+        ring_buffer_index_end <span style=color:#f92672>%=</span> NUM_WINDOW_CHUNKS_END
+
+        <span style=color:#75715e># start point detection</span>
+        <span style=color:#66d9ef>if</span> <span style=color:#f92672>not</span> triggered:
+            ring_buffer<span style=color:#f92672>.</span>append(chunk)
+            num_voiced <span style=color:#f92672>=</span> sum(ring_buffer_flags)
+            <span style=color:#66d9ef>if</span> num_voiced <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.8</span> <span style=color:#f92672>*</span> NUM_WINDOW_CHUNKS:
+                sys<span style=color:#f92672>.</span>stdout<span style=color:#f92672>.</span>write(<span style=color:#e6db74>&#39; Open &#39;</span>)
+                triggered <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+                start_point <span style=color:#f92672>=</span> index <span style=color:#f92672>-</span> CHUNK_SIZE <span style=color:#f92672>*</span> <span style=color:#ae81ff>20</span>  <span style=color:#75715e># start point</span>
+                <span style=color:#75715e># voiced_frames.extend(ring_buffer)</span>
+                ring_buffer<span style=color:#f92672>.</span>clear()
+        <span style=color:#75715e># end point detection</span>
+        <span style=color:#66d9ef>else</span>:
+            <span style=color:#75715e># voiced_frames.append(chunk)</span>
+            ring_buffer<span style=color:#f92672>.</span>append(chunk)
+            num_unvoiced <span style=color:#f92672>=</span> NUM_WINDOW_CHUNKS_END <span style=color:#f92672>-</span> sum(ring_buffer_flags_end)
+            <span style=color:#66d9ef>if</span> num_unvoiced <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0.90</span> <span style=color:#f92672>*</span> NUM_WINDOW_CHUNKS_END <span style=color:#f92672>or</span> TimeUse <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>10</span>:
+                sys<span style=color:#f92672>.</span>stdout<span style=color:#f92672>.</span>write(<span style=color:#e6db74>&#39; Close &#39;</span>)
+                triggered <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
+                got_a_sentence <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+
+        sys<span style=color:#f92672>.</span>stdout<span style=color:#f92672>.</span>flush()
+
+    sys<span style=color:#f92672>.</span>stdout<span style=color:#f92672>.</span>write(<span style=color:#e6db74>&#39;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#39;</span>)
+    <span style=color:#75715e># data = b&#39;&#39;.join(voiced_frames)</span>
+
+    stream<span style=color:#f92672>.</span>stop_stream()
+    print(<span style=color:#e6db74>&#34;* done recording&#34;</span>)
+    got_a_sentence <span style=color:#f92672>=</span> <span style=color:#66d9ef>False</span>
+
+    <span style=color:#75715e># write to file</span>
+    raw_data<span style=color:#f92672>.</span>reverse()
+    <span style=color:#66d9ef>for</span> index <span style=color:#f92672>in</span> range(start_point):
+        raw_data<span style=color:#f92672>.</span>pop()
+    raw_data<span style=color:#f92672>.</span>reverse()
+    raw_data <span style=color:#f92672>=</span> normalize(raw_data)
+    record_to_file(<span style=color:#e6db74>&#34;recording.wav&#34;</span>, raw_data, <span style=color:#ae81ff>2</span>)
+    leave <span style=color:#f92672>=</span> <span style=color:#66d9ef>True</span>
+
+stream<span style=color:#f92672>.</span>close()
+</code></pre></div><p>程序运行方式<code>sudo python vad.py</code> <br>
+qrcode_for_gh_3586401957c4_258.jpg Remove</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span>Author:</span>
+<span>神奇的战士 </span>
+</p>
+<p class=copyright-item>
+<span>Link:</span>
+<a href=https://wangshub.github.io/posts/python-vad/>https://wangshub.github.io/posts/python-vad/</span>
+</p>
+</div>
+<div class=post-tags>
+<section>
+<i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/code/>
+#Code</a></span>
+</section>
+<section>
+<a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span>
+</section>
+</div>
+<div class=post-nav>
+<a href=https://wangshub.github.io/posts/atom-editor/ class=prev rel=prev title="Atom editor"><i class="iconfont icon-left"></i>&nbsp;Atom editor</a>
+<a href=https://wangshub.github.io/posts/python-data-structure-bst/ class=next rel=next title="python 数据结构之二叉搜索树">python 数据结构之二叉搜索树&nbsp;<i class="iconfont icon-right"></i></a>
+</div>
+<div class=post-comment>
+</div>
+</article>
+</div>
+</main>
+<footer class=footer>
+<div class=copyright>
+&copy;
+<span itemprop=copyrightYear>2016 - 2021</span>
+<span class=with-love>
+<i class="iconfont icon-love"></i>
+</span>
+<span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> | </span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span>
+</div>
+</footer>
+<script defer src=/js/vendor_main.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script>
+<script>pangu.spacingPage()</script>
+</div>
+</body>
+</html>

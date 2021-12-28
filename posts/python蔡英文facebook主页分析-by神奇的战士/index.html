@@ -1,0 +1,287 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta name=author content="神奇的战士">
+<link rel=prev href=https://wangshub.github.io/posts/linux%E9%A9%B1%E5%8A%A8%E5%99%A8%E5%92%8C%E5%88%86%E5%8C%BA%E7%9A%84%E5%A4%87%E4%BB%BD%E4%BD%BF%E7%94%A8dd%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B/>
+<link rel=next href=https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/>
+<link rel=canonical href=https://wangshub.github.io/posts/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+<title>
+Python蔡英文facebook主页分析_by神奇的战士 | 🍉 神奇的战士
+</title>
+<meta name=title content="Python蔡英文facebook主页分析_by神奇的战士 | 🍉 神奇的战士">
+<link rel=stylesheet href=/css/main.min.css>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"Python蔡英文facebook主页分析_by神奇的战士","headline":"Python蔡英文facebook主页分析_by神奇的战士","description":"Python蔡英文facebook主页分析(by神奇的战士) 博客地址：https:\/\/wangshub.github.io\/ 公众号：神奇的战","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2017","datePublished":"2017-12-25 15:14:39 \u002b0000 UTC","dateModified":"2017-12-25 15:14:39 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB\/","wordCount":"2297","keywords":["python","🍉 神奇的战士"]}</script>
+</head>
+<body>
+<div class=wrapper>
+<nav class=navbar>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class="navbar-header header-back2home-logo">
+<span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io>
+<span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span>
+</a>
+</div>
+<div class=navbar-right>
+<span class=menu>
+<a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a>
+<span class=divide></span>
+<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a>
+</span>
+</div>
+</div>
+</nav>
+<nav class=navbar-mobile id=nav-mobile style=display:none>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class=navbar>
+<div class="navbar-header header-logo">
+<a href=https://wangshub.github.io>🍉 神奇的战士</a>
+</div>
+<div class=navbar-right>
+<div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div>
+<div class=menu-toggle>
+<span></span><span></span><span></span>
+</div>
+</div>
+</div>
+<div class=menu id=mobile-menu>
+<nav class=mb-md>
+<a class=menu-item href=/posts/ title>
+<h3>Blog</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/categories/ title>
+<h3>Categories</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/tags/ title>
+<h3>Tags</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/about/ title>
+<h3>About</h3>
+<div class=menu-active></div>
+</a>
+</nav>
+</div>
+</div>
+</nav>
+<main class=main>
+<div class=container>
+<article class=post-warp itemscope itemtype=http://schema.org/Article>
+<header class=post-header>
+<h1 class=post-title itemprop="name headline">Python蔡英文facebook主页分析_by神奇的战士</h1>
+<div class=post-meta>
+Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>
+on <time datetime=2017-12-25 itemprop=datePublished>December 25, 2017</time>
+</span>
+in
+<span class=post-word-count>2297 words</span>
+</div>
+</header>
+<div class=post-content>
+<h1 id=python蔡英文facebook主页分析by神奇的战士><strong>Python</strong>蔡英文facebook主页分析(by神奇的战士)</h1>
+<ul>
+<li>博客地址：<a href=https://wangshub.github.io/>https://wangshub.github.io/</a></li>
+<li>公众号：神奇的战士</li>
+<li>拒绝转载</li>
+</ul>
+<p>用<a href="https://developers.facebook.com/tools/explorer/?method=GET&path=tsaiingwen%2Fposts&version=v2.11">Facebook Graph API</a>和情绪分析API对蔡英文Facebook主页进行统计分析。</p>
+<h2 id=1-说明>1. 说明</h2>
+<p><a href="https://baike.baidu.com/item/%E8%94%A1%E8%8B%B1%E6%96%87/353?fr=aladdin">蔡英文</a>2016年5月20日，蔡英文正式就任台湾地区领导人，成为台湾地区首位女性领导人。</p>
+<p>最近台湾省地区新闻主要有：</p>
+<blockquote>
+<p>新闻来源： 人民网
+<a href=http://tw.people.com.cn/n1/2017/1222/c14657-29722289.html>坚决惩治电信诈骗犯罪 切实维护两岸同胞利益</a>
+<a href=http://tw.people.com.cn/n1/2017/1221/c14657-29720989.html>两岸学者评新党人士被调查事件：民进党当局逆流而动终将自掘坟墓</a>
+<a href=http://tw.people.com.cn/n1/2017/1126/c14657-29668078.html>台民众高呼“醒来”，蔡英文不能继续装睡</a>
+&mldr;</p>
+</blockquote>
+<p><strong>但是真实的台湾同胞们是如何看待她的执政表现呢？</strong></p>
+<h2 id=2-实现工具>2. 实现工具</h2>
+<p>如果是直接爬取脸书的主页，需要进行模拟登陆，反爬虫，代理，验证等等一系列的操作。幸好脸书开放出了图API，可以在一定的请求限制下对脸书上的数据进行访问。注意在多线程请求API的时候，不应该请求的太快，否则会被系统封禁一段时间(不要问我为什么-_-)。</p>
+<p><strong>目前为止使用了如下这些工具：</strong></p>
+<ul>
+<li>python 2.7</li>
+<li><a href="https://developers.facebook.com/tools/explorer/?method=GET&path=tsaiingwen%2Fposts&version=v2.11">Facebook Graph API</a></li>
+<li>情感分析API</li>
+<li>python 词云</li>
+<li><a href=https://github.com/fxsjy/jieba>python 中文jieba分词</a></li>
+<li>python Pandas</li>
+<li>python 多线程</li>
+</ul>
+<h2 id=3-数据处理>3. 数据处理</h2>
+<h3 id=31-posts>3.1 posts</h3>
+<p>首先测试脸书<a href="https://developers.facebook.com/tools/explorer/?method=GET&path=tsaiingwen%2Fposts&version=v2.11">Facebook Graph API</a>，对蔡小姐的post进行访问，</p>
+<p><strong>curl测试脚本</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -i -X GET <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span> <span style=color:#e6db74>&#34;https://graph.facebook.com/v2.11/tsaiingwen/posts?access_token=xxxxxxxxxxxxxxxxx&#34;</span>
+</code></pre></div><p><strong>返回示例</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#e6db74>&#34;data&#34;</span><span style=color:#960050;background-color:#1e0010>:</span> [
+    {
+      <span style=color:#f92672>&#34;created_time&#34;</span>: <span style=color:#e6db74>&#34;2017-12-24T11:50:06+0000&#34;</span>,
+      <span style=color:#f92672>&#34;message&#34;</span>: <span style=color:#e6db74>&#34;蔡想想🐱祝福大家聖誕快樂🎅
+</span><span style=color:#e6db74>        #MerryChristmas&#34;</span>,
+      <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#e6db74>&#34;46251501064_10154820163381065&#34;</span>
+    },
+    <span style=color:#960050;background-color:#1e0010>...</span>
+    <span style=color:#960050;background-color:#1e0010>...</span>
+]<span style=color:#960050;background-color:#1e0010>,</span>
+<span style=color:#e6db74>&#34;paging&#34;</span><span style=color:#960050;background-color:#1e0010>:</span> {
+    <span style=color:#f92672>&#34;cursors&#34;</span>: {
+      <span style=color:#f92672>&#34;before&#34;</span>: <span style=color:#e6db74>&#34;xxxxxx&#34;</span>,
+      <span style=color:#f92672>&#34;after&#34;</span>: <span style=color:#e6db74>&#34;xxxxx&#34;</span>
+    },
+    <span style=color:#f92672>&#34;next&#34;</span>: <span style=color:#e6db74>&#34;xxxxxxxxxxxxxxxxxxxxxx&#34;</span>
+  }
+
+</code></pre></div><p>可以观察到，脸书的每一个post都对应了一个唯一的<strong>id</strong>，由于post的数量是在太多，所以一次请求无法完整获取。根据<strong>next</strong>可以得到下一页的post，直到<strong>next</strong>为空时，表示所有的post获取完毕。</p>
+<p>根据以上原理，我获取了蔡小姐从开通脸书第一天起到今天，发的每一条post。</p>
+<p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fmsa0xjo5fj21py0ht0ul.jpg alt></p>
+<ul>
+<li>横坐标：时间</li>
+<li>纵坐标：每天发文数量</li>
+</ul>
+<p>自 <em>2008-10-22T13:55:20+0000</em>蔡小姐发了第一条post以来，一共发了<strong>4120</strong>篇状态，基本上在脸书上还是非常活跃的，在2012年最多一天发送了24条状态，成功刷屏。</p>
+<h3 id=32-comments>3.2 comments</h3>
+<p>与 <strong>3.1</strong>节类似，每一个post下都会有网友进行评论，那么如何获取所有评论?参考图谱API文档，利用测试脚本</p>
+<p><strong>curl测试脚本</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>curl -i -X GET <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span> <span style=color:#e6db74>&#34;https://graph.facebook.com/v2.11/46251501064_10154729068451065/comments?access_token=xxxxxxxxxxxx&#34;</span>
+</code></pre></div><p><strong>返回示例</strong></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  <span style=color:#f92672>&#34;data&#34;</span>: [
+    {
+      <span style=color:#f92672>&#34;created_time&#34;</span>: <span style=color:#e6db74>&#34;2017-11-13T07:15:25+0000&#34;</span>,
+      <span style=color:#f92672>&#34;message&#34;</span>: <span style=color:#e6db74>&#34;XXXXXXXX&#34;</span>,
+      <span style=color:#f92672>&#34;id&#34;</span>: <span style=color:#e6db74>&#34;10154729068451065_10154729097936065&#34;</span>
+    },
+    <span style=color:#960050;background-color:#1e0010>...</span>
+    <span style=color:#960050;background-color:#1e0010>...</span>
+  <span style=color:#e6db74>&#34;paging&#34;</span><span style=color:#960050;background-color:#1e0010>:</span> {
+  <span style=color:#f92672>&#34;cursors&#34;</span>: {
+      <span style=color:#f92672>&#34;before&#34;</span>: <span style=color:#e6db74>&#34;MTQyNQZDZD&#34;</span>,
+      <span style=color:#f92672>&#34;after&#34;</span>: <span style=color:#e6db74>&#34;MTM5MQZDZD&#34;</span>
+    },
+    <span style=color:#f92672>&#34;next&#34;</span>: <span style=color:#e6db74>&#34;https://graph.facebook.com/v2.11/46251501064_10154729068451065/comments?access_token=xxxxxxxx&amp;pretty=0&amp;limit=25&amp;after=MTM5MQZDZD&#34;</span>
+  }
+
+</code></pre></div><p>每一条评论都对应着唯一的<strong>id</strong>，<strong>next</strong>字段是下一页的评论内容。可以通过设置，选择一夜最多显示100条评论。以此逐级获取所有的评论。</p>
+<p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fmsadx87t0j20m80goacm.jpg alt></p>
+<ul>
+<li>横坐标：时间</li>
+<li>纵坐标：每条状态对应的评论数量</li>
+</ul>
+<p>一共爬取了<strong>1830322</strong>条网友评论，最多评论数是<strong>23630</strong>条。其中几次出现了较大值，原因应该是前几次大陆网友自发组织的Facebook远征军去进行<strong>友好访问</strong>了。具体内容可以接下来对这几次的峰值进行详细分析。</p>
+<blockquote>
+<p><strong>相关新闻</strong>：
+<a href=http://news.163.com/16/0122/19/BDV5H0O200014SEH.html>帝吧“远征”facebook｜一场表情包大战的爱国交流</a>
+<a href=https://www.zhihu.com/question/39663757>如何评价李毅吧 2016 年 1 月 20 日「出征」Facebook？</a></p>
+</blockquote>
+<h2 id=4-数据分析>4. 数据分析</h2>
+<h3 id=41-蔡英文主页分析>4.1. 蔡英文主页分析</h3>
+<p>一共获取了蔡小姐的<strong>4120</strong>状态，对json的message字段进行提取，将所有的状态的文字保存进行词云分析，看哪些词汇出现的频率最高。</p>
+<ol>
+<li>首先利用Pandas对状态的结构数据进行保存；</li>
+<li>读取Pandas表格，获取所有的状态文字；</li>
+<li>利用jieba中文分词库，对所有的文字进行分割；</li>
+<li>显示，保存图片；</li>
+</ol>
+<p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fmsaval30qj21041taaom.jpg alt=蔡小姐词云 loading=lazy></p>
+<h3 id=42-蔡英文评论分析>4.2. 蔡英文评论分析</h3>
+<p>从蔡小姐的post的所有评论当中，我找出了一条评论最多的状态，共有<strong>23630</strong>条评论，对应id为<code>46251501064_10154244975341065</code>，读取对应数据文件，利用词云分析可得</p>
+<p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fmt0ape4h1j20b405kt9b.jpg alt></p>
+<p>看来台湾网友也十分注意<strong>安全开车</strong>，其实这条post的评论区被台湾网友刷屏了，看来怨气挺重呢，哈哈哈哈，霸屏具体内容是</p>
+<pre tabindex=0><code> 1.政府請正視目前台灣改裝汽機車問題！
+ 排氣管及改裝品可以合法製造 合法販賣 合法進口但裝載車上就不合法 這是什麼邏輯 政府要課稅又要開罰單又是什麼想法？
+ 排氣管或車上零件是原廠被惡意檢舉驗車那是否能跟監理單位或環保署拿今日上班請假損失？
+ 2.環保局 監理站 警察執法單位 專業度嚴重不足 原廠排氣管也開單 叫民眾到監理單位驗車 當做民眾都很有時間？
+ 3.請提供可比照國外變更車體，如重機行李箱、遮陽板、避震、制動煞車系統在不影響行車安全的部份合乎法規
+ 4.如民眾遭受到檢舉達人惡意檢舉，因此需要請假驗車，若屬於惡意檢舉，政府需要支付民眾請假之當天工資
+ 蔡??...您不是希望台灣能跟世界接軌，那請您重視汽機車改裝合法性與可變更性，在不影響行車安全與噪音的&gt; 情況下，請把檢舉改裝還於司法單位執行，才不構成擾民。
+ 
+</code></pre><p>既然这条被刷屏了，那就换成最新的一篇post，看看网友又关心啥问题。。。
+截止爬取脸书时，最新一条博客是：</p>
+<pre tabindex=0><code>你有吃過越南生春捲、香蘭娘惹糕或是薑黃飯嗎？它們是來自東南亞各國的美食，現在也是台灣的美食。
+今天是國際移民日，前幾天，我邀請了幾位新移民的好朋友來到總統府，一起準備午餐。在這場午餐的約會中，他們和我分享來到台灣生活的點點滴滴，也給我很多建議。
+謝謝你們來到台灣，讓我們的社會更多元、更茁壯。祝大家國際移民日快樂！
+#留言告訴我你最喜歡的新南向美食
+#晚餐文&quot;,
+</code></pre><p>蔡小姐问网友喜欢吃啥美食，我们来看看网友是如何回复的</p>
+<p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fmt0p0kbpbj218g0m8drx.jpg alt></p>
+<p>结合最近的新党王炳忠事件，评论中出现了较多<strong>绿色恐怖、王炳忠、白色恐怖</strong>等高频词汇</p>
+<h2 id=5-todo>5. TODO</h2>
+<p>可以分析的数据还有很多，就先分析这么多了，接下来，可以对评论进行情感分析，看下网友对蔡小姐的评论是积极还是消极的多一些。不过经过这一年的时间来看，应该是消极多一点。哈哈哈</p>
+<p>总结下来，我认为：</p>
+<ol>
+<li>台湾社会的认知是处于一个分裂的状态；</li>
+<li>不少年轻人还是无脑反对大陆；</li>
+<li>真正理性思考人太少；</li>
+<li>不少人处于岛内的小确幸当中；</li>
+<li>结合最近的新闻来看，猜测台湾的士兵在开战时会不会遇到<strong>为了什么而战斗</strong>的信仰问题。哈哈，一百分将军太逗啦</li>
+</ol>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span>Author:</span>
+<span>神奇的战士 </span>
+</p>
+<p class=copyright-item>
+<span>Link:</span>
+<a href=https://wangshub.github.io/posts/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/>https://wangshub.github.io/posts/python%E8%94%A1%E8%8B%B1%E6%96%87facebook%E4%B8%BB%E9%A1%B5%E5%88%86%E6%9E%90-by%E7%A5%9E%E5%A5%87%E7%9A%84%E6%88%98%E5%A3%AB/</span>
+</p>
+</div>
+<div class=post-tags>
+<section>
+<i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/python/>
+#python</a></span>
+</section>
+<section>
+<a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span>
+</section>
+</div>
+<div class=post-nav>
+<a href=https://wangshub.github.io/posts/linux%E9%A9%B1%E5%8A%A8%E5%99%A8%E5%92%8C%E5%88%86%E5%8C%BA%E7%9A%84%E5%A4%87%E4%BB%BD%E4%BD%BF%E7%94%A8dd%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B/ class=prev rel=prev title=linux驱动器和分区的备份，使用dd命令示例><i class="iconfont icon-left"></i>&nbsp;linux驱动器和分区的备份，使用dd命令示例</a>
+<a href=https://wangshub.github.io/posts/%E6%95%99%E4%BD%A0%E7%94%A8python%E6%9D%A5%E7%8E%A9%E5%BE%AE%E4%BF%A1%E8%B7%B3%E4%B8%80%E8%B7%B3/ class=next rel=next title=教你用Python来玩微信跳一跳>教你用Python来玩微信跳一跳&nbsp;<i class="iconfont icon-right"></i></a>
+</div>
+<div class=post-comment>
+</div>
+</article>
+</div>
+</main>
+<footer class=footer>
+<div class=copyright>
+&copy;
+<span itemprop=copyrightYear>2016 - 2021</span>
+<span class=with-love>
+<i class="iconfont icon-love"></i>
+</span>
+<span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> | </span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span>
+</div>
+</footer>
+<script defer src=/js/vendor_main.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script>
+<script>pangu.spacingPage()</script>
+</div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta name=author content="神奇的战士">
+<link rel=prev href=https://wangshub.github.io/posts/%E6%88%91%E7%9A%84%E5%9B%A2%E9%95%BF%E6%88%91%E7%9A%84%E5%9B%A2%E4%B9%A6%E6%91%98/>
+<link rel=next href=https://wangshub.github.io/posts/pybulet-gym%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8Bhumanoidpybulletenv-v0/>
+<link rel=canonical href=https://wangshub.github.io/posts/openai-gym-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+<title>
+OpenAI Gym 源码阅读:创建自定义强化学习环境 | 🍉 神奇的战士
+</title>
+<meta name=title content="OpenAI Gym 源码阅读:创建自定义强化学习环境 | 🍉 神奇的战士">
+<link rel=stylesheet href=/css/main.min.css>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"OpenAI Gym 源码阅读:创建自定义强化学习环境","headline":"OpenAI Gym 源码阅读:创建自定义强化学习环境","description":"OpenAI Gym 源码阅读：创建自定义强化学习环境 Gym 介绍 Gym 是一套开发强化学习算法的工具箱，包含了一系列内置的环境，结合强化学习算法就可以对内置的环境进行求","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2019","datePublished":"2019-08-21 16:24:35 \u002b0000 UTC","dateModified":"2019-08-21 16:24:35 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/openai-gym-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83\/","wordCount":"679","keywords":["Reinforcement Learning","Python","🍉 神奇的战士"]}</script>
+</head>
+<body>
+<div class=wrapper>
+<nav class=navbar>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class="navbar-header header-back2home-logo">
+<span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io>
+<span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span>
+</a>
+</div>
+<div class=navbar-right>
+<span class=menu>
+<a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a>
+<span class=divide></span>
+<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a>
+</span>
+</div>
+</div>
+</nav>
+<nav class=navbar-mobile id=nav-mobile style=display:none>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class=navbar>
+<div class="navbar-header header-logo">
+<a href=https://wangshub.github.io>🍉 神奇的战士</a>
+</div>
+<div class=navbar-right>
+<div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div>
+<div class=menu-toggle>
+<span></span><span></span><span></span>
+</div>
+</div>
+</div>
+<div class=menu id=mobile-menu>
+<nav class=mb-md>
+<a class=menu-item href=/posts/ title>
+<h3>Blog</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/categories/ title>
+<h3>Categories</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/tags/ title>
+<h3>Tags</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/about/ title>
+<h3>About</h3>
+<div class=menu-active></div>
+</a>
+</nav>
+</div>
+</div>
+</nav>
+<main class=main>
+<div class=container>
+<article class=post-warp itemscope itemtype=http://schema.org/Article>
+<header class=post-header>
+<h1 class=post-title itemprop="name headline">OpenAI Gym 源码阅读:创建自定义强化学习环境</h1>
+<div class=post-meta>
+Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>
+on <time datetime=2019-08-21 itemprop=datePublished>August 21, 2019</time>
+</span>
+in
+<span class=post-word-count>679 words</span>
+</div>
+</header>
+<div class=post-content>
+<h1 id=openai-gym-源码阅读创建自定义强化学习环境>OpenAI Gym 源码阅读：创建自定义强化学习环境</h1>
+<h2 id=gym-介绍>Gym 介绍</h2>
+<p><a href=https://gym.openai.com/>Gym</a> 是一套开发强化学习算法的工具箱，包含了一系列<a href=https://gym.openai.com/docs/#environments>内置的环境</a>，结合强化学习算法就可以对内置的环境进行求解。</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190821145807.png width=60%></div>
+<p>例如，调用 <code>CartPole-v0</code> 环境的示例如下</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>import</span> gym
+env <span style=color:#f92672>=</span> gym<span style=color:#f92672>.</span>make(<span style=color:#e6db74>&#39;CartPole-v0&#39;</span>)
+<span style=color:#66d9ef>for</span> i_episode <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>20</span>):
+    observation <span style=color:#f92672>=</span> env<span style=color:#f92672>.</span>reset()
+    <span style=color:#66d9ef>for</span> t <span style=color:#f92672>in</span> range(<span style=color:#ae81ff>100</span>):
+        env<span style=color:#f92672>.</span>render()
+        print(observation)
+        action <span style=color:#f92672>=</span> env<span style=color:#f92672>.</span>action_space<span style=color:#f92672>.</span>sample()
+        observation, reward, done, info <span style=color:#f92672>=</span> env<span style=color:#f92672>.</span>step(action)
+        <span style=color:#66d9ef>if</span> done:
+            print(<span style=color:#e6db74>&#34;Episode finished after </span><span style=color:#e6db74>{}</span><span style=color:#e6db74> timesteps&#34;</span><span style=color:#f92672>.</span>format(t<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span>))
+            <span style=color:#66d9ef>break</span>
+env<span style=color:#f92672>.</span>close()
+</code></pre></div><p>Gym 仿真主要包括</p>
+<ul>
+<li>导入环境 <code>gym.make('CartPole-v0')</code></li>
+<li>初始化环境 <code>env.reset()</code>，将强化学习环境设置为初始状态</li>
+<li>一步仿真 <code>env.step(action)</code>，输入动作，获得环境反馈</li>
+<li>渲染可视化当前状态 <code>env.render()</code></li>
+</ul>
+<p>虽然 Gym 内置了大量强化学习环境，如果想训练自定义的强化学习问题，就必须要创建自定义的强化学习环境。</p>
+<h2 id=源码解析>源码解析</h2>
+<p>根据上一节的 Gym 主要函数调用接口，<a href=https://github.com/openai/gym/blob/master/gym/envs/classic_control/cartpole.py>CartPoleEnv</a> 继承了基类 <a href=https://github.com/openai/gym/blob/master/gym/core.py>gym.Env</a>，里面定义了主要的 API 方法</p>
+<ul>
+<li>step</li>
+<li>reset</li>
+<li>render</li>
+<li>close</li>
+<li>seed</li>
+</ul>
+<p>创建了自定义的环境，需要由 <a href=https://github.com/openai/gym/blob/master/gym/envs/__init__.py>gym/envs/<strong>init</strong>.py</a> 进行注册，注册 <code>id</code> 名，指定路径 <code>gym.envs.classic_control:CartPoleEnv</code> 和其他参数。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>from</span> gym.envs.registration <span style=color:#f92672>import</span> registry, register, make, spec
+
+register(
+    id<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;CartPole-v0&#39;</span>,
+    entry_point<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;gym.envs.classic_control:CartPoleEnv&#39;</span>,
+    max_episode_steps<span style=color:#f92672>=</span><span style=color:#ae81ff>200</span>,
+    reward_threshold<span style=color:#f92672>=</span><span style=color:#ae81ff>195.0</span>,
+)
+</code></pre></div><p>在 <a href=https://github.com/openai/gym/blob/master/gym/envs/registration.py#L150>gym/envs/registration.py</a> 实例化了 1 个全局的 <code>registry = EnvRegistry()</code></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e># Have a global registry</span>
+registry <span style=color:#f92672>=</span> EnvRegistry()
+</code></pre></div><p>在 <a href=https://github.com/openai/gym/blob/master/gym/envs/registration.py>gym/envs/registration.py</a> 中根据 <code>entry_point</code> 实例化环境 <code>env</code></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python>    <span style=color:#66d9ef>def</span> <span style=color:#a6e22e>make</span>(self, <span style=color:#f92672>**</span>kwargs):
+        <span style=color:#e6db74>&#34;&#34;&#34;Instantiates an instance of the environment with appropriate kwargs&#34;&#34;&#34;</span>
+        <span style=color:#66d9ef>if</span> self<span style=color:#f92672>.</span>entry_point <span style=color:#f92672>is</span> <span style=color:#66d9ef>None</span>:
+            <span style=color:#66d9ef>raise</span> error<span style=color:#f92672>.</span>Error(<span style=color:#e6db74>&#39;Attempting to make deprecated env </span><span style=color:#e6db74>{}</span><span style=color:#e6db74>. (HINT: is there a newer registered version of this env?)&#39;</span><span style=color:#f92672>.</span>format(self<span style=color:#f92672>.</span>id))
+        _kwargs <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>_kwargs<span style=color:#f92672>.</span>copy()
+        _kwargs<span style=color:#f92672>.</span>update(kwargs)
+        <span style=color:#66d9ef>if</span> callable(self<span style=color:#f92672>.</span>entry_point):
+            env <span style=color:#f92672>=</span> self<span style=color:#f92672>.</span>entry_point(<span style=color:#f92672>**</span>_kwargs)
+        <span style=color:#66d9ef>else</span>:
+            cls <span style=color:#f92672>=</span> load(self<span style=color:#f92672>.</span>entry_point)
+            env <span style=color:#f92672>=</span> cls(<span style=color:#f92672>**</span>_kwargs)
+
+        <span style=color:#75715e># Make the enviroment aware of which spec it came from.</span>
+        env<span style=color:#f92672>.</span>unwrapped<span style=color:#f92672>.</span>spec <span style=color:#f92672>=</span> self
+
+        <span style=color:#66d9ef>return</span> env
+</code></pre></div><p>所以，总结一下，如果希望导入自定义环境的话，只需要在自定义的 <code>package</code> 中注册 id，并指定自定义 Env 类的路径</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>from</span> gym.envs.registration <span style=color:#f92672>import</span> register
+
+register(
+    id<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;custom-env-name&#39;</span>,
+    entry_point<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;path.to:CusEnvClassName&#39;</span>,
+)
+</code></pre></div><p>然后调用 <code>gym.make('custom-env-name')</code> 就能导入自定义的环境</p>
+<h2 id=创建自定义环境>创建自定义环境</h2>
+<p>根据上面注册环境的流程分析，可知，要引入自定义环境，不必改动 Gym 的源码，只需创建一个 Python 模块 即可。目录结构解释如下</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190821161511.png width=80%></div>
+<p>为了方便调试调用，以 <code>pip install -e .</code> 安装自定义模块。测试代码中，引入模块时，即可将自定义环境注册到 Gym 环境中。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#f92672>import</span> gym
+<span style=color:#f92672>import</span> gym_foo
+env <span style=color:#f92672>=</span> gym<span style=color:#f92672>.</span>make(<span style=color:#e6db74>&#39;foo-v0&#39;</span>)
+</code></pre></div><h2 id=自定义环境模块参考代码>自定义环境模块参考代码</h2>
+<ul>
+<li><a href=https://github.com/wangshub/Tic-Tac-Toe-Gym_Environment>apoddar573/Tic-Tac-Toe-Gym_Environment</a></li>
+<li><a href=https://github.com/benelot/pybullet-gym>PyBullet Gymperium</a></li>
+</ul>
+<h2 id=参考>参考</h2>
+<ul>
+<li><a href=https://github.com/apoddar573/Tic-Tac-Toe-Gym_Environment>Tic-Tac-Toe-Gym_Environment</a></li>
+<li><a href=https://towardsdatascience.com/creating-a-custom-openai-gym-environment-for-stock-trading-be532be3910e>Create custom gym environments from scratch — A stock market example</a></li>
+<li><a href=https://github.com/benelot/pybullet-gym>pybullet-gym</a></li>
+</ul>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span>Author:</span>
+<span>神奇的战士 </span>
+</p>
+<p class=copyright-item>
+<span>Link:</span>
+<a href=https://wangshub.github.io/posts/openai-gym-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83/>https://wangshub.github.io/posts/openai-gym-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83/</span>
+</p>
+</div>
+<div class=post-tags>
+<section>
+<i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/reinforcement-learning/>
+#Reinforcement Learning</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/python/>
+#Python</a></span>
+</section>
+<section>
+<a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span>
+</section>
+</div>
+<div class=post-nav>
+<a href=https://wangshub.github.io/posts/%E6%88%91%E7%9A%84%E5%9B%A2%E9%95%BF%E6%88%91%E7%9A%84%E5%9B%A2%E4%B9%A6%E6%91%98/ class=prev rel=prev title=《我的团长我的团》书摘><i class="iconfont icon-left"></i>&nbsp;《我的团长我的团》书摘</a>
+<a href=https://wangshub.github.io/posts/pybulet-gym%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E6%A8%A1%E5%9E%8Bhumanoidpybulletenv-v0/ class=next rel=next title="Pybulet Gym 源码解析：双足机器人模型 HumanoidPyBulletEnv-v0">Pybulet Gym 源码解析：双足机器人模型 HumanoidPyBulletEnv-v0&nbsp;<i class="iconfont icon-right"></i></a>
+</div>
+<div class=post-comment>
+</div>
+</article>
+</div>
+</main>
+<footer class=footer>
+<div class=copyright>
+&copy;
+<span itemprop=copyrightYear>2016 - 2021</span>
+<span class=with-love>
+<i class="iconfont icon-love"></i>
+</span>
+<span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> | </span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span>
+</div>
+</footer>
+<script defer src=/js/vendor_main.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script>
+<script>pangu.spacingPage()</script>
+</div>
+</body>
+</html>

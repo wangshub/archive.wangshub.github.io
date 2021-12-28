@@ -1,0 +1,204 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta name=author content="神奇的战士">
+<link rel=prev href=https://wangshub.github.io/posts/markdown-syntax/>
+<link rel=next href=https://wangshub.github.io/posts/mac-bluetooth-auto-toggle-when-lock-unlock-screen/>
+<link rel=canonical href=https://wangshub.github.io/posts/rldeepqlearning/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+<title>
+强化学习之 Deep Q­-Learning | 🍉 神奇的战士
+</title>
+<meta name=title content="强化学习之 Deep Q­-Learning | 🍉 神奇的战士">
+<link rel=stylesheet href=/css/main.min.css>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"强化学习之 Deep Q­-Learning","headline":"强化学习之 Deep Q­-Learning","description":"Deep Q­-Learning Q-Learning 在 Q-Learning 中定义函数 $Q(s, a)$ 表示在当前状态 $s$ 下采取动作 $a$ 获得的最大有损奖励 $$ Q\\left(s_{t}, a_{t}\\right)=\\max R_{t\u002b1} $$ 可以将 $Q(s, a)$ 理解为在一局游戏中，如果在状态","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2019","datePublished":"2019-03-11 20:27:30 \u002b0000 UTC","dateModified":"2019-03-11 20:27:30 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/rldeepqlearning\/","wordCount":"1027","keywords":["Python","RL","🍉 神奇的战士"]}</script>
+</head>
+<body>
+<div class=wrapper>
+<nav class=navbar>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class="navbar-header header-back2home-logo">
+<span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io>
+<span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span>
+</a>
+</div>
+<div class=navbar-right>
+<span class=menu>
+<a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a>
+<span class=divide></span>
+<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a>
+</span>
+</div>
+</div>
+</nav>
+<nav class=navbar-mobile id=nav-mobile style=display:none>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class=navbar>
+<div class="navbar-header header-logo">
+<a href=https://wangshub.github.io>🍉 神奇的战士</a>
+</div>
+<div class=navbar-right>
+<div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div>
+<div class=menu-toggle>
+<span></span><span></span><span></span>
+</div>
+</div>
+</div>
+<div class=menu id=mobile-menu>
+<nav class=mb-md>
+<a class=menu-item href=/posts/ title>
+<h3>Blog</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/categories/ title>
+<h3>Categories</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/tags/ title>
+<h3>Tags</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/about/ title>
+<h3>About</h3>
+<div class=menu-active></div>
+</a>
+</nav>
+</div>
+</div>
+</nav>
+<main class=main>
+<div class=container>
+<article class=post-warp itemscope itemtype=http://schema.org/Article>
+<header class=post-header>
+<h1 class=post-title itemprop="name headline">强化学习之 Deep Q­-Learning</h1>
+<div class=post-meta>
+Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>
+on <time datetime=2019-03-11 itemprop=datePublished>March 11, 2019</time>
+</span>
+in
+<span class=post-word-count>1027 words</span>
+</div>
+</header>
+<div class=post-content>
+<h1 id=deep-q-learning>Deep Q­-Learning</h1>
+<h2 id=q-learning>Q-Learning</h2>
+<p>在 Q-Learning 中定义函数 $Q(s, a)$ 表示在当前状态 $s$ 下采取动作 $a$ 获得的最大有损奖励</p>
+<p>$$ Q\left(s_{t}, a_{t}\right)=\max R_{t+1} $$</p>
+<p>可以将 $Q(s, a)$ 理解为在一局游戏中，如果在状态 $s$ 下采取动作 $a$ 后，在游戏结束所能获得的最高分。即 <strong>Q-函数</strong> 表示在某一个状态下采取相应动作的<strong>质量</strong>。</p>
+<p>那么策略 $\pi(s)$ 就可以表示成在每个状态 $s$ 下选择动作 $a$ 的函数</p>
+<p>$$\pi(s)=\operatorname{argmax}_{a} Q(s, a)$$</p>
+<p>许多强化学习算法的基本思想都是通过迭代更新 Bellman 方程来对<strong>动作-值</strong>进行估计，最佳的得分奖励是由当前环境的即使奖励 $r$ 和下一个状态 $s^{\prime}$ 的最大奖励的加和。</p>
+<p>$$
+Q_{i+1}(s, a)=r+\gamma \max _{a^{\prime}} Q_{i}\left(s^{\prime}, a^{\prime}\right)
+$$</p>
+<p>Q-Learning 的核心思想：<strong>用 Bellman 方程迭代近似估计 Q-函数</strong>。一种最简单的方式实现 Q-函数 的方式就是建立一个行为状态，列为动作的表格。</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312210159.png width=50%></div>
+<p>Q-learning 伪代码表示如下</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312092656.png width=70%></div>
+<p>其中 $\alpha$ 成为学习率，用于控制上一时刻的 Q-值 与下一时刻 Q-值 的差值对更新过程的影响，当 $\alpha=1$ 时，上式即为 Bellman 方程。</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312210239.png width=80%></div>
+<p>假设在上图中令机器人从起始位置往右移动 1 步，然后计算并更新 Q-值。</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313082800.png width=70%></div>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313084707.png width=70%></div>
+<p>当 $i \rightarrow \infty$ 时，即可找到<strong>最佳动作值函数</strong> $Q_{i+t} \rightarrow Q^{*}$。但是在实际当中，每个轨迹序列当中，动作值函数都是被单独估计，不具有任何的泛化的能力。比较常见的方式就是使用(如神经网络)线性或者非线性的估计函数来对动作值函数进行近似估计。</p>
+<h2 id=深度-q-网络deep-q-network>深度 Q 网络(Deep Q Network)</h2>
+<p>假设状态是一张 64*64 分辨率的图像，那么每个像素点用 8bit 的灰度值表示，那么状态 $s$ 就可能有 $256^{64 \times 64}$ 种可能，如果构造这么一张巨大无比的 Q-Table，那将是不现实的。</p>
+<p>对于高度结构化的数据，正好适合用深度神经网络来对 Q 函数进行近似估计。输入状态 $s$ 和动作，通过网络，输出对应的 Q-值。另一种方式是在 DeepMind 文章中，只是输入当前的状态 $s$, 输出各个 Action 对应的 Q-值。</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190311204446.png width=80%></div>
+<p>在 Google DeepMind 的 Paper 中使用了如下的网络结构来对 $\max _{a} \cdot Q\left(s^{\prime}, a^{\prime}\right)$ 进行近似估计</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190311204645.png width=90%></div>
+<p>DeepMind 在文章中使用的网络模型如下。</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313091430.png width=80%></div>
+<p>Q 值可能是任意的实数，把对 Q 值的估计看作是机器学习中的<strong>回归问题</strong>，所以使用 <strong>平方误差损失(squared error loss)</strong> 作为优化的目标函数。</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190313195452.png width=40%></div>
+<p>$$
+L_{i}\left(\theta_{i}\right)=\mathbb{E}<em>{\left(s, a, r, s^{\prime}\right) \sim \mathrm{U}(D)}\left[\left(r+\gamma \max <em>{a^{\prime}} Q\left(s^{\prime}, a^{\prime} ; \theta</em>{i}^{-}\right)-Q\left(s, a ; \theta</em>{i}\right)\right)^{2}\right]
+$$</p>
+<p>给定轨迹 $&lt;s, a, r, s^{\prime}>$ ，使用神经网络替换 Q-Table 过程如下</p>
+<ol>
+<li>输入当前状态 $s$，预测所有动作 $a$ 的 Q-值；</li>
+<li>输入下一状态 $s$，计算最大 $\max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)$</li>
+<li>设置 Q 值优化目标为 $r+ \gamma \max _{a^{\prime}} Q\left(s^{\prime}, a^{\prime}\right)$</li>
+<li>反向传播更新网络 weights；</li>
+</ol>
+<p>目标 $\max _{a^{\prime}} Q$ 取决于神经网络中神经元的权重。监督学习在学习之前，待估计的目标是确定的。
+在优化 $L_{i}\left(\theta_{i}\right)$ 时保持上一次迭代参数 $\theta_{i}^{-}$ 固定不变。</p>
+<p>利用随机梯度下降优化损失函数</p>
+<p>$$\nabla_{\theta_{i}} L\left(\theta_{i}\right)=\mathbb{E}<em>{s, a, r, s^{\prime}}\left[\left(r+\gamma \max <em>{a^{\prime}} Q\left(s^{\prime}, a^{\prime} ; \theta</em>{i}^{-}\right)-Q\left(s, a ; \theta</em>{i}\right)\right) \nabla_{\theta_{i}} Q\left(s, a ; \theta_{i}\right)\right]$$</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190312083834.png width=80%></div>
+<h2 id=经验回放exploration-exploitation>经验回放(Exploration-Exploitation)</h2>
+<p><strong>为什么要经验回放？</strong></p>
+<ul>
+<li>网络是健忘的</li>
+</ul>
+<h2 id=参考文献>参考文献</h2>
+<ul>
+<li><a href=https://medium.freecodecamp.org/an-introduction-to-q-learning-reinforcement-learning-14ac0b4493cc>https://medium.freecodecamp.org/an-introduction-to-q-learning-reinforcement-learning-14ac0b4493cc</a></li>
+</ul>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span>Author:</span>
+<span>神奇的战士 </span>
+</p>
+<p class=copyright-item>
+<span>Link:</span>
+<a href=https://wangshub.github.io/posts/rldeepqlearning/>https://wangshub.github.io/posts/rldeepqlearning/</span>
+</p>
+</div>
+<div class=post-tags>
+<section>
+<i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/python/>
+#Python</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/rl/>
+#RL</a></span>
+</section>
+<section>
+<a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span>
+</section>
+</div>
+<div class=post-nav>
+<a href=https://wangshub.github.io/posts/markdown-syntax/ class=prev rel=prev title="Markdown Syntax Guide"><i class="iconfont icon-left"></i>&nbsp;Markdown Syntax Guide</a>
+<a href=https://wangshub.github.io/posts/mac-bluetooth-auto-toggle-when-lock-unlock-screen/ class=next rel=next title=『Hamerspoon』蓝牙自动开关>『Hamerspoon』蓝牙自动开关&nbsp;<i class="iconfont icon-right"></i></a>
+</div>
+<div class=post-comment>
+</div>
+</article>
+</div>
+</main>
+<footer class=footer>
+<div class=copyright>
+&copy;
+<span itemprop=copyrightYear>2016 - 2021</span>
+<span class=with-love>
+<i class="iconfont icon-love"></i>
+</span>
+<span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> | </span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span>
+</div>
+</footer>
+<script defer src=/js/vendor_main.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script>
+<script>pangu.spacingPage()</script>
+</div>
+</body>
+</html>

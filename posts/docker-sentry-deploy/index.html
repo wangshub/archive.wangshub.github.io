@@ -1,0 +1,234 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta name=author content="神奇的战士">
+<link rel=prev href=https://wangshub.github.io/posts/control-robot-in-scratch3/>
+<link rel=next href=https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/>
+<link rel=canonical href=https://wangshub.github.io/posts/docker-sentry-deploy/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+<title>
+用 Docker 部署 Sentry Bug 日志收集服务 | 🍉 神奇的战士
+</title>
+<meta name=title content="用 Docker 部署 Sentry Bug 日志收集服务 | 🍉 神奇的战士">
+<link rel=stylesheet href=/css/main.min.css>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"用 Docker 部署 Sentry Bug 日志收集服务","headline":"用 Docker 部署 Sentry Bug 日志收集服务","description":"用 Docker 部署 Sentry Bug 日志收集服务 Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大部分主流的编程语言，并提供 SDK，当程序出现异常就向服务","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2019","datePublished":"2019-05-25 10:44:27 \u002b0000 UTC","dateModified":"2019-05-25 10:44:27 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/docker-sentry-deploy\/","wordCount":"562","keywords":["Docker","Sentry","🍉 神奇的战士"]}</script>
+</head>
+<body>
+<div class=wrapper>
+<nav class=navbar>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class="navbar-header header-back2home-logo">
+<span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io>
+<span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span>
+</a>
+</div>
+<div class=navbar-right>
+<span class=menu>
+<a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a>
+<span class=divide></span>
+<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a>
+</span>
+</div>
+</div>
+</nav>
+<nav class=navbar-mobile id=nav-mobile style=display:none>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class=navbar>
+<div class="navbar-header header-logo">
+<a href=https://wangshub.github.io>🍉 神奇的战士</a>
+</div>
+<div class=navbar-right>
+<div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div>
+<div class=menu-toggle>
+<span></span><span></span><span></span>
+</div>
+</div>
+</div>
+<div class=menu id=mobile-menu>
+<nav class=mb-md>
+<a class=menu-item href=/posts/ title>
+<h3>Blog</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/categories/ title>
+<h3>Categories</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/tags/ title>
+<h3>Tags</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/about/ title>
+<h3>About</h3>
+<div class=menu-active></div>
+</a>
+</nav>
+</div>
+</div>
+</nav>
+<main class=main>
+<div class=container>
+<article class=post-warp itemscope itemtype=http://schema.org/Article>
+<header class=post-header>
+<h1 class=post-title itemprop="name headline">用 Docker 部署 Sentry Bug 日志收集服务</h1>
+<div class=post-meta>
+Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>
+on <time datetime=2019-05-25 itemprop=datePublished>May 25, 2019</time>
+</span>
+in
+<span class=post-word-count>562 words</span>
+</div>
+</header>
+<div class=post-content>
+<h1 id=用-docker-部署-sentry-bug-日志收集服务>用 Docker 部署 Sentry Bug 日志收集服务</h1>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172611.png width=30%></div>
+<p>Sentry 是一个日志收集和统计平台, 由客户端和服务端组成，目前支持大部分主流的编程语言，并提供 SDK，当程序出现异常就向服务端发送消息，服务端将消息记录到数据库中并提供一个 Web 端显示。</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525172257.png width=80%></div>
+<p>下面演示如何使用 Docker 快速部署 Sentry 服务，并自定义一些配置。</p>
+<h2 id=系统环境>系统环境</h2>
+<pre tabindex=0><code>&gt;&gt; uname -a
+Linux sentry 4.18.0-1018-azure #18~18.04.1-Ubuntu SMP Tue May 7 18:09:35 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+</code></pre><h2 id=安装-docker>安装 Docker</h2>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>&gt;&gt; sudo apt install docker.io
+&gt;&gt; sudo apt  install docker-compose
+&gt;&gt; docker -v
+
+Docker version 18.09.2, build <span style=color:#ae81ff>6247962</span>
+</code></pre></div><h2 id=部署-docker-服务>部署 Docker 服务</h2>
+<h3 id=clone-代码>Clone 代码</h3>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>&gt;&gt; git clone https://github.com/getsentry/onpremise.git
+&gt;&gt; cd onpremise
+</code></pre></div><h3 id=挂载本地路径>挂载本地路径</h3>
+<p>为了方便数据迁移，挂载本地路径到 Docker 镜像</p>
+<ul>
+<li><code>mkdir sentry-data</code>: 创建 Sentry 数据文件目录</li>
+<li><code>mkdir sentry-postgres</code>: 创建 Sentry 数据库目录</li>
+<li><code>config.yml</code>: Sentry 用户自定义配置文件</li>
+</ul>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525170352.png width=60%></div>
+<h3 id=配置邮箱与域名前缀>配置邮箱与域名前缀</h3>
+<p>这里需要同时改动两个文件，<code>config.yml</code> 和 <code>docker-compose.yml</code></p>
+<h5 id=配置-configyml>配置 <code>config.yml</code></h5>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yml data-lang=yml><span style=color:#f92672>mail.backend</span>: <span style=color:#e6db74>&#39;smtp&#39;</span>  <span style=color:#75715e># Use dummy if you want to disable email entirely</span>
+<span style=color:#f92672>mail.host</span>: <span style=color:#e6db74>&#39;smtp.exmail.qq.com&#39;</span>
+<span style=color:#f92672>mail.port</span>: <span style=color:#ae81ff>587</span>
+<span style=color:#f92672>mail.username</span>: <span style=color:#e6db74>&#39;name@email.com&#39;</span>
+<span style=color:#f92672>mail.password</span>: <span style=color:#e6db74>&#39;yourpassword&#39;</span>
+<span style=color:#f92672>mail.use-tls</span>: <span style=color:#66d9ef>true</span>
+<span style=color:#f92672>mail.from</span>: <span style=color:#e6db74>&#39;name@email.com&#39;</span>
+<span style=color:#f92672>system.url-prefix</span>: <span style=color:#e6db74>&#39;http://your_domain.com&#39;</span>
+</code></pre></div><h5 id=配置-docker-composeyml>配置 <code>docker-compose.yml</code></h5>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yml data-lang=yml><span style=color:#f92672>x-defaults</span>: <span style=color:#75715e>&amp;defaults</span>
+  <span style=color:#f92672>restart</span>: <span style=color:#ae81ff>unless-stopped</span>
+  <span style=color:#f92672>build</span>: <span style=color:#ae81ff>.</span>
+  <span style=color:#f92672>depends_on</span>:
+    - <span style=color:#ae81ff>redis</span>
+    - <span style=color:#ae81ff>postgres</span>
+    - <span style=color:#ae81ff>memcached</span>
+    - <span style=color:#ae81ff>smtp</span>
+  <span style=color:#f92672>env_file</span>: <span style=color:#ae81ff>.env</span>
+  <span style=color:#f92672>environment</span>:
+    <span style=color:#f92672>SENTRY_MEMCACHED_HOST</span>: <span style=color:#ae81ff>memcached</span>
+    <span style=color:#f92672>SENTRY_REDIS_HOST</span>: <span style=color:#ae81ff>redis</span>
+    <span style=color:#f92672>SENTRY_POSTGRES_HOST</span>: <span style=color:#ae81ff>postgres</span>
+    <span style=color:#f92672>SENTRY_SERVER_EMAIL</span>: <span style=color:#e6db74>&#39;name@email.com&#39;</span>
+    <span style=color:#f92672>SENTRY_EMAIL_HOST</span>: <span style=color:#e6db74>&#39;smtp.exmail.qq.com&#39;</span>
+    <span style=color:#f92672>SENTRY_EMAIL_PORT</span>: <span style=color:#ae81ff>587</span>
+    <span style=color:#f92672>SENTRY_EMAIL_USER</span>: <span style=color:#e6db74>&#39;name@email.com&#39;</span>
+    <span style=color:#f92672>SENTRY_EMAIL_PASSWORD</span>: <span style=color:#e6db74>&#39;yourpassword&#39;</span>
+    <span style=color:#f92672>SENTRY_EMAIL_USE_TLS</span>: <span style=color:#e6db74>&#39;true&#39;</span>
+    <span style=color:#f92672>SENTRY_URL_PREFIX</span>: <span style=color:#e6db74>&#39;http://your_domain.com&#39;</span>
+</code></pre></div><p><strong>注意</strong></p>
+<ul>
+<li>
+<p><strong>邮箱端口</strong>： 腾讯企业邮箱的设置 SMTP 的端口是 465，但 sentry 只支持 tls 而，所以使能 <code>tls</code> 并将端口改587。</p>
+</li>
+<li>
+<p>腾讯企业邮箱 <code>mail.from</code> 必须要和 <code>mail.username</code> 一致。</p>
+</li>
+</ul>
+<h3 id=启动-docker-服务>启动 Docker 服务</h3>
+<blockquote>
+<p>参考<a href=https://github.com/getsentry/onpremise/blob/master/README.md>官方文档</a></p>
+</blockquote>
+<ul>
+<li><code>cp -n .env.example .env</code> 创建环境配置文件</li>
+<li><code>docker-compose build</code> 构建 Docker 服务</li>
+<li><code>docker-compose run --rm web config generate-secret-key</code> 生成密钥，并将密钥添加至 <code>.env</code></li>
+<li><code>docker-compose run --rm web upgrade</code>，构建数据库，过程中需要输入管理员信息</li>
+<li><code>docker-compose up -d</code> 在后台启动，<code>docker-compose.yml</code> 默认端口为 9000</li>
+<li>浏览器打开 <a href=http://localhost:9000>http://localhost:9000</a>，部署成功。</li>
+</ul>
+<h2 id=作者>作者</h2>
+<ul>
+<li><strong>神奇的战士</strong></li>
+<li><strong>微信公众号</strong></li>
+</ul>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20190525173043.png width=30%></div>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span>Author:</span>
+<span>神奇的战士 </span>
+</p>
+<p class=copyright-item>
+<span>Link:</span>
+<a href=https://wangshub.github.io/posts/docker-sentry-deploy/>https://wangshub.github.io/posts/docker-sentry-deploy/</span>
+</p>
+</div>
+<div class=post-tags>
+<section>
+<i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/docker/>
+#Docker</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/sentry/>
+#Sentry</a></span>
+</section>
+<section>
+<a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span>
+</section>
+</div>
+<div class=post-nav>
+<a href=https://wangshub.github.io/posts/control-robot-in-scratch3/ class=prev rel=prev title="在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！"><i class="iconfont icon-left"></i>&nbsp;在 Scratch3 中玩转机器人:Python、Deep Learning、Posenet and Robot！</a>
+<a href=https://wangshub.github.io/posts/camera-pan-tlt-pid-face-tracking/ class=next rel=next title="基于 face_recognition 和 PID 的人脸识别和跟踪">基于 face_recognition 和 PID 的人脸识别和跟踪&nbsp;<i class="iconfont icon-right"></i></a>
+</div>
+<div class=post-comment>
+</div>
+</article>
+</div>
+</main>
+<footer class=footer>
+<div class=copyright>
+&copy;
+<span itemprop=copyrightYear>2016 - 2021</span>
+<span class=with-love>
+<i class="iconfont icon-love"></i>
+</span>
+<span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> | </span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span>
+</div>
+</footer>
+<script defer src=/js/vendor_main.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script>
+<script>pangu.spacingPage()</script>
+</div>
+</body>
+</html>

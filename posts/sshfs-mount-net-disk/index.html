@@ -1,0 +1,180 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta name=author content="神奇的战士">
+<link rel=prev href=https://wangshub.github.io/posts/python-data-structure-bst/>
+<link rel=next href=https://wangshub.github.io/posts/use-python-to-backup-markdown-images/>
+<link rel=canonical href=https://wangshub.github.io/posts/sshfs-mount-net-disk/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+<title>
+从机sshfs访问主机文件系统 | 🍉 神奇的战士
+</title>
+<meta name=title content="从机sshfs访问主机文件系统 | 🍉 神奇的战士">
+<link rel=stylesheet href=/css/main.min.css>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"从机sshfs访问主机文件系统","headline":"从机sshfs访问主机文件系统","description":"说明 需要在PC主机(Linux)上编写代码,每次都要将代码拷贝到从机(Linux)上编译运行程序.这里用到scp命令 scp -r \/主机\/文件 从机名@","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2017","datePublished":"2017-05-31 21:16:00 \u002b0000 UTC","dateModified":"2017-05-31 21:16:00 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/sshfs-mount-net-disk\/","wordCount":"186","keywords":["linux","tool","🍉 神奇的战士"]}</script>
+</head>
+<body>
+<div class=wrapper>
+<nav class=navbar>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class="navbar-header header-back2home-logo">
+<span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io>
+<span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span>
+</a>
+</div>
+<div class=navbar-right>
+<span class=menu>
+<a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a>
+<span class=divide></span>
+<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a>
+</span>
+</div>
+</div>
+</nav>
+<nav class=navbar-mobile id=nav-mobile style=display:none>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class=navbar>
+<div class="navbar-header header-logo">
+<a href=https://wangshub.github.io>🍉 神奇的战士</a>
+</div>
+<div class=navbar-right>
+<div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div>
+<div class=menu-toggle>
+<span></span><span></span><span></span>
+</div>
+</div>
+</div>
+<div class=menu id=mobile-menu>
+<nav class=mb-md>
+<a class=menu-item href=/posts/ title>
+<h3>Blog</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/categories/ title>
+<h3>Categories</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/tags/ title>
+<h3>Tags</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/about/ title>
+<h3>About</h3>
+<div class=menu-active></div>
+</a>
+</nav>
+</div>
+</div>
+</nav>
+<main class=main>
+<div class=container>
+<article class=post-warp itemscope itemtype=http://schema.org/Article>
+<header class=post-header>
+<h1 class=post-title itemprop="name headline">从机sshfs访问主机文件系统</h1>
+<div class=post-meta>
+Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>
+on <time datetime=2017-05-31 itemprop=datePublished>May 31, 2017</time>
+</span>
+in
+<i class="iconfont icon-folder"></i>
+<span class=post-category>
+<a href=https://wangshub.github.io/categories/linux/> linux, </a>
+<a href=https://wangshub.github.io/categories/tool/> tool, </a>
+</span>
+<span class=post-word-count>186 words</span>
+</div>
+</header>
+<div class=post-content>
+<h1 id=说明>说明</h1>
+<p>需要在PC主机(Linux)上编写代码,每次都要将代码拷贝到从机(Linux)上编译运行程序.这里用到<code>scp</code>命令 <code>scp -r /主机/文件 从机名@192.168.x.x:从机目录/</code>.利用<code>sshfs</code>可以直接在从机进行编译,省略拷贝步骤.</p>
+<h1 id=系统结构框图>系统结构框图</h1>
+<p><strong>Linux 主机</strong> <em>&lt;=====></em> <strong>Linux 从机</strong></p>
+<h1 id=操作步骤>操作步骤</h1>
+<ol>
+<li>主机</li>
+</ol>
+<ul>
+<li><code>sudo apt-get install openssh-server</code></li>
+<li><code>ifconfig -a</code>获取局域网内 <em>IP地址</em></li>
+</ul>
+<ol start=2>
+<li>从机</li>
+</ol>
+<ul>
+<li><code>sudo apt-get install sshfs</code></li>
+<li><code>sshfs -o idmap=user -o reconnect host_name@192.168.20.236:/path/to/your/workspace /path/to/your/workspace</code></li>
+</ul>
+<ol start=3>
+<li>现在可以从从机开心地访问主机文件了</li>
+</ol>
+<blockquote>
+<p><em>author</em> : Wangsong<br>
+<em>mail</em> : <a href=mailto:easternslope@yeah.net>easternslope@yeah.net</a></p>
+</blockquote>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span>Author:</span>
+<span>神奇的战士 </span>
+</p>
+<p class=copyright-item>
+<span>Link:</span>
+<a href=https://wangshub.github.io/posts/sshfs-mount-net-disk/>https://wangshub.github.io/posts/sshfs-mount-net-disk/</span>
+</p>
+</div>
+<div class=post-tags>
+<section>
+<i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/linux/>
+#linux</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/tool/>
+#tool</a></span>
+</section>
+<section>
+<a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span>
+</section>
+</div>
+<div class=post-nav>
+<a href=https://wangshub.github.io/posts/python-data-structure-bst/ class=prev rel=prev title="python 数据结构之二叉搜索树"><i class="iconfont icon-left"></i>&nbsp;python 数据结构之二叉搜索树</a>
+<a href=https://wangshub.github.io/posts/use-python-to-backup-markdown-images/ class=next rel=next title=使用python备份博客图床图片>使用python备份博客图床图片&nbsp;<i class="iconfont icon-right"></i></a>
+</div>
+<div class=post-comment>
+</div>
+</article>
+</div>
+</main>
+<footer class=footer>
+<div class=copyright>
+&copy;
+<span itemprop=copyrightYear>2016 - 2021</span>
+<span class=with-love>
+<i class="iconfont icon-love"></i>
+</span>
+<span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> | </span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span>
+</div>
+</footer>
+<script defer src=/js/vendor_main.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script>
+<script>pangu.spacingPage()</script>
+</div>
+</body>
+</html>

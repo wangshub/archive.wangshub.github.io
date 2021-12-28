@@ -1,0 +1,182 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta name=author content="神奇的战士">
+<link rel=prev href=https://wangshub.github.io/posts/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/>
+<link rel=next href=https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/>
+<link rel=canonical href=https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+<title>
+机器人强化学习笔记（0） | 🍉 神奇的战士
+</title>
+<meta name=title content="机器人强化学习笔记（0） | 🍉 神奇的战士">
+<link rel=stylesheet href=/css/main.min.css>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"机器人强化学习笔记（0）","headline":"机器人强化学习笔记（0）","description":"机器人强化学习笔记（0） 机器学习分类 强化学习\u0008问题 监督学习：监督学习由任务驱动，需要创造外部的“导师”，“导师”拥有外部环境的所有先验信息，","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2018","datePublished":"2018-07-03 22:34:36 \u002b0000 UTC","dateModified":"2018-07-03 22:34:36 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0\/","wordCount":"656","keywords":["Reinforment Learning","Python","🍉 神奇的战士"]}</script>
+</head>
+<body>
+<div class=wrapper>
+<nav class=navbar>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class="navbar-header header-back2home-logo">
+<span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io>
+<span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span>
+</a>
+</div>
+<div class=navbar-right>
+<span class=menu>
+<a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a>
+<span class=divide></span>
+<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a>
+</span>
+</div>
+</div>
+</nav>
+<nav class=navbar-mobile id=nav-mobile style=display:none>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class=navbar>
+<div class="navbar-header header-logo">
+<a href=https://wangshub.github.io>🍉 神奇的战士</a>
+</div>
+<div class=navbar-right>
+<div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div>
+<div class=menu-toggle>
+<span></span><span></span><span></span>
+</div>
+</div>
+</div>
+<div class=menu id=mobile-menu>
+<nav class=mb-md>
+<a class=menu-item href=/posts/ title>
+<h3>Blog</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/categories/ title>
+<h3>Categories</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/tags/ title>
+<h3>Tags</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/about/ title>
+<h3>About</h3>
+<div class=menu-active></div>
+</a>
+</nav>
+</div>
+</div>
+</nav>
+<main class=main>
+<div class=container>
+<article class=post-warp itemscope itemtype=http://schema.org/Article>
+<header class=post-header>
+<h1 class=post-title itemprop="name headline">机器人强化学习笔记（0）</h1>
+<div class=post-meta>
+Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>
+on <time datetime=2018-07-03 itemprop=datePublished>July 3, 2018</time>
+</span>
+in
+<span class=post-word-count>656 words</span>
+</div>
+</header>
+<div class=post-content>
+<h1 id=机器人强化学习笔记0>机器人强化学习笔记（0）</h1>
+<h2 id=机器学习分类>机器学习分类</h2>
+<p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fsx1t71czwj20lc0dkdjg.jpg alt="Machine Learning" loading=lazy></p>
+<h2 id=强化学习问题>强化学习问题</h2>
+<p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fsx1s6yxgsj20c204vjrh.jpg alt="RL problem" loading=lazy></p>
+<p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fsx1xqsh7ij20c204v0t0.jpg alt="Child walk" loading=lazy></p>
+<ul>
+<li><strong>监督学习</strong>：监督学习由任务驱动，需要创造外部的“导师”，“导师”拥有外部环境的所有先验信息，并教导 Agent 完成特定的任务。但是 Agent 可以用很多种子任务相结合的方式去完成相同的任务。所以创造一个全能的“导师”来训练 Agent 在实际中几乎是不可能的。</li>
+<li><strong>非监督学习</strong>：非监督学习是由数据驱动，主要目的是找到底层的模式而不是映射关系。例如给用户推荐新闻时，非监督学习主要是根据用户先前阅读过的新闻来推荐相似的新闻。</li>
+<li><strong>强化学习</strong>：和上面两种方法相比较，强化学习主要是从自身的经验来获取知识，在输入和输出之间存在着映射关系。强化学习将奖励函数作为行为的反馈。</li>
+</ul>
+<h2 id=解决强化学习问题的框架和算法>解决强化学习问题的框架和算法</h2>
+<p>强化学习需要平衡 <strong>exploration vs exploitation</strong> 困境。</p>
+<h3 id=马尔可夫决策过程markov-decision-process>马尔可夫决策过程(Markov Decision Process)</h3>
+<p>在强化学习场景下，数学模型为马尔可夫决策过程，表示为</p>
+<ul>
+<li>状态集合：S</li>
+<li>动作集合：A</li>
+<li>奖励函数：R</li>
+<li>策略：Pi</li>
+<li>值：V</li>
+</ul>
+<p>从起始状态到结束状态$S$需要经过动作集合 A。执行每个动作后，都会获得奖励 R，每个动作可能会导致好的或者坏的奖励函数值。策略(Policy)就是采取某个系列动作的方法，并且会相应的得到奖励函数的值。因此，求解强化学习的目标就是要选取最佳策略(Policy)，在所有可能的状态和时间范围内使得评估函数最大，即</p>
+<p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1ft298te49zj203001c0si.jpg alt></p>
+<h3 id=最短路径问题shortest-path-problem>最短路径问题(Shortest Path Problem)</h3>
+<p><img src=https://ws1.sinaimg.cn/large/c3a916a7gy1fsx3dp18t2j20md0bq74c.jpg alt></p>
+<p>求解以最小代价，从地点 A 到地点 F 的最短路径问题，转化为</p>
+<ul>
+<li>节点集合 {A, B, C, D, E, F}</li>
+<li>从点到点移动成为动作，{A->B, C->D}</li>
+<li>奖励函数为每条边的花费</li>
+<li>完成 A 点到 F 行走路线成为策略，如 {A->B->D->F}</li>
+</ul>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span>Author:</span>
+<span>神奇的战士 </span>
+</p>
+<p class=copyright-item>
+<span>Link:</span>
+<a href=https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</span>
+</p>
+</div>
+<div class=post-tags>
+<section>
+<i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/reinforment-learning/>
+#Reinforment Learning</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/python/>
+#Python</a></span>
+</section>
+<section>
+<a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span>
+</section>
+</div>
+<div class=post-nav>
+<a href=https://wangshub.github.io/posts/%E5%B7%A5%E5%85%B7%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/ class=prev rel=prev title=效率工具网站推荐><i class="iconfont icon-left"></i>&nbsp;效率工具网站推荐</a>
+<a href=https://wangshub.github.io/posts/%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BD%BF%E7%94%A8-openai-gym-%E6%95%99%E7%A8%8B%E4%B8%8E%E7%AC%94%E8%AE%B0/ class=next rel=next title="机器人强化学习之使用 OpenAI Gym 教程与笔记">机器人强化学习之使用 OpenAI Gym 教程与笔记&nbsp;<i class="iconfont icon-right"></i></a>
+</div>
+<div class=post-comment>
+</div>
+</article>
+</div>
+</main>
+<footer class=footer>
+<div class=copyright>
+&copy;
+<span itemprop=copyrightYear>2016 - 2021</span>
+<span class=with-love>
+<i class="iconfont icon-love"></i>
+</span>
+<span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> | </span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span>
+</div>
+</footer>
+<script defer src=/js/vendor_main.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script>
+<script>pangu.spacingPage()</script>
+</div>
+</body>
+</html>

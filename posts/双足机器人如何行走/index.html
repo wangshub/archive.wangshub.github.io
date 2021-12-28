@@ -1,0 +1,216 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="chrome=1">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=robots content="noodp">
+<meta name=author content="神奇的战士">
+<link rel=prev href=https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E7%BD%91%E7%BB%9C%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%BD%B1%E5%93%8D/>
+<link rel=next href=https://wangshub.github.io/posts/web%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%99%BA%E8%83%BD%E7%A1%AC%E4%BB%B6%E7%9A%84%E6%96%B9%E6%A1%88/>
+<link rel=canonical href=https://wangshub.github.io/posts/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<meta name=msapplication-TileColor content="#da532c">
+<meta name=theme-color content="#ffffff">
+<title>
+双足机器人如何行走？ | 🍉 神奇的战士
+</title>
+<meta name=title content="双足机器人如何行走？ | 🍉 神奇的战士">
+<link rel=stylesheet href=/css/main.min.css>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/wangshub.github.io"},"articleSection":"posts","name":"双足机器人如何行走？","headline":"双足机器人如何行走？","description":"[双足机器人如何行走？] 译文：how-do-biped-robots-walk 早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足","inLanguage":"zh-cn","author":"神奇的战士","creator":"神奇的战士","publisher":"神奇的战士","accountablePerson":"神奇的战士","copyrightHolder":"神奇的战士","copyrightYear":"2019","datePublished":"2019-11-05 10:03:35 \u002b0000 UTC","dateModified":"2019-11-05 10:03:35 \u002b0000 UTC","url":"https:\/\/wangshub.github.io\/posts\/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0\/","wordCount":"2246","keywords":["Gait","Algorithm","🍉 神奇的战士"]}</script>
+</head>
+<body>
+<div class=wrapper>
+<nav class=navbar>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class="navbar-header header-back2home-logo">
+<span class=logo_mark>>$</span>
+<a href=https://wangshub.github.io>
+<span class=logo_text>cd /home/</span>
+<span class=logo_cursor></span>
+</a>
+</div>
+<div class=navbar-right>
+<span class=menu>
+<a class=menu-item href=/posts/ title>Blog</a>
+<a class=menu-item href=/categories/ title>Categories</a>
+<a class=menu-item href=/tags/ title>Tags</a>
+<a class=menu-item href=/about/ title>About</a>
+<span class=divide></span>
+<a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a>
+</span>
+</div>
+</div>
+</nav>
+<nav class=navbar-mobile id=nav-mobile style=display:none>
+<progress class=content_progress max=0 value=0></progress>
+<div class=container>
+<div class=navbar>
+<div class="navbar-header header-logo">
+<a href=https://wangshub.github.io>🍉 神奇的战士</a>
+</div>
+<div class=navbar-right>
+<div><a href=javascript:void(0); class=theme-switch><i class="iconfont icon-dark-mode"></i></a></div>
+<div class=menu-toggle>
+<span></span><span></span><span></span>
+</div>
+</div>
+</div>
+<div class=menu id=mobile-menu>
+<nav class=mb-md>
+<a class=menu-item href=/posts/ title>
+<h3>Blog</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/categories/ title>
+<h3>Categories</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/tags/ title>
+<h3>Tags</h3>
+<div class=menu-active></div>
+</a>
+<a class=menu-item href=/about/ title>
+<h3>About</h3>
+<div class=menu-active></div>
+</a>
+</nav>
+</div>
+</div>
+</nav>
+<main class=main>
+<div class=container>
+<article class=post-warp itemscope itemtype=http://schema.org/Article>
+<header class=post-header>
+<h1 class=post-title itemprop="name headline">双足机器人如何行走？</h1>
+<div class=post-meta>
+Written by <a itemprop=name href=https://wangshub.github.io rel=author>神奇的战士</a> with ♥
+<span class=post-time>
+on <time datetime=2019-11-05 itemprop=datePublished>November 5, 2019</time>
+</span>
+in
+<span class=post-word-count>2246 words</span>
+</div>
+</header>
+<div class=post-content>
+<h1 id=双足机器人如何行走>[双足机器人如何行走？]</h1>
+<blockquote>
+<p>译文：<a href=https://scaron.info/teaching/how-do-biped-robots-walk.html>how-do-biped-robots-walk</a></p>
+</blockquote>
+<p>早在上个世纪七八十年代，双足行走就已经在机器人上实现了，但双足机器人一个重大里程碑是 1996 年 Honda 推出的 <a href=https://en.wikipedia.org/wiki/Honda_P_series>P2 仿人机器人</a>，随后 P2 成了大名鼎鼎的 Asimo。P2 能够完成<a href="https://youtu.be/d2BUO4HEhvM?t=26">行走</a>、<a href="https://youtu.be/d2BUO4HEhvM?t=119">推车</a>和<a href="https://youtu.be/d2BUO4HEhvM?t=172">爬楼梯</a>等任务。P2 的核心设计就是<strong>基于零力矩点 (ZMP) 反馈的步行控制</strong>。本文接下来就探究这背后的原理。</p>
+<p>如果您是第一次阅读这篇博客，建议先观看 <a href="https://www.youtube.com/watch?v=T7SEyvPtWFY">NHK 纪录片: ASIMO, HONDA, ROBOT, JAPAN, DOCUMENTARY, INTERVIEW</a>，纪录片介绍了接下来将要解释的几个关键的概念。</p>
+<h2 id=线性倒立摆模型lipm>线性倒立摆模型(LIPM)</h2>
+<p>机器人(固定或移动)通常是由多个执行关节连个多刚体模型。通常这样的系统的运动方程是高维的，但是可以分解成三个可行的假设：</p>
+<ul>
+<li><em>假设 1</em>：机器人有足够的关节力矩来实现其运动；</li>
+<li><em>假设 2</em>：质心(CoM)周围没有角动量；</li>
+<li><em>假设 3</em>：质心周围没有角动量；</li>
+</ul>
+<p>假设 2 和 3 解释了为什么 Honda P2 机器人总是<a href="https://www.youtube.com/watch?v=d2BUO4HEhvM&feature=youtu.be&t=172">胳膊保持静止并且弯曲膝盖行走</a>。在这三个假设的约束下，双足机器人步行的运动方程就简化成了一个线性模型，即<strong>线性倒立摆</strong>：</p>
+<p>$$
+\ddot{p}<em>{G}=\omega^{2}\left(p</em>{G}-p_{Z}\right)
+$$</p>
+<p>其中 $\omega^{2}=g / h$，$g$ 是重力常量，$h$ 是质心(CoM)的高度，$p_{Z}$ 是 ZMP 位置。常量 $\omega$ 称为线性倒立摆的<em>固有频率</em>。在这个模型当中，机器人可以被看成质量集中在一点 $G$ 上，通过一条没有质量的腿与地面接触，触地点为 $Z$。直观上理解，ZMP 点就是机器人施加重量的点。所以，ZMP 点需要落在支撑区 $S$ 内，机器人才能保持稳定。</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20191105110825.png width=50%></div>
+<p>从上免公式可以看出，机器人前进过程中，ZMP 往后移动，导致质心(CoM)加速向前（往前走一步，有可能导致往前摔倒）。同时，机器人摆动腾空的另一条腿来实现新的一步。当摆动腿接触地面，机器人的 ZMP 点就移动到了新的立足点了（质量转移到另一条腿），这就使得质心减速。然后不断重复上述过程。</p>
+<p>现在有了系统模型，接下来就是规划和控制的问题。步态行走任务通常分解成两个子问题：</p>
+<ul>
+<li><em>步态模式生成</em>：假设一个理想的模型，并且没有干扰，生成参考的 CoM-ZMP 轨迹；</li>
+<li><em>步态稳定性</em>：尽可能地去拟合跟踪参考轨迹，使用反馈控制来消除干扰和修正模型误差；</li>
+</ul>
+<h2 id=步态模式生成>步态模式生成</h2>
+<p>步态模式生成的目标时生成质心(CoM)的轨迹 $p_{G}(t)$，对应 ZMP 点</p>
+<p>$$
+p_{Z}=p_{G}-\frac{\ddot{p}_{G}}{\omega^{2}}
+$$</p>
+<p>ZMP 需要始终处于支撑区 $S$ 内。如果机器人处于<em>单脚支撑</em>时，支撑区就成了单个点。如果机器人在平地上双脚着地，所有支撑区就形成一个凸包形状。如果地面不平，或者机器人由其他接触（例如用手倾斜靠在某处），则定义一个<a href=https://hal.archives-ouvertes.fr/hal-02108589/document>多接触 ZMP 区</a>，但这就会是相当复杂的问题了。</p>
+<h3 id=线性模型预测控制>线性模型预测控制</h3>
+<p>有很多方法可以用来生成步态模式。其中一个最突出的部分就是将模型表述为一个数值优化问题，在 2003 年 Kajita 等人提出了<a href=https://doi.org/10.1109/ROBOT.2003.1241826>预览控制</a>，随后就被 Wieber 等人扩展并演变成为了<a href=https://doi.org/10.1109/ICHR.2006.321375>线性模型预测控制</a>,同时还有<a href=https://doi.org/10.1109/IROS.2010.5654429>足迹自适应</a> 和 <a href=https://doi.org/10.1109/HUMANOIDS.2015.7363423>CoM 高度变化</a>。在 <a href="https://www.youtube.com/watch?v=IWG3dt9HELw">HRP-2</a> 和 <a href="https://www.youtube.com/watch?v=tcDyZ89TRAA">HRP-4</a> 机器人上就采用了这样的方法加持下，显著提升了步态模式生成的性能。</p>
+<h3 id=dcm-轨迹生成>DCM 轨迹生成</h3>
+<p>另外一种方法就是将线性倒立摆的二阶动力模型分解成为 2 个一阶系统，定义 $\xi$</p>
+<p>$$
+\xi=p_{G}+\frac{\dot{p}_{G}}{\omega}
+$$</p>
+<p>那么 LIPM 的动力模型可以重新写作</p>
+<p>$$
+\begin{aligned} \dot{\xi} &=\omega\left(\xi-p_{Z}\right) \ \dot{p}<em>{G} &=\omega\left(\xi-p</em>{G}\right) \end{aligned}
+$$</p>
+<p>第二个方程是一个稳定系统：有一个对 $p_{G}$ 的负反馈增益 $-(1)$，或者这么理解，如果 $\xi$ 称为常数，那么 $P_{G}$ 将慢慢收敛于它。$\xi$ 就被称之为瞬时捕获点(ICP)。另一个方程是非稳定的：捕获点 $\xi$ 与 ZMP 点 $\boldsymbol{p}<em>{Z}$ 发散，这就是为什么 $\xi$ 被称为<em>发散运动分量 (DCM)</em>。瞬时捕获点(ICP)的名称来自于，如果机器人在任意时刻 $\forall t \geq t</em>{0}, p_{Z}(t)=\xi$ 站立到该点，它的 CoM 在$t \rightarrow \infty$ 时 $p_{G}(t) \rightarrow \xi$， 最终会停下来（称之为“被捕获”）。</p>
+<p>当 CoM 收敛到 DCM 时没就没有必要考虑上面第二个方程的动力学分解了。对步态控制器来说，控制 DCM 比控制 CoM 的速度和位置会更加有效率。步态模式生成可以专注于产生轨迹 $\xi(t)$ 而不是 $p_{G}(t)$。因为方程 $\dot{\xi}=\omega\left(\xi-p_{Z}\right)$ 是线性的，所以可以用几何解析求解。在 ASIMO、IHMC 的 Atlas 和 TORO 机器人上都是用了 DCM 轨迹优化的方法来生成步态模式。</p>
+<p>现在我们有了参考的步态模式，接下来就需要让实体机器人执行，简单的开环控制并不适用，因为步态的动力学模型是发散的，所以必须要添加反馈。</p>
+<h2 id=步态稳定性>步态稳定性</h2>
+<p>在 1996 年，Honda 的 P2 机器人有两个关键的进展：在硬件方面，脚踝和脚底之间加上了一个橡胶衬套，以吸收冲击力，并使地面反作用力得到柔顺的控制；在算法上，使用了 ZMP 反馈控制。根据 <a href=https://doi.org/10.1109/IROS.2009.5354522>Asimo 平衡控制报告</a> 中的术语，这种反馈方法用 DCM 表示成</p>
+<p>$$
+\dot{\xi}=\dot{\xi}^{d}+k_{\xi}\left(\xi^{d}-\xi\right)
+$$</p>
+<p>其中 $\xi^{d}$ 是根据步态模式的目标 DCM. 代入 $\dot{\xi}=\omega\left(\xi-p_{Z}\right)$ ，上式可以写成 ZMP 形式</p>
+<p>$$
+p_{Z}=p_{Z}^{d}+k_{z}\left(\xi-\xi^{d}\right)
+$$</p>
+<p>其中 $k_{Z}=1+k_{\xi} / \omega$，$p_{Z}^{d}$ 是目标 ZMP，$p_{Z}$ 是机器人使用足底力控制的 ZMP。对于像 HRP-2 或者 HRP-4 这样采用位控制的机器人，使用踝关节的阻尼控制实现脚力控制，参考 <a href=https://doi.org/10.1109/IROS.2010.5651082>HRP-4C 的步态稳定器报告的章节 III.D</a>，强烈安利这篇论文，每一个章节都是精华。</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20191105150311.png width=30%></div>
+<p>那么，这种控制方法实际是什么样的呢？想想这样一个场景，当回放步态模式是，机器人处于某种原因开始往右倾斜，结果 DCM 的横向坐标 $\xi_{y}$ 比 $\xi^d$ 位置低。然后 ZMP 将会朝着 $y_Z &lt; y^{d}_{Z}$ 的方向生成正向速度</p>
+<div style=text-align:center><img src=https://raw.githubusercontent.com/wangshub/image-hosting/master/img/20191105150249.png width=40%></div>
+<p>朝着 DCM（红色箭头往右）接近目标位置。机器人挥着手，右脚向右倾斜，以便将自己推回到左边。</p>
+<h2 id=更进一步>更进一步</h2>
+<p>按照上面讨论中链接可以了解每个部分的详细信息。上面的例子我没有提到的是<em>状态观测</em>，如何从传感数据<a href=https://scaron.info/teaching/floating-base-estimation.html>估计 CoM 的位置和速度</a>。下面是关于行走控制本身的一些其他要点：</p>
+<ul>
+<li><a href=https://scaron.info/teaching/prototyping-a-walking-pattern-generator.html>建立行走模式生成器的原型</a>：使用 pymanoid 一步一步构建一个步态模式生成器；</li>
+<li><a href="https://www.youtube.com/watch?v=qT9qzwCJjAk">关于步行运动控制的演讲</a>: 2013 年 Pierre-Brice Wieber 在波恩仿人足球学校的演讲；</li>
+<li><a href=https://github.com/Leph/PhD/blob/master/build/TheseMinimized.pdf>Quentin Rouxel 博士论文</a>:列举了双足机器人在应用时遇到的常见问题和解决方案。</li>
+</ul>
+<p>有一些其他的步态控制方法，不依赖于 ZMP 反馈，例如应用在 <a href="https://www.youtube.com/watch?v=1fC7b2LjVW4">DURUS</a> 上的被动步态和混合零动力方法。</p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span>Author:</span>
+<span>神奇的战士 </span>
+</p>
+<p class=copyright-item>
+<span>Link:</span>
+<a href=https://wangshub.github.io/posts/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0/>https://wangshub.github.io/posts/%E5%8F%8C%E8%B6%B3%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%A6%82%E4%BD%95%E8%A1%8C%E8%B5%B0/</span>
+</p>
+</div>
+<div class=post-tags>
+<section>
+<i class="iconfont icon-tag"></i>Tag(s):
+<span class=tag><a href=https://wangshub.github.io/tags/gait/>
+#Gait</a></span>
+<span class=tag><a href=https://wangshub.github.io/tags/algorithm/>
+#Algorithm</a></span>
+</section>
+<section>
+<a href=javascript:window.history.back();>back</a></span> ·
+<span><a href=https://wangshub.github.io>home</a></span>
+</section>
+</div>
+<div class=post-nav>
+<a href=https://wangshub.github.io/posts/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AD%96%E7%95%A5%E7%BD%91%E7%BB%9C%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%BD%B1%E5%93%8D/ class=prev rel=prev title=强化学习策略网络复杂度的影响><i class="iconfont icon-left"></i>&nbsp;强化学习策略网络复杂度的影响</a>
+<a href=https://wangshub.github.io/posts/web%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%99%BA%E8%83%BD%E7%A1%AC%E4%BB%B6%E7%9A%84%E6%96%B9%E6%A1%88/ class=next rel=next title=Web端连接智能硬件的方案>Web端连接智能硬件的方案&nbsp;<i class="iconfont icon-right"></i></a>
+</div>
+<div class=post-comment>
+</div>
+</article>
+</div>
+</main>
+<footer class=footer>
+<div class=copyright>
+&copy;
+<span itemprop=copyrightYear>2016 - 2021</span>
+<span class=with-love>
+<i class="iconfont icon-love"></i>
+</span>
+<span class=author itemprop=copyrightHolder><a href=https://wangshub.github.io>神奇的战士</a> | </span>
+<span>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow">Hugo</a> & <a href=https://github.com/Mogeko/Mogege target=_blank rel="external nofollow">Mogege</a></span>
+</div>
+</footer>
+<script defer src=/js/vendor_main.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin=anonymous></script>
+<script>pangu.spacingPage()</script>
+</div>
+</body>
+</html>
